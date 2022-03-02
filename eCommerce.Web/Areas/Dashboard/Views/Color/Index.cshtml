@@ -1,0 +1,38 @@
+﻿@model eCommerce.Web.Areas.Dashboard.ViewModels.ColorsListingViewModel
+
+@{
+    if (Model != null)
+    {
+        Model.PageTitle = "Dashboard.Color.Title".LocalizedString();
+        Model.PageDescription = "Dashboard.Color.Description".LocalizedString();
+        Model.PageURL = Url.ListAction("Color");
+        Model.PageImageURL = PictureHelper.PageImageURL("color.jpg");
+    }
+}
+
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        @Model.PageTitle
+    </h3>
+    <p>
+        @Model.PageDescription
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder card shadow mb-4">
+    <div class="card-header">
+        <form action="@Url.ListAction("Color")">
+            <div class="input-group">
+                <input name="searchterm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="@("Dashboard.Color.SearchPlaceholder".Localized())">
+                <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i> @("Dashboard.Color.Search".Localized())</button>
+                <a href="@Url.ListAction("Color")" role="button" class="form-control btn btn-primary"><i class="fas fa-redo-alt"></i> @("Dashboard.Color.Reset".Localized())</a>
+                <a href="@Url.CreateAction("Color")" role="button" class="form-control btn btn-success"><i class="fas fa-plus"></i> @("Dashboard.Color.CreateColor".Localized())</a>
+            </div>
+        </form>
+    </div>
+    <div class="card-body p-0" id="list-holder">
+        @{Html.RenderPartial("_Listing", Model);}
+    </div>
+</div>
