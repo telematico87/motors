@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 
     <header class="header-section">
-        <div class="header-top">
+        @*<div class="header-top">
             <div class="container">
                 <div class="ht-left">
                     @if (!string.IsNullOrEmpty(ConfigurationsHelper.Email))
@@ -120,7 +120,10 @@
                     }
                 </div>
             </div>
-        </div>
+        </div>*@
+
+
+
         @if (!LanguagesHelper.LanguagesWithResources.Contains(AppDataHelper.CurrentLanguage) && ConfigurationsHelper.Environment == Environments.DEMO)
         {
             <div class="text-center alert alert-danger rounded-0 mb-0" role="alert" dir="ltr">
@@ -133,11 +136,11 @@
         <div class="container">
             <div class="inner-header">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-2 col-md-2">
                         <div class="logo">
                             <a href="@Url.Home()">
-                                <h4 style="margin-top: -65px; height: 0px;"> 
-                                    <img src="~/Content/images/site/pages/iconoempresa.jpeg" style="height: 85px;"/> 
+                                <h4 style="margin-top: -65px; height: 0px;">
+                                    <img src="~/Content/images/site/pages/iconoempresa.jpeg" style="height: 85px;" />
                                     @* TODO: We should be able to localize the application name along with Logo *@
                                     @*@ConfigurationsHelper.ApplicationName*@
                                 </h4>
@@ -154,7 +157,7 @@
                             </div>
                         </form>
                     </div>
-                    <div id="cart-info" class="col-lg-3 col-md-3">
+                    <div id="cart-info" class="col-lg-2 col-md-2">
                         <ul class="nav-right">
                             <li class="cart-icon cartMenu">
                                 <span class="pointerCursor">
@@ -174,6 +177,94 @@
                             </li>
                         </ul>
                     </div>
+
+                    <div class="col-lg-2 col-md-3">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var hiUserMessage = "PP.Header.Menu.HiUser".LocalizedString().Replace("{user}", User.Identity.GetUserName());
+
+                            <div class="login-panel login-panel-last">
+                                <a href="#" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </div>
+
+                            if (User.IsInRole("Administrator"))
+                            {
+                                <div class="login-panel">
+                                    <a href="@Url.Dashboard()" title="@("PP.Header.Menu.Dashboard".Localized())">
+                                        <i class="fas fa-user-shield"></i>
+                                    </a>
+                                </div>
+                            }
+
+                            <div class="login-panel">
+                                <a href="@Url.UserProfile()" title="@hiUserMessage">
+                                    @Html.UserAvatar(User.Identity.GetUserPicture(), "image rounded-circle", style: "width: 20px; height: 20px", alt: hiUserMessage)
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="login-panel login-panel-last">
+                                <a href="@Url.Login()" title="@("PP.Header.Menu.Account".Localized())">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                            </div>
+                        }
+
+                        @if (ConfigurationsHelper.EnableMultilingual && LanguagesHelper.EnabledLanguages != null && LanguagesHelper.EnabledLanguages.Count > 1)
+                        {
+                            <div class="lan-selector">
+                                <select class="language_drop" name="languages" id="ddlanguages" style="width:@(AppDataHelper.IsMobile ? "70px" : "150px");">
+                                    @foreach (var language in LanguagesHelper.EnabledLanguages)
+                                    {
+                                        var iconCode = !string.IsNullOrEmpty(language.IconCode) ? language.IconCode : "FLAG.png";
+
+                                        <option value="@Url.LanguageBasedURL(language.ShortCode)"
+                                                data-image="@Html.LanguageIcon(iconCode)"
+                                                data-imagecss="flag yt"
+                                                data-title="@language.Name"
+                                                data-hasResources="true"
+                                                @(language.ShortCode == AppDataHelper.CurrentLanguage.ShortCode ? "selected" : string.Empty)>
+                                            @(AppDataHelper.IsMobile ? string.Empty : language.Name)
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL) ||
+                            !string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL) ||
+                            !string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL) ||
+                            !string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL) ||
+                            !string.IsNullOrEmpty(ConfigurationsHelper.WhatsAppNumber))
+                        {
+                            <div class="top-social">
+                                @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL))
+                                {
+                                    <a title="Facebook" href="@ConfigurationsHelper.FacebookURL" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                }
+                                @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
+                                {
+                                    <a title="Twitter" href="@ConfigurationsHelper.TwitterURL" target="_blank"><i class="fab fa-twitter"></i></a>
+                                }
+                                @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
+                                {
+                                    <a title="Instagram" href="@ConfigurationsHelper.InstagramURL" target="_blank"><i class="fab fa-instagram"></i></a>
+                                }
+                                @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
+                                {
+                                    <a title="LinkedIn" href="@ConfigurationsHelper.LinkedInURL" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                }
+                                @if (!string.IsNullOrEmpty(ConfigurationsHelper.WhatsAppNumber))
+                                {
+                                    <a title="WhatsApp" href="https://wa.me/@ConfigurationsHelper.WhatsAppNumber" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                }
+                            </div>
+                        }
+                    </div>
+
+
                 </div>
             </div>
         </div>
