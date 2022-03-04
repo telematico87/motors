@@ -4966,6 +4966,7 @@
     <Content Include="Areas\Dashboard\Views\Modelo\_Listing.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
+    <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
