@@ -17,7 +17,7 @@
                 }
             </ol>
         }
-        <div class="carousel-inner home-carousel-inner" role="listbox">
+        <div class="carousel-inner home-carousel-inner" role="listbox" style="height:511px;">
             @foreach (var configuration in Model.SlidersConfigurations)
             {
                 @* TODO: Localizing Slider *@
@@ -70,5 +70,36 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
         }
+    </div>
+    <div class="partner-logo" title="@("PP.Home.Showcase.OurPartners".LocalizedString())">
+        <div class="container">
+            <div class="logo-carousel owl-carousel">
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
