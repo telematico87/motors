@@ -1690,6 +1690,18 @@ ol {
 			font-size: 16px;
 			color: #b2b2b2;
 		}
+		
+		.footer-widget ul li span {
+			line-height: 36px;
+			font-size: 16px;
+			color: #b2b2b2;
+		}
+		
+		.footer-widget ul li i {
+			line-height: 36px;
+			font-size: 16px;
+			color: #b2b2b2;
+		}
 
 .newslatter-item h5 {
 	color: #ffffff;
