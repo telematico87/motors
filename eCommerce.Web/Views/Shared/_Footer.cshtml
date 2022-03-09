@@ -4,20 +4,14 @@
             <div class="col-lg-4">
                 <div class="footer-left">
                     @* TODO: We should be able to localize the application name along with Logo and Address *@
-                    <div class="footer-logo">
+                    <div class="footer-logo">                        
                         <a href="@Url.Home()">
-                            <h5>
-                                @ConfigurationsHelper.ApplicationName
-                            </h5>
+                            <h4>
+                                <img src="~/Content/images/site/pages/logo_bm3.png" style="height: 65px;" />                               
+                            </h4>
                         </a>
-                    </div>
-                    <p>
-                        @ConfigurationsHelper.ApplicationIntro
-                        <br />
-                        <address class="small text-muted">
-                            @Html.Raw(string.Format("{0}<br/>{1}", ConfigurationsHelper.AddressLine1, ConfigurationsHelper.AddressLine2))
-                        </address>
-                    </p>
+
+                    </div>                    
                 </div>
             </div>
             <div class="col-lg-2">
@@ -45,11 +39,22 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                @Html.Partial("_NewsLetterWidget")
+                <div class="footer-widget">
+                    <h5>Contactos:</h5>
+                    <ul>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span> Av. República de Panamá 3545 - Piso 5</span></li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i> <span>serviciocliente@hotmail.com</span></li>
+                        <li><i class="fa fa-phone"></i>  <span>98562356 (Ventas)</span></li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i> <span>98562356 (Accesorios)</span></li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i> <span>98562254 (Repuestos)</span></li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i> <span>9856231 (Servicios)</span></li>
+                        <li><i class="fa fa-clock" aria-hidden="true"></i> <span>Horario de Atención: 8AM-6PM</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="copyright-reserved" style="display:block">
+    <div class="copyright-reserved" style="display:none">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 copyrights-widget">
@@ -63,7 +68,7 @@
                     </div>
                 </div>
                 <div class='col-lg-12 py-2 ft-widget'>
-                    <small class='text'> 
+                    <small class='text'>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         <span>
                             Diseñado por<a class='text-primary' href='#' target='_blank' rel='nofollow'>Tunkisoft</a>.
