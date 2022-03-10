@@ -5014,9 +5014,11 @@
     <Content Include="Areas\Dashboard\Views\Modelo\_Listing.cshtml" />
     <Content Include="Content\images\moto\ffff.webp" />
     <Content Include="Content\images\moto\MotorBiker+Sports+Flyer+Preview.avif" />
+    <Content Include="Content\css\style2.css" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
+    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
