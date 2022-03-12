@@ -1,5 +1,10 @@
 ﻿@model eCommerce.Web.ViewModels.HomeSlidersViewModel
 
+@Styles.Render("~/Content/css/style2.css")
+@*<link href="~/Content/css/style2.scss" rel="stylesheet" />*@
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+
 @if (Model != null && Model.SlidersConfigurations != null && Model.SlidersConfigurations.Count > 0)
 {
     var i = 0;
@@ -71,35 +76,5 @@
             </a>
         }
     </div>
-    <div class="partner-logo" title="@("PP.Home.Showcase.OurPartners".LocalizedString())">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_VistaMarcaEmpresa")
 }
