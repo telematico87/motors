@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 
-    <header class="header-section">
+ 
+
+    <header class="header-section" style="background:black;">
         @*<div class="header-top">
             <div class="container">
                 <div class="ht-left">
@@ -162,10 +164,10 @@
                             <li class="cart-icon cartMenu">
                                 <span class="pointerCursor">
                                     <a>
-                                        <i class="fas fa-shopping-cart"></i>
+                                        <i class="fas fa-shopping-cart" style="color: white;"></i>
                                         <span class="countholder">0</span>
                                     </a>
-                                    <span class="cart-price ltr-dir" dir="ltr"></span>
+                                    <span class="cart-price ltr-dir" dir="ltr" style="color:white;"></span>
                                 </span>
                                 <div class="cart-hover">
                                     <div class="cart-items-modal"></div>
@@ -183,22 +185,22 @@
                         {
                             var hiUserMessage = "PP.Header.Menu.HiUser".LocalizedString().Replace("{user}", User.Identity.GetUserName());
 
-                            <div class="login-panel login-panel-last">
+                            <div class="login-panel" style="margin-top: 12px;">
                                 <a href="#" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())">
-                                    <i class="fas fa-sign-out-alt"></i>
+                                    <i class="fas fa-sign-out-alt" style="color:white;padding:2px;"></i>
                                 </a>
                             </div>
 
                             if (User.IsInRole("Administrator"))
                             {
-                                <div class="login-panel">
+                                <div class="login-panel" style="margin-top: 12px;">
                                     <a href="@Url.Dashboard()" title="@("PP.Header.Menu.Dashboard".Localized())">
-                                        <i class="fas fa-user-shield"></i>
+                                        <i class="fas fa-user-shield" style="color:white; padding:1px"></i>
                                     </a>
                                 </div>
                             }
 
-                            <div class="login-panel">
+                            <div class="login-panel" style="margin-top: 12px;">
                                 <a href="@Url.UserProfile()" title="@hiUserMessage">
                                     @Html.UserAvatar(User.Identity.GetUserPicture(), "image rounded-circle", style: "width: 20px; height: 20px", alt: hiUserMessage)
                                 </a>
@@ -206,9 +208,9 @@
                         }
                         else
                         {
-                            <div class="login-panel login-panel-last">
+                            <div class="login-panel" style="margin-top: 12px;">
                                 <a href="@Url.Login()" title="@("PP.Header.Menu.Account".Localized())">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-user" style="color:white;"></i>
                                 </a>
                             </div>
                         }
@@ -242,7 +244,7 @@
                             <div class="top-social">
                                 @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL))
                                 {
-                                    <a title="Facebook" href="@ConfigurationsHelper.FacebookURL" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                    <a title="Facebook" href="@ConfigurationsHelper.FacebookURL" target="_blank" class="redes"><i class="fab fa-facebook-f" style="color: blue; margin-top: 13px; padding:4px;"></i></a>
                                 }
                                 @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
                                 {
@@ -250,7 +252,7 @@
                                 }
                                 @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
                                 {
-                                    <a title="Instagram" href="@ConfigurationsHelper.InstagramURL" target="_blank"><i class="fab fa-instagram"></i></a>
+                                    <a title="Instagram" href="@ConfigurationsHelper.InstagramURL" target="_blank"><i class="fab fa-instagram" style="color:deeppink;"></i></a>
                                 }
                                 @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
                                 {
@@ -258,7 +260,7 @@
                                 }
                                 @if (!string.IsNullOrEmpty(ConfigurationsHelper.WhatsAppNumber))
                                 {
-                                    <a title="WhatsApp" href="https://wa.me/@ConfigurationsHelper.WhatsAppNumber" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                    <a title="WhatsApp" href="https://wa.me/@ConfigurationsHelper.WhatsAppNumber" target="_blank"><i class="fab fa-whatsapp" style="color:forestgreen"></i></a>
                                 }
                             </div>
                         }

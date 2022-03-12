@@ -690,7 +690,7 @@ ol {
 		}
 
 .header-section .nav-item {
-	background: #252525;
+	background: #c4161c;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -701,7 +701,7 @@ ol {
 	}
 
 		.header-section .nav-item .nav-depart .depart-btn {
-			background: #3b3b3b;
+			background: #c4161c;
 			color: #ffffff;
 			padding: 14px 84px 14px 18px;
 			cursor: pointer;
@@ -832,7 +832,7 @@ ol {
 			}
 
 			.header-section .nav-item .nav-menu li:hover > a {
-				background: #c4161c;
+				background: #252525;
 			}
 
 			.header-section .nav-item .nav-menu li:hover .dropdown {

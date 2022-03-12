@@ -1,5 +1,7 @@
 ﻿@model eCommerce.Web.ViewModels.ProductsByFeaturedCategoriesViewModel
 
+@Html.Partial("_SeccionNuevosIngresos")
+
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
     var reverse = false;
@@ -71,4 +73,3 @@
     }
 }
 
-@Html.Partial("_SeccionNuevosIngresos")
