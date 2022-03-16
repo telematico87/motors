@@ -1,5 +1,7 @@
 ﻿using eCommerce.Data;
 using eCommerce.Entities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -199,7 +201,30 @@ namespace eCommerce.Services
 
             var product = context.Products.Include("Category.CategoryRecords").Include("ProductPictures.Picture").FirstOrDefault(x=>x.ID == ID);
 
-            if(activeOnly)
+            string caracteristicas = product.Caracteristica;
+            JObject jsonProductoCaracteristica = JObject.Parse(caracteristicas);
+
+            ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
+            productoCaracteristica.motor.Cilindrada = "";
+            Motor motor = new Motor();
+            Frenos frenos = new Frenos();
+            motor.Cilindrada = "210";
+            motor.NroCilindrada = "5";
+            motor.Potencia = "4Hb";
+            frenos.FrenoDelantero = "Mano";
+            frenos.FrenoTrasero = "Pie";
+            productoCaracteristica.motor = motor;
+            productoCaracteristica.frenos = frenos;
+
+            product.productoCaracteristica = productoCaracteristica;
+
+
+
+            //ProductoCaracteristica productoCaracteristicass = JsonConvert.DeserializeObject(jsonProductoCaracteristica);
+           // string productoCaracteristicass = JsonConvert.DeserializeObject(jsonProductoCaracteristica);
+
+
+            if (activeOnly)
             {
                 return product != null && !product.IsDeleted && product.IsActive && !product.Category.IsDeleted ? product : null;
             }

@@ -11,7 +11,7 @@ namespace eCommerce.Entities
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
-        
+
         public decimal Price { get; set; }
         public decimal? Discount { get; set; }
         public decimal? Cost { get; set; }
@@ -30,6 +30,8 @@ namespace eCommerce.Entities
         public virtual List<ProductRecord> ProductRecords { get; set; }
 
         public string Caracteristica { get; set; }
+
+        public ProductoCaracteristica productoCaracteristica { get; set;}
     }
 
     public class ProductRecord : BaseEntity

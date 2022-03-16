@@ -81,6 +81,7 @@
     <Compile Include="OrderStatus.cs" />
     <Compile Include="PaymentMethods.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductoCaracteristica.cs" />
     <Compile Include="ProductPicture.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Category.cs" />
