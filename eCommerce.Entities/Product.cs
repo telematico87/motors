@@ -28,6 +28,8 @@ namespace eCommerce.Entities
         public virtual List<ProductPicture> ProductPictures { get; set; }
 
         public virtual List<ProductRecord> ProductRecords { get; set; }
+
+        public string Caracteristica { get; set; }
     }
 
     public class ProductRecord : BaseEntity
