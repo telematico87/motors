@@ -6,6 +6,7 @@
 {
     var reverse = false;
 
+
     foreach (var featuredCategory in Model.Categories)
     {
         var currentLanguageCategoryRecord = featuredCategory.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
@@ -72,4 +73,3 @@
         reverse = !reverse;
     }
 }
-
