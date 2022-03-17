@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Entities
 {
-    public class Product : BaseEntity
+    public class ProductoResponse
     {
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
@@ -31,20 +31,6 @@ namespace eCommerce.Entities
 
         public string Caracteristica { get; set; }
 
-        //public ProductoCaracteristica productoCaracteristica { get; set;}
-    }
-
-    public class ProductRecord : BaseEntity
-    {
-        public int ProductID { get; set; }
-        public virtual Product Product { get; set; }
-
-        public int LanguageID { get; set; }
-
-        public string Name { get; set; }
-        public string Summary { get; set; }
-        public string Description { get; set; }
-
-        public virtual List<ProductSpecification> ProductSpecifications { get; set; }
+        public ProductoCaracteristica productoCaracteristica { get; set;}
     }
 }

@@ -216,7 +216,7 @@ namespace eCommerce.Services
             productoCaracteristica.motor = motor;
             productoCaracteristica.frenos = frenos;
 
-            product.productoCaracteristica = productoCaracteristica;
+            //product.productoCaracteristica = productoCaracteristica;
 
 
 
