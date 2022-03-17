@@ -10,6 +10,8 @@ using System.Linq;
 using System.Web.Mvc;
 using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Enums;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -73,6 +75,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
 
+                //string jsonString = product.Caracteristica;
+                //ProductoCaracteristica productoCaracteristica = JsonSerializer.Deserialize<ProductoCaracteristica>;
+
+                ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
+
+
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
                 model.Price = product.Price;
@@ -94,6 +102,26 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.Summary = currentLanguageRecord.Summary;
                 model.Description = currentLanguageRecord.Description;
                 model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
+                 
+                //model.ProductoCaracteristica.motor.Cilindrada = productoCaracteristica.motor.Cilindrada;
+                //model.ProductoCaracteristica.motor.NroCilindrada = productoCaracteristica.motor.NroCilindrada;
+                //model.ProductoCaracteristica.motor.Potencia = productoCaracteristica.motor.Potencia;
+                //model.ProductoCaracteristica.frenos.FrenoDelantero = productoCaracteristica.frenos.FrenoDelantero;
+                //model.ProductoCaracteristica.frenos.FrenoTrasero = productoCaracteristica.frenos.FrenoTrasero;
+
+                // ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
+                //// productoCaracteristica.motor.Cilindrada = "";
+                // Motor motor = new Motor();
+                // Frenos frenos = new Frenos();
+                // motor.Cilindrada = "210";
+                // motor.NroCilindrada = "5";
+                // motor.Potencia = "4Hb";
+                // frenos.FrenoDelantero = "Mano";
+                // frenos.FrenoTrasero = "Pie";
+                // productoCaracteristica.motor = motor;
+                // productoCaracteristica.frenos = frenos;
+
+                // model.ProductoCaracteristica = productoCaracteristica;
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
@@ -134,6 +162,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
+
+                    //product.productoCaracteristica = model.ProductoCaracteristica;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {

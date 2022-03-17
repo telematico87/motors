@@ -65,7 +65,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
 
         public List<Category> Categories { get; set; }
 
-        
+       public ProductoCaracteristica ProductoCaracteristica { get; set; }
 
 
 
