@@ -176,11 +176,11 @@
 
                             if (currentLanguageCategoryRecord != null)
                             {
-                                <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
+                        <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
                             }
                             else
                             {
-                                <option value="@category.ID" @selected>@category.SanitizedName</option>
+                        <option value="@category.ID" @selected>@category.SanitizedName</option>
                             }
                         }
                     </select>
@@ -200,17 +200,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                        <div class="input-group-append">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
+                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         }
                     </div>
                 </div>
@@ -221,17 +221,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                        <div class="input-group-append">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
+                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                         }
                     </div>
                 </div>
@@ -242,17 +242,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                        <div class="input-group-append">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                        </div>
+                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         }
                     </div>
                 </div>
@@ -284,7 +284,7 @@
                     </label>
                     <input class="form-control" name="StockQuantity" value="@Model.StockQuantity" placeholder="@("Dashboard.Products.Action.StockQuantityPlaceholder".Localized())" />
                 </div>
-
+                 
                 <div class="form-group" id="pics-container">
                     <label>
                         @("Dashboard.Products.Action.SelectPictures".Localized())
@@ -295,22 +295,22 @@
                         {
                             foreach (var picture in Model.ProductPicturesList)
                             {
-                                <div class="thisImage col-md-3">
-                                    <div class="card mt-4">
-                                        <div class="uPicHolder card-body text-center">
-                                            <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
-                                                <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
-                                            </li>
-                                        </ul>
-                                        <div class="card-footer">
-                                            <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
-                                        </div>
-                                    </div>
+                        <div class="thisImage col-md-3">
+                            <div class="card mt-4">
+                                <div class="uPicHolder card-body text-center">
+                                    <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
                                 </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
+                                        <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
+                                    </li>
+                                </ul>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
+                                </div>
+                            </div>
+                        </div>
                             }
                         }
                     </div>
@@ -338,31 +338,194 @@
                         </label>
                     </div>
                 </div>
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link active" data-toggle="tab" href="#Destacados">Destacados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Motor">Motor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Suspension">Suspension</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Consumo">Consumo y Rendimiento</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Transmision">Transmision</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Dimensiones">Dimensiones</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body" id="response-holder">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="Destacados" class="container tab-pane active">
+                                <br>
+                                <h3>HOME</h3>
+                            </div>
+                            <div id="Motor" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Cilindrada
+                                    </label>
+                                    <input class="form-control" name="Cilindrada" @*value="@Model.ProductoCaracteristica.motor.Cilindrada"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        nro Cilindros
+                                    </label>
+                                    <input class="form-control" name="nroCilindros" @*value="@Model.ProductoCaracteristica.motor.NroCilindrada"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Potencia
+                                    </label>
+                                    <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Tipo Motor
+                                    </label>
+                                    <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                </div>
+                            </div>
+                            <div id="Suspension" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Suspension delantera
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Suspension Posterior
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                            </div>
+                            <div id="Consumo" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Octanaje
+                                    </label>
+                                    <input class="form-control" name="octanaje" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Sistema Combustible
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Capacidad Tanque
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Autonomia
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Rendimiento Galon
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                            </div>
+                            <div id="Transmision" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Transmision
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Nro Cambios
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Velocidad Maxima
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+
+                            </div>
+                            <div id="Dimensiones" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Peso
+                                    </label>
+                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Carga Util
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Pasajeros
+                                    </label>
+                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <hr />
                 <div class="form-group mb-0">
                     @if (Model.ProductID > 0)
                     {
-                        <button class="btn btn-success" type="submit" id="actionButton">
-                            <i class="fas fa-edit mr-1"></i>
-                            @("Dashboard.Products.Update".Localized())
-                        </button>
-                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
-                            <i class="fas fa-trash-alt mr-1"></i>
-                            @("Dashboard.Products.Delete".Localized())
-                        </button>
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-edit mr-1"></i>
+                        @("Dashboard.Products.Update".Localized())
+                    </button>
+                    <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                        @("Dashboard.Products.Delete".Localized())
+                    </button>
                     }
                     else
                     {
-                        <button class="btn btn-success" type="submit" id="actionButton">
-                            <i class="fas fa-plus mr-1"></i>
-                            @("Dashboard.Products.Save".Localized())
-                        </button>
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-plus mr-1"></i>
+                        @("Dashboard.Products.Save".Localized())
+                    </button>
                     }
                     <a class="btn btn-secondary" href="@Url.ListAction("Products")">
                         <i class="fas fa-angle-double-left mr-1"></i>
                         @("Dashboard.Products.Cancel".Localized())
                     </a>
                 </div>
+
+
             </div>
         </div>
     </form>
