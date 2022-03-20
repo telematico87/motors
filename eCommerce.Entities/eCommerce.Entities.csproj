@@ -95,6 +95,7 @@
     <Compile Include="Promo.cs" />
     <Compile Include="PromoTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Talla.cs" />
   </ItemGroup>
   <ItemGroup>
