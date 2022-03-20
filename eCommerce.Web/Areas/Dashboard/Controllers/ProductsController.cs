@@ -67,19 +67,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
             if (ID.HasValue)
             {
-                var product = ProductsService.Instance.GetProductByID(ID.Value, activeOnly: false);
+                var product = ProductsService.Instance.GetProductResponseByID(ID.Value, activeOnly: false);
 
                 if (product == null) return HttpNotFound();
 
                 var currentLanguageRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
-
-                //string jsonString = product.Caracteristica;
-                //ProductoCaracteristica productoCaracteristica = JsonSerializer.Deserialize<ProductoCaracteristica>;
-
-                ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
-
+                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();               
 
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
@@ -101,27 +95,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.Name = currentLanguageRecord.Name;
                 model.Summary = currentLanguageRecord.Summary;
                 model.Description = currentLanguageRecord.Description;
-                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
-                 
-                //model.ProductoCaracteristica.motor.Cilindrada = productoCaracteristica.motor.Cilindrada;
-                //model.ProductoCaracteristica.motor.NroCilindrada = productoCaracteristica.motor.NroCilindrada;
-                //model.ProductoCaracteristica.motor.Potencia = productoCaracteristica.motor.Potencia;
-                //model.ProductoCaracteristica.frenos.FrenoDelantero = productoCaracteristica.frenos.FrenoDelantero;
-                //model.ProductoCaracteristica.frenos.FrenoTrasero = productoCaracteristica.frenos.FrenoTrasero;
-
-                // ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
-                //// productoCaracteristica.motor.Cilindrada = "";
-                // Motor motor = new Motor();
-                // Frenos frenos = new Frenos();
-                // motor.Cilindrada = "210";
-                // motor.NroCilindrada = "5";
-                // motor.Potencia = "4Hb";
-                // frenos.FrenoDelantero = "Mano";
-                // frenos.FrenoTrasero = "Pie";
-                // productoCaracteristica.motor = motor;
-                // productoCaracteristica.frenos = frenos;
-
-                // model.ProductoCaracteristica = productoCaracteristica;
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;               
+                model.ProductoCaracteristica = product.ProductoCaracteristica;
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
@@ -140,7 +115,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 if (model.ProductID > 0)
                 {
-                    var product = ProductsService.Instance.GetProductByID(model.ProductID, activeOnly: false);
+                    var product = ProductsService.Instance.GetProductResponseByID(model.ProductID, activeOnly: false);
 
                     if (product == null)
                     {
@@ -162,8 +137,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
-
-                    //product.productoCaracteristica = model.ProductoCaracteristica;
+                    product.ProductoCaracteristica = model.ProductoCaracteristica;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -188,7 +162,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     product.IsActive = !model.InActive;
 
-                    if (!ProductsService.Instance.UpdateProduct(product))
+                    var toProduct = ProductsService.Instance.ProductResponseToProduct(product);
+
+
+                    if (!ProductsService.Instance.UpdateProduct(toProduct))
                     {
                         throw new Exception("Dashboard.Products.Action.Validation.UnableToUpdateProduct".LocalizedString());
                     }
@@ -250,6 +227,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 }
                 else
                 {
+                    var caracteristica = ProductsService.Instance.ProductoCaracteristicaToString(model.ProductoCaracteristica);
+
                     Product product = new Product
                     {
                         CategoryID = model.CategoryID,
@@ -263,9 +242,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         Supplier = model.Supplier,
 
                         StockQuantity = model.StockQuantity,
-
+                        Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
-                        ModifiedOn = DateTime.Now
+                        ModifiedOn = DateTime.Now                        
                     };
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
@@ -346,6 +325,20 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
         private ProductActionViewModel GetProductActionViewModelFromForm(FormCollection formCollection)
         {
+            var productoCaracteristicas = new ProductoCaracteristica
+            {
+                motor = new Motor{
+                    Cilindrada = formCollection["Cilindrada"],
+                    NroCilindrada = formCollection["nroCilindros"],
+                    Potencia = formCollection["Potencia"]
+                },
+                frenos = new Frenos { 
+                    FrenoDelantero = "Mano de Juan",
+                    FrenoTrasero = "Pie de Juan"
+                }
+            };
+
+
             var model = new ProductActionViewModel
             {
                 ProductID = !string.IsNullOrEmpty(formCollection["ProductID"]) ? int.Parse(formCollection["ProductID"]) : 0,
@@ -371,7 +364,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 Summary = formCollection["Summary"],
                 Description = formCollection["Description"],
 
-                ProductSpecifications = new List<ProductSpecification>()
+                ProductSpecifications = new List<ProductSpecification>(),
+                ProductoCaracteristica = productoCaracteristicas
             };
 
             foreach (string key in formCollection)

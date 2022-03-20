@@ -1039,7 +1039,7 @@ ol {
 -----------------------*/
 
 .banner-section {
-	padding: 80px 50px;
+	padding: 50px 110px;
 }
 
 .single-banner {
@@ -1108,10 +1108,10 @@ ol {
 -----------------------*/
 
 .forward-banner {
-	padding-right: 65px;
-	padding-left: 65px;
+	padding-right: 120px;
+	padding-left: 120px;
 	padding-top: 0;
-	padding-bottom: 80px;
+	padding-bottom: 50px;
 }
 
 .product-large {
@@ -1410,10 +1410,10 @@ ol {
 -----------------------*/
 
 .reverse-banner {
-	padding-right: 65px;
-	padding-left: 65px;
+	padding-right: 120px;
+	padding-left: 120px;
 	padding-top: 0px;
-	padding-bottom: 80px;
+	padding-bottom: 50px;
 }
 
 
