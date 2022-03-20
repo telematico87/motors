@@ -284,7 +284,7 @@
                     </label>
                     <input class="form-control" name="StockQuantity" value="@Model.StockQuantity" placeholder="@("Dashboard.Products.Action.StockQuantityPlaceholder".Localized())" />
                 </div>
-                 
+
                 <div class="form-group" id="pics-container">
                     <label>
                         @("Dashboard.Products.Action.SelectPictures".Localized())
@@ -339,8 +339,19 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="form-check" title="Activar si el Producto es Moto">
+                        <input type="checkbox" name="chkMoto" value="true" class="form-check-input" id="chkMoto"> 
+                        <label class="form-check-label" for="InActive">
+                           Es Moto?
+                        </label>
+                    </div>
+                </div>
+                <br />
+                <hr />
 
-                <div class="card">
+
+                <div class="card" id="TagMotos" style="display:none;">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
@@ -372,32 +383,119 @@
                             </div>
                             <div id="Motor" class="container tab-pane fade">
                                 <br>
-                                <div class="form-group">
-                                    <label>
-                                        Cilindrada
-                                    </label>
-                                    <input class="form-control" name="Cilindrada" @*value="@Model.ProductoCaracteristica.motor.Cilindrada"*@ />
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Cilindrada
+                                        </label>
+                                        <input class="form-control" name="Cilindrada" @*value="@Model.ProductoCaracteristica.motor.Cilindrada"*@ />
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            nro Cilindros
+                                        </label>
+                                        <input class="form-control" name="nroCilindros" @*value="@Model.ProductoCaracteristica.motor.NroCilindrada"*@ />
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        nro Cilindros
-                                    </label>
-                                    <input class="form-control" name="nroCilindros" @*value="@Model.ProductoCaracteristica.motor.NroCilindrada"*@ />
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Potencia
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Tipo Motor
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        Potencia
-                                    </label>
-                                    <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Sistema Enfriamiento
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Sistema Encendido
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>
-                                        Tipo Motor
-                                    </label>
-                                    <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Sistema de Arranque
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Frenos
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Frenos Delanteros
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Frenos Posterior
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Aros y Llantas
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Neumatico Delanteros
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Neumatico Posterior
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Aro Delantero
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Aro Posterior
+                                        </label>
+                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                    </div>
+                                </div>
+
+
                             </div>
                             <div id="Suspension" class="container tab-pane fade">
                                 <br>
@@ -818,4 +916,17 @@
             }
         });
     });
+
+    $("#chkMoto").click(function () {
+        debugger; 
+        if ($('#chkMoto').is(':checked')) {
+            $("#TagMotos").css("display", "block");
+        }
+        else {
+                $("#TagMotos").css("display", "none");
+            }
+    
+    });
+
+
 </script>
