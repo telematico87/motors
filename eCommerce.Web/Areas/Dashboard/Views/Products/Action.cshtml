@@ -361,13 +361,19 @@
                                 <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Motor">Motor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Suspension">Suspension</a>
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Frenos">Frenos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#ArosLlantas">Aros y Llantas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Suspension">Suspensión</a>
                             </li>
                             <li class="nav-item">
                                 <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Consumo">Consumo y Rendimiento</a>
                             </li>
                             <li class="nav-item">
-                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Transmision">Transmision</a>
+                                <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Transmision">Transmisión</a>
                             </li>
                             <li class="nav-item">
                                 <a class="pointerCursor user-link nav-link" data-toggle="tab" href="#Dimensiones">Dimensiones</a>
@@ -377,25 +383,91 @@
                     <div class="card-body" id="response-holder">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="Destacados" class="container tab-pane active">
+                                <div id="Destacados" class="container tab-pane active">
                                 <br>
-                                <h3>HOME</h3>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Texto 1
+                                        </label>
+                                        <input class="form-control" name="Texto1" value="@Model.ProductoCaracteristica.destacados.Texto1" />
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Texto 2
+                                        </label>
+                                        <input class="form-control" name="Texto2" value="@Model.ProductoCaracteristica.destacados.Texto2" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Texto 3
+                                        </label>
+                                        <input class="form-control" name="Texto3" value="@Model.ProductoCaracteristica.destacados.Texto3" />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Texto 4
+                                        </label>
+                                        <input class="form-control" name="Texto4" value="@Model.ProductoCaracteristica.destacados.Texto4" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            Compacta
+                                        </label>
+                                        <input class="form-control" name="Compacta" value="@Model.ProductoCaracteristica.destacados.Compacta" />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>
+                                            AroRayos
+                                        </label>
+                                        <input class="form-control" name="AroRayos" value="@Model.ProductoCaracteristica.destacados.AroRayos" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Colores Disponibles
+                                        </label>
+                                        <input class="form-control" name="ColoresDisponibles" value="@Model.ProductoCaracteristica.destacados.ColoresDisponibles" />
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Adicionales
+                                        </label>
+                                        <input class="form-control" name="Adicionales" value="@Model.ProductoCaracteristica.destacados.Adicionales" />
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            Tablero
+                                        </label>
+                                        <input class="form-control" name="Tablero" value="@Model.ProductoCaracteristica.destacados.Tablero" />
+                                    </div>
+                                </div>
+
                             </div>
-                            <div id="Motor" class="container tab-pane fade">
+                                <div id="Motor" class="container tab-pane fade">
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <label>
                                             Cilindrada
                                         </label>
-                                        <input class="form-control" name="Cilindrada" @*value="@Model.ProductoCaracteristica.motor.Cilindrada"*@ />
+                                        <input class="form-control" name="Cilindrada" value="@Model.ProductoCaracteristica.motor.Cilindrada" />
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>
                                             nro Cilindros
                                         </label>
-                                        <input class="form-control" name="nroCilindros" @*value="@Model.ProductoCaracteristica.motor.NroCilindrada"*@ />
+                                        <input class="form-control" name="NroCilindrada" value="@Model.ProductoCaracteristica.motor.NroCilindrada" />
                                     </div>
                                 </div>
 
@@ -404,194 +476,180 @@
                                         <label>
                                             Potencia
                                         </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                        <input class="form-control" name="Potencia" value="@Model.ProductoCaracteristica.motor.Potencia" />
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label>
                                             Tipo Motor
                                         </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                        <input class="form-control" name="TipoMotor" value="@Model.ProductoCaracteristica.motor.TipoMotor" />
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label>
                                             Sistema Enfriamiento
                                         </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                        <input class="form-control" name="SistemaEnfriamiento" value="@Model.ProductoCaracteristica.motor.SistemaEnfriamiento" />
                                     </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label>
                                             Sistema Encendido
                                         </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                        <input class="form-control" name="SistemaEncendido" value="@Model.ProductoCaracteristica.motor.SistemaEncendido" />
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label>
                                             Sistema de Arranque
                                         </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
+                                        <input class="form-control" name="SistemaArranque" value="@Model.ProductoCaracteristica.motor.SistemaArranque" />
                                     </div>
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Frenos
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Frenos Delanteros
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Frenos Posterior
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Aros y Llantas
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Neumatico Delanteros
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4 form-group">
-                                        <label>
-                                            Neumatico Posterior
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <label>
-                                            Aro Delantero
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <label>
-                                            Aro Posterior
-                                        </label>
-                                        <input class="form-control" name="Potencia" @*value="@Model.ProductoCaracteristica.motor.Potencia"*@ />
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div id="Suspension" class="container tab-pane fade">
-                                <br>
-                                <div class="form-group">
-                                    <label>
-                                        Suspension delantera
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>
-                                        Suspension Posterior
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
                                 </div>
                             </div>
-                            <div id="Consumo" class="container tab-pane fade">
-                                <br>
-                                <div class="form-group">
-                                    <label>
-                                        Octanaje
-                                    </label>
-                                    <input class="form-control" name="octanaje" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
+                                <div id="Frenos" class="container tab-pane fade">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Frenos Delanteros
+                                            </label>
+                                            <input class="form-control" name="FrenoDelantero" value="@Model.ProductoCaracteristica.frenos.FrenoDelantero" />
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Frenos Posterior
+                                            </label>
+                                            <input class="form-control" name="FrenoTrasero" value="@Model.ProductoCaracteristica.frenos.FrenoTrasero" />
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div id="ArosLlantas" class="container tab-pane fade">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Neumatico Delanteros
+                                            </label>
+                                            <input class="form-control" name="NeumaticoDelantero" value="@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero" />
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Neumatico Posterior
+                                            </label>
+                                            <input class="form-control" name="NeumaticoPosterior" value="@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior" />
+                                        </div>
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Aro Delantero
+                                            </label>
+                                            <input class="form-control" name="AroDelantero" value="@Model.ProductoCaracteristica.arollanta.AroDelantero" />
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>
+                                                Aro Posterior
+                                            </label>
+                                            <input class="form-control" name="AroPosterior" value="@Model.ProductoCaracteristica.arollanta.AroPosterior" />
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div id="Suspension" class="container tab-pane fade">
+                                    <br>
+                                    <div class="form-group">
+                                        <label>
+                                            Suspension delantera
+                                        </label>
+                                        <input class="form-control" name="SuspensionDelantera" value="@Model.ProductoCaracteristica.suspension.SuspensionDelantera" />
+                                    </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        Sistema Combustible
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                    <div class="form-group">
+                                        <label>
+                                            Suspension Posterior
+                                        </label>
+                                        <input class="form-control" name="SuspensionPosterior" value="@Model.ProductoCaracteristica.suspension.SuspensionPosterior" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>
-                                        Capacidad Tanque
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
+                                <div id="Consumo" class="container tab-pane fade">
+                                    <br>
+                                    <div class="form-group">
+                                        <label>
+                                            Octanaje
+                                        </label>
+                                        <input class="form-control" name="Octanaje" value="@Model.ProductoCaracteristica.consumo.Octanaje" />
+                                    </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        Autonomia
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Rendimiento Galon
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
-                                </div>
-                            </div>
-                            <div id="Transmision" class="container tab-pane fade">
-                                <br>
-                                <div class="form-group">
-                                    <label>
-                                        Transmision
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Nro Cambios
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Velocidad Maxima
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
-                                </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Sistema Combustible
+                                        </label>
+                                        <input class="form-control" name="SistemaCombustible" value="@Model.ProductoCaracteristica.consumo.SistemaCombustible" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Capacidad Tanque
+                                        </label>
+                                        <input class="form-control" name="CapacidadTanque" value="@Model.ProductoCaracteristica.consumo.CapacidadTanque" />
+                                    </div>
 
-                            </div>
-                            <div id="Dimensiones" class="container tab-pane fade">
-                                <br>
-                                <div class="form-group">
-                                    <label>
-                                        Peso
-                                    </label>
-                                    <input class="form-control" name="frenoDelantero" @*value="@Model.ProductoCaracteristica.frenos.FrenoDelantero"*@ />
+                                    <div class="form-group">
+                                        <label>
+                                            Autonomia
+                                        </label>
+                                        <input class="form-control" name="Autonomia" value="@Model.ProductoCaracteristica.consumo.Autonomia" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Rendimiento Galon
+                                        </label>
+                                        <input class="form-control" name="RendimientoGalon" value="@Model.ProductoCaracteristica.consumo.RendimientoGalon" />
+                                    </div>
                                 </div>
+                                <div id="Transmision" class="container tab-pane fade">
+                                    <br>
+                                    <div class="form-group">
+                                        <label>
+                                            Transmision
+                                        </label>
+                                        <input class="form-control" name="Transmision" value="@Model.ProductoCaracteristica.transmisiones.Transmision" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Nro Cambios
+                                        </label>
+                                        <input class="form-control" name="NroCambios" value="@Model.ProductoCaracteristica.transmisiones.NroCambios" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Velocidad Maxima
+                                        </label>
+                                        <input class="form-control" name="VelocidadMaxima" value="@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima" />
+                                    </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        Carga Util
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
                                 </div>
-                                <div class="form-group">
-                                    <label>
-                                        Pasajeros
-                                    </label>
-                                    <input class="form-control" name="frenoTrasero" @*value="@Model.ProductoCaracteristica.frenos.FrenoTrasero"*@ />
+                                <div id="Dimensiones" class="container tab-pane fade">
+                                    <br>
+                                    <div class="form-group">
+                                        <label>
+                                            Peso
+                                        </label>
+                                        <input class="form-control" name="Peso" value="@Model.ProductoCaracteristica.dimensiones.Peso" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>
+                                            Carga Util
+                                        </label>
+                                        <input class="form-control" name="CargaUtil" value="@Model.ProductoCaracteristica.dimensiones.CargaUtil" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Pasajeros
+                                        </label>
+                                        <input class="form-control" name="Pasajeros" value="@Model.ProductoCaracteristica.dimensiones.Pasajeros" />
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>

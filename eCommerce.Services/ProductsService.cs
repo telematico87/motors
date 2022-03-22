@@ -208,8 +208,10 @@ namespace eCommerce.Services
             ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();         
 
             if (!string.IsNullOrEmpty(product.Caracteristica)) {
-                productoCaracteristica = JsonConvert.DeserializeObject<ProductoCaracteristica>(product.Caracteristica);
+                productoCaracteristica = JsonConvert.DeserializeObject<ProductoCaracteristica>(product.Caracteristica); 
             }
+
+            productoCaracteristica = ValidaNulos(productoCaracteristica);
 
             response.ID = product.ID;
             response.IsActive = product.IsActive;
@@ -235,6 +237,52 @@ namespace eCommerce.Services
             response.ProductoCaracteristica = productoCaracteristica;
 
             return response;
+        }
+
+
+        public ProductoCaracteristica ValidaNulos(ProductoCaracteristica productoCaracteristica)
+        {
+             
+            if (productoCaracteristica.suspension == null)
+            {
+                productoCaracteristica.suspension = new Suspension();
+            }
+            if (productoCaracteristica.destacados == null)
+            {
+                productoCaracteristica.destacados = new Destacados();
+            }
+
+            if (productoCaracteristica.arollanta == null)
+            {
+                productoCaracteristica.arollanta = new AroLLanta();
+            }
+            if (productoCaracteristica.dimensiones == null)
+            {
+                productoCaracteristica.dimensiones = new Dimensiones();
+            }
+
+            if (productoCaracteristica.consumo == null)
+            {
+                productoCaracteristica.consumo = new Consumo();
+            }
+
+            if (productoCaracteristica.motor == null)
+            {
+                productoCaracteristica.motor = new Motor();
+            }
+             
+            if (productoCaracteristica.transmisiones == null)
+            {
+                productoCaracteristica.transmisiones = new Transmisions();
+            }
+
+            if (productoCaracteristica.frenos == null)
+            {
+                productoCaracteristica.frenos = new Frenos();
+            }
+
+
+            return productoCaracteristica;
         }
 
         public Product ProductResponseToProduct(ProductResponse productResponse)

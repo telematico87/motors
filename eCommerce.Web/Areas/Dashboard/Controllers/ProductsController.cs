@@ -327,15 +327,68 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         {
             var productoCaracteristicas = new ProductoCaracteristica
             {
-                motor = new Motor{
+                motor = new Motor {
                     Cilindrada = formCollection["Cilindrada"],
-                    NroCilindrada = formCollection["nroCilindros"],
-                    Potencia = formCollection["Potencia"]
+                    NroCilindrada = formCollection["NroCilindrada"],
+                    Potencia = formCollection["Potencia"],
+                    TipoMotor = formCollection["TipoMotor"],
+                    SistemaEnfriamiento = formCollection["SistemaEnfriamiento"],
+                    SistemaEncendido = formCollection["SistemaEncendido"],
+                    SistemaArranque = formCollection["SistemaArranque"]
                 },
-                frenos = new Frenos { 
-                    FrenoDelantero = "Mano de Juan",
-                    FrenoTrasero = "Pie de Juan"
-                }
+                frenos = new Frenos {
+                    FrenoDelantero = formCollection["FrenoDelantero"],
+                    FrenoTrasero = formCollection["FrenoTrasero"]
+                },
+                arollanta = new AroLLanta
+                {
+                    NeumaticoDelantero = formCollection["NeumaticoDelantero"],
+                    NeumaticoPosterior = formCollection["NeumaticoPosterior"],
+                    AroDelantero = formCollection["AroDelantero"],
+                    AroPosterior = formCollection["AroPosterior"]
+                },
+                suspension = new Suspension
+                {
+                    SuspensionDelantera = formCollection["SuspensionDelantera"],
+                    SuspensionPosterior = formCollection["SuspensionPosterior"]
+
+                },
+                 
+                consumo = new Consumo
+                {
+                    Octanaje = formCollection["Octanaje"],
+                    SistemaCombustible = formCollection["SistemaCombustible"],
+                    CapacidadTanque = formCollection["CapacidadTanque"],
+                    Autonomia = formCollection["Autonomia"],
+                    RendimientoGalon = formCollection["RendimientoGalon"] 
+                },
+                transmisiones = new Transmisions
+                {
+                    Transmision = formCollection["Transmision"],
+                    NroCambios = formCollection["NroCambios"],
+                    VelocidadMaxima = formCollection["VelocidadMaxima"]
+                   
+                },
+                dimensiones = new Dimensiones
+                {
+                    Peso = formCollection["Peso"],
+                    CargaUtil = formCollection["CargaUtil"],
+                    Pasajeros = formCollection["Pasajeros"]
+
+                },
+
+                destacados = new Destacados
+                {
+                    Texto1 = formCollection["Texto1"],
+                    Texto2 = formCollection["Texto2"],
+                    Texto3 = formCollection["Texto3"],
+                    Texto4 = formCollection["Texto4"],
+                    Compacta = formCollection["Compacta"],
+                    AroRayos = formCollection["AroRayos"],
+                    ColoresDisponibles = formCollection["ColoresDisponibles"],
+                    Adicionales = formCollection["Adicionales"],
+                    Tablero = formCollection["Tablero"] 
+                },
             };
 
 
