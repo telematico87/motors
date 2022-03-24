@@ -217,7 +217,7 @@ namespace eCommerce.Services
             response.IsActive = product.IsActive;
             response.IsDeleted = product.IsDeleted;
             response.ModifiedOn = product.ModifiedOn;
-
+            response.TipoProducto = product.TipoProducto;
             response.CategoryID = product.CategoryID;
             response.Category = product.Category;
 
@@ -308,6 +308,7 @@ namespace eCommerce.Services
             product.StockQuantity = productResponse.StockQuantity;
             product.ProductPictures = productResponse.ProductPictures;
             product.ProductRecords = productResponse.ProductRecords;
+            product.TipoProducto = productResponse.TipoProducto;
             product.Caracteristica = caracteristicas;
             return product;
         }

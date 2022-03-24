@@ -31,6 +31,8 @@ namespace eCommerce.Entities.Response
 
         public string Caracteristica { get; set; }
 
+        public bool TipoProducto { get; set; }
+
         public ProductoCaracteristica ProductoCaracteristica { get; set;}       
     }
 }

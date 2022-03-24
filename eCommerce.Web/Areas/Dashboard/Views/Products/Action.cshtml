@@ -334,16 +334,16 @@
                         <input type="hidden" name="InActive" value="false">
 
                         <label class="form-check-label" for="InActive">
-                            @("Dashboard.Products.Action.ProductInActive".Localized())
+                           Producto en Activo
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-check" title="Activar si el Producto es Moto">
-                        <input type="checkbox" name="chkMoto" value="true" class="form-check-input" id="chkMoto"> 
-                        <label class="form-check-label" for="InActive">
-                           Es Moto?
+                        <input type="checkbox" name="TipoProducto" value="true" class="form-check-input" id="TipoProducto" @(Model.TipoProducto ? "checked" : string.Empty)>
+                        <label class="form-check-label" for="TipoProducto">
+                            Es Moto?
                         </label>
                     </div>
                 </div>
@@ -723,7 +723,7 @@
     var productSpecificationCount = @(productSpecificationCount + 1);
 
     $(document).ready(function () {
-
+        $("#TipoProducto").trigger("change");
         var availableSpecificationTitles = [ @Html.Raw(string.Join(",", (Enum.GetValues(typeof(ProductSpecifications)).Cast<ProductSpecifications>()).Select(x=> string.Format("\"{0}\"", x)))) ];
 
         $("#SpecificationTitle").autocomplete({
@@ -975,9 +975,10 @@
         });
     });
 
-    $("#chkMoto").click(function () {
+    $("#TipoProducto").change(function () {
         debugger; 
-        if ($('#chkMoto').is(':checked')) {
+        if ($('#TipoProducto').is(':checked')) {
+            
             $("#TagMotos").css("display", "block");
         }
         else {

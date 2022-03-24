@@ -87,16 +87,17 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.SKU = product.SKU;
                 model.Barcode = product.Barcode;
                 model.Tags = product.Tags;
-                model.Supplier = product.Supplier;
-
+                model.Supplier = product.Supplier; 
                 model.InActive = !product.IsActive;
-
+               
                 model.ProductRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;
                 model.Summary = currentLanguageRecord.Summary;
                 model.Description = currentLanguageRecord.Description;
-                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;               
+
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications; 
                 model.ProductoCaracteristica = product.ProductoCaracteristica;
+                model.TipoProducto = product.TipoProducto;
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
@@ -131,10 +132,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.SKU = model.SKU;
                     product.Barcode = model.Barcode;
                     product.Tags = model.Tags;
-                    product.Supplier = model.Supplier;
-                    
-                    product.StockQuantity = model.StockQuantity;
-
+                    product.Supplier = model.Supplier; 
+                    product.StockQuantity = model.StockQuantity; 
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
                     product.ProductoCaracteristica = model.ProductoCaracteristica;
@@ -161,6 +160,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     product.IsActive = !model.InActive;
+                    product.TipoProducto = model.TipoProducto;
 
                     var toProduct = ProductsService.Instance.ProductResponseToProduct(product);
 
@@ -244,6 +244,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         StockQuantity = model.StockQuantity,
                         Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
+                        TipoProducto = model.TipoProducto,
                         ModifiedOn = DateTime.Now                        
                     };
 
@@ -409,6 +410,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 isFeatured = formCollection["isFeatured"].Contains("true"),
                 InActive = formCollection["InActive"].Contains("true"),
+                TipoProducto = formCollection["TipoProducto"].Contains("true"),
                 ProductPictures = formCollection["ProductPictures"],
                 ThumbnailPicture = !string.IsNullOrEmpty(formCollection["ThumbnailPicture"]) ? int.Parse(formCollection["ThumbnailPicture"]) : 0,
 

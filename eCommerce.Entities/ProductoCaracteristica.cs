@@ -14,10 +14,21 @@ namespace eCommerce.Entities
         public Consumo consumo { get; set; }
         public Transmisions transmisiones { get; set; }
         public Dimensiones dimensiones { get; set; }
-        public Destacados destacados { get; set; }
+        public Destacados destacados { get; set; } 
+        public AroLLanta arollanta { get; set; }
 
-        public AroLLanta arollanta { get; set; } 
-
+         
+        public ProductoCaracteristica()
+        {
+            motor = null;
+            frenos = null;
+            suspension = null;
+            consumo = null;
+            transmisiones = null;
+            dimensiones = null;
+            destacados = null;
+            arollanta = null;
+        }
     }
 
     public class Motor
