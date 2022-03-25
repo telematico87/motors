@@ -17,17 +17,34 @@ namespace eCommerce.Entities
         public Destacados destacados { get; set; } 
         public AroLLanta arollanta { get; set; }
 
-         
+
+        public ProductoCaracteristica DefinirNulos()
+        {
+
+            ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();
+
+            productoCaracteristica.motor = new Motor();
+            productoCaracteristica.frenos = new Frenos();
+            productoCaracteristica.suspension = new Suspension();
+            productoCaracteristica.consumo = new Consumo();
+            productoCaracteristica.transmisiones = new Transmisions();
+            productoCaracteristica.dimensiones = new Dimensiones();
+            productoCaracteristica.destacados = new Destacados();
+            productoCaracteristica.arollanta = new AroLLanta();
+            return productoCaracteristica;
+
+        }
+
         public ProductoCaracteristica()
         {
-            motor = null;
-            frenos = null;
-            suspension = null;
-            consumo = null;
-            transmisiones = null;
-            dimensiones = null;
-            destacados = null;
-            arollanta = null;
+            motor = new Motor();
+            frenos = new Frenos();
+            suspension = new Suspension();
+            consumo = new Consumo();
+            transmisiones = new Transmisions();
+            dimensiones = new Dimensiones();
+            destacados = new Destacados();
+            arollanta = new AroLLanta();
         }
     }
 
