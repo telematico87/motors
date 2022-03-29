@@ -1257,6 +1257,7 @@ ol {
 		align-items: center;
 		display: flex;
 		cursor: pointer;
+		width:164px;
 	}
 
 		.product-item .pi-pic img {
