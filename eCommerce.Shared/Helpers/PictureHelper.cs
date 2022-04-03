@@ -37,8 +37,8 @@ namespace eCommerce.Shared.Helpers
 
             if (lazyLoad)
             {
-                image.MergeAttribute("data-src", string.Format("{0}{1}", eCommerceConstants.MAIN_IMAGES_DIRECTORY, pictureURL));
-                image.MergeAttribute("src", string.Format("{0}{1}", eCommerceConstants.MAIN_IMAGES_DIRECTORY, eCommerceConstants.LOADING_PICTURE));
+                image.MergeAttribute("src", string.Format("{0}{1}", eCommerceConstants.MAIN_IMAGES_DIRECTORY, pictureURL));
+                image.MergeAttribute("data-src", string.Format("{0}{1}", eCommerceConstants.MAIN_IMAGES_DIRECTORY, eCommerceConstants.LOADING_PICTURE));
             }
             else
             {

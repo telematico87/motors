@@ -12,23 +12,23 @@
 <html lang="@AppDataHelper.CurrentLanguage.ShortCode.ToLower()" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>
 <head>
     @Html.Partial("_MetaTags", baseModel)
-    
-    @Html.Partial("_HeaderStylesScripts")
-    @RenderSection("IncludeHeaderStylesScripts", false)
+    <script type = "text/javascript" src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&amp;region=GB" ></script> 
+    @Html.Partial("_HeaderStylesBM3")
+    @*@RenderSection("IncludeHeaderStylesScripts", false)*@
 </head>
 <body>
     <div id="preloder">
         <div class="loader"></div>
     </div>
 
-    @Html.Partial("_Header")
+    @Html.Partial("_HeaderBm3")
 
     @RenderBody()
 
-    @Html.Partial("_Footer")
+    @Html.Partial("_FooterBm3")
     @Html.Partial("_Variables")
-    @Html.Partial("_FooterStylesScripts")
-    @RenderSection("IncludeFooterStyleScripts", false)
+    @*@Html.Partial("_FooterStylesScripts")
+    @RenderSection("IncludeFooterStyleScripts", false)*@
 </body>
 </html>
 

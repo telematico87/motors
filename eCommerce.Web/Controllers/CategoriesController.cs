@@ -54,7 +54,7 @@ namespace eCommerce.Web.Controllers
         {
             var categories = CategoriesService.Instance.GetFeaturedCategories(recordSize: recordSize);
 
-            return PartialView("_FeaturedCategoriesHomeSection", categories);
+            return PartialView("_CategoriaHomeSectionBm3", categories);
         }
 
         public ActionResult ProductsByFeaturedCategories(int recordSize = 3)
@@ -64,7 +64,7 @@ namespace eCommerce.Web.Controllers
                 Categories = CategoriesService.Instance.GetFeaturedCategories(recordSize: recordSize)
             };
 
-            return PartialView("_ProductsByFeaturedCategories", model);
+            return PartialView("_ProductByCategoriesBm3", model);
         }
     }
 }
