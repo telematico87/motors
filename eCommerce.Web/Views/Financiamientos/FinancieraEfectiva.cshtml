@@ -1,0 +1,71 @@
+﻿
+
+@{
+    ViewBag.Title = "FinancieraEfectiva";
+}
+
+<h2>FinancieraEfectiva</h2>
+
+@Html.Partial("Financiamiento")
+
+
+
+<script>
+    var _contactFormSubjectRequired = "Please write your message subject.";
+    var _contactFormNameRequired = "Please write your name.";
+    var _contactFormEmailRequired = "Please write your name.";
+    var _contactFormEmailFormat = "Please write a valid email address.";
+    var _contactFormMessageRequired = "Please write your message.";
+
+    $(document).ready(function () {
+        validateContactUsForm();
+
+        $("#contact-form").submit(function (e) {
+            submitContactUsForm();
+
+            e.preventDefault();
+        });
+
+        function submitContactUsForm() {
+            $(".errorsRow .errorMessages", "#contact-form").html("");
+            $(".errorsRow", "#contact-form").hide(200);
+            $(".errorsRow .errorMessages", "#contact-form").hide();
+            $(".successRow .successMessages", "#contact-form").html("");
+            $(".successRow", "#contact-form").hide(200);
+            $(".successRow .successMessages", "#contact-form").hide();
+
+            if ($("#contact-form").valid()) {
+                addLoader("contact-form");
+
+                $.ajax({
+                    url: "@Url.SubmitContactForm()",
+                    type: "post",
+                    data: $("#contact-form").serialize(),
+                })
+                .done(function (response) {
+                    removeLoader("contact-form");
+
+                    if (response != null && response.Success) {
+                        $(".successRow .successMessages", "#contact-form").html(response.Message);
+                        $(".successRow", "#contact-form").show(200);
+                        $(".successRow .successMessages", "#contact-form").show();
+                    }
+                    else {
+                        $(".errorsRow .errorMessages", "#contact-form").html(response.Message);
+                        $(".errorsRow", "#contact-form").show(200);
+                        $(".errorsRow .errorMessages", "#contact-form").show();
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    removeLoader("contact-form");
+
+                    Swal.fire("@("PP.Message.Error".Localized())", "@("PP.Message.GenericErrorMessage".Localized())", "error");
+
+                    console.log('jqXHR:' + jqXHR);
+                    console.log('textStatus:' + textStatus);
+                    console.log('errorThrown:' + errorThrown);
+                });
+            }
+        }
+    });
+</script>
