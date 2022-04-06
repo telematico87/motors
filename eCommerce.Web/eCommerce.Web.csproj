@@ -5145,6 +5145,7 @@
     <Content Include="Views\Categories\_CategoriaHomeSectionBm3.cshtml" />
     <Content Include="Views\Categories\_ProductByCategoriesBm3.cshtml" />
     <Content Include="Views\Categories\_ProductCategories.cshtml" />
+    <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

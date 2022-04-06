@@ -63,8 +63,9 @@ namespace eCommerce.Web.Controllers
             {
                 Categories = CategoriesService.Instance.GetFeaturedCategories(recordSize: recordSize)
             };
-
-            return PartialView("_ProductByCategoriesBm3", model);
+            
+            return PartialView("_ProductCategories", model);
+            //eturn PartialView("_ProductByCategoriesBm3", model);
         }
     }
 }

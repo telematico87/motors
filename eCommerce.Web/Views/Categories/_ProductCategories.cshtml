@@ -1,6 +1,32 @@
 ﻿@model eCommerce.Web.ViewModels.ProductsByFeaturedCategoriesViewModel
 
- 
+@Html.Partial("_ProductByCategoriesBm3")
+
+<style>
+     #productlarge {
+        height: 307px;
+        text-align: center;
+        /* padding-top: 285px; */
+        background-color: #efefef;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: auto;
+        align-items: center !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+    .productlarge2 {
+        color: #ffffff;
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 18px; 
+        display: inline-block;
+        position: relative;
+    }
+</style>
 
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
@@ -13,15 +39,15 @@
 
         var products = featuredCategory.Products != null ? featuredCategory.Products.Where(x => !x.IsDeleted && x.IsActive).OrderByDescending(x => x.ModifiedOn).Take(8).ToList() : null;
 
-        <section class="@(reverse ? "reverse-banner" : "forward-banner") spad">
-            <div class="container-fluid px-0">
+        <section class="@(reverse ? "flat-imagebox style1 reverse-banner" : "flat-imagebox style1 forward-banner") spad">
+            <div class="container">
                 <div class="row">
                     @if (reverse)
                     {
-                        <div class="col-lg-8">
+                        <div class="col-md-9">
                             @if (products != null && products.Count > 0)
                             {
-                                Html.RenderPartial("_ProductsSlider", products);
+                                Html.RenderPartial("_ProductCarouselSliderBm3", products);
                             }
                             else
                             {
@@ -30,10 +56,11 @@
                                 </div>
                             }
                         </div>
-                        <div class="col-lg-4" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
-                            <div class="product-large set-bg d-flex justify-content-center align-items-center" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")">
-                                <div>
-                                    <h2>
+
+                        <div class="col-md-3" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
+                            <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
+                                <div class="inner-box"> 
+                                    <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
                                     <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
@@ -43,20 +70,20 @@
                     }
                     else
                     {
-                        <div class="col-lg-4" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
-                            <div class="product-large set-bg d-flex justify-content-center align-items-center" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")">
-                                <div>
-                                    <h2>
+                        <div class="col-md-3" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
+                            <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
+                                <div class="inner-box">
+                                    <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
                                     <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-md-9">
                             @if (products != null && products.Count > 0)
                             {
-                                Html.RenderPartial("_ProductsSlider", products);
+                                Html.RenderPartial("_ProductCarouselSliderBm3", products);
                             }
                             else
                             {
@@ -75,213 +102,214 @@
 }
 
 @*<section class="flat-imagebox style1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="banner-box">
-                    <div class="inner-box">
-                        <a href="#" title="">
-                            <img src="images/banner/banner-4.jpg" alt="">
-                        </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="banner-box">
+                        <div class="inner-box">
+                            <a href="#" title="">
+                                <img src="images/banner/banner-4.jpg" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <div class="owl-carousel-product">
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
+                <div class="col-md-9">
+                    <div class="owl-carousel-product">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <span>KTM</span>
+                                        <img src="images/producto/producto-2.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-top">
-                                <div class="box-link">
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
-                                    <a href="#" title="">
-                                        <span>KTM</span>
-                                    </a>
-                                </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
-                                </div>
-                            </div>
-                            <div class="box-top">
-                                <div class="box-link">
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <span>KTM</span>
+                                        <img src="images/producto/producto-1.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-top">
-                                <div class="box-link">
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
-                                    <a href="#" title="">
-                                        <span>KTM</span>
-                                    </a>
-                                </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
-                                </div>
-                            </div>
-                            <div class="box-top">
-                                <div class="box-link">
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <span>KTM</span>
+                                        <img src="images/producto/producto-2.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-top">
-                                <div class="box-link">
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-box">
-                        <div class="imagebox style2">
-                            <div class="box-image">
-                                <a href="#" title="">
-                                    <img src="images/producto/producto-1.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="box-content">
-                                <div class="product-name">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <span>KTM</span>
+                                        <img src="images/producto/producto-1.jpg" alt="">
                                     </a>
                                 </div>
-                                <div class="price">
-                                    <span class="sale">$1,250.00</span>
-                                    <span class="regular">$2,999.00</span>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
+                                </div>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="box-top">
-                                <div class="box-link">
+                        </div>
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <i class="ti-eye"></i>
+                                        <img src="images/producto/producto-2.jpg" alt="">
                                     </a>
+                                </div>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
+                                </div>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
                                     <a href="#" title="">
-                                        <i class="ti-eye"></i>
+                                        <img src="images/producto/producto-1.jpg" alt="">
                                     </a>
-                                    <a href="#" title="">
-                                        <i class="ti-eye"></i>
-                                    </a>
+                                </div>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="#" title="">
+                                            <span>KTM</span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">$1,250.00</span>
+                                        <span class="regular">$2,999.00</span>
+                                    </div>
+                                </div>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#" title="">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -289,6 +317,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>*@
+    </section>*@
 
