@@ -67,10 +67,8 @@ namespace eCommerce.Data
         public DbSet<ProductLitros> ProductsLitroes { get; set; }
         public DbSet<Aro> Aros { get; set; }
         public DbSet<ProductsAro> ProductAros { get; set; }
+
         public DbSet<Financiamiento> Financiamientos { get; set; }
-
-
-
         public static eCommerceContext Create()
         {
             return new eCommerceContext();
