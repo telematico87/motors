@@ -233,7 +233,6 @@
     <Compile Include="Areas\API\Models\UserModels.cs" />
     <Compile Include="Areas\API\Providers\eCommerceOAuthProvider.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AroController.cs" />
-    <Compile Include="Areas\Dashboard\Controllers\CatalogoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ColorController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardBaseController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoriesController.cs" />
@@ -242,7 +241,6 @@
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LitroController.cs" />
-    <Compile Include="Areas\Dashboard\Controllers\MarcaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\MedidaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ModeloController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\OrdersController.cs" />
@@ -252,13 +250,11 @@
     <Compile Include="Areas\Dashboard\Controllers\TallaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
-    <Compile Include="Areas\Dashboard\ViewModels\CatalogosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ColorsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\LanguagesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CategoriesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ConfigurationsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\DashboardViewModels.cs" />
-    <Compile Include="Areas\Dashboard\ViewModels\MarcasViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\MedidasViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ModelosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\OrdersViewModels.cs" />
@@ -313,9 +309,6 @@
     <Content Include="Content\bm3\images\logo\logo.png" />
     <Content Include="Content\bm3\images\logo\logo.svg" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
-    <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
-    <Content Include="Content\bm3\images\producto\icono_best_points_envio_gratis.svg" />
-    <Content Include="Content\bm3\images\producto\icono_best_points_pago_en_linea.svg" />
     <Content Include="Content\bm3\images\producto\producto-1.jpg" />
     <Content Include="Content\bm3\images\producto\producto-2.jpg" />
     <Content Include="Content\bm3\images\slider\slider-1.jpg" />
@@ -5110,7 +5103,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
-    <Folder Include="Areas\Dashboard\Views\Marca\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
@@ -5141,13 +5133,11 @@
     <Content Include="Content\bm3\fonts\font-themify\icon.eot" />
     <Content Include="Content\bm3\fonts\font-themify\icon.ttf" />
     <Content Include="Content\bm3\fonts\font-themify\icon.woff" />
-    <Content Include="Areas\Dashboard\Views\Catalogo\Index.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Catalogo\Action.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
-    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" /> 
     <Content Include="Views\Shared\_HeaderBm3.cshtml" />
     <Content Include="Views\Shared\_FooterBm3.cshtml" />
     <Content Include="Views\Shared\_HeaderStylesBM3.cshtml" />
@@ -5156,10 +5146,10 @@
     <Content Include="Views\Categories\_CategoriaHomeSectionBm3.cshtml" />
     <Content Include="Views\Categories\_ProductByCategoriesBm3.cshtml" />
     <Content Include="Views\Categories\_ProductCategories.cshtml" />
-    <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" />
+    <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" /> 
     <Content Include="Views\Financiamientos\FinancieraEfectiva.cshtml" />
-    <Content Include="Views\Financiamientos\Financiamiento.cshtml" />
-    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
+    <Content Include="Views\Financiamientos\Financiamiento.cshtml" /> 
+    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" /> 
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

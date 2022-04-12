@@ -64,6 +64,7 @@
     <Compile Include="APIEntities\ProductEntity.cs" />
     <Compile Include="APIEntities\PromoEntity.cs" />
     <Compile Include="Aro.cs" />
+    <Compile Include="Catalogo.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="CustomEntities\Cart.cs" />
     <Compile Include="CustomEntities\CartItem.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="LanguageResource.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Litros.cs" />
+    <Compile Include="Marca.cs" />
     <Compile Include="Medida.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="NewsletterSubscription.cs" />

@@ -32,10 +32,17 @@
             <span>@("Dashboard.Menu.Products".Localized())</span>
         </a>
     </li>
-    <li class="nav-item @Html.MenuItemClass("Promos")">
+    @*<li class="nav-item @Html.MenuItemClass("Promos")">
         <a class="nav-link" href="@Url.ListAction("Promos")">
             <i class="fas fa-tags mr-1"></i>
             <span>@("Dashboard.Menu.Promos".Localized())</span>
+        </a>
+    </li>*@
+
+    <li class="nav-item @Html.MenuItemClass("Catalogo")">
+        <a class="nav-link" href="@Url.ListAction("Catalogo")">
+            <i class="fas fa-tags mr-1"></i>
+            <span>Catalogo</span>
         </a>
     </li>
 

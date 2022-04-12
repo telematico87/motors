@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+
 <section id="header" class="header">
     <div class="header-top">
         <div class="container">
@@ -84,70 +85,101 @@
                 </div>
                 <div class="col-md-3">
                     <div class="box-cart">
-                        <div class="inner-box">
-                            <ul class="menu-option">
-                                <li class="">
-                                    <a href="#" title="">
-                                        <i class="ti-user"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="inner-box">
-                            <a href="#" title="">
-                                <div class="icon-cart">
-                                    <i class="ti-shopping-cart"></i>
-                                    <span>4</span>
-                                </div>
-                                <div class="price">
-                                    <span>S/0.00</span>
-                                </div>
-                            </a>
-                            <div class="dropdown-box">
-                                <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var hiUserMessage = "PP.Header.Menu.HiUser".LocalizedString().Replace("{user}", User.Identity.GetUserName());
+                            <div class="inner-box">
+
+                                <ul class="menu-option">
+
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li>
+                                            <a href="@Url.Dashboard()" title="@("PP.Header.Menu.Dashboard".Localized())">
+                                                <i class="ti-users" style="color:white; padding:1px"></i>
+                                            </a>
+                                        </li>
+
+                                    }
                                     <li>
-                                        <div class="img-product">
-                                            <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
-                                        </div>
-                                        <div class="info-product">
-                                            <div class="name">
-                                                <span>Producto 1<br />Categoría</span>
-                                            </div>
-                                            <div class="price">
-                                                <span>1 x</span>
-                                                <span>S/10,000.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <span class="delete">x</span>
+                                        <a href="@Url.UserProfile()" title="@hiUserMessage">
+                                            @Html.UserAvatar(User.Identity.GetUserPicture(), "image rounded-circle", style: "width: 20px; height: 20px", alt: hiUserMessage)
+                                        </a>
                                     </li>
-                                    <li>
-                                        <div class="img-product">
-                                            <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
-                                        </div>
-                                        <div class="info-product">
-                                            <div class="name">
-                                                <span>Producto 2<br />Categoría</span>
-                                            </div>
-                                            <div class="price">
-                                                <span>1 x</span>
-                                                <span>S/10,000.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <span class="delete">x</span>
-                                    </li>
+
                                 </ul>
-                                <div class="total">
-                                    <span>Subtotal:</span>
-                                    <span class="price">S/20,000.00</span>
-                                </div>
-                                <div class="btn-cart">
-                                    <a href="#" class="view-cart" title="">Ver carrito</a>
-                                    <a href="#" class="check-out" title="">Finalizar compra</a>
+                            </div>
+                            <div class="inner-box">
+                                <a href="#" title="">
+                                    <div class="icon-cart">
+                                        <i class="ti-shopping-cart"></i>
+                                        <span>4</span>
+                                    </div>
+                                    <div class="price">
+                                        <span>S/0.00</span>
+                                    </div>
+                                </a>
+                                <div class="dropdown-box">
+                                    <ul>
+                                        <li>
+                                            <div class="img-product">
+                                                <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
+                                            </div>
+                                            <div class="info-product">
+                                                <div class="name">
+                                                    <span>Producto 1<br />Categoría</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span>1 x</span>
+                                                    <span>S/10,000.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <span class="delete">x</span>
+                                        </li>
+                                        <li>
+                                            <div class="img-product">
+                                                <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
+                                            </div>
+                                            <div class="info-product">
+                                                <div class="name">
+                                                    <span>Producto 2<br />Categoría</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span>1 x</span>
+                                                    <span>S/10,000.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <span class="delete">x</span>
+                                        </li>
+                                    </ul>
+                                    <div class="total">
+                                        <span>Subtotal:</span>
+                                        <span class="price">S/20,000.00</span>
+                                    </div>
+                                    <div class="btn-cart">
+                                        <a href="#" class="view-cart" title="">Ver carrito</a>
+                                        <a href="#" class="check-out" title="">Finalizar compra</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+                        else
+                        {
+                            <div class="inner-box">
+
+                                <ul class="menu-option">
+                                     
+                                        <li>
+                                            <a href="@Url.Login()" title="@("PP.Header.Menu.Account".Localized())">
+                                                <i class="fas fa-user" style="color:white;"></i>
+                                            </a>
+                                        </li> 
+                                </ul>
+                            </div> 
+                        }
                     </div>
                 </div>
             </div>
