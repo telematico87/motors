@@ -17,9 +17,13 @@
     @*@RenderSection("IncludeHeaderStylesScripts", false)*@
 </head>
 <body>
+    <div class="overlay"></div>
     <div id="preloder">
-        <div class="loader"></div>
+        <div class="clear-loading loading-effect-2">
+            <span></span>
+        </div>
     </div>
+
 
     @Html.Partial("_HeaderBm3")
 
@@ -28,7 +32,7 @@
     @Html.Partial("_FooterBm3")
     @Html.Partial("_Variables")
     @*@Html.Partial("_FooterStylesScripts")
-    @RenderSection("IncludeFooterStyleScripts", false)*@
+        @RenderSection("IncludeFooterStyleScripts", false)*@
 </body>
 </html>
 

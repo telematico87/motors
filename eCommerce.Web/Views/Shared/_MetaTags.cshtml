@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>@title</title>
-<meta name="description" content="@Model.PageDescription">
+@*<meta name="description" content="@Model.PageDescription">*@
+<meta name="description" content="Prueba">
 <meta property="og:title" content="@title" />
 <meta property="og:description" content="@Model.PageDescription" />
 <meta property="og:url" content="@Model.PageURL.ToSiteURL()" />
@@ -18,6 +19,8 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@ConfigurationsHelper.TwitterUsername" />
 <meta name="twitter:creator" content="@ConfigurationsHelper.TwitterUsername" />
+
+<link rel="shortcut icon" href="Content/bm3/favicon/favicon.png">
 
 @foreach (var canonicalURL in Model.PageCanonicalURLs)
 {
