@@ -35,19 +35,13 @@ namespace eCommerce.Services
         }
         #endregion
 
-
-        //public List<Catalogo> ListarCatalogos()
+        //public List<Category> ListarCategoria()
         //{
-
-        //    //string consulta = "select * from Catalogoes";
-        //    //var cata = new List<Catalogo>();
-        //    //using (var connection = new SqlConnection(con))
-	       //    // {
-        //    //       connection.Open();
-        //    //       var resul = con.Query<cata>.ToList();
-	       //    // }
-             
+        //    var context = DataContextHelper.GetNewContext();
+        //    var categori = context.Categories.ToList();
+        //    return categori.ToList();
         //}
+         
 
         public List<Marca> SearchMarca(string searchTerm, int? pageNo, int recordSize, out int count)
         {
@@ -92,8 +86,10 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            marca.ModifiedOn = DateTime.Now;
-            context.Entry(marca).State = System.Data.Entity.EntityState.Modified;
+            //marca.ModifiedOn = DateTime.Now;
+            //context.Entry(marca).State = System.Data.Entity.EntityState.Modified; 
+            var existingCategory = context.Marcas.Find(marca.ID); 
+            context.Entry(existingCategory).CurrentValues.SetValues(marca);
 
             return context.SaveChanges() > 0;
         }

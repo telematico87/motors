@@ -30,6 +30,14 @@ namespace eCommerce.Services
         }
         #endregion
 
+
+        public List<Catalogo> ListarCatalogo()
+        {
+            var context = DataContextHelper.GetNewContext();
+            var catalogo = context.Catalogos.ToList();
+            return catalogo.ToList();
+        }
+
         public List<Catalogo> SearchCatalogo(string searchTerm, int? pageNo, int recordSize, out int count)
         {
             var context = DataContextHelper.GetNewContext();

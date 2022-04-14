@@ -1,12 +1,12 @@
-﻿@model eCommerce.Web.Areas.Dashboard.ViewModels.CategoryActionViewModel
+﻿@model MarcasActionViewModel
 @{
     if (Model != null)
     {
-        if (Model.CategoryID > 0)
+        if (Model.ID > 0)
         {
             Model.PageTitle = "Dashboard.Categories.EditCategoryTitle".LocalizedString();
             Model.PageDescription = "Dashboard.Categories.EditCategoryDescription".LocalizedString();
-            Model.PageURL = Url.EditAction("Categories", Model.CategoryID);
+            Model.PageURL = Url.EditAction("Marca", Model.ID);
         }
         else
         {
@@ -15,7 +15,7 @@
             Model.PageURL = Url.CreateAction("Categories");
         }
 
-        Model.PageImageURL = PictureHelper.PageImageURL("marca.jpg");
+        Model.PageImageURL = PictureHelper.PageImageURL("categories.jpg");
     }
 }
 
@@ -31,48 +31,29 @@
 
 <div class="page-data-holder mb-4">
     <form id="actionForm" method="post">
-        <input type="hidden" name="CategoryID" value="@Model.CategoryID" />
-        <input type="hidden" name="CategoryRecordID" value="@Model.CategoryRecordID" />
-        <input type="hidden" name="LanguageID" value="@AppDataHelper.CurrentLanguage.ID" />
-
+        <input type="hidden" name="hdCatalogoID" value="@Model.CatalogoID" />   
         <div class="card mt-3">
-            @if (ConfigurationsHelper.EnableMultilingual)
-            {
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        @foreach (var language in LanguagesHelper.EnabledLanguages)
-                        {
-                            var isActive = language.ShortCode == AppDataHelper.CurrentLanguage.ShortCode;
-
-                            <li class="nav-item">
-                                <a class="nav-link @(isActive ? "active" : string.Empty)" href="@(isActive ? "#" : Url.LanguageBasedURL(language.ShortCode))">
-                                    @language.Name
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            }
+            
             <div class="card-body">
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Categories.Action.Name".Localized())
+                       Descripción
                     </label>
-                    <input class="form-control" name="Name" value="@Model.Name" placeholder="@("Dashboard.Categories.Action.NamePlaceholder".Localized())" />
+                    <input class="form-control" name="Descripcion" value="@Model.Descripcion" placeholder="Descripción" />
                 </div>
 
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Categories.Action.Summary".Localized())
+                       Resumen
                     </label>
-                    <textarea class="form-control" name="Summary" placeholder="@("Dashboard.Categories.Action.SummaryPlaceholder".Localized())" rows="2">@Model.Summary</textarea>
+                    <textarea class="form-control" name="Resumen" placeholder="Resumen" rows="2">@Model.Resumen</textarea>
                 </div>
 
-                <div class="form-group mb-0">
+                <div class="form-group">
                     <label>
-                        @("Dashboard.Categories.Action.Description".Localized())
+                       URL
                     </label>
-                    <textarea class="form-control" name="Description" placeholder="@("Dashboard.Categories.Action.DescriptionPlaceholder".Localized())" rows="6">@Model.Description</textarea>
+                    <input class="form-control" name="URL" placeholder="URL" value="@Model.URL" />
                 </div>
             </div>
         </div>
@@ -80,33 +61,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Categories.Action.ParentCategory".Localized())
+                       Catálogo
                     </label>
-                    <select class="form-control" name="ParentCategoryID">
-                        <option value="0">@("Dashboard.Categories.Action.ParentCategoryNone".Localized())</option>
-                        @foreach (var category in Model.Categories.Where(x => x.ID != Model.CategoryID))
+                    <select class="form-control" name="CatalogoID">
+                        <option value="0">--Seleccione--</option> 
+                        @foreach (var catalogo in Model.Catalogos)
                         {
-                            var selected = Model.ParentCategoryID == category.ID ? "selected" : string.Empty;
+                            var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
 
-                            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-
-                            if (currentLanguageCategoryRecord != null)
-                            {
-                                <option value="@category.ID" @selected>
-                                    @currentLanguageCategoryRecord.Name
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@category.ID" @selected>
-                                    @category.SanitizedName
-                                </option>
-                            }
-                        }
+                            <option value="@catalogo.ID" @selected>
+                                @catalogo.Description
+                            </option> 
+                        } 
                     </select>
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>
                         @("Dashboard.Categories.Action.URL".Localized())
                     </label>
@@ -118,53 +88,42 @@
                         </div>
                         <input type="text" class="form-control" id="SanitizedName" name="SanitizedName" value="@Model.SanitizedName">
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group" id="pics-container">
                     <label>
                         @("Dashboard.Categories.Action.SelectPicture".Localized())
                     </label>
                     <input id="categoryPicture" class="uPicUploadInput form-control" type="file" />
-                    <input type="hidden" name="PictureID" value="@Model.PictureID"/>
+                    <input type="hidden" name="PictureID" value="@Model.PictureID" />
                     <div id="pictureArea" class="pt-2">
                         @Html.Picture(Model.Picture, "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef", lazyLoad: false)
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" name="isFeatured" value="true" class="form-check-input" id="isFeatured" @(Model.isFeatured ? "checked" : string.Empty)>
-                        <input type="hidden" name="isFeatured" value="false">
-
-                        <label class="form-check-label" for="isFeatured">
-                            @("Dashboard.Categories.Action.Featured".Localized())
-                        </label>
-                    </div>
-                </div>
-
+                 
                 <hr />
                 <div class="form-group mb-0">
-                    @if (Model.CategoryID > 0)
+                    @if (Model.ID > 0)
                     {
                         <button class="btn btn-success" type="submit" id="actionButton">
                             <i class="fas fa-edit mr-1"></i>
-                            @("Dashboard.Categories.Update".Localized())
+                           Actualizar
                         </button>
-                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.CategoryID">
+                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ID">
                             <i class="fas fa-trash-alt mr-1"></i>
-                            @("Dashboard.Categories.Delete".Localized())
+                          Eliminar
                         </button>
                     }
                     else
                     {
                         <button class="btn btn-success" type="submit" id="actionButton">
                             <i class="fas fa-plus mr-1"></i>
-                            @("Dashboard.Categories.Save".Localized())
+                          Guardar
                         </button>
                     }
-                    <a class="btn btn-secondary" href="@Url.ListAction("Categories")">
+                    <a class="btn btn-secondary" href="@Url.ListAction("Marca")">
                         <i class="fas fa-angle-double-left mr-1"></i>
-                        @("Dashboard.Categories.Cancel".Localized())
+                       Cancelar
                     </a>
                 </div>
             </div>
@@ -185,7 +144,7 @@
         }
     });
 
-    
+
     $("#categoryPicture").change(function () {
 		var pictures = this.files;
 
@@ -194,7 +153,7 @@
 		for (var i = 0; i < pictures.length; i++) {
 			picsData.append("Picture", pictures[i]);
 		}
-        
+
         addLoader("pics-container");
 		$.ajax({
 			url: "@Url.UploadPictures()",
@@ -216,7 +175,7 @@
              Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
 		});
     });
-    
+
     function AttachNewImage(imageURL, imageID) {
         var $newimgHTML = $("#pictureTemplate").clone();
 
@@ -248,7 +207,7 @@
 				maxlength: "@("Dashboard.Categories.Action.Validation.NameMaximumLength".Localized().ToString().Replace("{max}", "150"))"
 			},
 			Description: {
-				minlength: "@("Dashboard.Categories.Action.Validation.DescriptionMinimumLength".Localized().ToString().Replace("{min}", "20"))",
+				minlength: "@("Dashboard.Categories.Action.Validation.DescriptionMinimumLength".Localized().ToString().Replace("{min}", "5"))",
 			}
 		},
 		highlight: function (element, errorClass) {
@@ -265,7 +224,7 @@
 			})
             .done(function (response) {
                 if (response.Success) {
-                    window.location.href = "@Url.ListAction("Categories")";
+                    window.location.href = "@Url.ListAction("Marca")";
 			    }
                 else {
                     removeLoader("actionForm");
@@ -297,13 +256,13 @@
             if (result.value) {
                 addLoader("actionForm");
 				$.ajax({
-					url: "@Url.DeleteAction("Categories")",
+					url: "@Url.DeleteAction("Marca")",
                     type: "post",
                     data: { id: recordID }
 				})
                 .done(function (response) {
                     if (response != null && response.Success != undefined && response.Success) {
-                        window.location.href = "@Url.ListAction("Categories")";
+                        window.location.href = "@Url.ListAction("Marca")";
 				    }
                     else {
                         removeLoader("actionForm");
