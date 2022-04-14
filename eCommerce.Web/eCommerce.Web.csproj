@@ -5110,7 +5110,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
-    <Folder Include="Areas\Dashboard\Views\Marca\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
@@ -5144,6 +5143,9 @@
     <Content Include="Areas\Dashboard\Views\Catalogo\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Catalogo\Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\_Listing.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
