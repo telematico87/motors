@@ -59,15 +59,18 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string Barcode { get; set; }
         public string Supplier { get; set; }
 
+        public bool TipoProducto { get; set; }
         public string ProductPictures { get; set; }
         public int ThumbnailPicture { get; set; }
         public List<ProductPicture> ProductPicturesList { get; set; }
 
         public List<Category> Categories { get; set; }
 
+       public ProductoCaracteristica ProductoCaracteristica
+        { get; 
+          set; }
+
         
-
-
 
     }
 }

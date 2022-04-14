@@ -690,7 +690,7 @@ ol {
 		}
 
 .header-section .nav-item {
-	background: #252525;
+	background: #c4161c;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -701,7 +701,7 @@ ol {
 	}
 
 		.header-section .nav-item .nav-depart .depart-btn {
-			background: #3b3b3b;
+			background: #c4161c;
 			color: #ffffff;
 			padding: 14px 84px 14px 18px;
 			cursor: pointer;
@@ -832,7 +832,7 @@ ol {
 			}
 
 			.header-section .nav-item .nav-menu li:hover > a {
-				background: #c4161c;
+				background: #252525;
 			}
 
 			.header-section .nav-item .nav-menu li:hover .dropdown {
@@ -1039,7 +1039,7 @@ ol {
 -----------------------*/
 
 .banner-section {
-	padding: 80px 50px;
+	padding: 50px 110px;
 }
 
 .single-banner {
@@ -1108,10 +1108,10 @@ ol {
 -----------------------*/
 
 .forward-banner {
-	padding-right: 65px;
-	padding-left: 65px;
+	padding-right: 120px;
+	padding-left: 120px;
 	padding-top: 0;
-	padding-bottom: 80px;
+	padding-bottom: 50px;
 }
 
 .product-large {
@@ -1257,6 +1257,7 @@ ol {
 		align-items: center;
 		display: flex;
 		cursor: pointer;
+		width:164px;
 	}
 
 		.product-item .pi-pic img {
@@ -1410,10 +1411,10 @@ ol {
 -----------------------*/
 
 .reverse-banner {
-	padding-right: 65px;
-	padding-left: 65px;
+	padding-right: 120px;
+	padding-left: 120px;
 	padding-top: 0px;
-	padding-bottom: 80px;
+	padding-bottom: 50px;
 }
 
 
@@ -1578,7 +1579,7 @@ ol {
 
 .partner-logo {
 	background: #303030;
-	padding: 38px 0;
+	padding: 15px 0;
 }
 
 .logo-carousel .logo-item {
@@ -1686,6 +1687,18 @@ ol {
 	}
 
 		.footer-widget ul li a {
+			line-height: 36px;
+			font-size: 16px;
+			color: #b2b2b2;
+		}
+		
+		.footer-widget ul li span {
+			line-height: 36px;
+			font-size: 16px;
+			color: #b2b2b2;
+		}
+		
+		.footer-widget ul li i {
 			line-height: 36px;
 			font-size: 16px;
 			color: #b2b2b2;
@@ -4112,7 +4125,8 @@ ol {
 	}
 
 	.header-section .nav-item .nav-menu li a {
-		padding: 16px 45px 15px;
+		/*	padding: 16px 45px 15px;*/
+		padding :15px 30px 15px;
 	}
 }
 

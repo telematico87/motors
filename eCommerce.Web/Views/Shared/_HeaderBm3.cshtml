@@ -1,0 +1,297 @@
+﻿@using Microsoft.AspNet.Identity
+
+<section id="header" class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="flat-support">
+                        <li>
+                            <a href="#" title="">Catálogo</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Nosotros</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="flat-infomation">
+                        <li class="phone">
+                            
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="social-list">
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.FacebookURL" title="Facebook" target="_blank">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                        }
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.TwitterURL" title="Twitter" target="_blank">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>                            
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.InstagramURL" title="Instagram"  target="_blank">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>                            
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.LinkedInURL" title="LinkedIn" target="_blank">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>                        
+                            </li>
+                        }                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="btn-menu style1 v2">
+                        <span></span>
+                    </div>
+                    <div id="logo" class="logo">
+                        <a href="@Url.Home()" title="">
+                            <img src="~/Content/bm3/images/logo/logo.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="top-search">
+                        <form action="@Url.SearchProducts()" class="form-search" accept-charset="utf-8">
+                            <div class="box-search">
+                                <input type="text" name="search" placeholder="@("PP.Header.SearchPlaceholder".Localized())" value="@(ViewBag.SearchTerm)">
+                                <span class="btn-search">
+                                    <button type="submit" class="waves-effect"><i class="ti-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>                
+                <div class="col-md-3">
+                    <div class="box-cart">
+                        <div class="inner-box">
+                            <ul class="menu-search">
+                                <li class="">
+                                    <a href="#" title="">
+                                        <i class="ti-search"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="inner-box dropdown-option">
+                            <a href="#" title="">
+                                <div class="menu-option">
+                                    <i class="ti-user"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-box">
+                                <ul>                                    
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        var hiUserMessage = "PP.Header.Menu.HiUser".LocalizedString().Replace("{user}", User.Identity.GetUserName());
+
+                                        if (User.IsInRole("Administrator"))
+                                        {
+                                            <li>
+                                                <a href="@Url.Dashboard()" title="@("PP.Header.Menu.Dashboard".Localized())">
+                                                    Dashboard
+                                                </a>
+                                            </li>
+                                        }                                    
+                                        <li>
+                                            <a href="" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())"> Cerrar Sesión</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Login()" title="@("PP.Header.Menu.Account".Localized())">Iniciar Sesión</a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {                                                      
+                           
+                           
+                            <div class="inner-box">
+                                <a href="#" title="">
+                                    <div class="icon-cart">
+                                        <i class="ti-shopping-cart"></i>
+                                        <span>4</span>
+                                    </div>
+                                    <div class="price">
+                                        <span>S/0.00</span>
+                                    </div>
+                                </a>
+                                <div class="dropdown-box">
+                                    <ul>
+                                        <li>
+                                            <div class="img-product">
+                                                <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
+                                            </div>
+                                            <div class="info-product">
+                                                <div class="name">
+                                                    <span>Producto 1<br />Categoría</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span>1 x</span>
+                                                    <span>S/10,000.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <span class="delete">x</span>
+                                        </li>
+                                        <li>
+                                            <div class="img-product">
+                                                <img src="Content/bm3/images/producto/producto-1.jpg" alt="">
+                                            </div>
+                                            <div class="info-product">
+                                                <div class="name">
+                                                    <span>Producto 2<br />Categoría</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span>1 x</span>
+                                                    <span>S/10,000.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <span class="delete">x</span>
+                                        </li>
+                                    </ul>
+                                    <div class="total">
+                                        <span>Subtotal:</span>
+                                        <span class="price">S/20,000.00</span>
+                                    </div>
+                                    <div class="btn-cart">
+                                        <a href="#" class="view-cart" title="">Ver carrito</a>
+                                        <a href="#" class="check-out" title="">Finalizar compra</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom style3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="nav-wrap">
+                        <div id="mainnav" class="mainnav style3">
+                            <ul class="menu">
+                                <li class="column-1">
+                                    <a href="@Url.Home()" title="Inicio"><i class="ti-home"></i><span>Inicio</span></a>                                    
+                                </li>
+                                <li class="has-mega-menu">
+                                    <a href="#" title=""><i class="ti-info-alt"></i><span>Nosotros</span></a>                                    
+                                </li>
+                                <li class="has-mega-menu">
+                                    <a href="#" title=""><i class="ti-star"></i><span>Catalogo</span></a>
+                                    <div class="submenu">
+                                        <ul class="submenu-list img">
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="has-mega-menu">
+                                    <a href="#" title=""><i class="ti-money"></i><span>Financiamiento</span></a>
+                                    <div class="submenu">
+                                        <ul class="submenu-list img">
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="banner-box">
+                                                    <div class="inner-box">
+                                                        <a href="#" title="">
+                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="has-mega-menu">
+                                    <a href="#" title=""><i class="ti-email"></i><span>Contacto</span></a>                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

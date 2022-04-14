@@ -75,6 +75,30 @@
     <Compile Include="Migrations\202202200238098_v1.2.2.designer.cs">
       <DependentUpon>202202200238098_v1.2.2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203160445595_v3.cs" />
+    <Compile Include="Migrations\202203160445595_v3.designer.cs">
+      <DependentUpon>202203160445595_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203240409505_v3.1.cs" />
+    <Compile Include="Migrations\202203240409505_v3.1.designer.cs">
+      <DependentUpon>202203240409505_v3.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204060544033_v5.cs" />
+    <Compile Include="Migrations\202204060544033_v5.designer.cs">
+      <DependentUpon>202204060544033_v5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204090349189_v5.1_catalogo.cs" />
+    <Compile Include="Migrations\202204090349189_v5.1_catalogo.designer.cs">
+      <DependentUpon>202204090349189_v5.1_catalogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204090601521_v5.2_marca.cs" />
+    <Compile Include="Migrations\202204090601521_v5.2_marca.designer.cs">
+      <DependentUpon>202204090601521_v5.2_marca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204120322036_v5.3_marca_id_picture.cs" />
+    <Compile Include="Migrations\202204120322036_v5.3_marca_id_picture.designer.cs">
+      <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +124,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202200238098_v1.2.2.resx">
       <DependentUpon>202202200238098_v1.2.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203160445595_v3.resx">
+      <DependentUpon>202203160445595_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203240409505_v3.1.resx">
+      <DependentUpon>202203240409505_v3.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204060544033_v5.resx">
+      <DependentUpon>202204060544033_v5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204090349189_v5.1_catalogo.resx">
+      <DependentUpon>202204090349189_v5.1_catalogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204090601521_v5.2_marca.resx">
+      <DependentUpon>202204090601521_v5.2_marca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204120322036_v5.3_marca_id_picture.resx">
+      <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

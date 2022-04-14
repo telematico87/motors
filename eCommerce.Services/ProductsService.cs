@@ -1,5 +1,8 @@
 ﻿using eCommerce.Data;
 using eCommerce.Entities;
+using eCommerce.Entities.Response;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -192,6 +195,129 @@ namespace eCommerce.Services
             return products.Include("Category.CategoryRecords").ToList();
         }
 
+        public ProductResponse GetProductResponseByID(int ID, bool activeOnly = true)
+        {            
+            var product = GetProductByID(ID, activeOnly);
+            return ProductToProductResponse(product);          
+        }
+
+        public ProductResponse ProductToProductResponse(Product product) {
+
+            ProductResponse response = new ProductResponse();
+
+            ProductoCaracteristica productoCaracteristica = new ProductoCaracteristica();         
+
+            if (!string.IsNullOrEmpty(product.Caracteristica)) {
+                productoCaracteristica = JsonConvert.DeserializeObject<ProductoCaracteristica>(product.Caracteristica); 
+            }
+
+            productoCaracteristica = ValidaNulos(productoCaracteristica);
+
+            response.ID = product.ID;
+            response.IsActive = product.IsActive;
+            response.IsDeleted = product.IsDeleted;
+            response.ModifiedOn = product.ModifiedOn;
+            response.TipoProducto = product.TipoProducto;
+            response.CategoryID = product.CategoryID;
+            response.Category = product.Category;
+
+            response.Price = product.Price;
+            response.Discount = product.Discount;
+            response.Cost = product.Cost;
+            response.isFeatured = product.isFeatured;
+            response.ThumbnailPictureID = product.ThumbnailPictureID;
+            response.SKU = product.SKU;
+            response.Barcode = product.Barcode;
+            response.Tags = product.Tags;
+            response.Supplier = product.Supplier;
+            response.StockQuantity = product.StockQuantity;
+            response.ProductPictures = product.ProductPictures;
+            response.ProductRecords = product.ProductRecords;
+            response.Caracteristica = product.Caracteristica;
+            response.ProductoCaracteristica = productoCaracteristica;
+
+            return response;
+        }
+
+
+        public ProductoCaracteristica ValidaNulos(ProductoCaracteristica productoCaracteristica)
+        {
+             
+            if (productoCaracteristica.suspension == null)
+            {
+                productoCaracteristica.suspension = new Suspension();
+            }
+            if (productoCaracteristica.destacados == null)
+            {
+                productoCaracteristica.destacados = new Destacados();
+            }
+
+            if (productoCaracteristica.arollanta == null)
+            {
+                productoCaracteristica.arollanta = new AroLLanta();
+            }
+            if (productoCaracteristica.dimensiones == null)
+            {
+                productoCaracteristica.dimensiones = new Dimensiones();
+            }
+
+            if (productoCaracteristica.consumo == null)
+            {
+                productoCaracteristica.consumo = new Consumo();
+            }
+
+            if (productoCaracteristica.motor == null)
+            {
+                productoCaracteristica.motor = new Motor();
+            }
+             
+            if (productoCaracteristica.transmisiones == null)
+            {
+                productoCaracteristica.transmisiones = new Transmisions();
+            }
+
+            if (productoCaracteristica.frenos == null)
+            {
+                productoCaracteristica.frenos = new Frenos();
+            }
+
+
+            return productoCaracteristica;
+        }
+
+        public Product ProductResponseToProduct(ProductResponse productResponse)
+        {            
+            var caracteristicas = JsonConvert.SerializeObject(productResponse.ProductoCaracteristica);
+
+            var product = new Product();
+            product.ID = productResponse.ID;
+            product.IsActive = productResponse.IsActive;
+            product.IsDeleted = productResponse.IsDeleted;
+            product.ModifiedOn = productResponse.ModifiedOn;            
+            product.CategoryID = productResponse.CategoryID;
+            product.Category = productResponse.Category;            
+            product.Price = productResponse.Price;
+            product.Discount = productResponse.Discount;
+            product.Cost = productResponse.Cost;
+            product.isFeatured = productResponse.isFeatured;
+            product.ThumbnailPictureID = productResponse.ThumbnailPictureID;
+            product.SKU = productResponse.SKU;
+            product.Barcode = productResponse.Barcode;
+            product.Tags = productResponse.Tags;
+            product.Supplier = productResponse.Supplier;
+            product.StockQuantity = productResponse.StockQuantity;
+            product.ProductPictures = productResponse.ProductPictures;
+            product.ProductRecords = productResponse.ProductRecords;
+            product.TipoProducto = productResponse.TipoProducto;
+            product.Caracteristica = caracteristicas;
+            return product;
+        }
+        
+        public string ProductoCaracteristicaToString(ProductoCaracteristica productoCaracteristica)
+        {            
+            return JsonConvert.SerializeObject(productoCaracteristica);
+        }
+
 
         public Product GetProductByID(int ID, bool activeOnly = true)
         {
@@ -199,7 +325,7 @@ namespace eCommerce.Services
 
             var product = context.Products.Include("Category.CategoryRecords").Include("ProductPictures.Picture").FirstOrDefault(x=>x.ID == ID);
 
-            if(activeOnly)
+            if (activeOnly)
             {
                 return product != null && !product.IsDeleted && product.IsActive && !product.Category.IsDeleted ? product : null;
             }
@@ -249,6 +375,8 @@ namespace eCommerce.Services
             return context.SaveChanges() > 0;
         }
 
+        
+        
         public bool UpdateProduct(Product product)
         {
             var context = DataContextHelper.GetNewContext();

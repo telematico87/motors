@@ -64,14 +64,17 @@
     <Compile Include="APIEntities\ProductEntity.cs" />
     <Compile Include="APIEntities\PromoEntity.cs" />
     <Compile Include="Aro.cs" />
+    <Compile Include="Catalogo.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="CustomEntities\Cart.cs" />
     <Compile Include="CustomEntities\CartItem.cs" />
     <Compile Include="CustomEntities\CategoryWithChildren.cs" />
     <Compile Include="CustomEntities\ProductRating.cs" />
+    <Compile Include="Financiamiento.cs" />
     <Compile Include="LanguageResource.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Litros.cs" />
+    <Compile Include="Marca.cs" />
     <Compile Include="Medida.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="NewsletterSubscription.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="OrderStatus.cs" />
     <Compile Include="PaymentMethods.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductoCaracteristica.cs" />
     <Compile Include="ProductPicture.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Category.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Promo.cs" />
     <Compile Include="PromoTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Talla.cs" />
   </ItemGroup>
   <ItemGroup>

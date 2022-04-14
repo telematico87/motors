@@ -36,7 +36,7 @@ namespace eCommerce.Web.Controllers
                 SlidersConfigurations = ConfigurationsService.Instance.GetConfigurationsByType((int)ConfigurationTypes.Sliders)
             };
 
-            return PartialView("_BannerSlider", model);
+            return PartialView("_BannerSliderBm3", model);
         }
 
         public ActionResult Search(string category, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)

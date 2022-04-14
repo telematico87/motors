@@ -10,6 +10,8 @@ using System.Linq;
 using System.Web.Mvc;
 using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Enums;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -65,13 +67,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
             if (ID.HasValue)
             {
-                var product = ProductsService.Instance.GetProductByID(ID.Value, activeOnly: false);
+                var product = ProductsService.Instance.GetProductResponseByID(ID.Value, activeOnly: false);
 
                 if (product == null) return HttpNotFound();
 
                 var currentLanguageRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
+                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();               
 
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
@@ -85,15 +87,17 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.SKU = product.SKU;
                 model.Barcode = product.Barcode;
                 model.Tags = product.Tags;
-                model.Supplier = product.Supplier;
-
+                model.Supplier = product.Supplier; 
                 model.InActive = !product.IsActive;
-
+               
                 model.ProductRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;
                 model.Summary = currentLanguageRecord.Summary;
                 model.Description = currentLanguageRecord.Description;
-                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
+
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications; 
+                model.ProductoCaracteristica = product.ProductoCaracteristica;
+                model.TipoProducto = product.TipoProducto;
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
@@ -112,7 +116,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 if (model.ProductID > 0)
                 {
-                    var product = ProductsService.Instance.GetProductByID(model.ProductID, activeOnly: false);
+                    var product = ProductsService.Instance.GetProductResponseByID(model.ProductID, activeOnly: false);
 
                     if (product == null)
                     {
@@ -128,12 +132,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.SKU = model.SKU;
                     product.Barcode = model.Barcode;
                     product.Tags = model.Tags;
-                    product.Supplier = model.Supplier;
-                    
-                    product.StockQuantity = model.StockQuantity;
-
+                    product.Supplier = model.Supplier; 
+                    product.StockQuantity = model.StockQuantity; 
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
+                    product.ProductoCaracteristica = model.ProductoCaracteristica;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -157,8 +160,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     product.IsActive = !model.InActive;
+                    product.TipoProducto = model.TipoProducto;
 
-                    if (!ProductsService.Instance.UpdateProduct(product))
+                    var toProduct = ProductsService.Instance.ProductResponseToProduct(product);
+
+
+                    if (!ProductsService.Instance.UpdateProduct(toProduct))
                     {
                         throw new Exception("Dashboard.Products.Action.Validation.UnableToUpdateProduct".LocalizedString());
                     }
@@ -220,6 +227,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 }
                 else
                 {
+                    var caracteristica = ProductsService.Instance.ProductoCaracteristicaToString(model.ProductoCaracteristica);
+
                     Product product = new Product
                     {
                         CategoryID = model.CategoryID,
@@ -233,9 +242,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         Supplier = model.Supplier,
 
                         StockQuantity = model.StockQuantity,
-
+                        Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
-                        ModifiedOn = DateTime.Now
+                        TipoProducto = model.TipoProducto,
+                        ModifiedOn = DateTime.Now                        
                     };
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
@@ -316,6 +326,73 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
         private ProductActionViewModel GetProductActionViewModelFromForm(FormCollection formCollection)
         {
+            var productoCaracteristicas = new ProductoCaracteristica
+            {
+                motor = new Motor {
+                    Cilindrada = formCollection["Cilindrada"],
+                    NroCilindrada = formCollection["NroCilindrada"],
+                    Potencia = formCollection["Potencia"],
+                    TipoMotor = formCollection["TipoMotor"],
+                    SistemaEnfriamiento = formCollection["SistemaEnfriamiento"],
+                    SistemaEncendido = formCollection["SistemaEncendido"],
+                    SistemaArranque = formCollection["SistemaArranque"]
+                },
+                frenos = new Frenos {
+                    FrenoDelantero = formCollection["FrenoDelantero"],
+                    FrenoTrasero = formCollection["FrenoTrasero"]
+                },
+                arollanta = new AroLLanta
+                {
+                    NeumaticoDelantero = formCollection["NeumaticoDelantero"],
+                    NeumaticoPosterior = formCollection["NeumaticoPosterior"],
+                    AroDelantero = formCollection["AroDelantero"],
+                    AroPosterior = formCollection["AroPosterior"]
+                },
+                suspension = new Suspension
+                {
+                    SuspensionDelantera = formCollection["SuspensionDelantera"],
+                    SuspensionPosterior = formCollection["SuspensionPosterior"]
+
+                },
+                 
+                consumo = new Consumo
+                {
+                    Octanaje = formCollection["Octanaje"],
+                    SistemaCombustible = formCollection["SistemaCombustible"],
+                    CapacidadTanque = formCollection["CapacidadTanque"],
+                    Autonomia = formCollection["Autonomia"],
+                    RendimientoGalon = formCollection["RendimientoGalon"] 
+                },
+                transmisiones = new Transmisions
+                {
+                    Transmision = formCollection["Transmision"],
+                    NroCambios = formCollection["NroCambios"],
+                    VelocidadMaxima = formCollection["VelocidadMaxima"]
+                   
+                },
+                dimensiones = new Dimensiones
+                {
+                    Peso = formCollection["Peso"],
+                    CargaUtil = formCollection["CargaUtil"],
+                    Pasajeros = formCollection["Pasajeros"]
+
+                },
+
+                destacados = new Destacados
+                {
+                    Texto1 = formCollection["Texto1"],
+                    Texto2 = formCollection["Texto2"],
+                    Texto3 = formCollection["Texto3"],
+                    Texto4 = formCollection["Texto4"],
+                    Compacta = formCollection["Compacta"],
+                    AroRayos = formCollection["AroRayos"],
+                    ColoresDisponibles = formCollection["ColoresDisponibles"],
+                    Adicionales = formCollection["Adicionales"],
+                    Tablero = formCollection["Tablero"] 
+                },
+            };
+
+
             var model = new ProductActionViewModel
             {
                 ProductID = !string.IsNullOrEmpty(formCollection["ProductID"]) ? int.Parse(formCollection["ProductID"]) : 0,
@@ -333,6 +410,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 isFeatured = formCollection["isFeatured"].Contains("true"),
                 InActive = formCollection["InActive"].Contains("true"),
+                TipoProducto = formCollection["TipoProducto"].Contains("true"),
                 ProductPictures = formCollection["ProductPictures"],
                 ThumbnailPicture = !string.IsNullOrEmpty(formCollection["ThumbnailPicture"]) ? int.Parse(formCollection["ThumbnailPicture"]) : 0,
 
@@ -341,7 +419,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 Summary = formCollection["Summary"],
                 Description = formCollection["Description"],
 
-                ProductSpecifications = new List<ProductSpecification>()
+                ProductSpecifications = new List<ProductSpecification>(),
+                ProductoCaracteristica = productoCaracteristicas
             };
 
             foreach (string key in formCollection)

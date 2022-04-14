@@ -1,0 +1,64 @@
+﻿@model List<eCommerce.Entities.Category>
+
+
+<style>
+
+    .single-banner .inner-text h4 {
+        color: #252525;
+        font-weight: 700;
+        padding: 11px 28px;
+        background: #ffffff;
+        border-radius: 2px;
+    }
+
+    .single-banner .inner-text {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        width: 100%;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        height: 100%;
+    }
+
+</style>
+
+@if (Model != null && Model.Count > 0)
+{
+
+    <section class="flat-row flat-banner-box">
+        <div class="container">
+            <div class="row">
+                @foreach (var category in Model)
+                {
+                    var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                    <div class="col-md-4">
+
+                        <div class="banner-box">
+                            <div class="inner-box single-banner" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
+                                @Html.Picture(picture: category.Picture, defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                <a class="inner-text" href="@Url.SearchProducts(category: category.SanitizedName)"> 
+                                    <h4>
+                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+  
+                </div>
+        </div>
+    </section>
+ 
+}
