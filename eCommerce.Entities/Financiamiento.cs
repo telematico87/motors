@@ -10,21 +10,27 @@ namespace eCommerce.Entities
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string FechaNacimiento { get; set; }
+        public string Celular { get; set; }
         public string Correo { get; set; }
-        public string NroTelefono { get; set; }
+        public int TipoDocumento { get; set; } 
+        public string NroDocumento { get; set; }
+        public int InteresCompra { get; set; }
         public string Departamento { get; set; }
-        public string Documento { get; set; }
+        public string Provincia { get; set; }
+        public string Distrito { get; set; }
         public string Marca { get; set; }
-        public string Modelo { get; set; }
-        public string Perfil { get; set; }
+        public string Modelo { get; set; } 
+        public int TipoVivienda { get; set; }
         public string SituacionLaboral { get; set; }
-        public decimal RangoIngreso { get; set; }
-        public bool AceptaTermino { get; set; }
-        public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
-        public decimal CuotaInicial { get; set; }
-        public string ActividadLaboral { get; set; }
-        public string Direccion { get; set; }
         public string SituacionSentimental { get; set; }
+        public int RangoIngreso { get; set; }
+        public bool PoliticaPrivacidad { get; set; }
+        public bool AceptoComunicaciones { get; set; } 
+        public int MontoFinanciar { get; set; }  
+        public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
+     
+     
+   
+        
     }
 }

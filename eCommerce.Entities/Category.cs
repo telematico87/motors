@@ -21,6 +21,9 @@ namespace eCommerce.Entities
 
         public virtual List<Product> Products { get; set; }
         public virtual List<CategoryRecord> CategoryRecords { get; set; }
+
+        public int CatalogoID { get; set; }
+        public virtual List<Catalogo> Catalogos { get; set; }
     }
 
     public class CategoryRecord : BaseEntity
