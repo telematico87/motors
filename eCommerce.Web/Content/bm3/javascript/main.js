@@ -236,7 +236,7 @@
                 items:5,
                 responsive:{
                     0:{
-                        items: 1,
+                        items: 2,
                         dots: false,
                         margin:10,
                     },
@@ -292,6 +292,42 @@
             });
         };// slide Brand
 
+        var slickGallery = function() {
+			$('.product-gallery').slick({
+				infinite: true,
+				arrows: true,
+				slidesToShow: 6,
+				autoplaySpeed: 7000,
+				responsive: [
+					{
+						breakpoint: 1024,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 3
+						}
+					},
+					{
+						breakpoint: 600,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 2
+						}
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1
+						}
+					}
+				]
+			});
+		}; // Slick Gallery
+
+        var slickLightbox = function() {
+			$('.product-gallery').slickLightbox();
+		}; // Slick Lightbox
+
         var goTop = function(){
             var gotop = $('.btn-scroll');
             gotop.on('click', function() {
@@ -315,6 +351,81 @@
                 });
             });
         }; // Overlay
+		
+        var toggleSearch = function() {
+            $( ".menu-search a").on('click', function() {
+              $(".box-cart").toggleClass('show');
+              $(".top-search").toggleClass('show');
+            });
+        }; // Toggle WiSearchdget
+		
+        var resizeWidget = function() {
+            $(window).on('load resize', function() {
+				var currMenuType = 'desktop';
+				
+                if ( matchMedia( 'only screen and (max-width: 991px)' ).matches ) {
+                    currMenuType = 'mobile';
+                }
+				
+				if (currMenuType == "mobile") {
+					$( ".widget .widget-title h3 span" ).removeClass("active").addClass("active")
+					$( ".widget .widget-title h3 span" ).closest('.widget').children('.widget-content').slideUp(300);
+				}
+				
+				if (currMenuType == "desktop") {
+					$( ".widget .widget-title h3 span" ).removeClass("active")
+					$( ".widget .widget-title h3 span" ).closest('.widget').children('.widget-content').slideDown(300);
+				}
+			});
+        }; // Toggle Widget
+		
+        var toggleWidget = function() {
+			$( ".widget .widget-title h3 span" ).on('click', function() {
+				$(this).toggleClass('active');
+				$(this).closest('.widget').children('.widget-content').slideToggle(300);
+			});
+        }; // Toggle Widget
+
+        var toggleCatlist = function() {
+            $('.cat-list.style1').each(function() {
+                $(this).children('li').children('ul.cat-child').hide();
+                $( ".cat-list.style1 li span" ).on('click', function() {
+                    $(this).parent('li').toggleClass('active');
+                    $(this).toggleClass('active');
+                    $(this).parent('li').children('ul.cat-child').slideToggle(300);
+                });
+            })
+        }; // Toggle Cat List
+		
+        var tabProductDetail = function() {
+            $('.flat-product-content').each(function() {
+                $(this).find('ul.product-detail-bar').children().first().addClass('active');
+                $(this).find('.detail-bar').children('.row').first().show().siblings().hide();
+                $(this).find('ul.product-detail-bar').children('li').on('click', function(e) {
+                    var liActive = $(this).index();
+                    $(this).addClass('active').siblings().removeClass('active');
+                     $(this).closest('.flat-product-content').find('.detail-bar').children('.row').eq(liActive).fadeIn(1000).show().siblings().hide();
+                    e.preventDefault();
+                });
+            });
+        }; // Tab Productdetail
+
+        var filterPrice = function() {
+            if( $().slider ) {
+                $( function() {
+                    $( "#slider-range" ).slider({
+                      range: true,
+                      min: 2000,
+                      max: 20000,
+                      values: [ 3000, 10000 ],
+                      slide: function( event, ui ) {
+                        $( "#amount" ).val( "S/" + ui.values[ 0 ] + " - " + "S/" + ui.values[ 1 ] );
+                      }
+                    });
+                    $( "#amount" ).val( "S/" + $( "#slider-range" ).slider( "values", 0 ) + " - " + "S/" + $( "#slider-range" ).slider( "values", 1 ) );
+                });
+            }
+        }; // Filter Price
 
         var removePreloader = function() { 
             $(window).on('load', function() {
@@ -332,7 +443,15 @@
         slideBanner();
         slideBrand();
         slideProduct();
+		slickGallery();
+		slickLightbox();
         goTop();
+		toggleSearch();
+		resizeWidget();
+		toggleWidget();
+		toggleCatlist();
+		tabProductDetail();
+		filterPrice();
         removePreloader();
     });
 
