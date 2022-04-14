@@ -99,6 +99,14 @@
     <Compile Include="Migrations\202204120322036_v5.3_marca_id_picture.designer.cs">
       <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204141745418_v5.3_catalogo_intocateg.cs" />
+    <Compile Include="Migrations\202204141745418_v5.3_catalogo_intocateg.designer.cs">
+      <DependentUpon>202204141745418_v5.3_catalogo_intocateg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.cs" />
+    <Compile Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.designer.cs">
+      <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204120322036_v5.3_marca_id_picture.resx">
       <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204141745418_v5.3_catalogo_intocateg.resx">
+      <DependentUpon>202204141745418_v5.3_catalogo_intocateg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.resx">
+      <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
