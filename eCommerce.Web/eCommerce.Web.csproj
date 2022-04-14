@@ -5130,7 +5130,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
-    <Folder Include="Areas\Dashboard\Views\Marca\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
@@ -5163,10 +5162,13 @@
     <Content Include="Content\bm3\fonts\font-themify\icon.woff" />
     <Content Include="Areas\Dashboard\Views\Catalogo\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Catalogo\Action.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" /> 
+    <Content Include="Areas\Dashboard\Views\Marca\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\_Listing.cshtml" /> 
     <Content Include="Content\bm3\stylesheets\fonts\slick.eot" />
     <Content Include="Content\bm3\stylesheets\fonts\slick.ttf" />
-    <Content Include="Content\bm3\stylesheets\fonts\slick.woff" />
+    <Content Include="Content\bm3\stylesheets\fonts\slick.woff" /> 
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
