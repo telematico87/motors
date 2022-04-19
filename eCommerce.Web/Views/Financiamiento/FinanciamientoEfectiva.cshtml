@@ -1,0 +1,262 @@
+﻿@model eCommerce.Web.ViewModels.FinanciamientosViewModels
+
+
+<style>
+    input[type="checkbox"] {
+        opacity: 1;
+    }
+
+  
+
+
+</style>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+
+        <img src="../Content/bm3/images/banner/Logo-efectiva.png" alt="" style="max-width: 88%; height: 80%;">
+    </div>
+</div>
+
+
+<div class="content">  
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Nombre">Nombre<span class="text-danger">*</span></label>
+                    <input class="form-control" name="Nombre" placeholder="Ingrese Nombre" id="txtNombre" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellido" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellidos'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Celular">Celular<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular'">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Correo">Email<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtCorreo" name="Correo" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
+                    <select id="cboTipoDocumento" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+                        <option value="CEXTRANJERIA">C.Extranjería</option>
+                        <option value="PASAPORTE">Pasaporte</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
+                    <input class="form-control" id="" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Interes Compra<span class="text-danger">*</span></label>
+                    <select id="cboInteresCompra" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+                        <option value="CEXTRANJERIA">C.Extranjería</option>
+                        <option value="PASAPORTE">Pasaporte</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Departamento<span class="text-danger">*</span></label>
+                    <select id="cboDepartamento" class="form-control">
+                        <option value="DNI">Lima</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Provincia">Provincia<span class="text-danger">*</span></label>
+                    <select id="cboProvincia" class="form-control custom-select">
+                        <option value="DNI">Lima</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Distrito">Distrito<span class="text-danger">*</span></label>
+                    <select id="cboDistrito" class="form-control custom-select">
+                        <option value="DNI">Santa Anita</option> 
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Marca">Marca<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Modelo">Modelo<span class="text-danger">*</span></label>
+                    <input class="form-control" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Modelo">Tipo Vivienda<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Modelo">Situación Laboral<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Modelo">Estado Civil<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Modelo">Rango de Ingresos<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                        @*@foreach (var item in Model.listaEstadoCivil)
+                        {
+                            <option value="@item.Codigo">
+                                @item.Valor
+                            </option>
+
+                        }*@
+                       
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6 form-check">
+                <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad" >
+                <label class="form-check-label" for="PoliticaPrivacidad">
+                    He leido y acepto la politica de privacidad
+                </label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6 form-check">
+                <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
+                <label class="form-check-label" for="AceptoComunicaciones">
+                    Acepto recibir comunicaciones comerciales de LA EMPRESA
+                </label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <button class="btn btn-success" id="actionButton"><i class="ti-save"></i>Enviar</button>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    <script>
+
+
+        $("#actionButton").on("click", function () {
+            debugger;
+            var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+            //var Nombre = $("#txtNombre").val();
+
+            var model = new Object();
+            model.Nombre = Nombre;
+
+            $.ajax({
+                method: "POST",
+                url: "/Financiamiento/GuardarFinanciamiento",
+                data: {
+                    model
+                },
+                success: function (result) {
+                    debugger;
+                    alert("ok")
+                }
+
+            });
+
+
+
+        })
+    </script>
+
+

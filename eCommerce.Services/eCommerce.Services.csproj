@@ -121,6 +121,7 @@
     <Compile Include="eCommerceSignInManager.cs" />
     <Compile Include="eCommerceUserManager.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="FinanciamientoService.cs" />
     <Compile Include="LanguagesService.cs" />
     <Compile Include="MarcaService.cs" />
     <Compile Include="MedidaService.cs" />

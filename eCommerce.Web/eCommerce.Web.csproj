@@ -271,6 +271,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
+    <Compile Include="Controllers\FinanciamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="ViewModels\BaseViewModels.cs" />
     <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\CommentsViewModels.cs" />
+    <Compile Include="ViewModels\FinanciamientosViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\CartViewModels.cs" />
     <Compile Include="ViewModels\OrdersViewModels.cs" />
@@ -308,6 +310,7 @@
     <Content Include="Content\bm3\images\banner\banner-5.jpg" />
     <Content Include="Content\bm3\images\banner\banner-6.jpg" />
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
+    <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\icono\icono-1.png" />
     <Content Include="Content\bm3\images\icono\left-1.png" />
     <Content Include="Content\bm3\images\icono\right-1.png" />
@@ -5129,6 +5132,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
+    <Folder Include="Areas\Dashboard\Views\Financiamiento\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
@@ -5162,13 +5166,15 @@
     <Content Include="Content\bm3\fonts\font-themify\icon.woff" />
     <Content Include="Areas\Dashboard\Views\Catalogo\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Catalogo\Action.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" /> 
+    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\Marca\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Marca\Action.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Marca\_Listing.cshtml" /> 
+    <Content Include="Areas\Dashboard\Views\Marca\_Listing.cshtml" />
     <Content Include="Content\bm3\stylesheets\fonts\slick.eot" />
     <Content Include="Content\bm3\stylesheets\fonts\slick.ttf" />
-    <Content Include="Content\bm3\stylesheets\fonts\slick.woff" /> 
+    <Content Include="Content\bm3\stylesheets\fonts\slick.woff" />
+    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.webp" />
+    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.webp" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5182,9 +5188,9 @@
     <Content Include="Views\Categories\_ProductByCategoriesBm3.cshtml" />
     <Content Include="Views\Categories\_ProductCategories.cshtml" />
     <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" />
-    <Content Include="Views\Financiamientos\FinancieraEfectiva.cshtml" />
-    <Content Include="Views\Financiamientos\Financiamiento.cshtml" />
     <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
+    <Content Include="Views\Financiamiento\FinanciamientoEfectiva.cshtml" />
+    <Content Include="Views\Financiamiento\FinanciamientoSantander.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
