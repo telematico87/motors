@@ -16,11 +16,32 @@ namespace eCommerce.Web.Controllers
         [HttpGet]
         public ActionResult FinanciamientoEfectiva()
         {
-            FinanciamientosViewModels finacefe = new FinanciamientosViewModels(); 
-            finacefe.listaEstadoCivil = new EstadoCivil().ListarEstadoCivil();
-            ViewBag.Lista = finacefe;
+            FinanciamientosViewModels model = new FinanciamientosViewModels();
+            //Marca model = new Marca();
+
+            model.listaMarca = MarcaService.Instance.ListarMarca();
+
+            //model.listaEstadoCivil = new EstadoCivil().ListarEstadoCivil();
+
+            //ViewBag.Lista = model.listaEstadoCivil;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult listarMarca()
+        { 
+            //FinanciamientosViewModels model = new FinanciamientosViewModels();
+            var model = MarcaService.Instance.ListarMarca();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listarEstadoCivil()
+        { 
+            var model = new EstadoCivil().ListarEstadoCivil();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public ActionResult FinanciamientoSantander()

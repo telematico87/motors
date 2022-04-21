@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCommerce.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,7 +31,9 @@ namespace eCommerce.Web.ViewModels
 
         public List<EstadoCivil> listaEstadoCivil { get; set; }
 
-         
+        public List<Marca> listaMarca { get; set; }
+
+
 
         public class EstadoCivil
         {

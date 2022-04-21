@@ -692,7 +692,7 @@ namespace eCommerce.Web
             routes.MapRoute(
                name: "Financiamiento",
                url: "{controller}/Financiamiento-efectiva",
-               defaults: new { area = "", controller = "Financiamiento", action = "FinancieraEfectiva" },
+               defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoEfectiva" },
                namespaces: new[] { "eCommerce.Web.Controllers" }
            );
 

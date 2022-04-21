@@ -264,12 +264,13 @@
                                         <ul class="submenu-list img">
                                             <li>
                                                 <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="@Url.Financiamiento()" title="Financiamiento">
-                                                            <i class="ti-money"></i><span>Financiera Efectiva</span>
-                                                            <img src="~/Content/bm3/images/banner/banner_categoria_financiera_efectiva.webp" alt="" width="200" />
-                                                        </a>
-                                                    </div>
+                                                    <div class="inner-box ">
+                                                        @*<a href="@Url.Financiamiento()" title="Financiamiento">*@
+                                                            <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
+                                                                <i class="ti-money"></i><span>Financiera Efectiva</span>
+                                                                <img src="~/Content/bm3/images/banner/banner_categoria_financiera_efectiva.webp" alt="" width="200" />
+                                                            </a>
+</div>
                                                 </div>
                                             </li>
                                             <li>
