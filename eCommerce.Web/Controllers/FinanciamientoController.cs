@@ -13,9 +13,22 @@ namespace eCommerce.Web.Controllers
     public class FinanciamientoController : PublicBaseController
     {
         // GET: Financiamiento
+
+        public ActionResult Index()
+        {
+            FinanciamientosViewModels model = new FinanciamientosViewModels
+            {
+                Nombre = "Juan Leder",
+                Apellido = "Lozano Pinchi",
+                TipoFinanciera = 1
+            };
+            return View("FinanciamientoEfectiva", model);
+        }
+
         [HttpGet]
         public ActionResult FinanciamientoEfectiva()
         {
+
             FinanciamientosViewModels model = new FinanciamientosViewModels();
             //Marca model = new Marca();
 
@@ -25,6 +38,40 @@ namespace eCommerce.Web.Controllers
 
             //ViewBag.Lista = model.listaEstadoCivil;
             return View();
+
+            FinanciamientosViewModels model = new FinanciamientosViewModels { 
+                Nombre = "Juan Leder",
+                Apellido = "Lozano Pinchi",
+                TipoFinanciera = 1
+            };
+            //model.Nombre = "";
+            //model.Apellido = "";
+            //finacefe.Celular = "";
+            //finacefe.Correo = "";
+            //finacefe.TipoDocumento = 1;
+            //finacefe.NroDocumento = "";
+            //finacefe.InteresCompra = 0;
+            //finacefe.Departamento = "";
+            //finacefe.Provincia = "";
+            //finacefe.Distrito = "";
+            //finacefe.Modelo = "";
+            //finacefe.TipoVivienda = 0;
+            //finacefe.SituacionLaboral = "";
+            //finacefe.SituacionSentimental = "";
+            //finacefe.RangoIngreso = 0;
+            //finacefe.Marca = "";
+            //finacefe.PoliticaPrivacidad = true;
+            //finacefe.AceptoComunicaciones = true;
+            //finacefe.MontoFinanciar = 0;
+            //model.TipoFinanciera = 0;
+
+            //finacefe.listaEstadoCivil = new MantenedorFinanciera().ListarEstadoCivil();
+            //finacefe.listaInteresCompra = new MantenedorFinanciera().ListarInteresCompra();
+            //finacefe.listaRangoIngreso = new MantenedorFinanciera().ListarRangoIngreso();
+            //finacefe.listaTipoVivienda = new MantenedorFinanciera().ListarTipoVivienda();
+            //ViewBag.Lista = finacefe;
+            return View(model);
+
         }
 
         [HttpGet]
@@ -58,28 +105,28 @@ namespace eCommerce.Web.Controllers
             {
                 var financ = new Financiamiento
                 {
-                     
+
                     Nombre = model.Nombre,
                     Apellido = model.Apellido,
-                    Celular = model.Celular,
-                    Correo = model.Correo,
-                    TipoDocumento = model.TipoDocumento,
-                    NroDocumento = model.NroDocumento,
-                    InteresCompra = model.InteresCompra,
-                    Departamento = model.Departamento,
-                    Provincia = model.Provincia,
-                    Distrito = model.Distrito,
-                    Marca = model.Marca,
-                    Modelo = model.Modelo,
-                    TipoVivienda = model.TipoVivienda,
-                    SituacionLaboral = model.SituacionLaboral,
-                    SituacionSentimental = model.SituacionSentimental,
-                    RangoIngreso = model.RangoIngreso,
-                    PoliticaPrivacidad = model.PoliticaPrivacidad,
-                    AceptoComunicaciones = model.AceptoComunicaciones,
-                    MontoFinanciar = model.MontoFinanciar,
-                    TipoFinanciera = model.TipoFinanciera  
-    };
+                    //Celular = model.Celular,
+                    //Correo = model.Correo,
+                    //TipoDocumento = model.TipoDocumento,
+                    //NroDocumento = model.NroDocumento,
+                    //InteresCompra = model.InteresCompra,
+                    //Departamento = model.Departamento,
+                    //Provincia = model.Provincia,
+                    //Distrito = model.Distrito,
+                    //Marca = model.Marca,
+                    //Modelo = model.Modelo,
+                    //TipoVivienda = model.TipoVivienda,
+                    //SituacionLaboral = model.SituacionLaboral,
+                    //SituacionSentimental = model.SituacionSentimental,
+                    //RangoIngreso = model.RangoIngreso,
+                    //PoliticaPrivacidad = model.PoliticaPrivacidad,
+                    //AceptoComunicaciones = model.AceptoComunicaciones,
+                    //MontoFinanciar = model.MontoFinanciar,
+                    TipoFinanciera = model.TipoFinanciera
+                };
 
                 var res = FinanciamientoService.Instance.SaveFinanciamiento(financ);
 
@@ -89,7 +136,6 @@ namespace eCommerce.Web.Controllers
             {
                 result.Data = new { Success = false, Message = ex.Message };
             }
-
             return result;
         }
 
