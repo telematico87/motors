@@ -30,7 +30,7 @@ namespace eCommerce.Services
             }
         }
 
-        private MarcaService()
+        public MarcaService()
         {
         }
         #endregion
