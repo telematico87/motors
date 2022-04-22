@@ -101,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Talla.cs" />
+    <Compile Include="Ubigeo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

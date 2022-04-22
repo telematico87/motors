@@ -1,1 +1,371 @@
-﻿@*@model eCommerce.Web.ViewModels.FinanciamientosViewModels*@
+﻿@model FinanciamientosViewModels
+
+
+<style>
+    input[type="checkbox"] {
+        opacity: 1;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-md-12 text-center">
+
+        <img src="../Content/bm3/images/banner/Santander-Logo.png" alt="" style="max-width: 88%; height: 80%;">
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Nombre">Nombre<span class="text-danger">*</span></label>
+                    <input class="form-control" name="Nombre" placeholder="Ingrese Nombre" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre'" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellido" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellidos'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Celular">Celular<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular'">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Correo">Email<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtCorreo" name="Correo" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
+                    <select id="cboTipoDocumento" class="form-control custom-select">
+                        <option value="DNI">DNI</option>
+                        <option value="CEXTRANJERIA">C.Extranjería</option>
+                        <option value="PASAPORTE">Pasaporte</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Interes Compra<span class="text-danger">*</span></label>
+                    <select id="cboInteresCompra" class="form-control custom-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="TipoDocumento">Departamento<span class="text-danger">*</span></label>
+                    <select id="cboDepartamento" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Provincia">Provincia<span class="text-danger">*</span></label>
+                    <select id="cboProvincia" class="form-control custom-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="group-input">
+                    <label for="Marca">Marca<span class="text-danger">*</span></label>
+                    <select id="cboMarca" class="form-control custom-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div> 
+            <div class="col-md-10">
+                <div class="group-input">
+                    <label for="Modelo">Modelo<span class="text-danger">*</span></label>
+                    <input class="form-control" id="txtModelo" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Modelo'">
+                </div>
+            </div> 
+            <div class="col-md-1"></div>
+        </div> 
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="group-input">
+                    <label for="Modelo">Rango de Ingresos<span class="text-danger">*</span></label>
+                    <select id="cboRangoIngresos" class="form-control custom-select" name="Codigo">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="group-input">
+                    <label for="Modelo">Monto a Financiar<span class="text-danger">*</span></label>
+                    <select id="cboMontoFinanciar" class="form-control custom-select" name="Codigo">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6 form-check">
+                <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
+                <label class="form-check-label" for="PoliticaPrivacidad">
+                    He leido y acepto la politica de privacidad
+                </label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6 form-check">
+                <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
+                <label class="form-check-label" for="AceptoComunicaciones">
+                    Acepto recibir comunicaciones comerciales de LA EMPRESA
+                </label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <button class="btn btn-success" id="actionButton"><i class="ti-save"></i>  Enviar</button>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+
+
+
+<script>
+        $(document).ready(function () {
+            listarMarcas(); 
+            listaRangoIngreso();
+            listaMontoFinanciar();
+            listaInteresCompra();
+            listaDepartamento();
+          
+
+        });
+
+
+        $("#actionButton").on("click", function () {
+            debugger;
+            var Nombre = $("#txtNombre").val();
+            var Apellido = $("#txtApellido").val();
+            var Celular = $("#txtCelular").val();
+            var Correo = $("#txtCorreo").val();
+            var TipoDocumento = $("#cboTipoDocumento").val();
+            var NroDocumento = $("#txtNroDocumento").val();
+            var InteresCompra = $("#cboInteresCompra").val();
+            var Departamento = $("#cboDepartamento").val();
+            var Provincia = $("#cboProvincia").val(); 
+            var Marca = $("#cboMarca").val();
+            var Modelo = $("#txtModelo").val();
+            var TipoVivienda = 0;
+            var SituacionLaboral = 0;
+            var SituacionSentimental = 0;
+            var RangoIngreso = $("#cboRangoIngresos").val();
+            var MontoFinanciar = $("#cboMontoFinanciar").val();
+            var PoliticaPrivacidad = document.getElementById('PoliticaPrivacidad').checked;
+            var AceptoComunicaciones = document.getElementById('PoliticaPrivacidad').checked; 
+             var TipoFinanciera = 2;
+
+            var model = new Object();
+            model.Nombre = Nombre;
+            model.Apellido = Apellido;
+            model.Celular = Celular;
+            model.Correo = Correo;
+            model.TipoDocumento = TipoDocumento;
+            model.NroDocumento = NroDocumento;
+            model.InteresCompra = InteresCompra;
+            model.Departamento = Departamento;
+            model.Provincia = Provincia;
+            model.Distrito = 0;
+            model.Marca = Marca;
+            model.Modelo = Modelo;
+            model.TipoVivienda = TipoVivienda;
+            model.SituacionLaboral = SituacionLaboral;
+            model.SituacionSentimental = SituacionSentimental;
+            model.RangoIngreso = RangoIngreso;
+            model.PoliticaPrivacidad = PoliticaPrivacidad;
+            model.AceptoComunicaciones = AceptoComunicaciones;
+            model.MontoFinanciar = MontoFinanciar;
+            model.TipoFinanciera = TipoFinanciera;
+
+            $.ajax({
+                method: "POST",
+                url: "/Financiamiento/GuardarFinanciamiento",
+                data: {
+                    model
+                },
+                success: function (result) {
+                    debugger;
+                    alert("ok")
+                     Swal.success("Bien Hecho", 'Enviado Correctamente', "success");
+                }
+
+            });
+
+        })
+
+        function listarMarcas() {
+            $.ajax({
+                method: "GET",
+                url: "/Financiamiento/listarMarca",
+                success: function (result) {
+                    debugger;
+                    console.log(result);
+                    let Marca = result;
+                    llenarCombo(Marca, "cboMarca", "Descripcion", "Descripcion", "0")
+                }
+            });
+        }
+
+       
+
+        
+        function listaRangoIngreso() {
+            $.ajax({
+                method: "GET",
+                url: "/Financiamiento/listaRangoIngreso",
+                success: function (result) {
+                    debugger;
+                    console.log(result);
+                    let Marca = result;
+                    llenarCombo(Marca, "cboRangoIngresos", "Valor", "Codigo", "0")
+                }
+            });
+        }
+
+        function listaInteresCompra() {
+            $.ajax({
+                method: "GET",
+                url: "/Financiamiento/listaInteresCompra",
+                success: function (result) {
+                    debugger;
+                    console.log(result);
+                    let Marca = result;
+                    llenarCombo(Marca, "cboInteresCompra", "Valor", "Codigo", "0")
+                }
+            });
+        }
+
+            function listaMontoFinanciar() {
+                $.ajax({
+                    method: "GET",
+                    url: "/Financiamiento/listaMontoFinanciar",
+                    success: function (result) {
+                        debugger;
+                        console.log(result);
+                        let Marca = result;
+                        llenarCombo(Marca, "cboMontoFinanciar", "Valor", "Codigo", "0")
+                    }
+                });
+            }
+
+        function listaDepartamento() {
+            $.ajax({
+                method: "GET",
+                url: "/Financiamiento/listarDepartamentos",
+                success: function (result) {
+                    debugger;
+                    console.log(result);
+                    let Marca = result;
+                    llenarComboDpto(Marca, "cboDepartamento", "NombreUbigeo", "CodDep", "0")
+                }
+            });
+        }
+
+        function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+            debugger;
+            var contenido = ""
+            var elemento;
+            contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
+            for (var j = 0; j < data.length; j++) {
+                elemento = data[j];
+                contenido +=
+                    "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
+            }
+            contenido += "";
+            document.getElementById(id).innerHTML = contenido;
+    }
+
+        function llenarComboDpto(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+            debugger;
+            var contenido = ""
+            var elemento;
+            contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
+            for (var j = 0; j < data.length; j++) {
+                elemento = data[j];
+                contenido +=
+                    "<option value='" + elemento[propiedadId] + "|" + elemento[propiedadMostrar] + "'  >" + elemento[propiedadMostrar] + "</option>"
+            }
+            contenido += "";
+            document.getElementById(id).innerHTML = contenido;
+    }
+
+
+    $("#cboDepartamento").on('change', function () {
+        debugger;
+        var cboDpto = $("#cboDepartamento").val();
+        var splitdepart = cboDpto.split('|');
+        var departamento = splitdepart[0];
+        $.ajax({
+            method: "GET",
+            url: "/Financiamiento/listarProvincias",
+            data: { departamento },
+            success: function (result) {
+                debugger;
+                console.log(result);
+                let Marca = result;
+                llenarCombo(Marca, "cboProvincia", "NombreUbigeo", "NombreUbigeo", "0")
+            }
+        });
+
+    });
+     
+</script>
+
+
+
+
+

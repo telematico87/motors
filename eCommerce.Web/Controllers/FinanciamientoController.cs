@@ -12,67 +12,30 @@ namespace eCommerce.Web.Controllers
 {
     public class FinanciamientoController : PublicBaseController
     {
-        // GET: Financiamiento
-
-        public ActionResult Index()
-        {
-            FinanciamientosViewModels model = new FinanciamientosViewModels
-            {
-                Nombre = "Juan Leder",
-                Apellido = "Lozano Pinchi",
-                TipoFinanciera = 1
-            };
-            return View("FinanciamientoEfectiva", model);
+        
+        [HttpGet]
+        public ActionResult FinanciamientoEfectiva()
+        { 
+            return View(); 
         }
 
         [HttpGet]
-        public ActionResult FinanciamientoEfectiva()
+        public ActionResult listarDepartamentos()
         {
-
-            FinanciamientosViewModels model = new FinanciamientosViewModels();
-            //Marca model = new Marca();
-
-            model.listaMarca = MarcaService.Instance.ListarMarca();
-
-            //model.listaEstadoCivil = new EstadoCivil().ListarEstadoCivil();
-
-            //ViewBag.Lista = model.listaEstadoCivil;
-            return View();
-
-            FinanciamientosViewModels model = new FinanciamientosViewModels { 
-                Nombre = "Juan Leder",
-                Apellido = "Lozano Pinchi",
-                TipoFinanciera = 1
-            };
-            //model.Nombre = "";
-            //model.Apellido = "";
-            //finacefe.Celular = "";
-            //finacefe.Correo = "";
-            //finacefe.TipoDocumento = 1;
-            //finacefe.NroDocumento = "";
-            //finacefe.InteresCompra = 0;
-            //finacefe.Departamento = "";
-            //finacefe.Provincia = "";
-            //finacefe.Distrito = "";
-            //finacefe.Modelo = "";
-            //finacefe.TipoVivienda = 0;
-            //finacefe.SituacionLaboral = "";
-            //finacefe.SituacionSentimental = "";
-            //finacefe.RangoIngreso = 0;
-            //finacefe.Marca = "";
-            //finacefe.PoliticaPrivacidad = true;
-            //finacefe.AceptoComunicaciones = true;
-            //finacefe.MontoFinanciar = 0;
-            //model.TipoFinanciera = 0;
-
-            //finacefe.listaEstadoCivil = new MantenedorFinanciera().ListarEstadoCivil();
-            //finacefe.listaInteresCompra = new MantenedorFinanciera().ListarInteresCompra();
-            //finacefe.listaRangoIngreso = new MantenedorFinanciera().ListarRangoIngreso();
-            //finacefe.listaTipoVivienda = new MantenedorFinanciera().ListarTipoVivienda();
-            //ViewBag.Lista = finacefe;
-            return View(model);
-
+            //FinanciamientosViewModels model = new FinanciamientosViewModels();
+            var model = UbigeoServices.Instance.ListarDepartamento();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult listarProvincias(string departamento)
+        {
+            //FinanciamientosViewModels model = new FinanciamientosViewModels();
+            var model = UbigeoServices.Instance.ListarProvincia(departamento);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         [HttpGet]
         public ActionResult listarMarca()
@@ -85,7 +48,35 @@ namespace eCommerce.Web.Controllers
         [HttpGet]
         public ActionResult listarEstadoCivil()
         { 
-            var model = new EstadoCivil().ListarEstadoCivil();
+            var model = new MantenedorFinanciera().ListarEstadoCivil();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listaTipoVivienda()
+        {
+            var model = new MantenedorFinanciera().ListarTipoVivienda();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listaRangoIngreso()
+        {
+            var model = new MantenedorFinanciera().ListarRangoIngreso();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listaInteresCompra()
+        {
+            var model = new MantenedorFinanciera().ListarInteresCompra();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listaMontoFinanciar()
+        {
+            var model = new MantenedorFinanciera().ListarMontoFinanciar();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -103,28 +94,31 @@ namespace eCommerce.Web.Controllers
 
             try
             {
-                var financ = new Financiamiento
-                {
+                var dpto = model.Departamento.Split('|');
+                var dptoNombre = dpto[1];
 
+                var financ = new Financiamiento
+               
+                { 
                     Nombre = model.Nombre,
                     Apellido = model.Apellido,
-                    //Celular = model.Celular,
-                    //Correo = model.Correo,
-                    //TipoDocumento = model.TipoDocumento,
-                    //NroDocumento = model.NroDocumento,
-                    //InteresCompra = model.InteresCompra,
-                    //Departamento = model.Departamento,
-                    //Provincia = model.Provincia,
-                    //Distrito = model.Distrito,
-                    //Marca = model.Marca,
-                    //Modelo = model.Modelo,
-                    //TipoVivienda = model.TipoVivienda,
-                    //SituacionLaboral = model.SituacionLaboral,
-                    //SituacionSentimental = model.SituacionSentimental,
-                    //RangoIngreso = model.RangoIngreso,
-                    //PoliticaPrivacidad = model.PoliticaPrivacidad,
-                    //AceptoComunicaciones = model.AceptoComunicaciones,
-                    //MontoFinanciar = model.MontoFinanciar,
+                    Celular = model.Celular,
+                    Correo = model.Correo,
+                    TipoDocumento = model.TipoDocumento,
+                    NroDocumento = model.NroDocumento,
+                    InteresCompra = model.InteresCompra,
+                    Departamento = dptoNombre,
+                    Provincia = model.Provincia,
+                    Distrito = model.Distrito,
+                    Marca = model.Marca,
+                    Modelo = model.Modelo,
+                    TipoVivienda = model.TipoVivienda,
+                    SituacionLaboral = model.SituacionLaboral,
+                    SituacionSentimental = model.SituacionSentimental,
+                    RangoIngreso = model.RangoIngreso,
+                    PoliticaPrivacidad = model.PoliticaPrivacidad,
+                    AceptoComunicaciones = model.AceptoComunicaciones,
+                    MontoFinanciar = model.MontoFinanciar,
                     TipoFinanciera = model.TipoFinanciera
                 };
 

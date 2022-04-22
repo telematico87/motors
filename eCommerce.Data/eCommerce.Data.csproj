@@ -107,6 +107,14 @@
     <Compile Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.designer.cs">
       <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204210418272_v6_ubigeo.cs" />
+    <Compile Include="Migrations\202204210418272_v6_ubigeo.designer.cs">
+      <DependentUpon>202204210418272_v6_ubigeo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204210421291_v6.1_ubigeo.cs" />
+    <Compile Include="Migrations\202204210421291_v6.1_ubigeo.designer.cs">
+      <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -156,6 +164,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.resx">
       <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204210418272_v6_ubigeo.resx">
+      <DependentUpon>202204210418272_v6_ubigeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204210421291_v6.1_ubigeo.resx">
+      <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

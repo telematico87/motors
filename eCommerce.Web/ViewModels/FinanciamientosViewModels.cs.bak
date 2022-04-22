@@ -30,19 +30,18 @@ namespace eCommerce.Web.ViewModels
         public int MontoFinanciar { get; set; }
         public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
 
+<<<<<<< HEAD
+        public List<EstadoCivil> listaEstadoCivil { get; set; }
 
         public List<Marca> listaMarca { get; set; }
 
-        public List<Ubigeo> listaDepart { get; set; }
 
-
+=======
         public List<MantenedorFinanciera> listaEstadoCivil { get; set; }
         public List<MantenedorFinanciera> listaTipoVivienda { get; set; }
         public List<MantenedorFinanciera> listaRangoIngreso { get; set; }
         public List<MantenedorFinanciera> listaInteresCompra { get; set; }
-
-        public List<MantenedorFinanciera> listaMontoFinanciar { get; set; }
-
+>>>>>>> add_catalog_into_categoria_2
 
         public class MantenedorFinanciera
         {
@@ -98,17 +97,6 @@ namespace eCommerce.Web.ViewModels
                 lis.Add(new MantenedorFinanciera(2, "1 a 2 meses"));
                 lis.Add(new MantenedorFinanciera(3, "3 a 6 meses"));
                 lis.Add(new MantenedorFinanciera(4, "7 meses a más"));
-                return lis;
-            }
-
-
-            public List<MantenedorFinanciera> ListarMontoFinanciar()
-            {
-
-                List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
-                lis.Add(new MantenedorFinanciera(1, "S/. 0 - S/. 1,000"));
-                lis.Add(new MantenedorFinanciera(2, "S/. 1,001 - S/. 3,000"));
-                lis.Add(new MantenedorFinanciera(3, "S/. 3,001 - S/. 5,000")); 
                 return lis;
             }
 
