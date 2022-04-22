@@ -64,6 +64,12 @@ namespace eCommerce.Services
             return marca.OrderByDescending(x => x.Descripcion).Skip(skipCount).Take(recordSize).ToList();
         }
 
+        public List<Marca> ListarMarca()
+        {
+            var context = DataContextHelper.GetNewContext(); 
+            return context.Marcas.ToList();
+        }
+
 
         public Marca GetMarcaByID(int ID)
         {

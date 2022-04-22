@@ -653,5 +653,55 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
+
+
+        public static string Financiamiento(this UrlHelper helper)
+        {
+            var routeValues = new RouteValueDictionary();
+
+            string routeURL = string.Empty;
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_Financiamiento");
+            }
+            else routeURL = helper.RouteUrl("Financiamiento");
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+        public static string FinanciamientoSantander(this UrlHelper helper)
+        {
+            var routeValues = new RouteValueDictionary();
+
+            string routeURL = string.Empty;
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_FinanciamientoSantander");
+            }
+            else routeURL = helper.RouteUrl("FinanciamientoSantander");
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+
+        public static string SavedFinanciamiento(this UrlHelper helper)
+        {
+            var routeValues = new RouteValueDictionary();
+
+            string routeURL = string.Empty;
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBasedSaved_Financiamiento");
+            }
+            else routeURL = helper.RouteUrl("Financiamiento");
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
     }
 }
