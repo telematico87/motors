@@ -11,11 +11,19 @@ namespace eCommerce.Web.Test
         [TestMethod]
         public void CantidadMarca()
         {
+            CategoriesService categoriaService = new CategoriesService();
+
             string nombre="Juan";
-            //Assert.AreEqual("Juan", nombre);
+            List<Category> categorias = categoriaService.GetCategories();
+            //int cantidadCategorias =   categorias.Count;
+            int cantidadCategorias = 5;
+            Assert.AreEqual("Juan", nombre);
+            
+            /*
             MarcaService marcaService = new MarcaService();
             List<Marca> marcas = marcaService.SearchMarca("", 10, 10, out _);            
             Assert.AreEqual(0, marcas.Count);
+            */
         }
     }
 }

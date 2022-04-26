@@ -6,6 +6,9 @@
         <thead class="thead-light">
             <tr>
                 <th>
+                    Catálogo
+                </th>
+                <th>
                     @("Dashboard.Categories.List.Name".Localized())
                 </th>
                 <th>
@@ -29,66 +32,86 @@
 
                 var doesntExistsInCurrentLanguage = currentLanguageCategoryRecord == null;
 
-                <tr>
-                    <td>
-                        @if (doesntExistsInCurrentLanguage)
+            <tr>
+                <td>
+                    @if (category.CatalogoID > 0)
+                    {
+                        var catalogo = Model.Catalogos.FirstOrDefault(x => x.ID == category.CatalogoID);
+
+                        if (catalogo != null)
                         {
-                            <i class="text-danger fas fa-exclamation-triangle" title="@("Dashboard.Commons.RecordNotSpecifiedInCurrentLanguage".Localized())"></i>
+                            <span>
+                                @catalogo.Description
+                            </span>
                         }
+                    }
+                    else
+                    {
+                        <span>
+                            -
+                        </span>
+                    }
+                </td>
+                <td>
+                    @if (doesntExistsInCurrentLanguage)
+                    {
+                        <i class="text-danger fas fa-exclamation-triangle" title="@("Dashboard.Commons.RecordNotSpecifiedInCurrentLanguage".Localized())"></i>
+                    }
 
-                        @if (category.isFeatured)
+                    @if (category.isFeatured)
+                    {
+                        <i class="text-warning fas fa-star m-1" title="@("Dashboard.Categories.List.FeaturedCategory".Localized())"></i>
+                    }
+
+                    <a href="@Url.SearchProducts(category: category.SanitizedName)" target="_blank">
+                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                    </a>
+                </td>
+                <td>
+                    @if (category.ParentCategory != null)
+                    {
+                        var currentLanguageParentCategoryRecord = category.ParentCategory.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                        if (currentLanguageParentCategoryRecord != null)
                         {
-                            <i class="text-warning fas fa-star m-1" title="@("Dashboard.Categories.List.FeaturedCategory".Localized())"></i>
-                        }
-
-                        <a href="@Url.SearchProducts(category: category.SanitizedName)" target="_blank">
-                            @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
-                        </a>
-                    </td>
-                    <td>
-                        @if (category.ParentCategory != null)
-                        {
-                            var currentLanguageParentCategoryRecord = category.ParentCategory.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-
-                            if (currentLanguageParentCategoryRecord != null)
-                            {
-                                <span>
-                                    @currentLanguageParentCategoryRecord.Name
-                                </span>
-                            }
-                            else
-                            {
-                                <i class="text-danger fas fa-exclamation-triangle" title="@("Dashboard.Commons.ParentCategoryRecordNotSpecifiedInCurrentLanguage".Localized())"></i>
-                            }
+                            <span>
+                                @currentLanguageParentCategoryRecord.Name
+                            </span>
                         }
                         else
                         {
-                            <span>
-                                -
-                            </span>
+                            <i class="text-danger fas fa-exclamation-triangle" title="@("Dashboard.Commons.ParentCategoryRecordNotSpecifiedInCurrentLanguage".Localized())"></i>
                         }
-                    </td>
-                    <td>
-                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Description.IfNullOrEmptyShowAlternative("-") : string.Empty)
-                    </td>
-                    <td>
-                        <a class="link" href="@Url.Products(categoryID: category.ID)" role="button" target="_blank">
-                            @(category.Products != null ? category.Products.Count : 0)
+                    }
+                    else
+                    {
+                        <span>
+                            -
+                        </span>
+                    }
+                </td>
+                <td>
+                    @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Description.IfNullOrEmptyShowAlternative("-") : string.Empty)
+                </td>
+                <td>
+                    <a class="link" href="@Url.Products(categoryID: category.ID)" role="button" target="_blank">
+                        @(category.Products != null ? category.Products.Count : 0)
+                    </a>
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="@Url.EditAction("Categories", category.ID)">
+                            <i class="fas fa-edit mr-1"></i>
+                            @("Dashboard.Categories.List.Edit".Localized())
                         </a>
-                    </td>
-                    <td>
-						<div class="btn-group" role="group">
-                            <a class="btn btn-primary" href="@Url.EditAction("Categories", category.ID)">
-                                <i class="fas fa-edit mr-1"></i>
-                                @("Dashboard.Categories.List.Edit".Localized())
-                            </a>
-                            <button class="deleteButton btn btn-danger" data-id="@category.ID">
-                                <i class="fas fa-trash-alt mr-1"></i>
-                                @("Dashboard.Categories.List.Delete".Localized())
-                            </button>
-						</div>                        
-                    </td>
-                </tr>
+                        <button class="deleteButton btn btn-danger" data-id="@category.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                            @("Dashboard.Categories.List.Delete".Localized())
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
             }
         </tbody>
     </table>

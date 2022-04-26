@@ -5,6 +5,7 @@
     <div class="owl-carousel-product" data-loop="@(Model.Count > 4 ? "true" : "false")">
         @foreach (var product in Model)
         {
+            
             var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
             var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
@@ -20,7 +21,7 @@
                 <div class="product-box">
                     <div class="imagebox style2">
                         <div class="box-image">
-                            <a href="#" title="">
+                            <a href="#" title="">                                
                                 @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
                             </a>
                         </div>
@@ -28,7 +29,7 @@
                             <div class="product-name">
                                 <a href="@detailsLink">
                                     <h5>
-                                        @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                       @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
                                     </h5>
                                 </a>
                             </div>

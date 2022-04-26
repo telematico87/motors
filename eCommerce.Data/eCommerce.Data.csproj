@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202204210421291_v6.1_ubigeo.designer.cs">
       <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204252116581_v7_categoria.cs" />
+    <Compile Include="Migrations\202204252116581_v7_categoria.designer.cs">
+      <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204210421291_v6.1_ubigeo.resx">
       <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204252116581_v7_categoria.resx">
+      <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

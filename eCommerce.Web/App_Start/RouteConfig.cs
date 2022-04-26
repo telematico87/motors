@@ -625,7 +625,7 @@ namespace eCommerce.Web
                 defaults: new { area = "", controller = "Home", action = "SubscribeNewsLetter" },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
-            
+
             routes.MapRoute(
                 name: "SubmitContactForm",
                 url: "contact-form-submit",
@@ -639,7 +639,7 @@ namespace eCommerce.Web
                 defaults: new { area = "", controller = "Home", action = "SubmitContactForm" },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
-            
+
             routes.MapRoute(
                 name: "ChangeMode",
                 url: "change-mode",
@@ -674,7 +674,7 @@ namespace eCommerce.Web
                 defaults: new { controller = "Home", action = "Index" },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
-             
+
             routes.MapRoute(
                 name: "LanguageBased_Home",
                 url: "{lang}",
