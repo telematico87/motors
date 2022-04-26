@@ -30,7 +30,27 @@ namespace eCommerce.Services
         }
         #endregion
 
-      
+        public List<Financiamiento> BuscarFinanciamiento(string searchTerm, int? pageNo, int recordSize, out int count)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var finac = context.Financiamientos
+                                .Where(x => !x.IsDeleted)
+                                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                finac = finac.Where(x => x.Nombre.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            count = finac.Count();
+
+            pageNo = pageNo ?? 1;
+            var skipCount = (pageNo.Value - 1) * recordSize;
+
+            return finac.OrderByDescending(x => x.Nombre).Skip(skipCount).Take(recordSize).ToList();
+        }
+         
 
         public Financiamiento GetFinanciamientoByID(int ID)
         {

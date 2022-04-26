@@ -1,37 +1,92 @@
 ﻿@using eCommerce.Entities;
-@model eCommerce.Web.Areas.Dashboard.ViewModels.ColorsListingViewModel
+@model eCommerce.Web.Areas.Dashboard.ViewModels.FinanciamientosListingViewModels
 
-@if (Model != null && Model.Colors != null && Model.Colors.Count > 0)
+@if (Model != null && Model.Financiamientos != null && Model.Financiamientos.Count > 0)
 {
+    
     <table class="table table-hover table-responsive-sm m-0">
         <thead class="thead-light">
             <tr>
                 <th>
-                    @("Dashboard.Color.List.Name".Localized())
+                    Nombres
                 </th>
-                
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Correo 
+                </th>
+                <th>
+                    Celular
+                </th>
+                <th>
+                    TipoDocumento
+                </th>
+                <th>
+                    NroDocumento
+                </th>
+                <th>
+                    Departamento
+                </th>
+                <th>
+                    Provincia
+                <th>
+                    Marca
+                </th>
+                <th>
+                    Modelo
+                </th> 
             </tr>
         </thead>
         <tbody>
-            @foreach (var color in Model.Colors)
+            @foreach (var financiamient in Model.Financiamientos)
             {
-                <tr>
-                    <td>
-                        @color.Description
-                    </td> 
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-primary" href="@Url.EditAction("Color", color.ID)">
-                                <i class="fas fa-edit mr-1"></i>
-                                @("Dashboard.Color.Edit".Localized())
-                            </a>
-                            <button class="deleteButton btn btn-danger" data-id="@color.ID">
-                                <i class="fas fa-trash-alt mr-1"></i>
-                                @("Dashboard.Color.Delete".Localized())
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                
+            <tr>
+                <td>
+                    @financiamient.Nombre
+                </td>
+                <td>
+                    @financiamient.Apellido
+                </td>
+                <td>
+                    @financiamient.Correo
+                </td>
+                <td>
+                    @financiamient.Celular
+                </td>
+                <td>
+                    @financiamient.TipoDocumento
+                </td>
+                <td>
+                    @financiamient.NroDocumento
+                </td>
+                <td>
+                    @financiamient.Departamento
+                </td>
+                <td>
+                    @financiamient.Provincia
+                </td>
+                <td>
+                    @financiamient.Marca
+                </td>
+                <td>
+                    @financiamient.Modelo
+                </td>
+                 
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="@Url.EditAction("Financiamiento", financiamient.ID)">
+                            <i class="fas fa-edit mr-1"></i>
+                           Revisar
+                        </a>
+                        <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                           Eliminar
+                        </button>
+                    </div>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -49,7 +104,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Color(Model.SearchTerm, Model.Pager.CurrentPage - 1)">@("Dashboard.Pagination.Previous".Localized())</a>
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, Model.Pager.CurrentPage - 1)">@("Dashboard.Pagination.Previous".Localized())</a>
                     </li>
                 }
 
@@ -58,7 +113,7 @@
                     var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
 
                     <li class="page-item @active">
-                        <a class="page-link" href="@Url.Color(Model.SearchTerm, page)">
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, page)">
                             @page
                         </a>
                     </li>
@@ -73,7 +128,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Color(Model.SearchTerm, Model.Pager.CurrentPage + 1)">@("Dashboard.Pagination.Next".Localized())</a>
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, Model.Pager.CurrentPage + 1)">@("Dashboard.Pagination.Next".Localized())</a>
                     </li>
                 }
             </ul>
@@ -83,7 +138,7 @@
 else
 {
     <div class="alert alert-warning rounded-0 m-0" role="alert">
-        @("Dashboard.Color.List.NoRecordFound".Localized())
+       No funciona
     </div>
 }
 
@@ -125,3 +180,4 @@ else
         });
     });
 </script>
+

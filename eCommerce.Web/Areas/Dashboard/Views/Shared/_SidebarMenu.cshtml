@@ -93,6 +93,12 @@
             <span>@("Dashboard.Menu.Comments".Localized())</span>
         </a>
     </li>
+    <li class="nav-item @Html.MenuItemClass("Financiamiento")">
+        <a class="nav-link" href="@Url.ListAction("Financiamiento")">
+            <i class="mr-1 fas fa-comments"></i>
+            <span>Financiamiento</span>
+        </a>
+    </li>
     <li class="nav-item @Html.MenuItemClass("Users")">
         <a class="nav-link" href="@Url.ListAction("Users")">
             <i class="mr-1 fas fa-users"></i>

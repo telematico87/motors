@@ -268,6 +268,34 @@ namespace eCommerce.Shared.Helpers
             return routeURL.ToLower();
         }
 
+        public static string Financiamiento(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", "Financiamiento");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_EntityList", routeValues);
+            }
+            else routeURL = helper.RouteUrl("EntityList", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
 
         //crear url helper para color by fortiz
         public static string Color(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
