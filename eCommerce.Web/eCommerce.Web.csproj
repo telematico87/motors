@@ -240,6 +240,7 @@
     <Compile Include="Areas\Dashboard\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ConfigurationsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\FinanciamientoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LitroController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\MarcaController.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CatalogosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ColorsViewModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\FinanciamientosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\LanguagesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CategoriesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ConfigurationsViewModels.cs" />
@@ -5133,7 +5135,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
-    <Folder Include="Areas\Dashboard\Views\Financiamiento\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
@@ -5176,6 +5177,9 @@
     <Content Include="Content\bm3\stylesheets\fonts\slick.woff" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.webp" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.webp" />
+    <Content Include="Areas\Dashboard\Views\Financiamiento\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Financiamiento\Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Financiamiento\_Listing.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
