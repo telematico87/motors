@@ -60,7 +60,7 @@
                         <div class="col-md-3" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
                             <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
                                 <div class="inner-box"> 
-                                    <h2 class="productlarge2">
+                                    <h2 class="productlarge2">                                        
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
                                     <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>

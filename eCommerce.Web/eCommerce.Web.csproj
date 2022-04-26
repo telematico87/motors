@@ -5197,6 +5197,7 @@
     <Content Include="Views\Financiamiento\FinanciamientoEfectiva.cshtml" />
     <Content Include="Views\Financiamiento\FinanciamientoSantander.cshtml" />
     <Content Include="Views\Financiamiento\FinanciamientosEfectivas.cshtml" />
+    <Content Include="Views\Categories\_CategoriesPictureMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

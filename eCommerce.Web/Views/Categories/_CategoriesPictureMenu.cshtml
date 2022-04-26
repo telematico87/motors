@@ -1,0 +1,29 @@
+﻿@model CategoriesMenuPictureViewModel
+
+@if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
+{
+
+    <div class="submenu">
+        <ul class="submenu-list img">
+
+            @foreach (var category in Model.Categories)
+            {                
+                var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                <li>
+                    <div class="banner-box">
+                        <div class="inner-box">
+                            <a href="#" title="">
+                                <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                <h4>
+                                    @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+               
+            }               
+            </ul>
+    </div>
+}
