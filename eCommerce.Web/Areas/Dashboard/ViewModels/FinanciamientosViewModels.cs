@@ -13,6 +13,14 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string SearchTerm { get; set; }
 
         public Pager Pager { get; set; }
+
+        public List<MantenedorFinanciera> listaEstadoCivil { get; set; }
+        public List<MantenedorFinanciera> listaTipoVivienda { get; set; }
+        public List<MantenedorFinanciera> listaRangoIngreso { get; set; }
+        public List<MantenedorFinanciera> listaInteresCompra { get; set; }
+
+        public List<MantenedorFinanciera> listaMontoFinanciar { get; set; }
+        public List<MantenedorFinanciera> listaTipoDocumento { get; set; }
     }
 
     public class FinanciamientosActionViewModels : PageViewModel

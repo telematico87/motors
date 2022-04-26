@@ -56,7 +56,28 @@
                     @financiamient.Celular
                 </td>
                 <td>
-                    @financiamient.TipoDocumento
+                    
+
+                    @if (financiamient.TipoDocumento > 0)
+                    {
+                        var tipoDocumento = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == financiamient.TipoDocumento);
+
+                        if (tipoDocumento != null)
+                        {
+                            <span>
+                                @tipoDocumento.Valor
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span>
+                            -
+                        </span>
+                    }
+
+
+
                 </td>
                 <td>
                     @financiamient.NroDocumento

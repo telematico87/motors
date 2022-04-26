@@ -1,4 +1,5 @@
-﻿using eCommerce.Services;
+﻿using eCommerce.Entities;
+using eCommerce.Services;
 using eCommerce.Shared.Enums;
 using eCommerce.Web.Areas.Dashboard.ViewModels;
 using eCommerce.Web.ViewModels;
@@ -26,7 +27,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 };
 
                 model.Financiamientos = FinanciamientoService.Instance.BuscarFinanciamiento(searchTerm, pageNo, pageSize, out int count);
-
+                model.listaEstadoCivil = new MantenedorFinanciera().ListarEstadoCivil();
+                model.listaTipoVivienda = new MantenedorFinanciera().ListarTipoVivienda();
+                model.listaRangoIngreso = new MantenedorFinanciera().ListarRangoIngreso();
+                model.listaInteresCompra = new MantenedorFinanciera().ListarInteresCompra();
+                model.listaMontoFinanciar = new MantenedorFinanciera().ListarMontoFinanciar();
+                model.listaTipoDocumento = new MantenedorFinanciera().ListarTipoDocumento();
+                
                 model.Pager = new Pager(count, pageNo, pageSize);
 
                 return View(model);
