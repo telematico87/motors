@@ -17,13 +17,16 @@ namespace eCommerce.Entities
         public int DisplaySeqNo { get; set; }
 
         public int? PictureID { get; set; }
+        public int? PictureMovilID { get; set; }
         public virtual Picture Picture { get; set; }
+        public virtual Picture PictureMovil { get; set; }
 
         public virtual List<Product> Products { get; set; }
         public virtual List<CategoryRecord> CategoryRecords { get; set; }
 
-        public int CatalogoID { get; set; }
-        public virtual List<Catalogo> Catalogos { get; set; }
+        public int CatalogoID { get; set; }     
+        
+        public List<Catalogo> Catalogos { get; set; }
     }
 
     public class CategoryRecord : BaseEntity

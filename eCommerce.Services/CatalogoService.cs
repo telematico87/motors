@@ -38,6 +38,27 @@ namespace eCommerce.Services
             return catalogo.ToList();
         }
 
+        public List<Catalogo> GetCatalogos(int? pageNo = 1, int? recordSize = 0)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var catalogos = context.Catalogos
+                                    .Where(x => !x.IsDeleted)
+                                    .OrderBy(x => x.ID)
+                                    .AsQueryable();
+
+            if (recordSize.HasValue && recordSize.Value > 0)
+            {
+                pageNo = pageNo ?? 1;
+                var skip = (pageNo.Value - 1) * recordSize.Value;
+
+                catalogos = catalogos.Skip(skip)
+                                       .Take(recordSize.Value);
+            }
+
+            return catalogos.ToList();
+        }
+
         public List<Catalogo> SearchCatalogo(string searchTerm, int? pageNo, int recordSize, out int count)
         {
             var context = DataContextHelper.GetNewContext();

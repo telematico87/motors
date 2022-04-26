@@ -71,6 +71,7 @@
     <Compile Include="CustomEntities\CategoryWithChildren.cs" />
     <Compile Include="CustomEntities\ProductRating.cs" />
     <Compile Include="Financiamiento.cs" />
+    <Compile Include="InteresCompraEnum.cs" />
     <Compile Include="LanguageResource.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Litros.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Talla.cs" />
+    <Compile Include="Ubigeo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

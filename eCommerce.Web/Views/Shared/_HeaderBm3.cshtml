@@ -217,46 +217,7 @@
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="#" title=""><i class="ti-star"></i><span>Catalogo</span></a>
-                                    <div class="submenu">
-                                        <ul class="submenu-list img">
-                                            <li>
-                                                <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @{ Html.RenderAction("CategoriesPictureMenu", "Categories"); }
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="#" title=""><i class="ti-money"></i><span>Financiamiento</span></a>
@@ -264,18 +225,21 @@
                                         <ul class="submenu-list img">
                                             <li>
                                                 <div class="banner-box">
-                                                    <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
-                                                        </a>
+                                                    <div class="inner-box ">
+                                                        @*<a href="@Url.Financiamiento()" title="Financiamiento">*@
+                                                            <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
+                                                                <i class="ti-money"></i><span>Financiera Efectiva</span>
+                                                                <img src="~/Content/bm3/images/banner/banner_categoria_financiera_efectiva.webp" alt="" width="200" />
+                                                            </a>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="banner-box">
                                                     <div class="inner-box">
-                                                        <a href="#" title="">
-                                                            <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                                        <a href="@Url.FinanciamientoSantander()" title="Financiamiento">
+                                                            <i class="ti-money"></i><span>Banco Santander</span>
+                                                            <img src="~/Content/bm3/images/banner/banner_categoria_financiera_santander.webp" alt="" width="200" />
                                                         </a>
                                                     </div>
                                                 </div>

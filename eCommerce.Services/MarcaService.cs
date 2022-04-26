@@ -30,7 +30,7 @@ namespace eCommerce.Services
             }
         }
 
-        private MarcaService()
+        public MarcaService()
         {
         }
         #endregion
@@ -62,6 +62,12 @@ namespace eCommerce.Services
             var skipCount = (pageNo.Value - 1) * recordSize;
 
             return marca.OrderByDescending(x => x.Descripcion).Skip(skipCount).Take(recordSize).ToList();
+        }
+
+        public List<Marca> ListarMarca()
+        {
+            var context = DataContextHelper.GetNewContext(); 
+            return context.Marcas.ToList();
         }
 
 
