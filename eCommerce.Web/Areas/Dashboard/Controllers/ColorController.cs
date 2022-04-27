@@ -69,13 +69,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     color.ID = model.ID;
                     color.Description = model.Description;
+                    color.Valor = model.Valor;
                  
-
                     if (!ColorService.Instance.UpdateColor(color))
                     {
                         throw new Exception("Dashboard.Color.Action.Validation.UnableToUpdateColor".LocalizedString());
                     }
-
                     json.Data = new { Success = true };
                 }
                 else
@@ -84,8 +83,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     {
                         ID = model.ID,
                         Description = model.Description,
-                       
-                    };
+                        Valor = model.Valor
+                };
 
                     if (!ColorService.Instance.SaveColor(color))
                     {
@@ -121,10 +120,5 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
             return result;
         }
-
-
-
-
-
     }
 }

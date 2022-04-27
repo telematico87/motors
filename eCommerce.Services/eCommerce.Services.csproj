@@ -127,6 +127,7 @@
     <Compile Include="MedidaService.cs" />
     <Compile Include="ModeloService.cs" />
     <Compile Include="OrdersService.cs" />
+    <Compile Include="ProductColorService.cs" />
     <Compile Include="PromosService.cs" />
     <Compile Include="ProductsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -33,7 +33,9 @@ namespace eCommerce.Entities
 
         public bool TipoProducto { get; set; }
 
-        //public ProductoCaracteristica productoCaracteristica { get; set;}
+        public int MarcaId { get; set; }
+        public int CatalogoId { get; set; }
+        public int TipoMoneda { get; set; }
     }
 
     public class ProductRecord : BaseEntity
