@@ -98,9 +98,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.ProductSpecifications = currentLanguageRecord.ProductSpecifications; 
                 model.ProductoCaracteristica = product.ProductoCaracteristica;
                 model.TipoProducto = product.TipoProducto;
+                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
+            model.Colors = ColorService.Instance.GetAllColors();
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
+            model.Marcas = MarcaService.Instance.ListarMarca();
 
             return View(model);
         }

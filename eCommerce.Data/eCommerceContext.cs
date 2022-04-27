@@ -75,6 +75,10 @@ namespace eCommerce.Data
         public DbSet<Marca> Marcas { get; set; }
 
         public DbSet<Ubigeo> Ubigeos { get; set; }
+        public DbSet<TablaMaster> TablaMasters { get; set; }
+        public DbSet<TipoCambio> TipoCambios { get; set; }
+
+
         public static eCommerceContext Create()
         {
             return new eCommerceContext();

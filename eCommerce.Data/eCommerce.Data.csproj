@@ -123,6 +123,10 @@
     <Compile Include="Migrations\202204270238420_addColorValue.designer.cs">
       <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.cs" />
+    <Compile Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.designer.cs">
+      <DependentUpon>202204270507027_addMarcaAndCatalogoInProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -184,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204270238420_addColorValue.resx">
       <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.resx">
+      <DependentUpon>202204270507027_addMarcaAndCatalogoInProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
