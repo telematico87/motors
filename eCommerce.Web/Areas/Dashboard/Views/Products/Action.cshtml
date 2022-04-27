@@ -20,6 +20,7 @@
     }
 
     var productSpecificationCount = 0;
+    var productColorCount = 0;
 }
 
 <script src="~/Content/lib/ckeditor-4.14.0/ckeditor.js"></script>
@@ -58,112 +59,169 @@
                     </ul>
                 </div>
             }
-        <div class="card-body">
-            <div class="form-group">
-                <label>
-                    @("Dashboard.Products.Action.Name".Localized())
-                </label>
-                <input class="form-control" name="Name" value="@Model.Name" placeholder="@("Dashboard.Products.Action.NamePlaceholder".Localized())" />
-            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>
+                        @("Dashboard.Products.Action.Name".Localized())
+                    </label>
+                    <input class="form-control" name="Name" value="@Model.Name" placeholder="@("Dashboard.Products.Action.NamePlaceholder".Localized())" />
+                </div>
 
-            <div class="form-group">
-                <label>
-                    @("Dashboard.Products.Action.Summary".Localized())
-                </label>
-                <textarea class="form-control" id="Summary" name="Summary" placeholder="@("Dashboard.Products.Action.SummaryPlaceholder".Localized())" rows="3">@Model.Summary</textarea>
-            </div>
+                <div class="form-group">
+                    <label>
+                        @("Dashboard.Products.Action.Summary".Localized())
+                    </label>
+                    <textarea class="form-control" id="Summary" name="Summary" placeholder="@("Dashboard.Products.Action.SummaryPlaceholder".Localized())" rows="3">@Model.Summary</textarea>
+                </div>
 
-            <div class="form-group">
-                <label>
-                    @("Dashboard.Products.Action.Description".Localized())
-                </label>
-                <textarea class="form-control" id="Description" name="Description" placeholder="@("Dashboard.Products.Action.DescriptionPlaceholder".Localized())" rows="10">@Model.Description</textarea>
+                <div class="form-group">
+                    <label>
+                        @("Dashboard.Products.Action.Description".Localized())
+                    </label>
+                    <textarea class="form-control" id="Description" name="Description" placeholder="@("Dashboard.Products.Action.DescriptionPlaceholder".Localized())" rows="10">@Model.Description</textarea>
+                </div>
             </div>
+        </div>
 
-            @*Color by fortiz*@
-            <div class="form-group">
+        <div class="card mt-3">
+            <div class="card-body">
                 <div class="form-group">
                     <label>
                         Color
                     </label>
                     <div class="input-group">
-                        <select class="form-control" name="ColorID">
-                            @*@foreach (var color in Model.Colors)
+                        <select class="form-control" name="ColorID" id="ColorID">
+                            @foreach (var color in Model.Colors)
                             {
-                                var selected = color.Id == Model.ColorID ? "selected" : string.Empty;
-
-                                <option value="@color.Id" @selected>@color.Description</option>
-                            }*@
+                                <option value="@color.ID, @color.Valor">@color.Description  </option>
+                            }
                         </select>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="addColor">Agregar Color</button>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-
-            <div class="form-group">
-                <label>
-                    @("Dashboard.Products.Action.ProductSpecifications".Localized())
-                </label>
-                <div class="input-group">
-                    <input id="SpecificationTitle" type="text" class="form-control" placeholder="@("Dashboard.Products.Action.SpecificationTitle".Localized())">
-                    <input id="SpecificationValue" type="text" class="form-control" placeholder="@("Dashboard.Products.Action.SpecificationValue".Localized())">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="addSpecification">@("Dashboard.Products.Action.AddSpecification".Localized())</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group mb-0">
-                <table class="table table-striped mb-0" id="specificationsTable">
-                    <thead>
-                        <tr>
-                            <th scope="col" width="45%">@("Dashboard.Products.Action.SpecificationTitle".Localized())</th>
-                            <th scope="col" width="45%">@("Dashboard.Products.Action.SpecificationValue".Localized())</th>
-                            <th scope="col" width="10%">@("Dashboard.Products.Action.SpecificationAction".Localized())</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model.ProductSpecifications != null && Model.ProductSpecifications.Count > 0)
-                        {
-                            foreach (var specicification in Model.ProductSpecifications)
+                <div class="form-group mb-0">
+                    <table class="table table-striped mb-0" id="colorsTable">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="45%">Titulo Color</th>
+                                <th scope="col" width="45%">Valor Color</th>
+                                <th scope="col" width="10%">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
                             {
-                                productSpecificationCount++;
+                                foreach (var productColors in Model.ProductColors)
+                                {
+                                    productColorCount++;
 
-                                var specName = string.Format("specification{0}", productSpecificationCount);
+                                    var colorName = string.Format("colorproduct{0}", productColorCount);
 
-                                var specificationTitle = specicification.Value.GetSubstringText("", "~");
-                                var specificationValue = specicification.Value.GetSubstringText("~", "");
+                                    var colorType = productColors.Color.Description.GetSubstringText("", "~");
+                                    var colorValue = productColors.Color.Valor.GetSubstringText("~", "");
 
-                                <tr id="@specName" class="specificationRow">
-                                    <td class="title" scope="row">@specicification.Title</td>
-                                    <td class="value">@specicification.Value</td>
-                                    <td>
-                                        <input type="hidden" name="@specName" value="@string.Format("{0}~{1}", specicification.Title, specicification.Value)" />
-                                        <button class="btn btn-danger deleteSpecificationButton btn-sm" type="button" onclick="removeRow(this)">
-                                            @("Dashboard.Products.Action.SpecificationDelete".Localized())
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <tr id="@colorName" class="colorRow">
+                                        <td class="title" scope="row">@productColors.Color.Description</td>
+                                        <td class="value">@productColors.Color.Valor</td>
+                                        <td>
+                                            <input type="hidden" name="@colorName" value="@string.Format("{0}~{1}", productColors.Color.Description, productColors.Color.Valor)" />
+                                            <button class="btn btn-danger deleteColorButton btn-sm" type="button" onclick="removeColorRow(this)">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
 
-                        <tr id="noSpecificationRow" style="@(Model.ProductSpecifications == null || Model.ProductSpecifications.Count == 0 ? string.Empty : "display:none")">
-                            <td scope="row" colspan="3">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <tr id="noColorRow" style="@(Model.ProductColors == null || Model.ProductColors.Count == 0 ? string.Empty : "display:none")">
+                                <td scope="row" colspan="3">Sin Colores</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-
-
-
         </div>
-        </div>
+
+
         <div class="card mt-3">
             <div class="card-body">
+
+                <div class="form-group">
+                    <label>
+                        @("Dashboard.Products.Action.ProductSpecifications".Localized())
+                    </label>
+                    <div class="input-group">
+                        <input id="SpecificationTitle" type="text" class="form-control" placeholder="@("Dashboard.Products.Action.SpecificationTitle".Localized())">
+                        <input id="SpecificationValue" type="text" class="form-control" placeholder="@("Dashboard.Products.Action.SpecificationValue".Localized())">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="addSpecification">@("Dashboard.Products.Action.AddSpecification".Localized())</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-0">
+                    <table class="table table-striped mb-0" id="specificationsTable">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="45%">@("Dashboard.Products.Action.SpecificationTitle".Localized())</th>
+                                <th scope="col" width="45%">@("Dashboard.Products.Action.SpecificationValue".Localized())</th>
+                                <th scope="col" width="10%">@("Dashboard.Products.Action.SpecificationAction".Localized())</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ProductSpecifications != null && Model.ProductSpecifications.Count > 0)
+                            {
+                                foreach (var specicification in Model.ProductSpecifications)
+                                {
+                                    productSpecificationCount++;
+
+                                    var specName = string.Format("specification{0}", productSpecificationCount);
+
+                                    var specificationTitle = specicification.Value.GetSubstringText("", "~");
+                                    var specificationValue = specicification.Value.GetSubstringText("~", "");
+
+                                    <tr id="@specName" class="specificationRow">
+                                        <td class="title" scope="row">@specicification.Title</td>
+                                        <td class="value">@specicification.Value</td>
+                                        <td>
+                                            <input type="hidden" name="@specName" value="@string.Format("{0}~{1}", specicification.Title, specicification.Value)" />
+                                            <button class="btn btn-danger deleteSpecificationButton btn-sm" type="button" onclick="removeRow(this)">
+                                                @("Dashboard.Products.Action.SpecificationDelete".Localized())
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                            <tr id="noSpecificationRow" style="@(Model.ProductSpecifications == null || Model.ProductSpecifications.Count == 0 ? string.Empty : "display:none")">
+                                <td scope="row" colspan="3">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>
+                        Catalogo
+                    </label>
+                    <select class="form-control" name="CatalogoID">
+                        @foreach (var catalogo in Model.Catalogos)
+                        {
+                            var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
+                            <option value="@catalogo.ID" @selected>@catalogo.Description</option>
+                        }
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label>
                         @("Dashboard.Products.Action.Category".Localized())
@@ -177,12 +235,24 @@
 
                             if (currentLanguageCategoryRecord != null)
                             {
-                        <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
+                                <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
                             }
                             else
                             {
-                        <option value="@category.ID" @selected>@category.SanitizedName</option>
+                                <option value="@category.ID" @selected>@category.SanitizedName</option>
                             }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Marca
+                    </label>
+                    <select class="form-control" name="MarcaID">
+                        @foreach (var marca in Model.Marcas)
+                        {
+                            var selected = Model.MarcaID == marca.ID ? "selected" : string.Empty;
+                            <option value="@marca.ID" @selected>@marca.Descripcion</option>
                         }
                     </select>
                 </div>
@@ -201,17 +271,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
-                        <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
+                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                            <div class="input-group-append">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
                         }
                         else
                         {
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
-                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
+                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         }
                     </div>
                 </div>
@@ -222,17 +292,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
-                        <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
+                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                            <div class="input-group-append">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
                         }
                         else
                         {
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
-                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
+                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                         }
                     </div>
                 </div>
@@ -243,17 +313,17 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
-                        <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
+                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                            <div class="input-group-append">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
                         }
                         else
                         {
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                        </div>
-                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            </div>
+                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         }
                     </div>
                 </div>
@@ -296,22 +366,22 @@
                         {
                             foreach (var picture in Model.ProductPicturesList)
                             {
-                        <div class="thisImage col-md-3">
-                            <div class="card mt-4">
-                                <div class="uPicHolder card-body text-center">
-                                    <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
+                                <div class="thisImage col-md-3">
+                                    <div class="card mt-4">
+                                        <div class="uPicHolder card-body text-center">
+                                            <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
+                                                <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
+                                            </li>
+                                        </ul>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
-                                        <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
-                                    </li>
-                                </ul>
-                                <div class="card-footer">
-                                    <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
-                                </div>
-                            </div>
-                        </div>
                             }
                         }
                     </div>
@@ -335,7 +405,7 @@
                         <input type="hidden" name="InActive" value="false">
 
                         <label class="form-check-label" for="InActive">
-                           Producto en Activo
+                            Producto en Activo
                         </label>
                     </div>
                 </div>
@@ -384,7 +454,7 @@
                     <div class="card-body" id="response-holder">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                                <div id="Destacados" class="container tab-pane active">
+                            <div id="Destacados" class="container tab-pane active">
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6 form-group">
@@ -454,7 +524,7 @@
                                 </div>
 
                             </div>
-                                <div id="Motor" class="container tab-pane fade">
+                            <div id="Motor" class="container tab-pane fade">
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6 form-group">
@@ -508,149 +578,149 @@
                                     </div>
                                 </div>
                             </div>
-                                <div id="Frenos" class="container tab-pane fade">
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Frenos Delanteros
-                                            </label>
-                                            <input class="form-control" name="FrenoDelantero" value="@Model.ProductoCaracteristica.frenos.FrenoDelantero" />
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Frenos Posterior
-                                            </label>
-                                            <input class="form-control" name="FrenoTrasero" value="@Model.ProductoCaracteristica.frenos.FrenoTrasero" />
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div id="ArosLlantas" class="container tab-pane fade">
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Neumatico Delanteros
-                                            </label>
-                                            <input class="form-control" name="NeumaticoDelantero" value="@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero" />
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Neumatico Posterior
-                                            </label>
-                                            <input class="form-control" name="NeumaticoPosterior" value="@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior" />
-                                        </div>
-                                    </div> 
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Aro Delantero
-                                            </label>
-                                            <input class="form-control" name="AroDelantero" value="@Model.ProductoCaracteristica.arollanta.AroDelantero" />
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Aro Posterior
-                                            </label>
-                                            <input class="form-control" name="AroPosterior" value="@Model.ProductoCaracteristica.arollanta.AroPosterior" />
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div id="Suspension" class="container tab-pane fade">
-                                    <br>
-                                    <div class="form-group">
+                            <div id="Frenos" class="container tab-pane fade">
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Suspension delantera
+                                            Frenos Delanteros
                                         </label>
-                                        <input class="form-control" name="SuspensionDelantera" value="@Model.ProductoCaracteristica.suspension.SuspensionDelantera" />
+                                        <input class="form-control" name="FrenoDelantero" value="@Model.ProductoCaracteristica.frenos.FrenoDelantero" />
                                     </div>
-
-                                    <div class="form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Suspension Posterior
+                                            Frenos Posterior
                                         </label>
-                                        <input class="form-control" name="SuspensionPosterior" value="@Model.ProductoCaracteristica.suspension.SuspensionPosterior" />
+                                        <input class="form-control" name="FrenoTrasero" value="@Model.ProductoCaracteristica.frenos.FrenoTrasero" />
                                     </div>
                                 </div>
-                                <div id="Consumo" class="container tab-pane fade">
-                                    <br>
-                                    <div class="form-group">
+                            </div>
+                            <div id="ArosLlantas" class="container tab-pane fade">
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Octanaje
+                                            Neumatico Delanteros
                                         </label>
-                                        <input class="form-control" name="Octanaje" value="@Model.ProductoCaracteristica.consumo.Octanaje" />
+                                        <input class="form-control" name="NeumaticoDelantero" value="@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero" />
                                     </div>
-
-                                    <div class="form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Sistema Combustible
+                                            Neumatico Posterior
                                         </label>
-                                        <input class="form-control" name="SistemaCombustible" value="@Model.ProductoCaracteristica.consumo.SistemaCombustible" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            Capacidad Tanque
-                                        </label>
-                                        <input class="form-control" name="CapacidadTanque" value="@Model.ProductoCaracteristica.consumo.CapacidadTanque" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>
-                                            Autonomia
-                                        </label>
-                                        <input class="form-control" name="Autonomia" value="@Model.ProductoCaracteristica.consumo.Autonomia" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            Rendimiento Galon
-                                        </label>
-                                        <input class="form-control" name="RendimientoGalon" value="@Model.ProductoCaracteristica.consumo.RendimientoGalon" />
+                                        <input class="form-control" name="NeumaticoPosterior" value="@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior" />
                                     </div>
                                 </div>
-                                <div id="Transmision" class="container tab-pane fade">
-                                    <br>
-                                    <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Transmision
+                                            Aro Delantero
                                         </label>
-                                        <input class="form-control" name="Transmision" value="@Model.ProductoCaracteristica.transmisiones.Transmision" />
+                                        <input class="form-control" name="AroDelantero" value="@Model.ProductoCaracteristica.arollanta.AroDelantero" />
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>
-                                            Nro Cambios
+                                            Aro Posterior
                                         </label>
-                                        <input class="form-control" name="NroCambios" value="@Model.ProductoCaracteristica.transmisiones.NroCambios" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            Velocidad Maxima
-                                        </label>
-                                        <input class="form-control" name="VelocidadMaxima" value="@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima" />
-                                    </div>
-
-                                </div>
-                                <div id="Dimensiones" class="container tab-pane fade">
-                                    <br>
-                                    <div class="form-group">
-                                        <label>
-                                            Peso
-                                        </label>
-                                        <input class="form-control" name="Peso" value="@Model.ProductoCaracteristica.dimensiones.Peso" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>
-                                            Carga Util
-                                        </label>
-                                        <input class="form-control" name="CargaUtil" value="@Model.ProductoCaracteristica.dimensiones.CargaUtil" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            Pasajeros
-                                        </label>
-                                        <input class="form-control" name="Pasajeros" value="@Model.ProductoCaracteristica.dimensiones.Pasajeros" />
+                                        <input class="form-control" name="AroPosterior" value="@Model.ProductoCaracteristica.arollanta.AroPosterior" />
                                     </div>
                                 </div>
+                            </div>
+                            <div id="Suspension" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Suspension delantera
+                                    </label>
+                                    <input class="form-control" name="SuspensionDelantera" value="@Model.ProductoCaracteristica.suspension.SuspensionDelantera" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Suspension Posterior
+                                    </label>
+                                    <input class="form-control" name="SuspensionPosterior" value="@Model.ProductoCaracteristica.suspension.SuspensionPosterior" />
+                                </div>
+                            </div>
+                            <div id="Consumo" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Octanaje
+                                    </label>
+                                    <input class="form-control" name="Octanaje" value="@Model.ProductoCaracteristica.consumo.Octanaje" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Sistema Combustible
+                                    </label>
+                                    <input class="form-control" name="SistemaCombustible" value="@Model.ProductoCaracteristica.consumo.SistemaCombustible" />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Capacidad Tanque
+                                    </label>
+                                    <input class="form-control" name="CapacidadTanque" value="@Model.ProductoCaracteristica.consumo.CapacidadTanque" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Autonomia
+                                    </label>
+                                    <input class="form-control" name="Autonomia" value="@Model.ProductoCaracteristica.consumo.Autonomia" />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Rendimiento Galon
+                                    </label>
+                                    <input class="form-control" name="RendimientoGalon" value="@Model.ProductoCaracteristica.consumo.RendimientoGalon" />
+                                </div>
+                            </div>
+                            <div id="Transmision" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Transmision
+                                    </label>
+                                    <input class="form-control" name="Transmision" value="@Model.ProductoCaracteristica.transmisiones.Transmision" />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Nro Cambios
+                                    </label>
+                                    <input class="form-control" name="NroCambios" value="@Model.ProductoCaracteristica.transmisiones.NroCambios" />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Velocidad Maxima
+                                    </label>
+                                    <input class="form-control" name="VelocidadMaxima" value="@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima" />
+                                </div>
+
+                            </div>
+                            <div id="Dimensiones" class="container tab-pane fade">
+                                <br>
+                                <div class="form-group">
+                                    <label>
+                                        Peso
+                                    </label>
+                                    <input class="form-control" name="Peso" value="@Model.ProductoCaracteristica.dimensiones.Peso" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Carga Util
+                                    </label>
+                                    <input class="form-control" name="CargaUtil" value="@Model.ProductoCaracteristica.dimensiones.CargaUtil" />
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Pasajeros
+                                    </label>
+                                    <input class="form-control" name="Pasajeros" value="@Model.ProductoCaracteristica.dimensiones.Pasajeros" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -660,21 +730,21 @@
                 <div class="form-group mb-0">
                     @if (Model.ProductID > 0)
                     {
-                    <button class="btn btn-success" type="submit" id="actionButton">
-                        <i class="fas fa-edit mr-1"></i>
-                        @("Dashboard.Products.Update".Localized())
-                    </button>
-                    <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
-                        <i class="fas fa-trash-alt mr-1"></i>
-                        @("Dashboard.Products.Delete".Localized())
-                    </button>
+                        <button class="btn btn-success" type="submit" id="actionButton">
+                            <i class="fas fa-edit mr-1"></i>
+                            @("Dashboard.Products.Update".Localized())
+                        </button>
+                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                            @("Dashboard.Products.Delete".Localized())
+                        </button>
                     }
                     else
                     {
-                    <button class="btn btn-success" type="submit" id="actionButton">
-                        <i class="fas fa-plus mr-1"></i>
-                        @("Dashboard.Products.Save".Localized())
-                    </button>
+                        <button class="btn btn-success" type="submit" id="actionButton">
+                            <i class="fas fa-plus mr-1"></i>
+                            @("Dashboard.Products.Save".Localized())
+                        </button>
                     }
                     <a class="btn btn-secondary" href="@Url.ListAction("Products")">
                         <i class="fas fa-angle-double-left mr-1"></i>
@@ -720,8 +790,22 @@
     </tr>
 </script>
 
+<script type="text/x-custom-template" id="colorRow">
+    <tr class="colorRow new" style="display:none">
+        <td class="title" scope="row"></td>
+        <td class="value"></td>
+        <td>
+            <input type="hidden" name="color" value="" />
+            <button class="btn btn-danger deleteColorButton btn-sm" type="button" onclick="removeRow(this)">
+                Eliminar
+            </button>
+        </td>
+    </tr>
+</script>
+
 <script>
     var productSpecificationCount = @(productSpecificationCount + 1);
+    var productColorCount = @(productColorCount + 1);
 
     $(document).ready(function () {
         $("#TipoProducto").trigger("change");
@@ -747,6 +831,15 @@
         }
         else {
             $("#noSpecificationRow").show();
+        }
+    }
+
+    function showHideNoColorsRow() {
+        if ($(".colorRow").length > 0) {
+            $("#noColorRow").hide();
+        }
+        else {
+            $("#noColorRow").show();
         }
     }
 
@@ -781,6 +874,45 @@
             $("#SpecificationValue").val("");
 
             showHideNoSpecificationsRow();
+        }
+    });
+
+    $("#addColor").click(function () {
+        var colorSelect = $("#ColorID").val();
+        var colorSplit = colorSelect.split(",");
+        var colorId = colorSplit[0];
+        var colorValue = "";
+        if (colorSplit.length > 1) {
+            colorValue = colorSplit[1];
+        }
+        var productId = @Model.ProductID;
+        var colorDescription = $("#ColorID").find('option:selected').text();
+
+        var colorValor = '<span style="background-color: '+ colorValue +'; height:10px; width:10px"></span>';
+
+        if (colorId && colorDescription) {
+            $("#colorsTable tbody").append($("#colorRow").clone().html());
+
+            var $newRow = $(".new", "#colorsTable tbody");
+
+            //for display to user
+            $(".title", $newRow).html(colorDescription);
+            $(".value", $newRow).html(colorValor);
+
+            //for submitting value
+            $("[name=color]", $newRow).val(colorDescription + "~" + colorValor);
+            $("[name=color]", $newRow).attr("name", "colorproduct" + productColorCount);
+            $newRow.attr("id", "colorproduct" + productColorCount);
+            $newRow.removeClass("new");
+
+            //show this new specification
+            $newRow.show();
+
+            //for new specification
+            productColorCount++;
+
+            //reset inputs
+            showHideNoColorsRow();
         }
     });
 
@@ -868,7 +1000,7 @@
 		for (var i = 0; i < pictures.length; i++) {
 			picsData.append("Picture", pictures[i]);
 		}
-        
+
         addLoader("pics-container");
 		$.ajax({
 			url: "@Url.UploadPictures()",
@@ -977,15 +1109,15 @@
     });
 
     $("#TipoProducto").change(function () {
-        debugger; 
+        debugger;
         if ($('#TipoProducto').is(':checked')) {
-            
+
             $("#TagMotos").css("display", "block");
         }
         else {
                 $("#TagMotos").css("display", "none");
             }
-    
+
     });
 
 
