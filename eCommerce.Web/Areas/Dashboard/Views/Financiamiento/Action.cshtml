@@ -1,1 +1,283 @@
-﻿
+﻿@model FinanciamientosActionViewModels
+@{
+    if (Model != null)
+    {
+        if (Model.ID > 0)
+        {
+            Model.PageTitle = "Ver Financiamiento";
+            Model.PageDescription = "Financiamiento";
+            Model.PageURL = Url.EditAction("Financiamiento", Model.ID);
+        }
+        else
+        {
+            Model.PageTitle = "Crear Catalogo";
+            Model.PageDescription = "Crear Descripcion de Catalogo";
+            Model.PageURL = Url.CreateAction("Catalogo");
+        }
+
+        Model.PageImageURL = PictureHelper.PageImageURL("catalogo.jpg");
+    }
+}
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        @Model.PageTitle
+    </h3>
+    <p>
+        @Model.PageDescription
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder mb-4">
+    <form id="actionForm" method="post">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <div class="form-group">
+            <label>
+                Nombres
+            </label>
+            <input class="form-control" name="Nombre" value="@(Model.Nombre == null ? "-" : Model.Nombre)" placeholder="Nombre" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Apellido
+            </label>
+            <input class="form-control" name="Apellido" value="@(Model.Apellido == null ? "-" : Model.Apellido)" placeholder="Apellido" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Celular
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Celular == null ? "-" : Model.Celular)" placeholder="Celular" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Correo
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Correo == null ? "-" : Model.Correo)" placeholder="Correo" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                TipoDocumento
+            </label>
+            @if (Model.TipoDocumento > 0)
+            {
+                var tfinanciera = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == Model.TipoDocumento);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+             
+        </div>
+        <div class="form-group">
+            <label>
+                NroDocumento
+            </label>
+            <input class="form-control" name="Description" value="@(Model.NroDocumento==null ? "-" : Model.NroDocumento)" placeholder="NroDocumento" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Departamento
+            </label>
+            <input class="form-control" name="Description" value="@Model.Departamento" placeholder="Departamento" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Provincia
+            </label>
+            <input class="form-control" name="Description" value="@Model.Provincia" placeholder="Provincia" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Marca
+            </label>
+            <input class="form-control" name="Description" value="@Model.Marca" placeholder="Nombre" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Modelo
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Modelo==null ? "-" : Model.Modelo)" placeholder="Modelo" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Tipo Vivienda
+            </label>
+            @if (Model.TipoVivienda > 0)
+            {
+                var tfinanciera = Model.listaTipoVivienda.FirstOrDefault(x => x.Codigo == Model.TipoVivienda);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }         
+        </div> 
+        <div class="form-group">
+            <label>
+                Situacion Laboral
+            </label>
+            <input class="form-control" name="Description" value="@(Model.SituacionLaboral == null ? "-" : Model.SituacionLaboral)" placeholder="SituacionLaboral" disabled />
+        </div>
+
+        <div class="form-group">
+            <label>
+                RangoIngreso
+            </label>
+            @if (Model.RangoIngreso > 0)
+            {
+                var tfinanciera = Model.listaRangoIngreso.FirstOrDefault(x => x.Codigo == Model.RangoIngreso);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+
+        </div>
+        <div class="form-group">
+            <label>
+                Monto Financiar
+            </label>
+            @if (Model.MontoFinanciar > 0)
+            {
+                var tfinanciera = Model.listaMontoFinanciar.FirstOrDefault(x => x.Codigo == Model.MontoFinanciar);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+             
+        </div>
+        <div class="form-group">
+            <label>
+                Tipo Financiera
+            </label>
+            @if (Model.TipoFinanciera > 0)
+            {
+                var tfinanciera = Model.listaTipoFinanciera.FirstOrDefault(x => x.Codigo == Model.TipoFinanciera);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+             
+        </div>
+        <div class="form-group">
+            <label>
+                Situacion Sentimiental
+            </label>
+            @if (Convert.ToInt32(Model.SituacionSentimental) > 0 )
+            {
+                var tfinanciera = Model.listaEstadoCivil.FirstOrDefault(x => x.Codigo == Convert.ToInt32(Model.SituacionSentimental));
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+             
+        </div>
+
+
+
+        <hr />
+        <div class="form-group mb-0">
+            <a class="btn btn-secondary" href="@Url.ListAction("Financiamiento")">
+                <i class="fas fa-angle-double-left mr-1"></i>
+                Regresar
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+
+    $("#actionForm").validate({
+        errorClass: "alert alert-danger",
+        errorElement: "div",
+        Class: "disabled",
+        rules: {
+            Description: {
+                required: true,
+                minlength: 4,
+                maxlength: 150
+            }
+        },
+        messages: {
+            Description
+                : {
+                required: "@("Dashboard.Color.Action.Validation.DescriptionRequired".Localized())",
+
+            }
+        },
+        highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+        }
+    });
+
+    $("#actionForm").submit(function (e) {
+        if ($("#actionForm").valid()) {
+            addLoader("actionForm");
+            $.ajax({
+                type: "post",
+                data: $("#actionForm").serialize()
+			})
+            .done(function (response) {
+                if (response.Success) {
+                    window.location.href = "@Url.ListAction("Catalogo")";
+			    }
+			    else {
+                    removeLoader("actionForm");
+                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+			    }
+			})
+            .fail(function () {
+                 removeLoader("actionForm");
+                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			});
+        }
+
+        e.preventDefault();
+    });
+
+    $(".deleteButton").click(function () {
+        var recordID = $(this).attr("data-id");
+
+        Swal.fire({
+            title: '@("Dashboard.Message.Warning".Localized())',
+            text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
+            cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
+        }).then((result) => {
+            if (result.value) {
+                addLoader("actionForm");
+				$.ajax({
+					url: "@Url.DeleteAction("Catalogo")",
+                    type: "post",
+                    data: { id: recordID }
+				})
+                .done(function (response) {
+                    if (response != null && response.Success != undefined && response.Success) {
+                        window.location.href = "@Url.ListAction("Catalogo")";
+				    }
+                    else {
+                        removeLoader("actionForm");
+                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+				    }
+				})
+                .fail(function () {
+                     removeLoader("actionForm");
+                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			    });
+            }
+        });
+    });
+</script>
+
+

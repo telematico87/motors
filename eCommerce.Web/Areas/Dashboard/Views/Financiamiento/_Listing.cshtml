@@ -14,7 +14,7 @@
                     Apellidos
                 </th>
                 <th>
-                    Correo 
+                    Correo
                 </th>
                 <th>
                     Celular
@@ -36,9 +36,12 @@
                 <th>
                     Modelo
                 </th>
-				 <th>
-                    Acción
-                </th> 
+                <th>
+                    Ver
+                </th>
+                <th>
+                    Eliminar
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -93,20 +96,21 @@
                 </td>
                 <td>
                     @financiamient.Modelo
-                </td>
-                 
+                </td> 
                 <td>
                     <div class="btn-group" role="group">
                         <a class="btn btn-primary" href="@Url.EditAction("Financiamiento", financiamient.ID)">
                             <i class="fas fa-edit mr-1"></i>
                            Revisar
-                        </a>
-                        <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
-                            <i class="fas fa-trash-alt mr-1"></i>
-                           Eliminar
-                        </button>
+                        </a> 
                     </div>
                 </td>
+                <td>
+                    <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                        Eliminar
+                    </button>
+                </td> 
             </tr>
             }
         </tbody>
