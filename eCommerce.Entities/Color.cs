@@ -10,6 +10,7 @@ namespace eCommerce.Entities
     {
 
         public string Description { get; set; }
+        public string Valor { get; set; }
 
     }
 
