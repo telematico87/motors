@@ -119,6 +119,10 @@
     <Compile Include="Migrations\202204252116581_v7_categoria.designer.cs">
       <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204270238420_addColorValue.cs" />
+    <Compile Include="Migrations\202204270238420_addColorValue.designer.cs">
+      <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -177,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204252116581_v7_categoria.resx">
       <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204270238420_addColorValue.resx">
+      <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
