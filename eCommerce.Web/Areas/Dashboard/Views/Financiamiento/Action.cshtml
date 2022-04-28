@@ -119,7 +119,7 @@
             <label>
                 Situacion Laboral
             </label>
-            <input class="form-control" name="Description" value="@(Model.SituacionLaboral == null ? "-" : Model.SituacionLaboral)" placeholder="SituacionLaboral" disabled />
+            <input class="form-control" name="Description" value="@(Model.SituacionLaboral == null || Model.SituacionLaboral == "0" ? "-" : Model.SituacionLaboral)" placeholder="SituacionLaboral" disabled />
         </div>
 
         <div class="form-group">
@@ -167,16 +167,17 @@
             <label>
                 Situacion Sentimiental
             </label>
-            @if (Convert.ToInt32(Model.SituacionSentimental) > 0 )
-            {
-                var tfinanciera = Model.listaEstadoCivil.FirstOrDefault(x => x.Codigo == Convert.ToInt32(Model.SituacionSentimental));
-                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
-            }
-            else
-            {
-                <input type="text" class="form-control" value="-" disabled />
-            }
-             
+            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />
+            @*@if (Convert.ToInt32(Model.SituacionSentimental) > 0 )
+        {
+            var tfinanciera = Model.listaEstadoCivil.FirstOrDefault(x => x.Codigo == Convert.ToInt32(Model.SituacionSentimental));
+            <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+        }
+        else
+        {
+            <input type="text" class="form-control" value="-" disabled />
+        }*@
+
         </div>
 
 
@@ -258,13 +259,13 @@
             if (result.value) {
                 addLoader("actionForm");
 				$.ajax({
-					url: "@Url.DeleteAction("Catalogo")",
+					url: "@Url.DeleteAction("Financiamiento")",
                     type: "post",
                     data: { id: recordID }
 				})
                 .done(function (response) {
                     if (response != null && response.Success != undefined && response.Success) {
-                        window.location.href = "@Url.ListAction("Catalogo")";
+                        window.location.href = "@Url.ListAction("Financiamiento")";
 				    }
                     else {
                         removeLoader("actionForm");

@@ -73,7 +73,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.SituacionSentimental = financi.SituacionSentimental;
                 model.TipoDocumento = financi.TipoDocumento; 
                 model.TipoFinanciera = financi.TipoFinanciera;
-                //model.financiera.Codigo = 
+                model.MontoFinanciar = financi.MontoFinanciar;
+             
             }
             model.listaTipoDocumento = new MantenedorFinanciera().ListarTipoDocumento();
             model.listaEstadoCivil = new MantenedorFinanciera().ListarEstadoCivil();
@@ -86,5 +87,27 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
             return View(model);
         }
+
+
+        [HttpPost]
+        public JsonResult Delete(int ID)
+        {
+            JsonResult result = new JsonResult();
+
+            try
+            {
+                var operation = FinanciamientoService.Instance.DeleteFinanciamiento(ID);
+
+                result.Data = new { Success = operation, Message = operation ? string.Empty : "No se puede eliminar" };
+            }
+            catch (Exception ex)
+            {
+                result.Data = new { Success = false, Message = string.Format("{0}", ex.Message) };
+            }
+
+            return result;
+        }
+
     }
+     
 }
