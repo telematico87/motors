@@ -234,8 +234,10 @@ namespace eCommerce.Services
             response.ProductPictures = product.ProductPictures;
             response.ProductRecords = product.ProductRecords;
             response.Caracteristica = product.Caracteristica;
+            response.MarcaID = product.MarcaId;
+            response.CatalogoID = product.CatalogoId;
+            response.TipoMoneda = product.TipoMoneda;
             response.ProductoCaracteristica = productoCaracteristica;
-
             return response;
         }
 
@@ -310,6 +312,9 @@ namespace eCommerce.Services
             product.ProductRecords = productResponse.ProductRecords;
             product.TipoProducto = productResponse.TipoProducto;
             product.Caracteristica = caracteristicas;
+            product.MarcaId = productResponse.MarcaID;
+            product.CatalogoId = productResponse.CatalogoID;
+            product.TipoMoneda = productResponse.TipoMoneda;
             return product;
         }
         
