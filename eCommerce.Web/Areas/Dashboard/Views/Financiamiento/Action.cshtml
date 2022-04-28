@@ -4,18 +4,13 @@
     {
         if (Model.ID > 0)
         {
-            Model.PageTitle = "Ver Financiamiento";
-            Model.PageDescription = "Financiamiento";
-            Model.PageURL = Url.EditAction("Financiamiento", Model.ID);
-        }
-        else
-        {
-            Model.PageTitle = "Crear Catalogo";
-            Model.PageDescription = "Crear Descripcion de Catalogo";
-            Model.PageURL = Url.CreateAction("Catalogo");
-        }
+             
+            Model.PageTitle = "Detalle Financiamiento";
+            Model.PageDescription = Model.TipoFinanciera == 1 ? "Financiera Efectiva" : "Financiera Santander";
+            Model.PageURL = Url.EditAction("Financiamiento", Model.ID); 
 
-        Model.PageImageURL = PictureHelper.PageImageURL("catalogo.jpg");
+        }
+         
     }
 }
 
@@ -40,7 +35,7 @@
         </div>
         <div class="form-group">
             <label>
-                Apellido
+                Apellidos
             </label>
             <input class="form-control" name="Apellido" value="@(Model.Apellido == null ? "-" : Model.Apellido)" placeholder="Apellido" disabled />
         </div>
@@ -58,7 +53,7 @@
         </div>
         <div class="form-group">
             <label>
-                TipoDocumento
+                Tipo Documento
             </label>
             @if (Model.TipoDocumento > 0)
             {
@@ -73,7 +68,7 @@
         </div>
         <div class="form-group">
             <label>
-                NroDocumento
+                Nro Documento
             </label>
             <input class="form-control" name="Description" value="@(Model.NroDocumento==null ? "-" : Model.NroDocumento)" placeholder="NroDocumento" disabled />
         </div>
@@ -117,14 +112,14 @@
         </div> 
         <div class="form-group">
             <label>
-                Situacion Laboral
+                Situación Laboral
             </label>
             <input class="form-control" name="Description" value="@(Model.SituacionLaboral == null || Model.SituacionLaboral == "0" ? "-" : Model.SituacionLaboral)" placeholder="SituacionLaboral" disabled />
         </div>
 
         <div class="form-group">
             <label>
-                RangoIngreso
+                Rango de Ingreso
             </label>
             @if (Model.RangoIngreso > 0)
             {
@@ -139,7 +134,7 @@
         </div>
         <div class="form-group">
             <label>
-                Monto Financiar
+                Monto a Financiar
             </label>
             @if (Model.MontoFinanciar > 0)
             {
@@ -154,34 +149,20 @@
         </div>
         <div class="form-group">
             <label>
-                Tipo Financiera
+                Tipo de Financiera
             </label>
             @if (Model.TipoFinanciera > 0)
             {
                 var tfinanciera = Model.listaTipoFinanciera.FirstOrDefault(x => x.Codigo == Model.TipoFinanciera);
                 <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
-            }
-             
+            } 
         </div>
         <div class="form-group">
             <label>
-                Situacion Sentimiental
+                Situación Sentimiental
             </label>
-            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />
-            @*@if (Convert.ToInt32(Model.SituacionSentimental) > 0 )
-        {
-            var tfinanciera = Model.listaEstadoCivil.FirstOrDefault(x => x.Codigo == Convert.ToInt32(Model.SituacionSentimental));
-            <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
-        }
-        else
-        {
-            <input type="text" class="form-control" value="-" disabled />
-        }*@
-
-        </div>
-
-
-
+            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />  
+        </div> 
         <hr />
         <div class="form-group mb-0">
             <a class="btn btn-secondary" href="@Url.ListAction("Financiamiento")">
@@ -191,94 +172,5 @@
         </div>
     </form>
 </div>
-
-<script>
-
-
-    $("#actionForm").validate({
-        errorClass: "alert alert-danger",
-        errorElement: "div",
-        Class: "disabled",
-        rules: {
-            Description: {
-                required: true,
-                minlength: 4,
-                maxlength: 150
-            }
-        },
-        messages: {
-            Description
-                : {
-                required: "@("Dashboard.Color.Action.Validation.DescriptionRequired".Localized())",
-
-            }
-        },
-        highlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        }
-    });
-
-    $("#actionForm").submit(function (e) {
-        if ($("#actionForm").valid()) {
-            addLoader("actionForm");
-            $.ajax({
-                type: "post",
-                data: $("#actionForm").serialize()
-			})
-            .done(function (response) {
-                if (response.Success) {
-                    window.location.href = "@Url.ListAction("Catalogo")";
-			    }
-			    else {
-                    removeLoader("actionForm");
-                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-			    }
-			})
-            .fail(function () {
-                 removeLoader("actionForm");
-                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			});
-        }
-
-        e.preventDefault();
-    });
-
-    $(".deleteButton").click(function () {
-        var recordID = $(this).attr("data-id");
-
-        Swal.fire({
-            title: '@("Dashboard.Message.Warning".Localized())',
-            text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
-            cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
-        }).then((result) => {
-            if (result.value) {
-                addLoader("actionForm");
-				$.ajax({
-					url: "@Url.DeleteAction("Financiamiento")",
-                    type: "post",
-                    data: { id: recordID }
-				})
-                .done(function (response) {
-                    if (response != null && response.Success != undefined && response.Success) {
-                        window.location.href = "@Url.ListAction("Financiamiento")";
-				    }
-                    else {
-                        removeLoader("actionForm");
-                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-				    }
-				})
-                .fail(function () {
-                     removeLoader("actionForm");
-                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			    });
-            }
-        });
-    });
-</script>
-
+ 
 

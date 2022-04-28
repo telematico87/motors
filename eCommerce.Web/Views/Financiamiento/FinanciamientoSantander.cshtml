@@ -174,15 +174,15 @@
 </div>
 
 
-
+<script src="~/content/lib/sweetalert2-9.10.7/sweetalert2.all.min.js" type="text/javascript"></script>
 <script>
         $(document).ready(function () {
-            listarMarcas(); 
+            listarMarcas();
             listaRangoIngreso();
             listaMontoFinanciar();
             listaInteresCompra();
             listaDepartamento();
-          
+
 
         });
 
@@ -197,7 +197,7 @@
             var NroDocumento = $("#txtNroDocumento").val();
             var InteresCompra = $("#cboInteresCompra").val();
             var Departamento = $("#cboDepartamento").val();
-            var Provincia = $("#cboProvincia").val(); 
+            var Provincia = $("#cboProvincia").val();
             var Marca = $("#cboMarca").val();
             var Modelo = $("#txtModelo").val();
             var TipoVivienda = 0;
@@ -206,7 +206,7 @@
             var RangoIngreso = $("#cboRangoIngresos").val();
             var MontoFinanciar = $("#cboMontoFinanciar").val();
             var PoliticaPrivacidad = document.getElementById('PoliticaPrivacidad').checked;
-            var AceptoComunicaciones = document.getElementById('PoliticaPrivacidad').checked; 
+            var AceptoComunicaciones = document.getElementById('PoliticaPrivacidad').checked;
              var TipoFinanciera = 2;
 
             var model = new Object();
@@ -240,7 +240,8 @@
                 success: function (result) {
                     debugger;
                     alert("ok")
-                     Swal.success("Bien Hecho", 'Enviado Correctamente', "success");
+                     Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
+                     window.location.href = "@Url.Home()";
                 }
 
             });
@@ -260,9 +261,9 @@
             });
         }
 
-       
 
-        
+
+
         function listaRangoIngreso() {
             $.ajax({
                 method: "GET",
@@ -362,7 +363,7 @@
         });
 
     });
-     
+
 </script>
 
 
