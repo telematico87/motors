@@ -1,1 +1,176 @@
-﻿
+﻿@model FinanciamientosActionViewModels
+@{
+    if (Model != null)
+    {
+        if (Model.ID > 0)
+        {
+             
+            Model.PageTitle = "Detalle Financiamiento";
+            Model.PageDescription = Model.TipoFinanciera == 1 ? "Financiera Efectiva" : "Financiera Santander";
+            Model.PageURL = Url.EditAction("Financiamiento", Model.ID); 
+
+        }
+         
+    }
+}
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        @Model.PageTitle
+    </h3>
+    <p>
+        @Model.PageDescription
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder mb-4">
+    <form id="actionForm" method="post">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <div class="form-group">
+            <label>
+                Nombres
+            </label>
+            <input class="form-control" name="Nombre" value="@(Model.Nombre == null ? "-" : Model.Nombre)" placeholder="Nombre" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Apellidos
+            </label>
+            <input class="form-control" name="Apellido" value="@(Model.Apellido == null ? "-" : Model.Apellido)" placeholder="Apellido" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Celular
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Celular == null ? "-" : Model.Celular)" placeholder="Celular" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Correo
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Correo == null ? "-" : Model.Correo)" placeholder="Correo" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Tipo Documento
+            </label>
+            @if (Model.TipoDocumento > 0)
+            {
+                var tfinanciera = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == Model.TipoDocumento);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+             
+        </div>
+        <div class="form-group">
+            <label>
+                Nro Documento
+            </label>
+            <input class="form-control" name="Description" value="@(Model.NroDocumento==null ? "-" : Model.NroDocumento)" placeholder="NroDocumento" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Departamento
+            </label>
+            <input class="form-control" name="Description" value="@Model.Departamento" placeholder="Departamento" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Provincia
+            </label>
+            <input class="form-control" name="Description" value="@Model.Provincia" placeholder="Provincia" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Marca
+            </label>
+            <input class="form-control" name="Description" value="@Model.Marca" placeholder="Nombre" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Modelo
+            </label>
+            <input class="form-control" name="Description" value="@(Model.Modelo==null ? "-" : Model.Modelo)" placeholder="Modelo" disabled />
+        </div>
+        <div class="form-group">
+            <label>
+                Tipo Vivienda
+            </label>
+            @if (Model.TipoVivienda > 0)
+            {
+                var tfinanciera = Model.listaTipoVivienda.FirstOrDefault(x => x.Codigo == Model.TipoVivienda);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }         
+        </div> 
+        <div class="form-group">
+            <label>
+                Situación Laboral
+            </label>
+            <input class="form-control" name="Description" value="@(Model.SituacionLaboral == null || Model.SituacionLaboral == "0" ? "-" : Model.SituacionLaboral)" placeholder="SituacionLaboral" disabled />
+        </div>
+
+        <div class="form-group">
+            <label>
+                Rango de Ingreso
+            </label>
+            @if (Model.RangoIngreso > 0)
+            {
+                var tfinanciera = Model.listaRangoIngreso.FirstOrDefault(x => x.Codigo == Model.RangoIngreso);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+
+        </div>
+        <div class="form-group">
+            <label>
+                Monto a Financiar
+            </label>
+            @if (Model.MontoFinanciar > 0)
+            {
+                var tfinanciera = Model.listaMontoFinanciar.FirstOrDefault(x => x.Codigo == Model.MontoFinanciar);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            }
+            else
+            {
+                <input type="text" class="form-control" value="-" disabled />
+            }
+             
+        </div>
+        <div class="form-group">
+            <label>
+                Tipo de Financiera
+            </label>
+            @if (Model.TipoFinanciera > 0)
+            {
+                var tfinanciera = Model.listaTipoFinanciera.FirstOrDefault(x => x.Codigo == Model.TipoFinanciera);
+                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+            } 
+        </div>
+        <div class="form-group">
+            <label>
+                Situación Sentimiental
+            </label>
+            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />  
+        </div> 
+        <hr />
+        <div class="form-group mb-0">
+            <a class="btn btn-secondary" href="@Url.ListAction("Financiamiento")">
+                <i class="fas fa-angle-double-left mr-1"></i>
+                Regresar
+            </a>
+        </div>
+    </form>
+</div>
+ 
+
