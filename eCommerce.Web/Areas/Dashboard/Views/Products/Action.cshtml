@@ -1,5 +1,6 @@
 ﻿@model ProductActionViewModel
 @{
+    String iconoMoneda = "S/";
     if (Model != null)
     {
         if (Model.ProductID > 0)
@@ -7,6 +8,8 @@
             Model.PageTitle = "Dashboard.Products.EditProductTitle".LocalizedString();
             Model.PageDescription = "Dashboard.Products.EditProductDescription".LocalizedString();
             Model.PageURL = Url.EditAction("Products", Model.ProductID);
+            iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
+
         }
         else
         {
@@ -21,6 +24,7 @@
 
     var productSpecificationCount = 0;
     var productColorCount = 0;
+
 }
 
 <script src="~/Content/lib/ckeditor-4.14.0/ckeditor.js"></script>
@@ -217,7 +221,7 @@
                         @foreach (var catalogo in Model.Catalogos)
                         {
                             var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
-                            <option value="@catalogo.ID" @selected>@catalogo.Description</option>
+                        <option value="@catalogo.ID" @selected>@catalogo.Description</option>
                         }
                     </select>
                 </div>
@@ -235,11 +239,11 @@
 
                             if (currentLanguageCategoryRecord != null)
                             {
-                                <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
+                        <option value="@category.ID" @selected>@currentLanguageCategoryRecord.Name</option>
                             }
                             else
                             {
-                                <option value="@category.ID" @selected>@category.SanitizedName</option>
+                        <option value="@category.ID" @selected>@category.SanitizedName</option>
                             }
                         }
                     </select>
@@ -252,7 +256,7 @@
                         @foreach (var marca in Model.Marcas)
                         {
                             var selected = Model.MarcaID == marca.ID ? "selected" : string.Empty;
-                            <option value="@marca.ID" @selected>@marca.Descripcion</option>
+                        <option value="@marca.ID" @selected>@marca.Descripcion</option>
                         }
                     </select>
                 </div>
@@ -266,64 +270,78 @@
 
                 <div class="form-group">
                     <label>
+                        Tipo Moneda
+                    </label>
+                    <select class="form-control" name="TipoMoneda" id="TipoMoneda">
+                        @foreach (var tipoMoneda in Model.TipoMonedas)
+                        {
+                            var selected = Model.TipoMoneda == tipoMoneda.Codigo ? "selected" : string.Empty;
+                        <option value="@tipoMoneda.Codigo" @selected>@tipoMoneda.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
                         @("Dashboard.Products.Action.Price".Localized())
                     </label>
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                        <div class="input-group-append">
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
+                        <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         }
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Products.Action.Discount".Localized())
+                       Descuento
                     </label>
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                        <div class="input-group-append">
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                        <div class="input-group-prepend">
+                            <!--<span class="input-group-text">-->@*@ConfigurationsHelper.CurrencySymbol*@<!--</span>-->
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
+                        <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                         }
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Products.Action.Cost".Localized())
+                        Precio Costo
                     </label>
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
-                            <div class="input-group-append">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
+                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                        <div class="input-group-append">
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
-                            </div>
-                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                        </div>
+                        <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         }
                     </div>
                 </div>
@@ -366,22 +384,22 @@
                         {
                             foreach (var picture in Model.ProductPicturesList)
                             {
-                                <div class="thisImage col-md-3">
-                                    <div class="card mt-4">
-                                        <div class="uPicHolder card-body text-center">
-                                            <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
-                                                <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
-                                            </li>
-                                        </ul>
-                                        <div class="card-footer">
-                                            <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
-                                        </div>
-                                    </div>
+                        <div class="thisImage col-md-3">
+                            <div class="card mt-4">
+                                <div class="uPicHolder card-body text-center">
+                                    <img class='image img-thumbnail' src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
                                 </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
+                                        <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
+                                    </li>
+                                </ul>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-danger" onclick="removeImage(this)"><i class="fas fa-times mr-1"></i> @("Dashboard.Products.Action.RemovePicture".Localized())</button>
+                                </div>
+                            </div>
+                        </div>
                             }
                         }
                     </div>
@@ -405,7 +423,7 @@
                         <input type="hidden" name="InActive" value="false">
 
                         <label class="form-check-label" for="InActive">
-                            Producto en Activo
+                            Producto Activo
                         </label>
                     </div>
                 </div>
@@ -413,6 +431,7 @@
                 <div class="form-group">
                     <div class="form-check" title="Activar si el Producto es Moto">
                         <input type="checkbox" name="TipoProducto" value="true" class="form-check-input" id="TipoProducto" @(Model.TipoProducto ? "checked" : string.Empty)>
+                        <input type="hidden" name="TipoProducto" value="false">
                         <label class="form-check-label" for="TipoProducto">
                             Es Moto?
                         </label>
@@ -730,21 +749,21 @@
                 <div class="form-group mb-0">
                     @if (Model.ProductID > 0)
                     {
-                        <button class="btn btn-success" type="submit" id="actionButton">
-                            <i class="fas fa-edit mr-1"></i>
-                            @("Dashboard.Products.Update".Localized())
-                        </button>
-                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
-                            <i class="fas fa-trash-alt mr-1"></i>
-                            @("Dashboard.Products.Delete".Localized())
-                        </button>
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-edit mr-1"></i>
+                        @("Dashboard.Products.Update".Localized())
+                    </button>
+                    <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ProductID">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                        @("Dashboard.Products.Delete".Localized())
+                    </button>
                     }
                     else
                     {
-                        <button class="btn btn-success" type="submit" id="actionButton">
-                            <i class="fas fa-plus mr-1"></i>
-                            @("Dashboard.Products.Save".Localized())
-                        </button>
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-plus mr-1"></i>
+                        @("Dashboard.Products.Save".Localized())
+                    </button>
                     }
                     <a class="btn btn-secondary" href="@Url.ListAction("Products")">
                         <i class="fas fa-angle-double-left mr-1"></i>
@@ -805,7 +824,7 @@
 
 <script>
     var productSpecificationCount = @(productSpecificationCount + 1);
-    var productColorCount = @(productColorCount + 1);
+    var productColorCount = @(productColorCount + 1);    
 
     $(document).ready(function () {
         $("#TipoProducto").trigger("change");
@@ -813,7 +832,7 @@
 
         $("#SpecificationTitle").autocomplete({
             source: availableSpecificationTitles
-        });
+        });        
 
         CKEDITOR.replace('Description', { height: 700, contentsLangDirection: '@(AppDataHelper.IsRTL ? "rtl" : "ltr")', defaultLanguage: 'en', language : '@AppDataHelper.CurrentLanguage.ShortCode' });
     });
@@ -1118,6 +1137,17 @@
                 $("#TagMotos").css("display", "none");
             }
 
+    });
+
+    $("#TipoMoneda").change(function () {
+
+        var tipoMoneda = $(this).val();
+
+        if (tipoMoneda == "1") {            
+            $(".icono-moneda").html("S/");
+        } else {            
+            $(".icono-moneda").html("$");
+        }
     });
 
 

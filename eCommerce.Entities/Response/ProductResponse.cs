@@ -32,6 +32,9 @@ namespace eCommerce.Entities.Response
         public string Caracteristica { get; set; }
 
         public bool TipoProducto { get; set; }
+        public int MarcaID { get; set; }
+        public int CatalogoID { get; set; }
+        public int TipoMoneda { get; set; }
 
         public ProductoCaracteristica ProductoCaracteristica { get; set;}       
     }
