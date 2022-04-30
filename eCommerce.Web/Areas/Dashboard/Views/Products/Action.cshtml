@@ -1,5 +1,6 @@
 ﻿@model ProductActionViewModel
 @{
+    String iconoMoneda = "S/";
     if (Model != null)
     {
         if (Model.ProductID > 0)
@@ -7,6 +8,8 @@
             Model.PageTitle = "Dashboard.Products.EditProductTitle".LocalizedString();
             Model.PageDescription = "Dashboard.Products.EditProductDescription".LocalizedString();
             Model.PageURL = Url.EditAction("Products", Model.ProductID);
+            iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
+
         }
         else
         {
@@ -21,6 +24,7 @@
 
     var productSpecificationCount = 0;
     var productColorCount = 0;
+
 }
 
 <script src="~/Content/lib/ckeditor-4.14.0/ckeditor.js"></script>
@@ -268,7 +272,7 @@
                     <label>
                         Tipo Moneda
                     </label>
-                    <select class="form-control" name="TipoMoneda">
+                    <select class="form-control" name="TipoMoneda" id="TipoMoneda">
                         @foreach (var tipoMoneda in Model.TipoMonedas)
                         {
                             var selected = Model.TipoMoneda == tipoMoneda.Codigo ? "selected" : string.Empty;
@@ -286,13 +290,13 @@
                         {
                         <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         }
                         else
                         {
                         <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         }
@@ -300,20 +304,21 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Products.Action.Discount".Localized())
+                       Descuento
                     </label>
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
                         <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                         <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         }
                         else
                         {
                         <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <!--<span class="input-group-text">-->@*@ConfigurationsHelper.CurrencySymbol*@<!--</span>-->
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                         }
@@ -321,20 +326,20 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Products.Action.Cost".Localized())
+                        Precio Costo
                     </label>
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
                         <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         <div class="input-group-append">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         }
                         else
                         {
                         <div class="input-group-prepend">
-                            <span class="input-group-text">@ConfigurationsHelper.CurrencySymbol</span>
+                            <span class="input-group-text icono-moneda">@iconoMoneda</span>
                         </div>
                         <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         }
@@ -819,7 +824,7 @@
 
 <script>
     var productSpecificationCount = @(productSpecificationCount + 1);
-    var productColorCount = @(productColorCount + 1);
+    var productColorCount = @(productColorCount + 1);    
 
     $(document).ready(function () {
         $("#TipoProducto").trigger("change");
@@ -827,7 +832,7 @@
 
         $("#SpecificationTitle").autocomplete({
             source: availableSpecificationTitles
-        });
+        });        
 
         CKEDITOR.replace('Description', { height: 700, contentsLangDirection: '@(AppDataHelper.IsRTL ? "rtl" : "ltr")', defaultLanguage: 'en', language : '@AppDataHelper.CurrentLanguage.ShortCode' });
     });
@@ -1132,6 +1137,17 @@
                 $("#TagMotos").css("display", "none");
             }
 
+    });
+
+    $("#TipoMoneda").change(function () {
+
+        var tipoMoneda = $(this).val();
+
+        if (tipoMoneda == "1") {            
+            $(".icono-moneda").html("S/");
+        } else {            
+            $(".icono-moneda").html("$");
+        }
     });
 
 
