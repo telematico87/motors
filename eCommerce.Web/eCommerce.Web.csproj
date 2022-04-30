@@ -305,6 +305,7 @@
     <Content Include="Content\bm3\favicon\favicon.png" />
     <Content Include="Content\bm3\fonts\font-awesome\icon.svg" />
     <Content Include="Content\bm3\fonts\font-themify\icon.svg" />
+    <Content Include="Content\bm3\images\banner\aceites.jpg" />
     <Content Include="Content\bm3\images\banner\banner-1.jpg" />
     <Content Include="Content\bm3\images\banner\banner-2.jpg" />
     <Content Include="Content\bm3\images\banner\banner-3.jpg" />
@@ -312,6 +313,8 @@
     <Content Include="Content\bm3\images\banner\banner-5.jpg" />
     <Content Include="Content\bm3\images\banner\banner-6.jpg" />
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
+    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.png" />
+    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.png" />
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
     <Content Include="Content\bm3\images\icono\icono-1.png" />
@@ -5199,8 +5202,6 @@
     <Content Include="Content\bm3\stylesheets\fonts\slick.eot" />
     <Content Include="Content\bm3\stylesheets\fonts\slick.ttf" />
     <Content Include="Content\bm3\stylesheets\fonts\slick.woff" />
-    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.webp" />
-    <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.webp" />
     <Content Include="Content\images\moto\cardo_febrero_grilla.webp" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\Index.cshtml" />
