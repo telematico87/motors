@@ -89,7 +89,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.Tags = product.Tags;
                 model.Supplier = product.Supplier; 
                 model.InActive = !product.IsActive;
-               
+                model.MarcaID = product.MarcaID;
+                model.CatalogoID = product.CatalogoID;
+                model.TipoMoneda = product.TipoMoneda;
+              
                 model.ProductRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;
                 model.Summary = currentLanguageRecord.Summary;
@@ -105,6 +108,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             model.Colors = ColorService.Instance.GetAllColors();
             model.Catalogos = CatalogoService.Instance.GetCatalogos();
             model.Marcas = MarcaService.Instance.ListarMarca();
+            model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
         }
@@ -130,7 +134,6 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.ID = model.ProductID;
                     product.CategoryID = model.CategoryID;
                     product.Price = model.Price;
-
                     product.Discount = model.Discount;
                     product.Cost = model.Cost;
                     product.SKU = model.SKU;
@@ -141,6 +144,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
                     product.ProductoCaracteristica = model.ProductoCaracteristica;
+                    product.MarcaID = model.MarcaID;
+                    product.CatalogoID = model.CatalogoID;
+                    product.TipoMoneda = model.TipoMoneda;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -249,8 +255,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
                         TipoProducto = model.TipoProducto,
-                        ModifiedOn = DateTime.Now                        
-                    };
+                        ModifiedOn = DateTime.Now,
+                        MarcaId = model.MarcaID,
+                        CatalogoId = model.CatalogoID,
+                        TipoMoneda = model.TipoMoneda
+                };
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -424,7 +433,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 Description = formCollection["Description"],
 
                 ProductSpecifications = new List<ProductSpecification>(),
-                ProductoCaracteristica = productoCaracteristicas
+                ProductoCaracteristica = productoCaracteristicas,
+                MarcaID = int.Parse(formCollection ["MarcaID"]),
+                CatalogoID = int.Parse(formCollection ["CatalogoID"]),
+                TipoMoneda = int.Parse(formCollection["TipoMoneda"])
             };
 
             foreach (string key in formCollection)
