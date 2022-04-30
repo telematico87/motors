@@ -14,7 +14,7 @@
                     Apellidos
                 </th>
                 <th>
-                    Correo
+                    Correo 
                 </th>
                 <th>
                     Celular
@@ -35,13 +35,7 @@
                 </th>
                 <th>
                     Modelo
-                </th>
-                <th>
-                    Ver
-                </th>
-                <th>
-                    Eliminar
-                </th>
+                </th> 
             </tr>
         </thead>
         <tbody>
@@ -61,8 +55,13 @@
                 <td>
                     @financiamient.Celular
                 </td>
-
+<<<<<<< HEAD
+                <td> 
+                    @financiamient.TipoDocumento
+=======
                 <td>
+                    
+
                     @if (financiamient.TipoDocumento > 0)
                     {
                         var tipoDocumento = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == financiamient.TipoDocumento);
@@ -81,6 +80,9 @@
                         </span>
                     }
 
+
+
+>>>>>>> dev
                 </td>
                 <td>
                     @financiamient.NroDocumento
@@ -96,21 +98,20 @@
                 </td>
                 <td>
                     @financiamient.Modelo
-                </td> 
+                </td>
+                 
                 <td>
                     <div class="btn-group" role="group">
                         <a class="btn btn-primary" href="@Url.EditAction("Financiamiento", financiamient.ID)">
                             <i class="fas fa-edit mr-1"></i>
                            Revisar
-                        </a> 
+                        </a>
+                        <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                           Eliminar
+                        </button>
                     </div>
                 </td>
-                <td>
-                    <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
-                        <i class="fas fa-trash-alt mr-1"></i>
-                        Eliminar
-                    </button>
-                </td> 
             </tr>
             }
         </tbody>
@@ -163,7 +164,7 @@
 else
 {
     <div class="alert alert-warning rounded-0 m-0" role="alert">
-       No hay Datos
+       No funciona
     </div>
 }
 

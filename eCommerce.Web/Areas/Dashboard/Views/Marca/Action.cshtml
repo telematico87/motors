@@ -4,15 +4,15 @@
     {
         if (Model.ID > 0)
         {
-            Model.PageTitle = "Dashboard.Categories.EditCategoryTitle".LocalizedString();
+            Model.PageTitle = "Editar Marca";
             Model.PageDescription = "Dashboard.Categories.EditCategoryDescription".LocalizedString();
             Model.PageURL = Url.EditAction("Marca", Model.ID);
         }
         else
         {
-            Model.PageTitle = "Dashboard.Categories.CreateCategoryTitle".LocalizedString();
+            Model.PageTitle = "Crear Marca";
             Model.PageDescription = "Dashboard.Categories.CreateCategoryDescription".LocalizedString();
-            Model.PageURL = Url.CreateAction("Categories");
+            Model.PageURL = Url.CreateAction("Marca");
         }
 
         Model.PageImageURL = PictureHelper.PageImageURL("categories.jpg");

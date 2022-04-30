@@ -84,5 +84,15 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(3, "S/. 3,001 - S/. 5,000"));
             return lis;
         }
+
+        public List<MantenedorFinanciera> ListarTipoFinanciera()
+        {
+
+            List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
+            lis.Add(new MantenedorFinanciera(1, "EFECTIVA"));
+            lis.Add(new MantenedorFinanciera(2, "SANTANDER"));
+      
+            return lis;
+        }
     }
 }

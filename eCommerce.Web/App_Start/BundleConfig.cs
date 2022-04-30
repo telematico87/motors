@@ -86,6 +86,7 @@ namespace eCommerce.Web
                          "~/content/bm3/javascript/slick-lightbox.js",
                          "~/content/bm3/javascript/waypoints.min.js",
                          "~/content/bm3/javascript/bootstrap.min.js",
+                         "~/content/lib/sweetalert2-9.10.7/sweetalert2.all.min.js",
                          "~/content/bm3/javascript/main.js"));
 
             #endregion

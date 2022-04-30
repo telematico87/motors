@@ -43,6 +43,19 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public int MontoFinanciar { get; set; }
         public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
 
+        public List<MantenedorFinanciera> listaEstadoCivil { get; set; }
+        public List<MantenedorFinanciera> listaTipoVivienda { get; set; }
+        public List<MantenedorFinanciera> listaRangoIngreso { get; set; }
+        public List<MantenedorFinanciera> listaInteresCompra { get; set; }
+
+        public List<MantenedorFinanciera> listaMontoFinanciar { get; set; }
+        public List<MantenedorFinanciera> listaTipoDocumento { get; set; }
+        public List<MantenedorFinanciera> listaTipoFinanciera { get; set; }
+
+        public MantenedorFinanciera financiera { get; set; }
+
+        public List<Marca> Marcas { get; set; }
+      
 
     }
 }
