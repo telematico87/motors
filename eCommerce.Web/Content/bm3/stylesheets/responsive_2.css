@@ -1,5 +1,17 @@
-@media only screen and (max-width:1900px) {
-	
+@media only screen and (max-width:1900px) {	
+
+	.productlarge-movil {
+		display: none;
+	}
+
+	.publicidad-2-movil {
+		display: none;
+	}
+
+	.productlarge {
+		display: block;
+	}
+
 	footer.style1 {
 		margin:0px;
 	}
@@ -91,9 +103,18 @@
 }
 
 @media only screen and (min-width:1200px) and (max-width:1366px) {
-	
+
+	#category-movil {
+		display: none;
+	}
+
+	.item-image-movil {
+		display: none;
+	}
+
 	#mega-menu > ul.menu > li .drop-menu {
-		left:258px;width:879px;
+		left: 258px;
+		width: 879px;
 	}
 
 	.flat-location .location-detail {
@@ -124,6 +145,14 @@
 }
 
 @media only screen and (max-width:1366px) {
+
+	#category-movil {
+		display: none;
+	}
+
+	.item-image-movil {
+		display: none;
+	}
 	.boxed.style2 .container-fluid {
 		padding:0 30px;
 	}
@@ -152,6 +181,7 @@
 }
 
 @media only screen and (max-width:1199px) {
+
 	
 	body.background section.flat-row {
 		margin-left:15px;margin-right:15px;
@@ -303,6 +333,14 @@
 }
 
 @media only screen and (min-width:992px) and (max-width:1199px) {
+
+	#category-movil {
+		display: none;
+	}
+
+	.item-image-movil {
+		display: none;
+	}
 	
 	#mainnav ul.menu > li > a {
 		padding:0 18px;
@@ -401,6 +439,14 @@
 
 
 @media only screen and (min-width:992px) {
+
+	#category-movil {
+		display: none;
+	}
+
+	.item-image-movil {
+		display: none;
+	}
 	
 	ul.submenu {
 		word-spacing:2px;
@@ -414,13 +460,31 @@
 }
 
 @media only screen and (min-width:992px) and (max-width:1199px) {
+
+	
 	ul.menu > li.has-mega-menu .submenu {
 		width: 130%;
+	}
+
+	#category-movil {
+		display: none;
 	}
 
 }
 
 @media only screen and (max-width:991px) {
+
+	#category-movil {
+		display: block;
+	}
+
+	.item-image-movil {
+		display: block;
+	}
+
+	#category-web {
+		display: none;
+	}
 	.row {
 		margin-right: -5px;
 		margin-left: -5px;
@@ -443,13 +507,20 @@
 	.img-res-si {
 		display: inline;
 	}
-	
-	#shop .sidebar .widget .widget-title h3 {
-		line-height: 14px;
-		padding-bottom: 10px;
-		margin-bottom: 10px;
-		font-size: 15px;
+	.publicidad-2-web {
+		display: none;
 	}
+
+	.publicidad-2-movil {
+		display: block;
+	}
+
+		#shop .sidebar .widget .widget-title h3 {
+			line-height: 14px;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+			font-size: 15px;
+		}
 	
 	.widget-categories > ul.cat-list > li {
 		margin-bottom: 0;
@@ -1300,6 +1371,14 @@
 }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
+
+	#category-movil {
+		display: block;
+	}
+
+	.item-image-movil {
+		display: block;
+	}
 	
 	ul.flat-unstyled {
 		margin-left:-30px;
@@ -1355,6 +1434,10 @@
 	ul.flat-unstyled,
 	ul.flat-support {
 		text-align:center;
+	}
+
+	#category-movil {
+		display: block;
 	}
 
 	.header-middle #logo {
@@ -1761,7 +1844,11 @@
 }
 
 @media only screen and (max-width:575px) {
-	
+
+	#category-movil {
+		display: block;
+	}
+
 	.container {
 		max-width:100%;
 	}
@@ -1962,6 +2049,9 @@
 		width:43%;padding-right:30px;
 	}
 
+	#category-movil {
+		display: block;
+	}
 
 }
 
@@ -1970,6 +2060,14 @@
 }
 
 @media only screen and (max-width:480px) {
+
+	#category-movil {
+		display: block;
+	}
+
+	.category-web {
+		display: none;
+	}
 	
 	.flat-breadcrumb ul.breadcrumbs li.trail-item a {
 		margin-right:10px;

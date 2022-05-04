@@ -1954,6 +1954,11 @@
 
 	.slider .slider-item .item-text .header-item h2{font-size: 40px;}
 
+	.moto-catalogo {
+		display:none;
+	}
+
+
 }
 
 @media only screen and (min-width:480px) and (max-width:767px) {
@@ -1961,7 +1966,9 @@
 	.slider .slider-item.style5 .item-image {
 		width:43%;padding-right:30px;
 	}
-
+	.moto-catalogo {
+		display: none;
+	}
 
 }
 

@@ -78,6 +78,17 @@ namespace eCommerce.Services
             return context.Marcas.FirstOrDefault(x => !x.IsDeleted && x.ID == ID);
         }
 
+        public List<Marca> GetMarcaByCatalogoID(int CatalogoId, int? pageNo = 1, int? recordSize = 0)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var marcas = context.Marcas
+                                    .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
+                                    .OrderBy(x => x.ID)
+                                    .AsQueryable();
+            return marcas.ToList();
+        }
+
 
         public bool SaveMarca(Marca Marca)
         {

@@ -15,5 +15,6 @@ namespace eCommerce.Web.ViewModels
     public class CategoriesMenuPictureViewModel
     {
         public List<Category> Categories { get; set; }
+        public List<Marca> Marcas { get; set; }
     }
 }

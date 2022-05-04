@@ -3,7 +3,7 @@
 @Html.Partial("_ProductByCategoriesBm3")
 
 <style>
-     #productlarge {
+    #productlarge {
         height: 307px;
         text-align: center;
         /* padding-top: 285px; */
@@ -18,19 +18,27 @@
         justify-content: center !important;
         display: flex !important;
     }
+
     .productlarge2 {
         color: #ffffff;
         font-size: 48px;
         font-weight: 700;
-        margin-bottom: 18px; 
+        margin-bottom: 18px;
         display: inline-block;
         position: relative;
+    }
+
+    .descubrir {
+        background-color: white;
+        padding: 5px;
     }
 </style>
 
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
     var reverse = false;
+    Picture pictureMovil = new Picture();
+    pictureMovil.URL = "categoria_movil.jpg";
 
 
     foreach (var featuredCategory in Model.Categories)
@@ -44,6 +52,15 @@
                 <div class="row">
                     @if (reverse)
                     {
+                        <div class="col-md-12" id="category-movil">
+                            <div class="inner-box">                                
+                                <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">
+                                    <h2 style="color: #474B4E !important;">
+                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                    </h2>
+                                </a>
+                            </div>
+                        </div>
                         <div class="col-md-9">
                             @if (products != null && products.Count > 0)
                             {
@@ -57,26 +74,36 @@
                             }
                         </div>
 
-                        <div class="col-md-3" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
+                        <div class="col-md-3" id="category-web" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
                             <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
-                                <div class="inner-box"> 
-                                    <h2 class="productlarge2">                                        
+                                <div class="inner-box">
+                                    <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
-                                    <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
+                                    <a class="descubrir" href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
                                 </div>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="col-md-3" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
+                        <div class="col-md-12" id="category-movil">
+                            <div class="inner-box">
+                                <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">
+                                    <h2  style="color: #474B4E !important;">
+                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                    </h2>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3" id="category-web" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
                             <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
                                 <div class="inner-box">
                                     <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
-                                    <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
+                                    <a class="descubrir" href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
                                 </div>
                             </div>
                         </div>

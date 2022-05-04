@@ -61,7 +61,7 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            var categories = context.Categories
+                var categories = context.Categories
                                     .Where(x => !x.IsDeleted && x.isFeatured)
                                     .OrderBy(x => x.ID)
                                     .AsQueryable();

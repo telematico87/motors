@@ -75,16 +75,17 @@ namespace eCommerce.Shared.Extensions
             }
             else return string.Empty;
         }
-        public static string WithCurrency(this decimal price)
+        public static string WithCurrency(this decimal price, int tipoMoneda)
         {
             //if(ConfigurationsHelper.DigitsAfterDecimalPoint > -1)
             //{
             //    price = decimal.Round(price, ConfigurationsHelper.DigitsAfterDecimalPoint, MidpointRounding.AwayFromZero);
             //}
+            string iconoMoneda = tipoMoneda == 2 ? "$" : "S/";
 
             return ConfigurationsHelper.PriceCurrencyPosition
                                        .Replace("{price}", price.ToDecimalWithPoints(ConfigurationsHelper.DigitsAfterDecimalPoint))
-                                       .Replace("{currency}", ConfigurationsHelper.CurrencySymbol);
+                                       .Replace("{currency}", iconoMoneda);
         }
 
         public static string ToDecimalWithPoints(this decimal price, int digitsAfterDecimalPoints)

@@ -3533,6 +3533,31 @@ ol.comment-list li.comment .comment-text .comment-content p {
 	border-bottom-color:transparent!important;
 }
 
+.moto-catalogo {
+	height: 120px;
+	margin: 0px;
+	width: 150px;
+	text-align: center;
+}
+
+	.moto-catalogo a img {
+		text-align: center;
+		vertical-align: middle;
+		height: 90px;
+	}
+
+	.moto-catalogo a h4 {
+		text-align: center;
+	}
+
+.inner-text .text-category {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
 @-webkit-keyframes effect-2 {
 	from {
 		-webkit-transform:rotate(0deg);
