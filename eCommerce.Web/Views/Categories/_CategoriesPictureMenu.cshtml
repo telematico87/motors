@@ -3,27 +3,55 @@
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
 
-    <div class="submenu">
-        <ul class="submenu-list img">
+<div class="submenu">
 
-            @foreach (var category in Model.Categories)
-            {                
-                var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-                <li>
-                    <div class="banner-box">
-                        <div class="inner-box">
+    <ul class="submenu-list img">
+
+        @foreach (var category in Model.Categories)
+        {
+            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+            var urlImagenCategoriaMovil = category.PictureMovil == null ? "" : category.PictureMovil.URL;
+            <li>
+                <div class="banner-box">
+                    <div class="inner-box">
+                        <div class="moto-catalogo">
                             <a href="#" title="">
-                                <img src="Content/bm3/images/menu/menu.jpg" alt="" width="200" />
+                                @Html.Picture(picture: category.PictureMovil, defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                 <h4>
                                     @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                 </h4>
                             </a>
                         </div>
+
                     </div>
-                </li>
-               
-            }               
-            </ul>
-    </div>
+                </div>
+            </li>
+
+        }
+    </ul>
+
+    <ul class="submenu-list img">
+
+        @foreach (var marca in Model.Marcas)
+        {            
+            <li>
+                <div class="banner-box">
+                    <div class="inner-box">
+                        <div class="moto-catalogo">
+                            <a href="#" title="">
+                                @Html.Picture(picture: marca.Picture, defaultPic: "site/default-bg.jpg", alt: marca.Descripcion != null ? marca.Descripcion : string.Empty)
+                                <h4>
+                                    @( marca.Descripcion != null ? marca.Descripcion : string.Empty)
+                                </h4>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+        }
+    </ul>
+</div>
 }

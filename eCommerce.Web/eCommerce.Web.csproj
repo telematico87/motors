@@ -324,6 +324,8 @@
     <Content Include="Content\bm3\images\logo\logo.png" />
     <Content Include="Content\bm3\images\logo\logo.svg" />
     <Content Include="Content\bm3\images\marca\honda.png" />
+    <Content Include="Content\bm3\images\menu\logo-efectiva.jpg" />
+    <Content Include="Content\bm3\images\menu\logo-santander.png" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
     <Content Include="Content\bm3\images\producto\fondo.jpg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
@@ -684,6 +686,7 @@
     <Content Include="Content\images\fb40bf7e-02f2-4e98-9864-554186276cf7.png" />
     <Content Include="Content\images\ffdd1b1b-a2e4-4e93-8fd6-689fb51265f6.jpg" />
     <Content Include="Content\images\moto\012222-Yamaha-MT-09-SP-EBB28621-633x388.jpg" />
+    <Content Include="Content\images\moto\580b585b2edbce24c47b2d01.png" />
     <Content Include="Content\images\moto\accesorios.jpg" />
     <Content Include="Content\images\moto\adventure.jpg" />
     <Content Include="Content\images\moto\banner_moto.jpg" />
@@ -692,6 +695,8 @@
     <Content Include="Content\images\moto\casco-inteligente-01.jpg" />
     <Content Include="Content\images\moto\cascos-seccion.png" />
     <Content Include="Content\images\moto\cascos.jpg" />
+    <Content Include="Content\images\moto\categoria_movil.jpg" />
+    <Content Include="Content\images\moto\categoria_pistera_movil.png" />
     <Content Include="Content\images\moto\Color-1-07K-min.png" />
     <Content Include="Content\images\moto\Color-1-T72min.png" />
     <Content Include="Content\images\moto\daventure.jpg" />

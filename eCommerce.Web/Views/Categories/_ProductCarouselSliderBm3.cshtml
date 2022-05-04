@@ -5,7 +5,7 @@
     <div class="owl-carousel-product" data-loop="@(Model.Count > 4 ? "true" : "false")">
         @foreach (var product in Model)
         {
-            
+
             var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
             var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
@@ -17,7 +17,9 @@
             var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
 
             var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
-             
+
+            var iconoMoneda = product.TipoMoneda == 2 ? "$" : "S/";
+
                 <div class="product-box">
                     <div class="imagebox style2">
                         <div class="box-image">
@@ -26,7 +28,7 @@
                             </a>
                         </div>
                         <div class="box-content">
-                            <div class="product-name">
+                            <div class="product-name" style="font-weight:bolder">
                                 <a href="@detailsLink">
                                     <h5>
                                        @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
@@ -34,16 +36,18 @@
                                 </a>
                             </div>
                             <div class="price">
+                                <span class="sale">
+                                    @productPrice.WithCurrency(product.TipoMoneda)
+                                </span>
                                 @if (product.Discount.HasValue && product.Discount.Value > 0)
                                 {
                                     <span class="regular">
-                                        @product.Price.WithCurrency()
-                                    </span>                                       
-                                   
-                                }
-                                    <span class="sale">
-                                        @productPrice.WithCurrency()
+                                        @product.Price.WithCurrency(product.TipoMoneda)
+
                                     </span>
+
+                                }
+
                             </div>
                         </div>
                         <div class="box-top">
