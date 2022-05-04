@@ -207,14 +207,14 @@ namespace eCommerce.Web
             routes.MapRoute(
                 name: "ProductDetails",
                 url: "{category}/product/{ID}/{sanitizedtitle}",
-                defaults: new { area = "", controller = "Products", action = "Details", sanitizedtitle = UrlParameter.Optional },
+                defaults: new { area = "", controller = "Products", action = "DetalleBm3", sanitizedtitle = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 
             routes.MapRoute(
                 name: "LanguageBased_ProductDetails",
                 url: "{lang}/{category}/product/{ID}/{sanitizedtitle}",
-                defaults: new { area = "", controller = "Products", action = "Details", sanitizedtitle = UrlParameter.Optional },
+                defaults: new { area = "", controller = "Products", action = "DetalleBm3", sanitizedtitle = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 

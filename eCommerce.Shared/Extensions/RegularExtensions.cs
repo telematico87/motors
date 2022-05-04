@@ -75,7 +75,7 @@ namespace eCommerce.Shared.Extensions
             }
             else return string.Empty;
         }
-        public static string WithCurrency(this decimal price, int tipoMoneda)
+        public static string WithCurrency(this decimal price, int tipoMoneda=0)
         {
             //if(ConfigurationsHelper.DigitsAfterDecimalPoint > -1)
             //{
