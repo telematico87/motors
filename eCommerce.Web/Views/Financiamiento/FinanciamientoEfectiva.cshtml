@@ -170,7 +170,9 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-6 form-check">
                         <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
-                        <label class="form-check-label" for="PoliticaPrivacidad">He leído y acepto la política de privacidad <span class="text-danger">*</span></label>
+                        <label class="form-check-label" for="PoliticaPrivacidad">
+                            He leído y acepto la política de privacidad
+                        </label>
                     </div>
                 </div>
                 <br />
@@ -178,7 +180,9 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-6 form-check">
                         <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
-                        <label class="form-check-label" for="AceptoComunicaciones">Acepto recibir comunicaciones comerciales de LA EMPRESA <span class="text-danger">*</span></label>
+                        <label class="form-check-label" for="AceptoComunicaciones">
+                            Acepto recibir comunicaciones comerciales de LA EMPRESA
+                        </label>
                     </div>
                 </div>
                 <br />
@@ -268,16 +272,6 @@
                             minlength: 1,
                             maxlength: 50
                         },
-                       PoliticaPrivacidad: {
-                            required: true,
-                            minlength: 1,
-                            maxlength: 50
-                        },
-                        AceptoComunicaciones: {
-                            required: true,
-                            minlength: 1,
-                            maxlength: 50
-                        },
 
 
 
@@ -337,16 +331,6 @@
                             required: "Marca Requerido",
 				            minlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMinimumLength".LocalizedString().Replace("{min}", "1"))",
 				            maxlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMaximumLength".LocalizedString().Replace("{max}", "80"))"
-                        },
-                          PoliticaPrivacidad: {
-                            required: "Politica de Seguridad Requerido",
-				            minlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMinimumLength".LocalizedString().Replace("{min}", "1"))",
-				            maxlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMaximumLength".LocalizedString().Replace("{max}", "80"))"
-                        },
-                        AceptoComunicaciones: {
-                            required: "Acepto terminos de comunicaciones requerido",
-				            minlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMinimumLength".LocalizedString().Replace("{min}", "1"))",
-				            maxlength: "@("Dashboard.Languages.Action.Validation.ShortCodeMaximumLength".LocalizedString().Replace("{max}", "80"))"
                         }
 
 		            },
@@ -358,9 +342,26 @@
 
 
 
-        $("#frmEfectiva").submit(function (event) { 
-            GuardarFinanciamiento(); 
-            event.preventDefault();  
+        $("#frmEfectiva").submit(function (event) {
+
+            GuardarFinanciamiento();
+
+            event.preventDefault();
+
+                @*$.ajax({
+                    method: "POST",
+                    url: "/Financiamiento/GuardarFinanciamiento",
+                    data: {
+                        model
+                    },
+                    success: function (result) {
+                        debugger;
+                        Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
+                        window.location.href = "@Url.Home()";
+                    }
+
+                });*@
+
         })
 
         function GuardarFinanciamiento() {
