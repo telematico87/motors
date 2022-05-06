@@ -39,6 +39,15 @@ namespace eCommerce.Web.Controllers
             return PartialView("_BannerSliderBm3", model);
         }
 
+
+        public ActionResult CatalogoMoto()
+        {
+
+            return View();
+        }
+
+
+
         public ActionResult Search(string category, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
         {
             recordSize = recordSize ?? (int)RecordSizeEnums.Size20;
