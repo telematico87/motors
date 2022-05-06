@@ -40,10 +40,52 @@ namespace eCommerce.Web.Controllers
         }
 
 
-        public ActionResult CatalogoMoto()
+        public ActionResult CatalogoMoto2()
         {
 
             return View();
+        }
+
+
+        //metodo para motos
+
+        public ActionResult CatalogoMoto(string category, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
+        {
+            recordSize = recordSize ?? (int)RecordSizeEnums.Size20;
+
+            ProductsViewModel model = new ProductsViewModel
+            {
+                Categories = CategoriesService.Instance.GetCategories()
+            };
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                var selectedCategory = CategoriesService.Instance.GetCategoryByName(category);
+
+                if (selectedCategory == null) return HttpNotFound();
+                else
+                {
+                    model.CategoryID = selectedCategory.ID;
+                    model.CategoryName = selectedCategory.SanitizedName;
+                    model.SelectedCategory = selectedCategory;
+
+                    model.SearchedCategories = CategoryHelpers.GetAllCategoryChildrens(selectedCategory, model.Categories);
+                }
+            }
+
+            model.SearchTerm = q;
+            model.PriceFrom = from;
+            model.PriceTo = to;
+            model.SortBy = sortby;
+            model.PageSize = recordSize;
+
+            var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;
+
+            model.Products = ProductsService.Instance.SearchProducts(selectedCategoryIDs, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
+
+            model.Pager = new Pager(count, pageNo, recordSize.Value);
+
+            return View(model);
         }
 
 
