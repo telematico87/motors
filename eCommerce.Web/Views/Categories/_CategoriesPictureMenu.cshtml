@@ -16,7 +16,7 @@
                 <div class="banner-box">
                     <div class="inner-box">
                         <div class="moto-catalogo">
-                            <a href="#" title="">
+                            <a href="@Url.CatalogoMoto(category.SanitizedName)" title="">
                                 @Html.Picture(picture: category.PictureMovil, defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                 <h4>
                                     @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)

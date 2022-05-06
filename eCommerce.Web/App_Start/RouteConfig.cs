@@ -197,6 +197,15 @@ namespace eCommerce.Web
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 
+            //Ruta Catalogo Moto
+            routes.MapRoute(
+             name: "CatalogoMoto",
+             url: "moto/{category}",
+             defaults: new { area = "", controller = "Home", action = "CatalogoMoto", category = UrlParameter.Optional },
+             namespaces: new[] { "eCommerce.Web.Controllers" }
+         );
+
+
             routes.MapRoute(
                 name: "LanguageBased_SearchProducts",
                 url: "{lang}/search/{category}",
