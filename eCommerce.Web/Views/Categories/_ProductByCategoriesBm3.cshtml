@@ -10,7 +10,7 @@
         var products = featuredCategory.Products != null ? featuredCategory.Products.Where(x => !x.IsDeleted && x.IsActive).OrderByDescending(x => x.ModifiedOn).Take(8).ToList() : null;
 
     }
-
+    
     //Seccion Banner Publicidad
     <section class="flat-row flat-banner-box">
         <div class="container">
