@@ -43,19 +43,17 @@
 {
     <section class="flat-row flat-banner-box category-shortcut-web">
         <div class="container">
-            <div class="row">
-                
+            <div class="row"> 
                     @foreach (var category in Model)
                     {
                         var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
                         Picture pictureMovil = new Picture();
                         pictureMovil.URL = "categoria_movil.jpg";
 
-                        <div class="col-md-4">
-
+                        <div class="col-md-4"> 
                             <div class="banner-box">
                                 <div class="inner-box single-banner" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
-
+ 
                                     <a class="inner-text" href="@Url.SearchProducts(category: category.SanitizedName)">
                                         @Html.Picture(picture: category.Picture, classes: "img-res-no", defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                         @*@Html.Picture(picture: pictureMovil, classes: "img-res-si", defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)*@
@@ -63,15 +61,14 @@
                                             @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                         </h4>
                                     </a>
-                                </div>
+                                </div> 
                             </div>
                         </div>
-                    }
-                
+                    } 
             </div>
         </div>
     </section>
-
+                    
     <section class="category-shortcut-movil">
         <div class="container">
             <div class="row">
@@ -82,8 +79,7 @@
                         Picture pictureMovil = new Picture();
                         pictureMovil.URL = "categoria_movil.jpg";
 
-                        <div class="col-md-4">
-
+                        <div class="col-md-4"> 
                             @*<div class="banner-box">*@
                                 <div class="inner-box single-banner" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
 

@@ -161,6 +161,107 @@ namespace eCommerce.Shared.Helpers
             return routeURL.ToLower();
         }
 
+
+        public static string SearchProductsCatalogoMoto(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("category", category);
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                routeValues.Add("q", q);
+            }
+
+            if (from.HasValue && from.Value > 0.0M)
+            {
+                routeValues.Add("from", from.Value);
+            }
+
+            if (to.HasValue && to.Value > 0.0M)
+            {
+                routeValues.Add("to", to.Value);
+            }
+
+            if (!string.IsNullOrEmpty(sortby))
+            {
+                routeValues.Add("sortby", sortby);
+            }
+
+            if (recordSize.HasValue && recordSize.Value > 1 && recordSize.Value != (int)RecordSizeEnums.Size20)
+            {
+                routeValues.Add("recordSize", recordSize.Value);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("SearchCatalogoMoto", routeValues);
+            }
+            else routeURL = helper.RouteUrl("SearchCatalogoMoto", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+
+        //moto 
+        public static string CatalogoMoto(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("category", category);
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                routeValues.Add("q", q);
+            }
+
+            if (from.HasValue && from.Value > 0.0M)
+            {
+                routeValues.Add("from", from.Value);
+            }
+
+            if (to.HasValue && to.Value > 0.0M)
+            {
+                routeValues.Add("to", to.Value);
+            }
+
+            if (!string.IsNullOrEmpty(sortby))
+            {
+                routeValues.Add("sortby", sortby);
+            }
+
+            if (recordSize.HasValue && recordSize.Value > 1 && recordSize.Value != (int)RecordSizeEnums.Size20)
+            {
+                routeValues.Add("recordSize", recordSize.Value);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("CatalogoMoto", routeValues);
+            }
+            else routeURL = helper.RouteUrl("CatalogoMoto", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+         
+
         public static string SearchProducts(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
         {
             string routeURL = string.Empty;
