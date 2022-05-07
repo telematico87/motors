@@ -1,0 +1,42 @@
+﻿@using eCommerce.Entities
+@using eCommerce.Shared
+@model eCommerce.Web.ViewModels.ProductsViewModel
+
+
+
+
+
+
+@if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
+{
+    var categoriesWithChildren = CategoryHelpers.MakeCategoriesHierarchy(Model.Categories);
+
+    <ul class="cat-list style1 widget-content">
+
+        <li class="@(!Model.CategoryID.HasValue ? "active" : string.Empty)">
+            <a class="@(!Model.CategoryID.HasValue ? "active" : string.Empty)" href="@Url.SearchProducts(category: string.Empty, q: Model.SearchTerm)">
+                @("PP.Search.Categories.AllCategories".LocalizedString())
+            </a>
+        </li>
+
+        @foreach (var categoryWithChildren in categoriesWithChildren)
+        {
+            var category = categoryWithChildren.Category;
+
+            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+            <li class="@(category.ID == Model.CategoryID ? "active" : string.Empty)">
+                @*<label><input type="checkbox" name="grupo-1" id="cat-1" /></label>*@
+                <a class="@(category.ID == Model.CategoryID ? "active" : string.Empty)" href="@Url.CatalogoMoto(category: category.SanitizedName, q: Model.SearchTerm)">
+                    <span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty) <i>(@CategoryHelpers.GetCategoryAllChildrensProductCount(category, Model.Categories))</i></span>
+                </a>
+            </li>
+        }
+
+
+
+
+    </ul>
+
+}
+

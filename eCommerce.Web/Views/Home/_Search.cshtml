@@ -44,10 +44,10 @@
                                 @if (product.Discount.HasValue && product.Discount.Value > 0)
                                 {
                                     <span>
-                                        @product.Price.WithCurrency()
+                                        @product.Price.WithCurrency(0)
                                     </span>
                                 }
-                                @productPrice.WithCurrency()
+                                @productPrice.WithCurrency(0)
                             </div>
                             <a href="@detailsLink">
                                 <h5>
