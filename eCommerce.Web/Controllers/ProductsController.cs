@@ -31,7 +31,7 @@ namespace eCommerce.Web.Controllers
                 return PartialView("_FeaturedProducts", model);
             }
         }
-        
+
         public ActionResult RecentProducts(int? productID, int pageSize = 0)
         {
             if (pageSize == 0)
@@ -49,28 +49,19 @@ namespace eCommerce.Web.Controllers
 
         public ActionResult RelatedProducts(int categoryID, int recordSize = (int)RecordSizeEnums.Size6)
         {
-            try
+            RelatedProductsViewModel model = new RelatedProductsViewModel
             {
-                RelatedProductsViewModel model = new RelatedProductsViewModel
-                {
-                    Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
-                };
+                Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
+            };
 
-                if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
-                {
-                    //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
-                    model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
-                    model.IsFeaturedProductsOnly = true;
-                }
-
-                return PartialView("_RelatedProducts", model);
-            }
-            catch (Exception ex)
+            if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
             {
-
-                throw ex;
+                //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
+                model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
+                model.IsFeaturedProductsOnly = true;
             }
-           
+
+            return PartialView("_RelatedProducts", model);
         }
 
         [HttpGet]

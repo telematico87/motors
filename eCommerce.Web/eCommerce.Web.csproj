@@ -317,6 +317,7 @@
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.png" />
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
+    <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
     <Content Include="Content\bm3\images\icono\icono-1.png" />
     <Content Include="Content\bm3\images\icono\left-1.png" />
     <Content Include="Content\bm3\images\icono\right-1.png" />
@@ -5172,6 +5173,8 @@
     <Folder Include="Areas\Dashboard\Views\Litro\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\Home\Catalogo\AccessoryFilters\" />
+    <Folder Include="Views\Home\Catalogo\PartsFilters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Dashboard\Views\Dashboard\NewsletterSubscribers.cshtml" />
@@ -5231,10 +5234,13 @@
     <Content Include="Views\Financiamiento\FinanciamientoSantander.cshtml" />
     <Content Include="Views\Categories\_CategoriesPictureMenu.cshtml" />
     <Content Include="Views\Products\DetalleBm3.cshtml" />
-    <Content Include="Views\Home\CatalogoMotoUp.cshtml" />
     <Content Include="Views\Home\SearchBack.cshtml" />
     <Content Include="Views\Home\CatalogoMoto.cshtml" />
-    <Content Include="Views\Products\_Destacados.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_ListingFilter.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_SearchMoto.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_MotoFilters.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_CategoriesFilter.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_MarcasFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
