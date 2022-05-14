@@ -14,5 +14,6 @@ namespace eCommerce.Shared.Commons
         public const string LOADING_PICTURE = "site/loading.gif";
         public const string DEFAULT_PICTURE = "site/default-picture.png";
         public const string USER_DEFAULT_PICTURE = "site/user-default-avatar.png";
+        public const int CATALOGO_MOTO_ID = 1;
     }
 }

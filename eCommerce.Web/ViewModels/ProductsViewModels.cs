@@ -12,12 +12,16 @@ namespace eCommerce.Web.ViewModels
     public class ProductsViewModel : PageViewModel
     {
         public List<Category> Categories { get; set; }
+        public List<Marca> Marcas { get; set; }
         public List<Product> Products { get; set; }
 
-        public int? CategoryID { get; set; }
+        public int? CategoryID { get; set; }       
         public string CategoryName { get; set; }
         public Category SelectedCategory { get; set; }
         public List<Category> SearchedCategories { get; set; }
+        public int? MarcaID { get; set; }       
+        public string MarcaName { get; set; }
+        public Marca SelectedMarca { get; set; }        
 
         public string SearchTerm { get; set; }
         public string SortBy { get; set; }

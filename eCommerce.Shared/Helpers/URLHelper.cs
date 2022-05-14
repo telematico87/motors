@@ -212,13 +212,14 @@ namespace eCommerce.Shared.Helpers
 
 
         //moto 
-        public static string CatalogoMoto(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
+        public static string CatalogoMoto(this UrlHelper helper, int categoryId = 0, int marcaId = 0, string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
         {
             string routeURL = string.Empty;
 
             var routeValues = new RouteValueDictionary();
 
-            routeValues.Add("category", category);
+            routeValues.Add("categoryId", categoryId);
+            routeValues.Add("marcaId", marcaId);
 
             if (!string.IsNullOrEmpty(q))
             {

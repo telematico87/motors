@@ -85,7 +85,6 @@
                     }
                 }
             });
-
             minamount.val(@Html.Raw(priceCurrencyFormat.Replace("{price}", isCurrencyFirst ?  " + rangeSlider.slider(\"values\", 0)" : "rangeSlider.slider(\"values\", 0) +")));
             maxamount.val(@Html.Raw(priceCurrencyFormat.Replace("{price}", isCurrencyFirst ?  " + rangeSlider.slider(\"values\", 1)" : "rangeSlider.slider(\"values\", 1) +")));
         });
