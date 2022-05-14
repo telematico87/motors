@@ -5234,6 +5234,7 @@
     <Content Include="Views\Home\CatalogoMotoUp.cshtml" />
     <Content Include="Views\Home\SearchBack.cshtml" />
     <Content Include="Views\Home\CatalogoMoto.cshtml" />
+    <Content Include="Views\Products\_Destacados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

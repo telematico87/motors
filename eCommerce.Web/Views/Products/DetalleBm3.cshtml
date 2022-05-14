@@ -387,15 +387,17 @@
     </div>
     <div class="container-full">
         <div class="slider product-gallery">
-             
-            <div>
-                <div class="image">
-                    <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail">
-                    <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
-                    </a>
-                </div>
-            </div>
-       
+
+                    @foreach (var picture in Model.ProductPicturesList)
+                    {
+                        <div>
+                            <div class="image">
+                                <a href='@Html.PictureSource(picture.Picture.URL)' target="_blank" class="thumbnail">
+                                    <img src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
+                                </a>
+                            </div>
+                        </div>
+                    } 
         </div>
     </div>
 </section>
