@@ -2,7 +2,7 @@
 @using eCommerce.Shared
 @model eCommerce.Web.ViewModels.RelatedProductsViewModel
 
-@*@if (Model.Products != null && Model.Products.Count > 0)
+@if (Model.Products != null && Model.Products.Count > 0)
 {
     <div class="related-products spad">
         <div class="container">
@@ -26,14 +26,16 @@
                     var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
                     var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-                    
+
                     var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
-                    
+
                     var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
 
                     var detailsLink = Url.ProductDetails(category: product.Category.SanitizedName, ID: product.ID);
-                    
+
                     var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+
+                    var iconoMoneda = Model.Product.TipoMoneda == 2 ? "$" : "S/";
 
                     <div class="col-lg-2 col-sm-6">
                         <div class="product-item">
@@ -73,4 +75,4 @@
             </div>
         </div>
     </div>
-}*@
+}

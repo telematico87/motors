@@ -47,7 +47,7 @@ namespace eCommerce.Web.Controllers
             return PartialView("_RecentProducts", model);
         }
 
-        public ActionResult RelatedProducts(int categoryID, int recordSize = (int)RecordSizeEnums.Size6)
+        public ActionResult RelatedProducts(int categoryID, int ProductID, int recordSize = (int)RecordSizeEnums.Size6)
         {
             try
             {
@@ -61,9 +61,13 @@ namespace eCommerce.Web.Controllers
                     //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
                     model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
                     model.IsFeaturedProductsOnly = true;
-                }
+                    var product = ProductsService.Instance.GetProductResponseByID(ProductID, activeOnly: false);
 
-                return PartialView("_RelatedProducts", model);
+                    model.TipoMonedaDestacado = product.TipoMoneda;
+
+                }
+                
+                return PartialView("_Destacados", model);
             }
             catch (Exception ex)
             {
