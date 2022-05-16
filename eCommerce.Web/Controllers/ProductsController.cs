@@ -31,7 +31,7 @@ namespace eCommerce.Web.Controllers
                 return PartialView("_FeaturedProducts", model);
             }
         }
-
+        
         public ActionResult RecentProducts(int? productID, int pageSize = 0)
         {
             if (pageSize == 0)
@@ -47,21 +47,34 @@ namespace eCommerce.Web.Controllers
             return PartialView("_RecentProducts", model);
         }
 
-        public ActionResult RelatedProducts(int categoryID, int recordSize = (int)RecordSizeEnums.Size6)
+        public ActionResult RelatedProducts(int categoryID, int ProductID, int recordSize = (int)RecordSizeEnums.Size6)
         {
-            RelatedProductsViewModel model = new RelatedProductsViewModel
+            try
             {
-                Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
-            };
+                RelatedProductsViewModel model = new RelatedProductsViewModel
+                {
+                    Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
+                };
 
-            if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
-            {
-                //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
-                model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
-                model.IsFeaturedProductsOnly = true;
+                if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
+                {
+                    //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
+                    model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
+                    model.IsFeaturedProductsOnly = true;
+                    var product = ProductsService.Instance.GetProductResponseByID(ProductID, activeOnly: false);
+
+                    model.TipoMonedaDestacado = product.TipoMoneda;
+
+                }
+                
+                return PartialView("_Destacados", model);
             }
+            catch (Exception ex)
+            {
 
-            return PartialView("_RelatedProducts", model);
+                throw ex;
+            }
+           
         }
 
         [HttpGet]

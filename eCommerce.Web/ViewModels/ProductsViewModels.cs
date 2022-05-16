@@ -35,6 +35,7 @@ namespace eCommerce.Web.ViewModels
 
     public class FeaturedProductsViewModel : PageViewModel
     {
+        public Product Product { get; set; }
         public List<Category> Categories { get; set; }
         public List<Product> Products { get; set; }
     }
@@ -42,6 +43,7 @@ namespace eCommerce.Web.ViewModels
     {
         public Category Category { get; set; }
         public bool IsFeaturedProductsOnly { get; set; }
+        public int TipoMonedaDestacado { get; set; }
     }
 
     public class ProductsByFeaturedCategoriesViewModel : PageViewModel
