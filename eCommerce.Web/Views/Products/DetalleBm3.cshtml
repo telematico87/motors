@@ -1,4 +1,33 @@
-﻿@model eCommerce.Web.ViewModels.ProductDetailsViewModel
+﻿@model eCommerce.Web.ViewModels.ProductDetalleViewModel
+
+@*@section IncludeHeaderStylesScripts{
+        <link href="~/Content/lib/drift-1.4.0/drift-basic.min.css" rel="stylesheet" />
+        <script src="~/Content/lib/drift-1.4.0/Drift.min.js"></script>
+    }*@
+
+<style>
+    .product-detail-bar {
+        width: 108% !important;
+    }
+</style>
+
+@{
+    String iconoMoneda = "S/";
+    if (Model != null)
+    {
+
+
+        if (Model.ProductID > 0)
+        {
+            iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
+            var productStockTextColor = Model.StockQuantity > 0 ? "text-success bold" : "text-danger bold";
+
+        }
+    }
+}
+
+@if (Model != null)
+{
 
     <section class="flat-row flat-product-detail">
         <div class="container-full">
@@ -8,18 +37,38 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="product-img">
-                                        <img src="~/Content/bm3/images/producto/producto-1.jpg" />
+                                    <div class="form-product-img" id="pics-container">
+                                        @if (Model.ProductPicturesList != null && Model.ProductPicturesList.Count > 0)
+                                        {
+                                            var firstProductPicture = Model.ProductPicturesList.First();
+
+                                            <img src='@Html.PictureSource(firstProductPicture.Picture.URL)' data-id="@firstProductPicture.PictureID" />
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-info">
-                                        <h3 class="info-brand">KTM</h3>
-                                        <h3 class="info-name">KTM 125</h3>
-                                        <h3 class="info-version">2022</h3>
-                                        <p class="info-description">La nueva Honda NAVI cuenta con un motor monocilíndrico de 4 tiempos refrigerado por aire. El sistema dual de encendido (electrónico y patada) aseguran el correcto funcionamiento de esta moto, que además, gracias a su pequeño motor de 110 centímetros cúbicos entrega una gran autonomía.</p>
+                                        @if (Model.MarcaID > 0)
+                                        {
+                                            var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
+
+                                            if (marca != null)
+                                            {
+                                                <h3 class="info-brand"> @marca.Descripcion</h3>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                -
+                                            </span>
+                                        }
+
+                                        <h3 class="info-name">@Model.Name</h3>
+                                        @*<h3 class="info-version">2022</h3>*@
+                                        <p class="info-description">@Model.Summary</p>
                                         <p class="info-description">PRECIO REFERENCIAL</p>
-                                        <p class="info-price">S/10,000</p>
+                                        <p class="info-price">@iconoMoneda @Model.Price</p>
                                         <a class="info-select waves-effect" href="#">Quiero esta moto</a>
                                     </div>
                                 </div>
@@ -41,7 +90,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>16.5 L</span>
+                                <span>@(Model.ProductoCaracteristica.consumo.CapacidadTanque == null ? "-" : Model.ProductoCaracteristica.consumo.CapacidadTanque)</span>
                             </div>
                             <div class="product-text">
                                 <span>CAPACIDAD DE TANQUE</span>
@@ -54,7 +103,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>249.6 CC</span>
+                                <span>@(Model.ProductoCaracteristica.motor.Cilindrada == null ? "-" : Model.ProductoCaracteristica.motor.Cilindrada)</span>
                             </div>
                             <div class="product-text">
                                 <span>CILINDRADA</span>
@@ -67,7 +116,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>6</span>
+                                <span>@(Model.ProductoCaracteristica.transmisiones.NroCambios == null ? "-" : Model.ProductoCaracteristica.transmisiones.NroCambios)</span>
                             </div>
                             <div class="product-text">
                                 <span>VELOCIDADES</span>
@@ -80,7 +129,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>22.1 HP  7,500 RPM</span>
+                                <span>@(Model.ProductoCaracteristica.motor.Potencia == null ? "-" : Model.ProductoCaracteristica.motor.Potencia)</span>
                             </div>
                             <div class="product-text">
                                 <span>POTENCIA</span>
@@ -147,6 +196,10 @@
                 </li>
                 <li>
                     <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-title">Consumo</span>
+                </li>
+                <li>
+                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
                     <span class="bar-title">Dimensiones</span>
                 </li>
             </ul>
@@ -154,43 +207,36 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <h3>PESO VS POTENCIA</h3>
-                            <p>Su bajo peso en relación a la potencia que entrega su motor de 158 centímetros cúbicos, le permite un gran desempeño, entregando 12 caballos de fuerza y una velocidad máxima de 100 km/h.</p>
-                            <p>Su bajo peso en relación a la potencia que entrega su motor de 158 centímetros cúbicos, le permite un gran desempeño, entregando 12 caballos de fuerza y una velocidad máxima de 100 km/h.</p>
-                            <h3>SUAVE MOTOR SIN VIBRACIONES</h3>
-                            <p>El motor de la Sukhoi 16 cuenta con un balanceador interno para reducir las vibraciones.</p>
-                            <h3>MÁS KILÓMETROS, MENOS SOLES</h3>
-                            <p>Su tanque de 3 galones y su eficiente sistema de carburación de combustible, le permiten a la Sukhoi 16 una autonomía de 427 km.</p>
-                            <h3>DISEÑO Y SEGURIDAD</h3>
-                            <p>El atractivo diseño de los aros de aleación de la Sukhoi 16, le dan no solo una apariencia deportiva, si no que además, brinda mayor seguridad al evitar el uso de cámaras internas para sellar las llantas a los aros.</p>
+                            <div class="container">
+                                @Html.Raw(@Model.Description)
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>Cuenta con un motor monocilíndrico de 158 centímetros cúbicos. Un motor de árbol de levas simple que entrega 12 caballos de fuerza. Además, su balanceador evita las vibraciones fuertes del motor producto de su gran torque en bajas revoluciones.</p>
                             <table>
                                 <tbody>
                                     <tr>
                                         <td>CILINDRADA</td>
-                                        <td>158 CC</td>
+                                        <td>@(Model.ProductoCaracteristica.motor.Cilindrada == null ? "-" : Model.ProductoCaracteristica.motor.Cilindrada)</td>
                                     </tr>
                                     <tr>
                                         <td>POTENCIA</td>
-                                        <td>12.1 HP</td>
+                                        <td>@Model.ProductoCaracteristica.motor.Potencia</td>
                                     </tr>
                                     <tr>
-                                        <td>TORQUE</td>
-                                        <td>10.9 Nm ( 6,500 RPM)</td>
+                                        <td>TIPÓ MOTOR</td>
+                                        <td>@Model.ProductoCaracteristica.motor.TipoMotor</td>
                                     </tr>
                                     <tr>
                                         <td>SISTEMA DE ENCENDIDO</td>
-                                        <td>CDI</td>
+                                        <td>@Model.ProductoCaracteristica.motor.SistemaEncendido</td>
                                     </tr>
                                     <tr>
                                         <td>SISTEMA DE ARRANQUE</td>
-                                        <td>ELÉCTRICO / PATADA</td>
+                                        <td>@Model.ProductoCaracteristica.motor.SistemaArranque</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -200,16 +246,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>En la llanta delantera, la Sukhoi 16 cuenta con un freno de disco lobulado y ventilado, el que disipa mejor el calor producto de las frenadas, evitando que las pastillas se recalienten y pierdan adherencia. Su tambor posterior es mecánico y de 20 cm de diámetro.</p>
                             <table>
                                 <tbody>
                                     <tr>
                                         <td>TIPO DE FRENO DELANTERO</td>
-                                        <td>DISCO</td>
+                                        <td>@Model.ProductoCaracteristica.frenos.FrenoDelantero</td>
                                     </tr>
                                     <tr>
-                                        <td>TIPO DE FRENO TRASERO</td>
-                                        <td>TAMBOR</td>
+                                        <td>TIPO DE FRENO POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.frenos.FrenoTrasero</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -219,16 +264,23 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>Llantas de mediano ancho y aros de aleación, eliminando el uso de cámaras internas para sellar las llantas a los aros.</p>
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>LLANTA DELANTERA</td>
-                                        <td>90/90-17</td>
+                                        <td>NEUMATICOS DELANTEROS</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero</td>
                                     </tr>
                                     <tr>
-                                        <td>LLANTA TRASERA</td>
-                                        <td>120/80-17</td>
+                                        <td>NEUMATICOS POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ARO DELANTERO</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.AroDelantero</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEUMATICOS POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.AroPosterior</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -238,17 +290,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>La Sukhoi 16 cuenta con una suspensión delantera de horquilla telescópica de 12 cm de recorrido, dándole mayor control y adherencia de la llanta al asfalto. En la llanta posterior los amortiguadores dobles cuentan con una recorrido de 10 cm.</p>
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>SUSPENSIÓN DELANTERA</td>
-                                        <td>Telescópica</td>
+                                        <td>SUSPENSION DELANTEROS</td>
+                                        <td>@Model.ProductoCaracteristica.suspension.SuspensionDelantera</td>
                                     </tr>
                                     <tr>
-                                        <td>SUSPENSIÓN POSTERIOR</td>
-                                        <td>Doble amortiguador</td>
+                                        <td>SUSPENSION POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.suspension.SuspensionPosterior</td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -257,12 +309,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>Cuenta con una transmisión mecánica de 5 velocidades de tipo retorno. El primer cambio es para abajo y todos los demás para arriba. Sus 5 marchas le permiten alcanzar una velocidad final de 100 km/h.</p>
                             <table>
                                 <tbody>
                                     <tr>
                                         <td>TRANSMISIÓN</td>
-                                        <td>Mecánica</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.Transmision</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NRO CAMBIOS</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.NroCambios</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VELOCIDAD MAXIMA</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -272,32 +331,49 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tecnical-specs">
-                            <p>La Sukhoi es una moto ligera. Con tan solo 127 kg de peso, es una moto fácil de manejar que se mueve sin problemas dentro de espacios reducidos gracias a su amplio giro de timón.</p>
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>LARGO TOTAL</td>
-                                        <td>2060 MM</td>
+                                        <td>OCTANAJE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.Octanaje</td>
                                     </tr>
                                     <tr>
-                                        <td>ANCHO TOTAL</td>
-                                        <td>745 MM</td>
+                                        <td>SISTEMA COMBUSTIBLE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.SistemaCombustible</td>
                                     </tr>
                                     <tr>
-                                        <td>ALTURA TOTAL</td>
-                                        <td>1080 MM</td>
+                                        <td>CAPACIDAD TANQUE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.CapacidadTanque</td>
                                     </tr>
+                                    <tr>
+                                        <td>AUTONOMIA</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.Autonomia</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RENDIMIENTO GALON</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.RendimientoGalon</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tecnical-specs">
+                            <table>
+                                <tbody>
                                     <tr>
                                         <td>PESO NETO</td>
-                                        <td>134 kg</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.Peso</td>
                                     </tr>
                                     <tr>
-                                        <td>ALTURA SILLÍN</td>
-                                        <td>765</td>
+                                        <td>CARGA UTIL</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.CargaUtil</td>
                                     </tr>
                                     <tr>
-                                        <td>DISTANCIA ENTRE EJES</td>
-                                        <td>1320</td>
+                                        <td>PASAJEROS</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.Pasajeros</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -314,41 +390,17 @@
         </div>
         <div class="container-full">
             <div class="slider product-gallery">
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
+
+                @foreach (var picture in Model.ProductPicturesList)
+                {
+                    <div>
+                        <div class="image">
+                            <a href='@Html.PictureSource(picture.Picture.URL)' target="_blank" class="thumbnail">
+                                <img src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div>
-                    <div class="image">
-                        <a href="~/Content/bm3/images/producto/producto-2.jpg" target="_blank" class="thumbnail"><img src="~/Content/bm3/images/producto/producto-1.jpg" alt=""></a>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </section>
@@ -386,16 +438,32 @@
                         <div class="brand-detail">
                             <h3>Sobre la marca</h3>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="brand-img">
-                                        <img src="~/Content/bm3/images/marca/honda.png" />
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="brand-desc">
-                                        <p>Demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo.</p>
-                                    </div>
-                                </div>
+                                @if (Model.MarcaID > 0)
+                                {
+
+                                    var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
+
+                                    if (marca != null)
+                                    {
+                                        <div class="col-md-3">
+                                            <div class="brand-img">
+                                                <img src='@Html.PictureSource(marca.Picture.URL)' data-id="@marca.PictureID" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="brand-desc">
+                                                <h4> @marca.Resumen</h4>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>
+                                        -
+                                    </span>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -404,219 +472,81 @@
         </div>
     </section>
 
-    <section class="flat-product-imagebox style1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="text-box">
-                        <div class="inner-box">
-                            <h3>MOTOS RELACIONADAS</h3>
-                            <p>Te damos las opciones similares a lo que estás buscando.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="owl-carousel-product">
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    Html.RenderAction("RelatedProducts", "Products", new { categoryID = Model.CategoryID, ProductID = Model.ProductID, recordSize = RecordSizeEnums.Size6  });
+
+   
+}
+    <script>
+     $("#productPictures").change(function () {
+
+		var pictures = this.files;
+
+		var picsData = new FormData();
+
+		for (var i = 0; i < pictures.length; i++) {
+			picsData.append("Picture", pictures[i]);
+		}
+
+        addLoader("pics-container");
+		$.ajax({
+			url: "@Url.UploadPictures()",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+		.done(function (responses) {
+			for (var i = 0; i < responses.length; i++) {
+				var picResponse = responses[i];
+
+				AttachNewImage(picResponse.pictureURL, picResponse.ID);
+			}
+            removeLoader("pics-container");
+		})
+        .fail(function () {
+             removeLoader("pics-container");
+             Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+		});
+    });
+
+    function AttachNewImage(imageURL, imageID) {
+        var $newimgHTML = $("#imageTemplate").clone();
+
+        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+        $newimgHTML.find(".image").attr("data-id", imageID);
+        $newimgHTML.find("input[name=ThumbnailPicture]").val(imageID);
+        $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
+        $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
+
+        $("#picturesArea").append($newimgHTML.html());
+    }
+
+    </script>
+
+    @*<script>
+            if ($("#imgZoom1").length > 0) {
+                applyDriftOnElement("#imgZoom1");
+            }
+
+            $('#carouselIndicators').on('slide.bs.carousel', function onSlide(ev) {
+                var elemID = $("img", ev.relatedTarget).attr("id");
+
+                if (elemID) {
+                    applyDriftOnElement("#" + elemID);
+                }
+            })
+
+            function applyDriftOnElement(elemID) {
+                if (!$(elemID).hasClass("drifted")) {
+                    $(elemID).addClass("drifted");
+                    new Drift(document.querySelector(elemID), {
+                        paneContainer: document.querySelector('#productSummaryContainer'),
+                        inlinePane: 900,
+                        inlineOffsetY: -85,
+                        containInline: true,
+                        hoverBoundingBox: true
+                    });
+                }
+            }
+        </script>*@
