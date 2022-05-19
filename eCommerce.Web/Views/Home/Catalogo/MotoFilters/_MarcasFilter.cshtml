@@ -3,28 +3,33 @@
 @model eCommerce.Web.ViewModels.ProductsViewModel
 
 @if (Model != null && Model.Marcas != null && Model.Marcas.Count > 0)
-{    
+{
     int categoryId = Convert.ToInt32(Model.CategoryID);
+    int marcaId = Convert.ToInt32(Model.MarcaID);
     <div class="widget widget-categories">
         <div class="widget-title">
             <h3>Marcas<span></span></h3>
         </div>
         <ul class="cat-list style1 widget-content">
+            <li>
+                <label>
+                    <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: 0, q: Model.SearchTerm)">
+                        <input type="checkbox" @(marcaId==0 ? "checked" : string.Empty) name="grupo-2" /><span>Todas las Marcas</span>
+                    </a>
+                </label>
 
-            <li class="@(!Model.MarcaID.HasValue ? "active" : string.Empty)">
-                <a class="@(!Model.MarcaID.HasValue ? "active" : string.Empty)" href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: 0, q: Model.SearchTerm)">
-                    Todas las Marcas
-                </a>
             </li>
 
             @foreach (var marca in Model.Marcas)
-            {
-                <li class="@(marca.ID == Model.MarcaID ? "active" : string.Empty)">
-                    @*<label><input type="checkbox" name="grupo-1" id="cat-1" /></label>*@
-                    <a class="@(marca.ID == Model.MarcaID ? "active" : string.Empty)" href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: marca.ID, q: Model.SearchTerm)">
-                        <span>@(marca.Descripcion != null ? marca.Descripcion : string.Empty) </span>
-                    </a>
+            {               
+                <li>
+                    <label>
+                        <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: marca.ID, q: Model.SearchTerm)">
+                            <input type="checkbox" @(marca.ID == marcaId ? "checked" : string.Empty) name="grupo-2" value="@(marca.ID)" /><span>@(marca.Descripcion != null ? marca.Descripcion : string.Empty)</span>                            
+                        </a>
+                    </label>
                 </li>
+                
             }
         </ul>
     </div>

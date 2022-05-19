@@ -4,28 +4,29 @@
 
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
-    var categoriesWithChildren = CategoryHelpers.MakeCategoriesHierarchy(Model.Categories);    
-    int marcaId = Convert.ToInt32(Model.CategoryID);
+    var categoriesWithChildren = CategoryHelpers.MakeCategoriesHierarchy(Model.Categories);
+    int marcaId = Convert.ToInt32(Model.MarcaID);
+    int categoryId = Convert.ToInt32(Model.CategoryID);
 
-    <ul class="cat-list style1 widget-content">
-
-        <li class="@(!Model.CategoryID.HasValue ? "active" : string.Empty)">
-            <a class="@(!Model.CategoryID.HasValue ? "active" : string.Empty)" href="@Url.CatalogoMoto(categoryId: 0, marcaId : marcaId, q: Model.SearchTerm)">
-                @("PP.Search.Categories.AllCategories".LocalizedString())
-            </a>
+    <ul class="cat-list style1 widget-content">      
+        <li>
+            <label>
+                <a href="@Url.CatalogoMoto(categoryId: 0, marcaId : marcaId, q: Model.SearchTerm)">
+                    <input type="checkbox" @(categoryId==0 ? "checked" : string.Empty) name="grupo-1" /><span>Todas las Categorias</span>
+                </a>
+            </label>
         </li>
-
         @foreach (var categoryWithChildren in categoriesWithChildren)
         {
             var category = categoryWithChildren.Category;
 
-            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-
-            <li class="@(category.ID == Model.CategoryID ? "active" : string.Empty)">
-                @*<label><input type="checkbox" name="grupo-1" id="cat-1" /></label>*@
-                <a class="@(category.ID == Model.CategoryID ? "active" : string.Empty)" href="@Url.CatalogoMoto(categoryId: category.ID, marcaId: marcaId, q: Model.SearchTerm)">
-                    <span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty) <i>(@CategoryHelpers.GetCategoryAllChildrensProductCount(category, Model.Categories))</i></span>
-                </a>
+            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);          
+            <li>
+                <label>
+                    <a href="@Url.CatalogoMoto(categoryId: category.ID, marcaId: marcaId, q: Model.SearchTerm)">
+                        <input type="checkbox" @(category.ID == categoryId ? "checked" : string.Empty) name="grupo-1" value="@(category.ID)" /><span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</span>
+                    </a>
+                </label>
             </li>
         }
     </ul>
