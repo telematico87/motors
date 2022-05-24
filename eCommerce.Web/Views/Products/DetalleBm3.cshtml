@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model eCommerce.Web.ViewModels.ProductDetailsViewModel
 
     <section class="flat-row flat-product-detail">
@@ -395,6 +396,77 @@
                                     <div class="brand-desc">
                                         <p>Demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo.</p>
                                     </div>
+=======
+﻿@model eCommerce.Web.ViewModels.ProductDetalleViewModel
+
+@*@section IncludeHeaderStylesScripts{
+    <link href="~/Content/lib/drift-1.4.0/drift-basic.min.css" rel="stylesheet" />
+    <script src="~/Content/lib/drift-1.4.0/Drift.min.js"></script>
+}*@
+
+<style>
+    .product-detail-bar {
+        width: 108% !important;
+    }
+</style>
+
+@{
+    String iconoMoneda = "S/";
+    if (Model != null)
+    {
+
+
+        if (Model.ProductID > 0)
+        {
+            iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
+            var productStockTextColor = Model.StockQuantity > 0 ? "text-success bold" : "text-danger bold";
+          
+        }
+    }
+}
+
+<section class="flat-row flat-product-detail">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-detail" style="background-image: url(/Content/bm3/images/producto/fondo.jpg); background-size: cover;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-product-img" id="pics-container">  
+                                        @if (Model.ProductPicturesList != null && Model.ProductPicturesList.Count > 0)
+                                        { 
+                                            var firstProductPicture = Model.ProductPicturesList.First();
+                                            
+                                          <img src='@Html.PictureSource(firstProductPicture.Picture.URL)' data-id="@firstProductPicture.PictureID" />  
+                                        } 
+                                </div> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="product-info">
+                                    @if (Model.MarcaID > 0)
+                                    {
+                                        var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
+
+                                        if (marca != null)
+                                        {
+                                            <h3 class="info-brand"> @marca.Descripcion</h3>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            -
+                                        </span>
+                                    }
+
+                                    <h3 class="info-name">@Model.Name</h3>
+                                    @*<h3 class="info-version">2022</h3>*@
+                                    <p class="info-description">@Model.Summary</p>
+                                    <p class="info-description">PRECIO REFERENCIAL</p>
+                                    <p class="info-price">@iconoMoneda @Model.Price</p>
+                                    <a class="info-select waves-effect" href="#">Quiero esta moto</a>
+>>>>>>> parent of 852e4d9 (Merge branch 'checo_dev' of https://github.com/fortizs/EcommerceMotos into checo_dev)
                                 </div>
                             </div>
                         </div>
@@ -402,8 +474,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<<<<<<< HEAD
     <section class="flat-product-imagebox style1">
         <div class="container">
             <div class="row">
@@ -612,6 +686,607 @@
                                             <i class="ti-eye"></i>
                                         </a>
                                     </div>
+=======
+<section class="flat-row flat-product-attribute">
+    <div class="container">
+        <div class="product-attribute">
+            <div class="row">
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>@(Model.ProductoCaracteristica.consumo.CapacidadTanque == null ? "-" : Model.ProductoCaracteristica.consumo.CapacidadTanque)</span>
+                        </div>
+                        <div class="product-text">
+                            <span>CAPACIDAD DE TANQUE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>@(Model.ProductoCaracteristica.motor.Cilindrada == null ? "-" : Model.ProductoCaracteristica.motor.Cilindrada)</span>
+                        </div>
+                        <div class="product-text">
+                            <span>CILINDRADA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>@(Model.ProductoCaracteristica.transmisiones.NroCambios == null ? "-" : Model.ProductoCaracteristica.transmisiones.NroCambios)</span>
+                        </div>
+                        <div class="product-text">
+                            <span>VELOCIDADES</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>@(Model.ProductoCaracteristica.motor.Potencia == null ? "-" : Model.ProductoCaracteristica.motor.Potencia)</span>
+                        </div>
+                        <div class="product-text">
+                            <span>POTENCIA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>22.0 NM  6,00 RPM</span>
+                        </div>
+                        <div class="product-text">
+                            <span>TORQUE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <div class="product-value">
+                            <span>16 MESES / 10 MIL KM</span>
+                        </div>
+                        <div class="product-text">
+                            <span>GARANTÍA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="flat-product-content">
+    <div class="container">
+        <ul class="product-detail-bar">
+            <li class="active">
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Características Técnicas</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Motor y sistema eléctrico</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Frenos</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Aros y Llantas</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Suspensión</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Transmisión</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Consumo</span>
+            </li>
+            <li>
+                <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                <span class="bar-title">Dimensiones</span>
+            </li>
+        </ul>
+        <div class="detail-bar">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs">
+                        <div class="container">
+                            @Html.Raw(@Model.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>CILINDRADA</td>
+                                    <td>@(Model.ProductoCaracteristica.motor.Cilindrada == null ? "-" : Model.ProductoCaracteristica.motor.Cilindrada)</td>
+                                </tr>
+                                <tr>
+                                    <td>POTENCIA</td>
+                                    <td>@Model.ProductoCaracteristica.motor.Potencia</td>
+                                </tr>
+                                <tr>
+                                    <td>TIPÓ MOTOR</td>
+                                    <td>@Model.ProductoCaracteristica.motor.TipoMotor</td>
+                                </tr>
+                                <tr>
+                                    <td>SISTEMA DE ENCENDIDO</td>
+                                    <td>@Model.ProductoCaracteristica.motor.SistemaEncendido</td>
+                                </tr>
+                                <tr>
+                                    <td>SISTEMA DE ARRANQUE</td>
+                                    <td>@Model.ProductoCaracteristica.motor.SistemaArranque</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>TIPO DE FRENO DELANTERO</td>
+                                    <td>@Model.ProductoCaracteristica.frenos.FrenoDelantero</td>
+                                </tr>
+                                <tr>
+                                    <td>TIPO DE FRENO POSTERIOR</td>
+                                    <td>@Model.ProductoCaracteristica.frenos.FrenoTrasero</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>NEUMATICOS DELANTEROS</td>
+                                    <td>@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero</td>
+                                </tr>
+                                <tr>
+                                    <td>NEUMATICOS POSTERIOR</td>
+                                    <td>@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior</td>
+                                </tr>
+                                <tr>
+                                    <td>ARO DELANTERO</td>
+                                    <td>@Model.ProductoCaracteristica.arollanta.AroDelantero</td>
+                                </tr>
+                                <tr>
+                                    <td>NEUMATICOS POSTERIOR</td>
+                                    <td>@Model.ProductoCaracteristica.arollanta.AroPosterior</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>SUSPENSION DELANTEROS</td>
+                                    <td>@Model.ProductoCaracteristica.suspension.SuspensionDelantera</td>
+                                </tr>
+                                <tr>
+                                    <td>SUSPENSION POSTERIOR</td>
+                                    <td>@Model.ProductoCaracteristica.suspension.SuspensionPosterior</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>TRANSMISIÓN</td>
+                                    <td>@Model.ProductoCaracteristica.transmisiones.Transmision</td>
+                                </tr>
+                                <tr>
+                                    <td>NRO CAMBIOS</td>
+                                    <td>@Model.ProductoCaracteristica.transmisiones.NroCambios</td>
+                                </tr>
+                                <tr>
+                                    <td>VELOCIDAD MAXIMA</td>
+                                    <td>@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>OCTANAJE</td>
+                                    <td>@Model.ProductoCaracteristica.consumo.Octanaje</td>
+                                </tr>
+                                <tr>
+                                    <td>SISTEMA COMBUSTIBLE</td>
+                                    <td>@Model.ProductoCaracteristica.consumo.SistemaCombustible</td>
+                                </tr>
+                                <tr>
+                                    <td>CAPACIDAD TANQUE</td>
+                                    <td>@Model.ProductoCaracteristica.consumo.CapacidadTanque</td>
+                                </tr>
+                                <tr>
+                                    <td>AUTONOMIA</td>
+                                    <td>@Model.ProductoCaracteristica.consumo.Autonomia</td>
+                                </tr>
+                                <tr>
+                                    <td>RENDIMIENTO GALON</td>
+                                    <td>@Model.ProductoCaracteristica.consumo.RendimientoGalon</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tecnical-specs"> 
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>PESO NETO</td>
+                                    <td>@Model.ProductoCaracteristica.dimensiones.Peso</td>
+                                </tr>
+                                <tr>
+                                    <td>CARGA UTIL</td>
+                                    <td>@Model.ProductoCaracteristica.dimensiones.CargaUtil</td>
+                                </tr>
+                                <tr>
+                                    <td>PASAJEROS</td>
+                                    <td>@Model.ProductoCaracteristica.dimensiones.Pasajeros</td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="flat-product-gallery">
+    <div class="container">
+        <h3>Galería</h3>
+    </div>
+    <div class="container-full">
+        <div class="slider product-gallery">
+
+                    @foreach (var picture in Model.ProductPicturesList)
+                    {
+                        <div>
+                            <div class="image">
+                                <a href='@Html.PictureSource(picture.Picture.URL)' target="_blank" class="thumbnail">
+                                    <img src='@Html.PictureSource(picture.Picture.URL)' data-id="@picture.PictureID" />
+                                </a>
+                            </div>
+                        </div>
+                    } 
+        </div>
+    </div>
+</section>
+
+<section class="flat-banner-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="banner-box">
+                    <div class="inner-box">
+                        <a href="#" title="">
+                            <img src="~/Content/bm3/images/banner/banner-6.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="banner-box">
+                    <div class="inner-box">
+                        <a href="#" title="">
+                            <img src="~/Content/bm3/images/banner/banner-6.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="flat-brand-detail">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="brand-detail">
+                        <h3>Sobre la marca</h3>
+                        <div class="row">
+                            @if (Model.MarcaID > 0)
+                            {
+                                
+                                var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
+
+                                if (marca != null)
+                                {
+                                    <div class="col-md-3">
+                                        <div class="brand-img">                 
+                                            <img src='@Html.PictureSource(marca.Picture.URL)' data-id="@marca.PictureID" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="brand-desc">
+                                            <h4> @marca.Resumen</h4>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <span>
+                                    -
+                                </span>
+                            }
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="flat-product-imagebox style1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="text-box">
+                    <div class="inner-box">
+                        <h3>MOTOS RELACIONADAS</h3>
+                        <p>Te damos las opciones similares a lo que estás buscando.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="owl-carousel-product">
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="~/Content/bm3/images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+>>>>>>> parent of 852e4d9 (Merge branch 'checo_dev' of https://github.com/fortizs/EcommerceMotos into checo_dev)
                                 </div>
                             </div>
                         </div>
@@ -619,4 +1294,84 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </section>
+=======
+    </div>
+</section>
+
+<script>
+     $("#productPictures").change(function () {
+
+		var pictures = this.files;
+
+		var picsData = new FormData();
+
+		for (var i = 0; i < pictures.length; i++) {
+			picsData.append("Picture", pictures[i]);
+		}
+
+        addLoader("pics-container");
+		$.ajax({
+			url: "@Url.UploadPictures()",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+		.done(function (responses) {
+			for (var i = 0; i < responses.length; i++) {
+				var picResponse = responses[i];
+
+				AttachNewImage(picResponse.pictureURL, picResponse.ID);
+			}
+            removeLoader("pics-container");
+		})
+        .fail(function () {
+             removeLoader("pics-container");
+             Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+		});
+    });
+
+    function AttachNewImage(imageURL, imageID) {
+        var $newimgHTML = $("#imageTemplate").clone();
+
+        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+        $newimgHTML.find(".image").attr("data-id", imageID);
+        $newimgHTML.find("input[name=ThumbnailPicture]").val(imageID);
+        $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
+        $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
+
+        $("#picturesArea").append($newimgHTML.html());
+    }
+
+</script>
+
+@*<script>
+    if ($("#imgZoom1").length > 0) {
+        applyDriftOnElement("#imgZoom1");
+    }
+
+    $('#carouselIndicators').on('slide.bs.carousel', function onSlide(ev) {
+        var elemID = $("img", ev.relatedTarget).attr("id");
+
+        if (elemID) {
+            applyDriftOnElement("#" + elemID);
+        }
+    })
+
+    function applyDriftOnElement(elemID) {
+        if (!$(elemID).hasClass("drifted")) {
+            $(elemID).addClass("drifted");
+            new Drift(document.querySelector(elemID), {
+                paneContainer: document.querySelector('#productSummaryContainer'),
+                inlinePane: 900,
+                inlineOffsetY: -85,
+                containInline: true,
+                hoverBoundingBox: true
+            });
+        }
+    }
+</script>*@
+>>>>>>> parent of 852e4d9 (Merge branch 'checo_dev' of https://github.com/fortizs/EcommerceMotos into checo_dev)

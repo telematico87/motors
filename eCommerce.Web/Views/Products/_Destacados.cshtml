@@ -1,0 +1,234 @@
+﻿@model eCommerce.Web.ViewModels.ProductDetalleViewModel
+
+@{
+    String iconoMoneda = "S/";
+    if (Model != null)
+    {
+
+
+        if (Model.ProductID > 0)
+        {
+            iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
+            var productStockTextColor = Model.StockQuantity > 0 ? "text-success bold" : "text-danger bold";
+
+        }
+    }
+}
+
+<section class="flat-product-imagebox style1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="text-box">
+                    <div class="inner-box">
+                        <h3>MOTOS RELACIONADAS</h3>
+                        <p>Te damos las opciones similares a lo que estás buscando.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="owl-carousel-product">
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="imagebox style2">
+                            <div class="box-image">
+                                <a href="#" title="">
+                                    <img src="images/producto/producto-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="box-content">
+                                <div class="product-name">
+                                    <a href="#" title="">
+                                        <span>KTM</span>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <span class="sale">$1,250.00</span>
+                                    <span class="regular">$2,999.00</span>
+                                </div>
+                            </div>
+                            <div class="box-top">
+                                <div class="box-link">
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="#" title="">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

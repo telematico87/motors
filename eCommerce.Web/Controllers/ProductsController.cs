@@ -31,7 +31,7 @@ namespace eCommerce.Web.Controllers
                 return PartialView("_FeaturedProducts", model);
             }
         }
-        
+
         public ActionResult RecentProducts(int? productID, int pageSize = 0)
         {
             if (pageSize == 0)
