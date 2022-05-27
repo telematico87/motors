@@ -212,13 +212,14 @@ namespace eCommerce.Shared.Helpers
 
 
         //moto 
-        public static string CatalogoMoto(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
+        public static string CatalogoMoto(this UrlHelper helper, int categoryId = 0, int marcaId = 0, string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
         {
             string routeURL = string.Empty;
 
             var routeValues = new RouteValueDictionary();
 
-            routeValues.Add("category", category);
+            routeValues.Add("categoryId", categoryId);
+            routeValues.Add("marcaId", marcaId);
 
             if (!string.IsNullOrEmpty(q))
             {
@@ -259,9 +260,7 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
-
-         
-
+        
         public static string SearchProducts(this UrlHelper helper, string category = "", string q = "", decimal? from = 0.0M, decimal? to = 0.0M, string sortby = "", int? pageNo = 0, int? recordSize = 0)
         {
             string routeURL = string.Empty;
@@ -308,7 +307,7 @@ namespace eCommerce.Shared.Helpers
 
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
-        }
+        }       
 
         public static string ProductDetails(this UrlHelper helper, string category, int ID, string sanitizedtitle = "")
         {
@@ -319,7 +318,7 @@ namespace eCommerce.Shared.Helpers
             routeValues.Add("category", category);
             routeValues.Add("ID", ID);
 
-            if(!string.IsNullOrEmpty(sanitizedtitle))
+            if (!string.IsNullOrEmpty(sanitizedtitle))
             {
                 routeValues.Add("sanitizedtitle", sanitizedtitle);
             }
@@ -333,6 +332,7 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
+
 
         public static string UserProfile(this UrlHelper helper, string tab = "")
         {

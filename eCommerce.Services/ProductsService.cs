@@ -139,6 +139,72 @@ namespace eCommerce.Services
             return products.Skip(skipCount).Take(recordSize).Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
         }
 
+        public List<Product> SearchProductsMoto(List<int> categoryIDs, int marcaId, string searchTerm, decimal? from, decimal? to, string sortby, int? pageNo, int recordSize, bool activeOnly, out int count, int? stockCheckCount = null)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var products = context.Products
+                                  .Where(x => !x.IsDeleted && (!activeOnly || x.IsActive) && !x.Category.IsDeleted)
+                                  .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                products = context.ProductRecords
+                                  .Where(x => !x.IsDeleted && x.Name.ToLower().Contains(searchTerm.ToLower()))
+                                  .Select(x => x.Product)
+                                  .Where(x => !x.IsDeleted && (!activeOnly || x.IsActive) && !x.Category.IsDeleted)
+                                  .AsQueryable();
+            }
+
+            if (categoryIDs != null && categoryIDs.Count > 0)
+            {
+                products = products.Where(x => categoryIDs.Contains(x.CategoryID));
+            }
+
+            if (marcaId > 0)
+            {
+                products = products.Where(x => marcaId == x.MarcaId);
+            }
+
+            if (from.HasValue && from.Value > 0.0M)
+            {
+                products = products.Where(x => x.Price >= from.Value);
+            }
+
+            if (to.HasValue && to.Value > 0.0M)
+            {
+                products = products.Where(x => x.Price <= to.Value);
+            }
+
+            if (stockCheckCount.HasValue && stockCheckCount.Value > 0)
+            {
+                products = products.Where(x => x.StockQuantity <= stockCheckCount.Value);
+            }
+
+            if (!string.IsNullOrEmpty(sortby))
+            {
+                if (string.Equals(sortby, "price-high", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.OrderByDescending(x => x.Price);
+                }
+                else
+                {
+                    products = products.OrderBy(x => x.Price);
+                }
+            }
+            else //sortBy Product Date
+            {
+                products = products.OrderByDescending(x => x.ModifiedOn);
+            }
+
+            count = products.Count();
+
+            pageNo = pageNo ?? 1;
+            var skipCount = (pageNo.Value - 1) * recordSize;
+
+            return products.Skip(skipCount).Take(recordSize).Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
+        }
+
 
         public List<Product> GetProductWithLessStockQuantity(List<int> categoryIDs, string searchTerm, decimal? from, decimal? to, string sortby, bool activeOnly, int stockCount, out int count)
         {

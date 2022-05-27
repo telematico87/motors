@@ -5241,6 +5241,7 @@
     <Content Include="Views\Home\Catalogo\MotoFilters\_MotoFilters.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_CategoriesFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_MarcasFilter.cshtml" />
+    <Content Include="Views\Products\_Destacados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

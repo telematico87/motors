@@ -95,8 +95,8 @@
                         </div>
 
                         @*@{
-                                Html.RenderPartial("SearchFilters/_SearchInputFilter", Model);
-                            }*@
+                Html.RenderPartial("SearchFilters/_SearchInputFilter", Model);
+            }*@
 
                         @{
                             Html.RenderPartial("Catalogo/MotoFilters/_CategoriesFilter", Model);
@@ -111,49 +111,37 @@
                         <div class="widget-content">
                             <p>Precio</p>
                             <div class="price search-filter-input">
-                                <div id="slider-range" class="price-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span></div>
+                                <div id="slider-range" class="price-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
                                 <p class="amount">
                                     <input type="text" id="amount" disabled="">
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="widget widget-categories">
-                        <div class="widget-title">
-                            <h3>Marcas<span></span></h3>
-                        </div>
-                        <ul class="cat-list style1 widget-content">
-                            <li>
-                                <label><input type="checkbox" name="grupo-1" id="cat-1" /><span>Honda<i>(03)</i></span></label>
-                            </li>
-                            <li>
-                                <label><input type="checkbox" name="grupo-1" id="cat-1" /><span>KTM<i>(14)</i></span></label>
-                            </li>
-                            <li>
-                                <label><input type="checkbox" name="grupo-1" id="cat-1" /><span>Yamaha<i>(7)</i></span></label>
-                            </li>
-                            <li>
-                                <label><input type="checkbox" name="grupo-1" id="cat-1" /><span>RTM<i>(6)</i></span></label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widget widget-button">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <a href="#" class="waves-effect">FILTRO</a>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <a href="#" class="waves-effect">ACTUALIZAR</a>
+                        @{
+                            Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
+                        }
+
+                        <div class="widget widget-button">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <a href="#" class="waves-effect">FILTRO</a>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <a href="#" class="waves-effect">ACTUALIZAR</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
             @*Catalogo de Productos*@
             <div class="col-lg-9 col-md-8">
                 <div class="main-shop">
                     @{
-                        //Motos
                         Html.RenderPartial("Catalogo/MotoFilters/_SearchMoto", Model);
                     }
                 </div>
@@ -161,6 +149,8 @@
         </div>
     </div>
 </main>
+
+
 
 <!--<section class="product-shop spad">
     <div class="container">

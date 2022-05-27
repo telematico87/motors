@@ -198,10 +198,17 @@ namespace eCommerce.Web
             );
 
             //Ruta Catalogo Moto
+         //   routes.MapRoute(
+         //    name: "CatalogoMoto",
+         //    url: "moto/category{category}",
+         //    defaults: new { area = "", controller = "Home", action = "CatalogoMoto", category = UrlParameter.Optional },
+         //    namespaces: new[] { "eCommerce.Web.Controllers" }
+         //);
+
             routes.MapRoute(
              name: "CatalogoMoto",
-             url: "moto/{category}",
-             defaults: new { area = "", controller = "Home", action = "CatalogoMoto", category = UrlParameter.Optional },
+             url: "moto/category/{categoryId}/marca/{MarcaId}",
+             defaults: new { area = "", controller = "Home", action = "CatalogoMoto", categoryId = UrlParameter.Optional, marcaId = UrlParameter.Optional },
              namespaces: new[] { "eCommerce.Web.Controllers" }
          );
 
@@ -211,19 +218,19 @@ namespace eCommerce.Web
                 url: "{lang}/search/{category}",
                 defaults: new { area = "", controller = "Home", action = "Search", category = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
-            );
+            );           
 
             routes.MapRoute(
                 name: "ProductDetails",
                 url: "{category}/product/{ID}/{sanitizedtitle}",
-                defaults: new { area = "", controller = "Products", action = "Details", sanitizedtitle = UrlParameter.Optional },
+                defaults: new { area = "", controller = "Products", action = "DetalleBm3", sanitizedtitle = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 
             routes.MapRoute(
                 name: "LanguageBased_ProductDetails",
                 url: "{lang}/{category}/product/{ID}/{sanitizedtitle}",
-                defaults: new { area = "", controller = "Products", action = "Details", sanitizedtitle = UrlParameter.Optional },
+                defaults: new { area = "", controller = "Products", action = "DetalleBm3", sanitizedtitle = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 
