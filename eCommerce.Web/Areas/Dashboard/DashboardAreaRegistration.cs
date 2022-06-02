@@ -271,6 +271,29 @@ namespace eCommerce.Web.Areas.dashboard
                 "dashboard/{controller}/{action}/{id}",
                 new { controller = "dashboard", action = "Index", id = UrlParameter.Optional }
             );
+
+
+            //ruta listar catalogo
+            context.MapRoute(
+               name:"CategoriesbyCatalogo",
+               url:"dashboard/{controller}/Hola/",
+               new { action = "Action" }
+           );
+
+            context.MapRoute(
+               name: "LanguageBased_CategoriesbyCatalogo",
+               url: "{lang}/dashboard/{controller}/ListarCategoriasbyCatalogo",
+               new {action = "ListarCategoriasbyCatalogo" }
+           );
+
+
+            //context.MapRoute(
+            //    name:"LanguageBased_CategoriesbyCatalogo",
+            //    url: "{lang}/products/ListarCategoriasbyCatalogo/{CatalogoID}",
+            //    new { controller = "products" ,action = "ListarCategoriasbyCatalogo" }
+            //);
+
+
         }
     }
 }
