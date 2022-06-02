@@ -247,6 +247,7 @@
     <Compile Include="Areas\Dashboard\Controllers\MedidaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ModeloController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\PromosController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\RolesController.cs" />
@@ -5171,6 +5172,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\Aro\" />
     <Folder Include="Areas\Dashboard\Views\Litro\" />
+    <Folder Include="Areas\Dashboard\Views\Producto\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Home\Catalogo\AccessoryFilters\" />
