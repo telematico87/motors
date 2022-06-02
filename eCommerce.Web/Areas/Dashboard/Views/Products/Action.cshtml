@@ -217,7 +217,7 @@
                     <label>
                         Catalogo
                     </label>
-                    <select class="form-control" name="CatalogoID">
+                    <select class="form-control" name="CatalogoID" id="cboCatalogo">
                         @foreach (var catalogo in Model.Catalogos)
                         {
                             var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
@@ -230,7 +230,7 @@
                     <label>
                         @("Dashboard.Products.Action.Category".Localized())
                     </label>
-                    <select class="form-control" name="CategoryID">
+                    <select class="form-control" name="CategoryID" id="cboCategoria">
                         @foreach (var category in Model.Categories)
                         {
                             var selected = Model.CategoryID == category.ID ? "selected" : string.Empty;
@@ -252,7 +252,7 @@
                     <label>
                         Marca
                     </label>
-                    <select class="form-control" name="MarcaID">
+                    <select class="form-control" name="MarcaID" id="cboMarca">
                         @foreach (var marca in Model.Marcas)
                         {
                             var selected = Model.MarcaID == marca.ID ? "selected" : string.Empty;
@@ -821,6 +821,66 @@
         </td>
     </tr>
 </script>
+
+
+<script>
+
+    function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+        debugger;
+        var contenido = ""
+        var elemento;
+        contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
+        for (var j = 0; j < data.length; j++) {
+            elemento = data[j];
+            contenido +=
+                "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
+        }
+        contenido += "";
+        document.getElementById(id).innerHTML = contenido;
+    }
+
+        $("#cboCatalogo").change(function () {
+            debugger;
+            let CatalogoID = $("#cboCatalogo").val();  
+            //var model = new Object();
+            //model.Nombre = Nombre; 
+            $.ajax({
+                method: "GET",
+                url: "@Url.ChangedProducts("Products")",
+                ContentType: 'application/json;utf-8',
+                data: { CatalogoID }
+              })
+		        .done(function (resultado) {
+                    console.log(resultado);
+		        })
+                .fail(function () {
+                     alert("error")
+		        });
+
+        });
+
+
+    //$("#cboCatalogo").on('change', function () {
+
+    //    //var splitdepart = cboDpto.split('|');
+    //    //var departamento = splitdepart[0];
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/ListarCategoriasbyCatalogo",
+    //        data: { catalogo },
+    //        //method: "GET",
+    //        //url: "/Products/ListarCategoriasbyCatalogo?catalogo=" + catalogo,
+    //        success: function (result) {
+    //            //debugger;
+    //            //console.log(result);
+    //            //let Categoria = result;
+    //            //llenarCombo(Categoria, "cboCategoria", "NombreUbigeo", "NombreUbigeo", "0")
+    //        }
+    //    });
+
+    //});
+</script>
+
 
 <script>
     var productSpecificationCount = @(productSpecificationCount + 1);

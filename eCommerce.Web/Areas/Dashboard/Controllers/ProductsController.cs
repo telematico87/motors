@@ -12,6 +12,7 @@ using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Enums;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -460,5 +461,63 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             
             return model;
         }
+
+
+        [HttpGet]
+        public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
+        {
+            Prueba pr = new Prueba();
+            List<CategoryResponse> catlist = new List<CategoryResponse>();
+            CategoryResponse objcat1 = new CategoryResponse();
+            objcat1.ID = 19;
+            objcat1.NombreCategoria = "Guantes";
+
+            CategoryResponse objcat2 = new CategoryResponse();
+            objcat2.ID = 20;
+            objcat2.NombreCategoria = "Cascos";
+
+            catlist.Add(objcat1);
+            catlist.Add(objcat2);
+
+            JsonResult result = new JsonResult();
+
+            pr.resultado = "hola";
+            pr.res = catlist;
+            //return Json(pr, JsonRequestBehavior.AllowGet);
+            //FinanciamientosViewModels model = new FinanciamientosViewModels();
+            //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            //var response = new JavaScriptSerializer().Serialize(pr);
+            //var json = JsonSerializer.Serialize(res2); 
+            //return Json(response, JsonRequestBehavior.AllowGet);
+
+            try
+            {
+                var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+
+                result.Data = new { Success = pr, Message = string.Empty};
+            }
+            catch (Exception ex)
+            {
+                result.Data = new { Success = false, Message = ex.Message };
+            }
+
+            return result;
+             
+
+        }
+        public class Prueba
+        {
+            public string resultado { get; set; }
+            public List<CategoryResponse> res { get; set; }
+        }
+
+        public class CategoryResponse
+        {
+            public int ID { get; set; }
+            public string NombreCategoria { get; set; }
+        }
+
+
     }
 }

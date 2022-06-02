@@ -900,5 +900,27 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
+
+
+
+        public static string ChangedProducts(this UrlHelper helper, string controller)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", controller);
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_CategoriesbyCatalogo", routeValues);
+            }
+            else routeURL = helper.RouteUrl("CategoriesbyCatalogo", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+
     }
 }
