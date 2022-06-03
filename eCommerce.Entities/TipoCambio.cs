@@ -8,6 +8,8 @@ namespace eCommerce.Entities
 {
     public class TipoCambio : BaseEntity
     {
-        public double TipoCambioSunat { get; set; }
+        public double Venta { get; set; }
+        public double Compra { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }

@@ -468,6 +468,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         {
             Prueba pr = new Prueba();
             List<CategoryResponse> catlist = new List<CategoryResponse>();
+            CatRepo cat = new CatRepo();
+
             CategoryResponse objcat1 = new CategoryResponse();
             objcat1.ID = 19;
             objcat1.NombreCategoria = "Guantes";
@@ -476,35 +478,32 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             objcat2.ID = 20;
             objcat2.NombreCategoria = "Cascos";
 
+            cat.IDS = objcat1.ID;
+            cat.nombre = objcat1.NombreCategoria;
+
             catlist.Add(objcat1);
             catlist.Add(objcat2);
 
             JsonResult result = new JsonResult();
-
             pr.resultado = "hola";
             pr.res = catlist;
             //return Json(pr, JsonRequestBehavior.AllowGet);
             //FinanciamientosViewModels model = new FinanciamientosViewModels();
             //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
             //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-            //var response = new JavaScriptSerializer().Serialize(pr);
-            //var json = JsonSerializer.Serialize(res2); 
+            var response = new JavaScriptSerializer().Serialize(pr);
+            //var json = JsonSerializer.Serialize(pr); 
             //return Json(response, JsonRequestBehavior.AllowGet);
-
             try
             {
                 var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-
-                result.Data = new { Success = pr, Message = string.Empty};
+                result.Data = new { Success = cat, Message = string.Empty};
             }
             catch (Exception ex)
             {
                 result.Data = new { Success = false, Message = ex.Message };
             }
-
-            return result;
-             
-
+            return result;    
         }
         public class Prueba
         {
@@ -516,6 +515,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         {
             public int ID { get; set; }
             public string NombreCategoria { get; set; }
+        }
+
+        public class CatRepo
+        {
+            public int IDS { get; set; }
+            public string nombre { get; set; }
         }
 
 

@@ -252,6 +252,7 @@
     <Compile Include="Areas\Dashboard\Controllers\PromosController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\RolesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\TallaController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\TipoCambioController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CatalogosViewModels.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\PromosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\RolesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\TallasViewModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\TipoCambiosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UsersViewModels.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -5218,6 +5220,9 @@
     <Content Include="Areas\Dashboard\Views\Financiamiento\Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TipoCambio\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TipoCambio\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TipoCambio\Action.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
