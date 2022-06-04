@@ -5250,6 +5250,7 @@
     <Content Include="Areas\Dashboard\Views\Financiamiento\Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Products\Sample.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5268,7 +5269,6 @@
     <Content Include="Views\Financiamiento\FinanciamientoSantander.cshtml" />
     <Content Include="Views\Categories\_CategoriesPictureMenu.cshtml" />
     <Content Include="Views\Products\DetalleBm3.cshtml" />
-    <Content Include="Views\Home\SearchBack.cshtml" />
     <Content Include="Views\Home\CatalogoMoto.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_ListingFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_SearchMoto.cshtml" />
@@ -5321,6 +5321,8 @@
           <DevelopmentServerPort>49462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:32569/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:32569/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

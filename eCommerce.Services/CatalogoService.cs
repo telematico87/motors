@@ -92,9 +92,7 @@ namespace eCommerce.Services
         public bool SaveCatalogo(Catalogo Catalogo)
         {
             var context = DataContextHelper.GetNewContext();
-
             context.Catalogos.Add(Catalogo);
-
             return context.SaveChanges() > 0;
         }
 

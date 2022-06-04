@@ -826,7 +826,7 @@
 <script>
 
     function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
-        debugger;
+        
         var contenido = ""
         var elemento;
         contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
@@ -840,22 +840,37 @@
     }
 
         $("#cboCatalogo").change(function () {
-            debugger;
-            let CatalogoID = $("#cboCatalogo").val();  
+            
+            let CatalogoID = $("#cboCatalogo").val();
             //var model = new Object();
-            //model.Nombre = Nombre; 
-            $.ajax({
+            //model.Nombre = Nombre;
+            @*$.ajax({
                 method: "GET",
                 url: "@Url.ChangedProducts("Products")",
-                ContentType: 'application/json;utf-8',
+                //ContentType: 'application/json;utf-8',
                 data: { CatalogoID }
               })
-		        .done(function (resultado) {
-                    console.log(resultado);
+                .done(function (resultado) {
+                    console.log(resultado.data);
 		        })
                 .fail(function () {
                      alert("error")
-		        });
+                });*@
+
+            $.ajax({
+                url: "@Url.ChangedProducts("Products")",
+                type: 'GET',
+                data: { 'catalogoID': 1 },
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    alert('success');
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
 
         });
 
@@ -1187,8 +1202,7 @@
         });
     });
 
-    $("#TipoProducto").change(function () {
-        debugger;
+    $("#TipoProducto").change(function () {      
         if ($('#TipoProducto').is(':checked')) {
 
             $("#TagMotos").css("display", "block");
