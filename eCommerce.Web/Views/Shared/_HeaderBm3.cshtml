@@ -123,7 +123,7 @@
                                             </li>
                                         }
                                         <li>
-                                            <a href="" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())"> Cerrar Sesión</a>
+                                            <a href="#" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())"> Cerrar Sesión</a>
                                         </li>
                                     }
                                     else
@@ -223,8 +223,8 @@
                                         <ul class="submenu-list img">
                                             <li>
                                                 <div class="banner-box">
-                                                    <div class="inner-box ">                                                        
-                                                        <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">                                                            
+                                                    <div class="inner-box ">
+                                                        <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
                                                             <img src="~/Content/bm3/images/menu/logo-efectiva.jpg" alt="" width="200" />
                                                         </a>
                                                     </div>
@@ -233,7 +233,7 @@
                                             <li>
                                                 <div class="banner-box">
                                                     <div class="inner-box">
-                                                        <a href="@Url.FinanciamientoSantander()" title="Financiamiento">                                                            
+                                                        <a href="@Url.FinanciamientoSantander()" title="Financiamiento">
                                                             <img src="~/Content/bm3/images/menu/logo-santander.png" alt="" width="200" />
                                                         </a>
                                                     </div>
@@ -254,3 +254,17 @@
         </div>
     </div>
 </section>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form id="logOffForm" method="post" action="@Url.Logoff()">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <script>
+        $("#btnLogOff").click(function () {
+            debugger;
+            $("#logOffForm").submit();
+        });
+    </script>
+}
