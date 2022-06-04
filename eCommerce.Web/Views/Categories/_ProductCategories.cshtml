@@ -54,7 +54,7 @@
                     {
                         <div class="col-md-12" id="category-movil">
                             <div class="inner-box">                                
-                                <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">
+                                <a href="@Url.CatalogoMoto(featuredCategory.ID)">
                                     <h2 style="color: #474B4E !important;">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
@@ -80,7 +80,7 @@
                                     <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
-                                    <a class="descubrir" href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
+                                    <a class="descubrir" href="@Url.CatalogoMoto(featuredCategory.ID)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                     {
                         <div class="col-md-12" id="category-movil">
                             <div class="inner-box">
-                                <a href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">
+                                <a href="@Url.CatalogoMoto(featuredCategory.ID)">
                                     <h2  style="color: #474B4E !important;">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
@@ -103,7 +103,7 @@
                                     <h2 class="productlarge2">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
-                                    <a class="descubrir" href="@Url.SearchProducts(category:featuredCategory.SanitizedName)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
+                                    <a class="descubrir" href="@Url.CatalogoMoto(featuredCategory.ID)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
                                 </div>
                             </div>
                         </div>
@@ -123,226 +123,6 @@
                 </div>
             </div>
         </section>
-
         reverse = !reverse;
     }
 }
-
-@*<section class="flat-imagebox style1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="banner-box">
-                        <div class="inner-box">
-                            <a href="#" title="">
-                                <img src="images/banner/banner-4.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="owl-carousel-product">
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="imagebox style2">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="images/producto/producto-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="box-content">
-                                    <div class="product-name">
-                                        <a href="#" title="">
-                                            <span>KTM</span>
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">$1,250.00</span>
-                                        <span class="regular">$2,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="box-top">
-                                    <div class="box-link">
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#" title="">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>*@
-

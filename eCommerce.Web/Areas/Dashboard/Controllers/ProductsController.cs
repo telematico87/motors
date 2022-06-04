@@ -13,6 +13,7 @@ using eCommerce.Shared.Enums;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using eCommerce.Shared.Commons;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -105,10 +106,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 
-            model.Categories = CategoriesService.Instance.GetCategories();
+            model.Categories = CategoriesService.Instance.GetCategoryByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            //model.Categories = CategoriesService.Instance.GetCategories();
             model.Colors = ColorService.Instance.GetAllColors();
             model.Catalogos = CatalogoService.Instance.GetCatalogos();
-            model.Marcas = MarcaService.Instance.ListarMarca();
+            model.Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            //model.Marcas = MarcaService.Instance.ListarMarca();
             model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
@@ -463,48 +466,59 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         }
 
 
+        //[HttpGet]
+        //public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
+        //{
+        //    Prueba pr = new Prueba();
+        //    List<CategoryResponse> catlist = new List<CategoryResponse>();
+        //    CategoryResponse objcat1 = new CategoryResponse();
+        //    objcat1.ID = 19;
+        //    objcat1.NombreCategoria = "Guantes";
+
+        //    CategoryResponse objcat2 = new CategoryResponse();
+        //    objcat2.ID = 20;
+        //    objcat2.NombreCategoria = "Cascos";
+
+        //    catlist.Add(objcat1);
+        //    catlist.Add(objcat2);
+
+        //    JsonResult result = new JsonResult();
+
+        //    pr.resultado = "hola";
+        //    pr.res = catlist;
+        //    //return Json(pr, JsonRequestBehavior.AllowGet);
+        //    //FinanciamientosViewModels model = new FinanciamientosViewModels();
+        //    //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+        //    //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+        //    //var response = new JavaScriptSerializer().Serialize(pr);
+        //    //var json = JsonSerializer.Serialize(res2); 
+        //    //return Json(response, JsonRequestBehavior.AllowGet);
+
+        //    try
+        //    {
+        //        var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+
+        //        result.Data = new { Success = pr.ToString(), Message = string.Empty};
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Data = new { Success = false, Message = ex.Message };
+        //    }
+
+        //    return result;
+
+
+        //}
+
+
+
         [HttpGet]
-        public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
-        {
-            Prueba pr = new Prueba();
-            List<CategoryResponse> catlist = new List<CategoryResponse>();
-            CategoryResponse objcat1 = new CategoryResponse();
-            objcat1.ID = 19;
-            objcat1.NombreCategoria = "Guantes";
+        public ActionResult ListarCategoriasbyCatalogo(int CatalogoID)
+        {                       
+            var categories = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            var nombre = categories[0].SanitizedName;
 
-            CategoryResponse objcat2 = new CategoryResponse();
-            objcat2.ID = 20;
-            objcat2.NombreCategoria = "Cascos";
-
-            catlist.Add(objcat1);
-            catlist.Add(objcat2);
-
-            JsonResult result = new JsonResult();
-
-            pr.resultado = "hola";
-            pr.res = catlist;
-            //return Json(pr, JsonRequestBehavior.AllowGet);
-            //FinanciamientosViewModels model = new FinanciamientosViewModels();
-            //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-            //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-            //var response = new JavaScriptSerializer().Serialize(pr);
-            //var json = JsonSerializer.Serialize(res2); 
-            //return Json(response, JsonRequestBehavior.AllowGet);
-
-            try
-            {
-                var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-
-                result.Data = new { Success = pr, Message = string.Empty};
-            }
-            catch (Exception ex)
-            {
-                result.Data = new { Success = false, Message = ex.Message };
-            }
-
-            return result;
-             
-
+            return Json(categories, JsonRequestBehavior.AllowGet);
         }
         public class Prueba
         {

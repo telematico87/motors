@@ -400,12 +400,17 @@
     <Content Include="Content\bm3\stylesheets\style_2.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
+    <Content Include="Content\images\07f5c4e6-0929-4fa5-b7ae-392bcbff9c1e.png" />
+    <Content Include="Content\images\0f34bbc9-18cf-4bc1-967f-9ed9f6697a04.jpg" />
     <Content Include="Content\images\12f7f99d-c762-4e15-9f9b-b9d70a6f89df.jpeg" />
     <Content Include="Content\images\1c40db5d-1cf2-460b-b04c-d9456ee5cc32.jpg" />
     <Content Include="Content\images\25a95dad-1ef6-46ee-bf19-5ecafeafceab.jpg" />
+    <Content Include="Content\images\278052d7-130b-4326-98d2-d6a1f5533166.png" />
+    <Content Include="Content\images\28169961-54e2-488a-9329-629e189975c2.jpg" />
     <Content Include="Content\images\28570ad2-a60e-4a09-8fc7-8ff74b625517.jpg" />
     <Content Include="Content\images\2ab27cb5-9490-4422-ab5e-ec2d1fc9677b.jfif" />
     <Content Include="Content\images\2b3e0823-71d1-4f39-b1af-3601b2f122b2.jpg" />
+    <Content Include="Content\images\32ba14de-ad7b-49a2-800c-583db6301744.jfif" />
     <Content Include="Content\images\3605f845-ee1c-47ee-bc92-1c8452a93512.jpg" />
     <Content Include="Content\images\3615c18b-7a8d-4b43-bbae-ff61d2cb0b9b.jpg" />
     <Content Include="Content\images\38e49711-ea6f-46e6-be4b-56897243d414.jpg" />
@@ -421,17 +426,39 @@
     <Content Include="Content\images\5d1f2c56-6ccb-4b41-babb-a0c3616b40dc.jpg" />
     <Content Include="Content\images\5d56a463-5645-4d0f-b977-a987beac7939.png" />
     <Content Include="Content\images\63af22fd-727b-4836-8dd1-53ba6234f7af.jpg" />
+    <Content Include="Content\images\67527ed0-df3c-47e8-80b3-ff59f4e4d74b.jpg" />
     <Content Include="Content\images\6cbd85fe-55f0-4733-aa14-4353b5728e46.jpg" />
+    <Content Include="Content\images\6cec3f1f-fa61-49c8-aa82-2d8a529350a0.jpg" />
+    <Content Include="Content\images\6eba7952-c2ec-4c1f-8157-7ced41daa8d5.jpg" />
+    <Content Include="Content\images\6f0f3693-bd83-48f7-aac7-088452d63092.png" />
     <Content Include="Content\images\739d79b4-1890-4d57-9f14-424adbb809e9.jpg" />
+    <Content Include="Content\images\7facee58-aa51-4add-97a1-74ace65d774f.jpg" />
+    <Content Include="Content\images\860288f5-e85b-492d-8ab4-7f23500c3f1c.jpg" />
     <Content Include="Content\images\8cd4a228-8b14-4dbb-ac98-109b75b1b15f.png" />
+    <Content Include="Content\images\8d1df8fd-57ef-431d-9d90-78e4343330fb.jpg" />
+    <Content Include="Content\images\90711db1-3ed9-4ed1-8918-3d0f356ff5fa.png" />
     <Content Include="Content\images\91824fb9-7043-42a7-a0b7-a166944cee2d.jpg" />
     <Content Include="Content\images\94375021-154f-430e-8b79-98301fc06058.jpg" />
+    <Content Include="Content\images\965989af-608f-4bef-b1f8-555278b8d76a.jpg" />
+    <Content Include="Content\images\97786fa1-531f-4506-8abf-1c504436ccff.png" />
+    <Content Include="Content\images\9b28f950-b520-4ee8-845d-c51dda60fde8.png" />
+    <Content Include="Content\images\9b8c2e9b-5149-45dd-af44-d303e32ca60c.jpg" />
     <Content Include="Content\images\9ef472b2-8730-4703-90aa-3c32140a5105.png" />
+    <Content Include="Content\images\a9343117-b3ca-4587-b820-85237a195c68.jpg" />
     <Content Include="Content\images\aa96a8e1-0026-4289-a610-40d18446b94a.jfif" />
     <Content Include="Content\images\b20f81de-4d68-4f3e-85fb-cc22a623e7e1.jpg" />
     <Content Include="Content\images\b4b52dc3-031c-42f1-80f2-c79144490e87.png" />
+    <Content Include="Content\images\b98e6eb9-01a3-4ad4-89f6-c35fbf7dfd45.png" />
+    <Content Include="Content\images\bce5b649-6080-4aac-ae5c-73d1ab464b6a.jpg" />
+    <Content Include="Content\images\c32bbc42-7b6c-4e03-b7b6-74259f567723.png" />
+    <Content Include="Content\images\categoria_movil.jpg" />
+    <Content Include="Content\images\cfdfa3a5-e089-466c-baa5-38e70d464afd.png" />
     <Content Include="Content\images\d1b17c74-0603-43f7-b223-7eb7e50a1763.png" />
     <Content Include="Content\images\d8acc40c-d78d-4856-99c5-339df6fdfac9.jpg" />
+    <Content Include="Content\images\da96ff84-9f50-471a-b472-5bb9f5bf78f9.jpg" />
+    <Content Include="Content\images\db9ff21c-25a8-4b67-8715-f5fd7133a884.png" />
+    <Content Include="Content\images\dcb5301a-d97f-411c-bfd0-7875cb5179e0.jpg" />
+    <Content Include="Content\images\de905c27-b041-4740-98b5-1e4244fa0cd3.png" />
     <Content Include="Content\images\demo\10.png" />
     <Content Include="Content\images\demo\100.png" />
     <Content Include="Content\images\demo\101.png" />
@@ -682,10 +709,15 @@
     <Content Include="Content\images\demo\a9b67549-4ef7-409b-92e2-8655aec21f4a.png" />
     <Content Include="Content\images\demo\af3a7ff7-d049-441c-ae4e-e216b3fbfd86.png" />
     <Content Include="Content\images\demo\c0ed2af7-6eb6-4b8a-bb73-45c4b4d410f1.png" />
+    <Content Include="Content\images\e37b7225-b896-4573-b06a-885f297bfc1c.png" />
+    <Content Include="Content\images\e9f0b440-01c8-4423-bae4-e76e5e842d5b.png" />
     <Content Include="Content\images\error-page.jpg" />
     <Content Include="Content\images\f39a4ad3-b4e8-4bc0-bb7f-19cec8c00545.jpg" />
+    <Content Include="Content\images\f3eeaa75-6f38-42db-8c5a-e9e9cca789bd.png" />
     <Content Include="Content\images\f794ab33-455c-4d66-afc7-fe9849775250.jpg" />
+    <Content Include="Content\images\f8db4047-9eeb-4893-9304-879e6245215f.png" />
     <Content Include="Content\images\fb40bf7e-02f2-4e98-9864-554186276cf7.png" />
+    <Content Include="Content\images\fb9f4a3b-03a8-4a64-8b7b-1132e84371db.jpg" />
     <Content Include="Content\images\ffdd1b1b-a2e4-4e93-8fd6-689fb51265f6.jpg" />
     <Content Include="Content\images\moto\012222-Yamaha-MT-09-SP-EBB28621-633x388.jpg" />
     <Content Include="Content\images\moto\580b585b2edbce24c47b2d01.png" />
@@ -5218,6 +5250,7 @@
     <Content Include="Areas\Dashboard\Views\Financiamiento\Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Financiamiento\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Products\Sample.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5236,7 +5269,6 @@
     <Content Include="Views\Financiamiento\FinanciamientoSantander.cshtml" />
     <Content Include="Views\Categories\_CategoriesPictureMenu.cshtml" />
     <Content Include="Views\Products\DetalleBm3.cshtml" />
-    <Content Include="Views\Home\SearchBack.cshtml" />
     <Content Include="Views\Home\CatalogoMoto.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_ListingFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_SearchMoto.cshtml" />
@@ -5289,6 +5321,8 @@
           <DevelopmentServerPort>49462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:32569/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:32569/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
