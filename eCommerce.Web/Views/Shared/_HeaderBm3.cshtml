@@ -1,31 +1,31 @@
 ﻿@using Microsoft.AspNet.Identity
 
 <style>
-    /*.moto-catalogo {
-        height: 120px;
-        margin: 0px;
-        width: 150px;        
-        text-align:center;
-    }
-
-    .moto-catalogo a img {
-        text-align: center;
-        vertical-align: middle;
-        height: 90px;
-    }
-
-        .moto-catalogo a h4{
-            text-align: center;            
+        /*.moto-catalogo {
+            height: 120px;
+            margin: 0px;
+            width: 150px;
+            text-align:center;
         }
 
-    .inner-text .text-category {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-*/
-    
+        .moto-catalogo a img {
+            text-align: center;
+            vertical-align: middle;
+            height: 90px;
+        }
+
+            .moto-catalogo a h4{
+                text-align: center;
+            }
+
+        .inner-text .text-category {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    */
+
 
 </style>
 
@@ -49,7 +49,7 @@
                 <div class="col-md-4">
                     <ul class="flat-infomation">
                         <li class="phone">
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -72,24 +72,26 @@
                                 <a href="@ConfigurationsHelper.TwitterURL" title="Twitter" target="_blank">
                                     <i class="fa fa-twitter" aria-hidden="true"></i>
                                 </a>
-                            </li>                            
+                            </li>
+
                         }
                         @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
                         {
                             <li>
-                                <a href="@ConfigurationsHelper.InstagramURL" title="Instagram"  target="_blank">
+                                <a href="@ConfigurationsHelper.InstagramURL" title="Instagram" target="_blank">
                                     <i class="fa fa-instagram" aria-hidden="true"></i>
                                 </a>
-                            </li>                            
+                            </li>
+
                         }
                         @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
                         {
                             <li>
                                 <a href="@ConfigurationsHelper.LinkedInURL" title="LinkedIn" target="_blank">
                                     <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                </a>                        
+                                </a>
                             </li>
-                        }                        
+                        }
                     </ul>
                 </div>
             </div>
@@ -119,7 +121,7 @@
                             </div>
                         </form>
                     </div>
-                </div>                
+                </div>
                 <div class="col-md-3">
                     <div class="box-cart">
                         <div class="inner-box">
@@ -138,7 +140,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-box">
-                                <ul>                                    
+                                <ul>
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         var hiUserMessage = "PP.Header.Menu.HiUser".LocalizedString().Replace("{user}", User.Identity.GetUserName());
@@ -150,9 +152,9 @@
                                                     Dashboard
                                                 </a>
                                             </li>
-                                        }                                    
+                                        }
                                         <li>
-                                            <a href="" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())"> Cerrar Sesión</a>
+                                            <a href="#" id="btnLogOff" title="@("PP.Header.Menu.LogOff".Localized())"> Cerrar Sesión</a>
                                         </li>
                                     }
                                     else
@@ -167,9 +169,9 @@
                         </div>
 
                         @if (User.Identity.IsAuthenticated)
-                        {                                                      
-                           
-                           
+                        {
+
+
                             <div class="inner-box">
                                 <a href="#" title="">
                                     <div class="icon-cart">
@@ -225,7 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-                        }                       
+                        }
                     </div>
                 </div>
             </div>
@@ -239,12 +241,12 @@
                         <div id="mainnav" class="mainnav style3">
                             <ul class="menu">
                                 <li class="column-1">
-                                    <a href="@Url.Home()" title="Inicio"><i class="ti-home"></i><span>Inicio</span></a>                                    
+                                    <a href="@Url.Home()" title="Inicio"><i class="ti-home"></i><span>Inicio</span></a>
                                 </li>
                                 <li class="has-mega-menu">
-                                    <a href="#" title=""><i class="ti-info-alt"></i><span>Nosotros</span></a>                                    
+                                    <a href="#" title=""><i class="ti-info-alt"></i><span>Nosotros</span></a>
                                 </li>
-                                <li class="has-mega-menu">                                    
+                                <li class="has-mega-menu">
                                     <a href="@Url.CatalogoMoto(0,0)" title=""><i class="ti-star"></i><span>Catalogo</span></a>
                                     @{ Html.RenderAction("CategoriesPictureMenu", "Categories"); }
                                 </li>
@@ -256,10 +258,10 @@
                                                 <div class="banner-box">
                                                     <div class="inner-box ">
                                                         @*<a href="@Url.Financiamiento()" title="Financiamiento">*@
-                                                            <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
-                                                                @*<i class="ti-money"></i><span>Financiera Efectiva</span>*@
-                                                                <img src="~/Content/bm3/images/menu/logo-efectiva.jpg" alt="" width="200" />
-                                                            </a>
+                                                        <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
+                                                            @*<i class="ti-money"></i><span>Financiera Efectiva</span>*@
+                                                            <img src="~/Content/bm3/images/menu/logo-efectiva.jpg" alt="" width="200" />
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -273,12 +275,12 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="has-mega-menu">
-                                    <a href="#" title=""><i class="ti-email"></i><span>Contacto</span></a>                                    
+                                    <a href="#" title=""><i class="ti-email"></i><span>Contacto</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -288,3 +290,16 @@
         </div>
     </div>
 </section>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form id="logOffForm" method="post" action="@Url.Logoff()">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <script>
+        $("#btnLogOff").click(function () {
+            $("#logOffForm").submit();
+        });
+    </script>
+}
