@@ -26,7 +26,7 @@
         <form action="@Url.ListAction("Catalogo")">
             <div class="input-group">
                 <input name="searchterm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="@("Buscar Catalogo")">
-                <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i> @("Nuevo Catalogo")</button>
+                <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i> @("Buscar Catalogo")</button>
                 <a href="@Url.ListAction("Catalogo")" role="button" class="form-control btn btn-primary"><i class="fas fa-redo-alt"></i> @("Dashboard.Color.Reset".Localized())</a>
                 <a href="@Url.CreateAction("Catalogo")" role="button" class="form-control btn btn-success"><i class="fas fa-plus"></i> Crear Catálogo</a>
             </div>

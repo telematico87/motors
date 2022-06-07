@@ -1,5 +1,5 @@
 ﻿@model eCommerce.Web.ViewModels.RegisterViewModel
-
+<br />
 <form id="registerForm" method="post">
     @Html.AntiForgeryToken()
     <div class="group-input">
@@ -25,7 +25,8 @@
     <div class="group-input errorsRow" style="display:none">
         <div class="alert alert-danger errorMessages mb-0" role="alert"></div>
     </div>
-    <button type="submit" id="registerButton" class="site-btn login-btn">@("PP.Register.RegisterAccount".LocalizedString())</button>
+    <br />
+    <button type="submit" id="registerButton" class="btn btn-success">@("PP.Register.RegisterAccount".LocalizedString())</button>
 </form>
 
 <script>

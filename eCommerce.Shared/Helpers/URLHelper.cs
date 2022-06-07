@@ -333,7 +333,6 @@ namespace eCommerce.Shared.Helpers
             return routeURL.ToLower();
         }
 
-
         public static string UserProfile(this UrlHelper helper, string tab = "")
         {
             string routeURL = string.Empty;

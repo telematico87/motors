@@ -51,6 +51,7 @@ namespace eCommerce.Web
                          "~/content/bm3/javascript/slick.js",
                          "~/content/bm3/javascript/slick-lightbox.js",
                          "~/content/bm3/javascript/waypoints.min.js",
+                         "~/content/js/site.js",
                          "~/content/bm3/javascript/main.js"));
 
             #endregion

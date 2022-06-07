@@ -19,10 +19,11 @@
             <a href="@Url.ForgotPassword()" class="forget-pass">@("PP.Login.ForgotPassword".LocalizedString())</a>
         </div>
     </div>
+    <br />
     <div class="group-input errorsRow" style="display:none">
         <div class="alert alert-danger errorMessages mb-0" role="alert"></div>
     </div>
-    <button type="submit" id="loginButton" class="site-btn login-btn">@("PP.Login.LoginAccount".LocalizedString())</button>
+    <button type="submit" id="loginButton" class="btn btn-success">@("PP.Login.LoginAccount".LocalizedString())</button>
 </form>
 
 
@@ -30,7 +31,7 @@
     var _usernameRequired = "@("PP.Login.Validation.UsernameRequired".LocalizedString())";
     var _passwordRequired = "@("PP.Login.Validation.PasswordRequired".LocalizedString())";
 
-    validateLoginForm();
+    //validateLoginForm();
 
     $("#loginForm").submit(function (e) {
         submitForm();
@@ -39,6 +40,7 @@
     });
 
     function submitForm() {
+        debugger;
         $(".errorsRow .errorMessages", "#loginForm").html("");
         $(".errorsRow", "#loginForm").hide(200);
         $(".errorsRow .errorMessages", "#loginForm").hide();
@@ -51,7 +53,9 @@
                 type: "post",
                 data: $("#loginForm").serialize(),
             })
-           .done(function (response) {
+                .done(function (response) {
+                    debugger;
+                    console.log(response);
                 if (response != null && response.Success) {
                     window.location.href = "@(!string.IsNullOrEmpty(Model.ReturnUrl) ? Model.ReturnUrl : Url.Home() )";
                 }

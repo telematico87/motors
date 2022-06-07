@@ -36,7 +36,7 @@
                 <div class="col-md-4">
                     <ul class="flat-support">
                         <li>
-                            <a href="#" title="">Catálogo</a>
+                            <a href="@Url.CatalogoMoto(0,0)" title="Visite nuestro Catalogo">Catálogo</a>
                         </li>
                         <li>
                             <a href="#" title="">Nosotros</a>
@@ -63,7 +63,6 @@
                                     <i class="fa fa-facebook" aria-hidden="true"></i>
                                 </a>
                             </li>
-
                         }
 
                         @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
@@ -170,8 +169,6 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-
-
                             <div class="inner-box">
                                 <a href="#" title="">
                                     <div class="icon-cart">
@@ -257,9 +254,7 @@
                                             <li>
                                                 <div class="banner-box">
                                                     <div class="inner-box ">
-                                                        @*<a href="@Url.Financiamiento()" title="Financiamiento">*@
                                                         <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento">
-                                                            @*<i class="ti-money"></i><span>Financiera Efectiva</span>*@
                                                             <img src="~/Content/bm3/images/menu/logo-efectiva.jpg" alt="" width="200" />
                                                         </a>
                                                     </div>
@@ -269,7 +264,6 @@
                                                 <div class="banner-box">
                                                     <div class="inner-box">
                                                         <a href="@Url.FinanciamientoSantander()" title="Financiamiento">
-                                                            @*<i class="ti-money"></i><span>Banco Santander</span>*@
                                                             <img src="~/Content/bm3/images/menu/logo-santander.png" alt="" width="200" />
                                                         </a>
                                                     </div>
@@ -298,7 +292,7 @@
     </form>
 
     <script>
-        $("#btnLogOff").click(function () {
+        $("#btnLogOff").click(function () {            
             $("#logOffForm").submit();
         });
     </script>
