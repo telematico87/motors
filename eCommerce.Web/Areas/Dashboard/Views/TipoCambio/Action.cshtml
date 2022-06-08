@@ -1,0 +1,164 @@
+﻿
+@model TipoCambiosActionViewModels
+@{
+    if (Model != null)
+    {
+        if (Model.ID > 0)
+        {
+            Model.PageTitle = "Editar Tipo de Cambio";
+            Model.PageDescription = "Dashboard.Color.EditColorDescription".LocalizedString();
+            Model.PageURL = Url.EditAction("TipoCambio", Model.ID);
+        }
+        else
+        {
+            Model.PageTitle = "Crear Tipo de Cambio";
+            Model.PageDescription = "Dashboard.Color.CreateColorDescription".LocalizedString();
+            Model.PageURL = Url.CreateAction("TipoCambio");
+        }
+
+        Model.PageImageURL = PictureHelper.PageImageURL("promos.jpg");
+    }
+}
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        @Model.PageTitle
+    </h3>
+    <p>
+        @Model.PageDescription
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder mb-4">
+    <form id="actionForm" method="post">
+        <input type="hidden" name="ID" value="@Model.ID" />
+
+        <div class="form-group">
+            <label>
+              Venta
+            </label>
+            <input class="form-control" name="Venta" value="@Model.Venta" placeholder="Venta" />
+        </div>
+        <div class="form-group">
+            <label>
+                Fecha
+            </label>
+            <input class="form-control" type="datetime" name="Fecha" value="@Model.Fecha" />
+        </div>
+
+        <hr />
+        <div class="form-group mb-0">
+            @if (Model.ID > 0)
+            {
+                <button class="btn btn-success" type="submit" id="actionButton">
+                    <i class="fas fa-edit mr-1"></i>
+                    Editar Tipo Cambio
+                </button>
+                <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ID">
+                    <i class="fas fa-trash-alt mr-1"></i>
+                    Eliminar Tipo Cambio
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-success" type="submit" id="actionButton">
+                    <i class="fas fa-plus mr-1"></i>
+                    Guardar
+                </button>
+            }
+            <a class="btn btn-secondary" href="@Url.ListAction("TipoCambio")">
+                <i class="fas fa-angle-double-left mr-1"></i>
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+
+    $("#actionForm").validate({
+        errorClass: "alert alert-danger",
+        errorElement: "div",
+        rules: {
+            Description: {
+                required: true,
+                minlength: 4,
+                maxlength: 150
+            }
+        },
+        messages: {
+            Description
+                : {
+                required: "@("Dashboard.Color.Action.Validation.DescriptionRequired".Localized())",
+
+            }
+        },
+        highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+        }
+    });
+
+    $("#actionForm").submit(function (e) {
+        if ($("#actionForm").valid()) {
+            addLoader("actionForm");
+            $.ajax({
+                type: "post",
+                data: $("#actionForm").serialize()
+			})
+            .done(function (response) {
+                if (response.Success) {
+                    window.location.href = "@Url.ListAction("TipoCambio")";
+			    }
+			    else {
+                    removeLoader("actionForm");
+                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+			    }
+			})
+            .fail(function () {
+                 removeLoader("actionForm");
+                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			});
+        }
+
+        e.preventDefault();
+    });
+
+    $(".deleteButton").click(function () {
+        var recordID = $(this).attr("data-id");
+
+        Swal.fire({
+            title: '@("Dashboard.Message.Warning".Localized())',
+            text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
+            cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
+        }).then((result) => {
+            if (result.value) {
+                addLoader("actionForm");
+				$.ajax({
+					url: "@Url.DeleteAction("TipoCambio")",
+                    type: "post",
+                    data: { id: recordID }
+				})
+                .done(function (response) {
+                    if (response != null && response.Success != undefined && response.Success) {
+                        window.location.href = "@Url.ListAction("TipoCambio")";
+				    }
+                    else {
+                        removeLoader("actionForm");
+                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+				    }
+				})
+                .fail(function () {
+                     removeLoader("actionForm");
+                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			    });
+            }
+        });
+    });
+</script>

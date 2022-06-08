@@ -134,6 +134,7 @@
     <Compile Include="SharedService.cs" />
     <Compile Include="TablaMasterService.cs" />
     <Compile Include="TallaService.cs" />
+    <Compile Include="TipoCambioService.cs" />
     <Compile Include="UbigeoServices.cs" />
   </ItemGroup>
   <ItemGroup>
