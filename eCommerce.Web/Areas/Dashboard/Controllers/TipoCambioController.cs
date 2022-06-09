@@ -71,7 +71,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     tcambio.ID = model.ID;
-                    tcambio.Venta = model.Venta;
+                    tcambio.Venta = Convert.ToDecimal(model.Venta);
                     tcambio.Compra = 0;
                     tcambio.Fecha = model.Fecha;
 
@@ -86,7 +86,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     TipoCambio tcambios = new TipoCambio
                     {
                         ID = model.ID,
-                        Venta = model.Venta,
+                        Venta = Convert.ToDecimal(model.Venta),
                         Compra = 0,
                         Fecha = model.Fecha
                     };
