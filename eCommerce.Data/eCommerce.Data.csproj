@@ -131,6 +131,10 @@
     <Compile Include="Migrations\202206030510442_v8_tipoCambio.designer.cs">
       <DependentUpon>202206030510442_v8_tipoCambio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206090508395_v9_valor_tipo_cambio.cs" />
+    <Compile Include="Migrations\202206090508395_v9_valor_tipo_cambio.designer.cs">
+      <DependentUpon>202206090508395_v9_valor_tipo_cambio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206030510442_v8_tipoCambio.resx">
       <DependentUpon>202206030510442_v8_tipoCambio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206090508395_v9_valor_tipo_cambio.resx">
+      <DependentUpon>202206090508395_v9_valor_tipo_cambio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
