@@ -19,8 +19,8 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
     public class TipoCambiosActionViewModels : PageViewModel
     {
         public int ID { get; set; }
-        public double Venta { get; set; }
-        public double Compra { get; set; }
+        public decimal Venta { get; set; }
+        public decimal Compra { get; set; }
         public DateTime Fecha { get; set; }
 
 
