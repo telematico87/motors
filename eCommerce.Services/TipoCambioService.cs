@@ -31,6 +31,17 @@ namespace eCommerce.Services
         #endregion
 
 
+        public decimal ConvertirSoles(decimal Dolares)
+        {
+            decimal VentaConvert;
+            decimal TipoCambioVenta; 
+            var context = DataContextHelper.GetNewContext();
+            var tcam = context.TipoCambios.OrderBy(x => x.Fecha).Select(i => new { Venta = i.Venta}); 
+            VentaConvert = Convert.ToDecimal(tcam);
+            TipoCambioVenta = VentaConvert * Dolares;
+            return TipoCambioVenta;
+        }
+
 
         public List<TipoCambio> GetAllTipoCambio()
         {
