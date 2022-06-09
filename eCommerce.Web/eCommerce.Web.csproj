@@ -5258,12 +5258,10 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
-    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
     <Content Include="Views\Shared\_HeaderBm3.cshtml" />
     <Content Include="Views\Shared\_FooterBm3.cshtml" />
     <Content Include="Views\Shared\_HeaderStylesBM3.cshtml" />
     <Content Include="Views\Home\_BannerSliderBm3.cshtml" />
-    <Content Include="Views\Home\_VistaMarcaBm3.cshtml" />
     <Content Include="Views\Categories\_CategoriaHomeSectionBm3.cshtml" />
     <Content Include="Views\Categories\_ProductByCategoriesBm3.cshtml" />
     <Content Include="Views\Categories\_ProductCategories.cshtml" />
@@ -5279,7 +5277,6 @@
     <Content Include="Views\Home\Catalogo\MotoFilters\_CategoriesFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_MarcasFilter.cshtml" />
     <Content Include="Views\Products\_Destacados.cshtml" />
-    <Content Include="Views\Home\_HomeMarcas.cshtml" />
     <Content Include="Views\Home\HomeMarcasMoto.cshtml" />
   </ItemGroup>
   <ItemGroup>

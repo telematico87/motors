@@ -36,67 +36,19 @@ namespace eCommerce.Web.Controllers
             {
                 SlidersConfigurations = ConfigurationsService.Instance.GetConfigurationsByType((int)ConfigurationTypes.Sliders)
             };
-
             return PartialView("_BannerSliderBm3", model);
         }
-
         
         public ActionResult HomeMarcasMoto()
-        {
-            //HomeMarcasMoto model = new HomeMarcasMoto();
-            List<Marca> marcasList = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
-            
-
+        {                        
             HomeMarcasMoto model = new HomeMarcasMoto
             {
-                //Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)
-                Marcas = marcasList
+                Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)                
             };
-
             return PartialView("HomeMarcasMoto", model);
-
-
-        }
-        
-        public ActionResult HomeMarcasMotos()
-        {
-            //HomeMarcasMoto model = new HomeMarcasMoto();
-            var marcasList = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
-            //model.Marcas = marcas;
-            //Console.WriteLine("Cantidad de Marcas: " + marcas.Count);
-            //return PartialView("_HomeMarcas", model);
-            List<Marca> marcasDev = new List<Marca>();
-            Marca marca1 = new Marca();
-            Picture pic = new Picture();
-            pic.ID = 1214;
-            pic.URL = "38e49711-ea6f-46e6-be4b-56897243d414.jpg";
-
-            marca1.CatalogoID = 1;
-            marca1.Picture = pic;
-
-            marcasDev.Add(marca1);
-
-            HomeMarcasMoto model = new HomeMarcasMoto
-            {
-                //Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)
-                Marcas = marcasDev
-            };
-
-            return PartialView("_HomeMarcas", model);
-
-
-        }
-
-
-        public ActionResult CatalogoMoto2()
-        {
-
-            return View();
-        }
-
+        }                       
 
         //metodo para motos
-
         public ActionResult CatalogoMoto(int categoryId, int marcaId, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
         {
             recordSize = recordSize ?? (int)RecordSizeEnums.Size20;
@@ -151,8 +103,6 @@ namespace eCommerce.Web.Controllers
 
             return View(model);
         }
-
-
 
         public ActionResult Search(string category, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
         {

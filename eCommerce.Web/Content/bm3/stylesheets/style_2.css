@@ -3565,6 +3565,10 @@ ol.comment-list li.comment .comment-text .comment-content p {
 	display: block;
 }
 
+.home-marca {
+	height: 100px;
+}
+
 @-webkit-keyframes effect-2 {
 	from {
 		-webkit-transform:rotate(0deg);
