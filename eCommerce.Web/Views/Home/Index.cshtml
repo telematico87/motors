@@ -33,9 +33,11 @@
     }
 
     Html.RenderAction("HomeSliders", "Home");
+    Html.RenderAction("HomeMarcasMoto", "Home");
     Html.RenderAction("FeaturedCategories", "Categories", new { recordSize = 3, isForHomePage = true });
     Html.RenderAction("ProductsByFeaturedCategories", "Categories", new { recordSize = 3 });
 }
+
 
 
 <div class="container-fluid my-4 pb-4">
@@ -120,47 +122,5 @@
 
             </div>
         </div>
-    </section>
-    @*<section class="latest-blog spad py-0">
-            <div class="benefit-items">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="single-benefit">
-                                <div class="sb-icon">
-                                    <i class="fas fa-shipping-fast"></i>
-                                </div>
-                                <div class="sb-text">
-                                    <h6>@("PP.Home.Showcase.FastDelivery".LocalizedString())</h6>
-                                    <p>@("PP.Home.Showcase.OnTimeDelivery".LocalizedString())</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="single-benefit">
-                                <div class="sb-icon">
-                                    <i class="fas fa-headset"></i>
-                                </div>
-                                <div class="sb-text">
-                                    <h6>@("PP.Home.Showcase.247Support".LocalizedString())</h6>
-                                    <p>@("PP.Home.Showcase.AlwaysReadyToHelp".LocalizedString())</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="single-benefit border-0">
-                                <div class="sb-icon">
-                                    <i class="fas fa-user-shield"></i>
-                                </div>
-                                <div class="sb-text">
-                                    <h6>@("PP.Home.Showcase.SecurePayments".LocalizedString())</h6>
-                                    <p>@("PP.Home.Showcase.SecurePaymentOptions".LocalizedString())</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
-
+    </section>   
 }

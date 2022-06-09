@@ -1475,6 +1475,9 @@
 	.slider .slider-item.style9 .item-text {
 		padding: 25px 20px;
 	}
+	.home-marca {
+		height: 80px;
+	}
 }
 
 @media only screen and (max-width:767px) {
@@ -1895,6 +1898,9 @@
 		width: 50%;
 	}
 
+	.home-marca {
+		height: 60px;
+	}
 
 }
 
@@ -2127,6 +2133,10 @@
 }
 
 @media only screen and (max-width:480px) {
+
+	.home-marca {
+		height: 60px;
+	}
 
 	#category-movil {
 		display: block;
