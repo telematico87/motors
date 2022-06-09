@@ -21,7 +21,7 @@ namespace eCommerce.Web.Controllers
         public ActionResult Index()
         {
             /* if multi language is enabled and the home page is accessed without any language, redirect to the default language */
-            if(ConfigurationsHelper.EnableMultilingual && Request.Url.AbsolutePath.ToString().Equals("/"))
+            if (ConfigurationsHelper.EnableMultilingual && Request.Url.AbsolutePath.ToString().Equals("/"))
             {
                 return Redirect(Url.Home());
             }
@@ -38,6 +38,53 @@ namespace eCommerce.Web.Controllers
             };
 
             return PartialView("_BannerSliderBm3", model);
+        }
+
+        
+        public ActionResult HomeMarcasMoto()
+        {
+            //HomeMarcasMoto model = new HomeMarcasMoto();
+            List<Marca> marcasList = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            
+
+            HomeMarcasMoto model = new HomeMarcasMoto
+            {
+                //Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)
+                Marcas = marcasList
+            };
+
+            return PartialView("HomeMarcasMoto", model);
+
+
+        }
+        
+        public ActionResult HomeMarcasMotos()
+        {
+            //HomeMarcasMoto model = new HomeMarcasMoto();
+            var marcasList = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            //model.Marcas = marcas;
+            //Console.WriteLine("Cantidad de Marcas: " + marcas.Count);
+            //return PartialView("_HomeMarcas", model);
+            List<Marca> marcasDev = new List<Marca>();
+            Marca marca1 = new Marca();
+            Picture pic = new Picture();
+            pic.ID = 1214;
+            pic.URL = "38e49711-ea6f-46e6-be4b-56897243d414.jpg";
+
+            marca1.CatalogoID = 1;
+            marca1.Picture = pic;
+
+            marcasDev.Add(marca1);
+
+            HomeMarcasMoto model = new HomeMarcasMoto
+            {
+                //Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)
+                Marcas = marcasDev
+            };
+
+            return PartialView("_HomeMarcas", model);
+
+
         }
 
 
@@ -86,7 +133,7 @@ namespace eCommerce.Web.Controllers
                 {
                     model.MarcaID = selectedMarca.ID;
                     model.MarcaName = selectedMarca.Descripcion;
-                    model.SelectedMarca = selectedMarca;                    
+                    model.SelectedMarca = selectedMarca;
                 }
             }
 
@@ -96,10 +143,10 @@ namespace eCommerce.Web.Controllers
             model.SortBy = sortby;
             model.PageSize = recordSize;
 
-            var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;            
+            var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;
 
             model.Products = ProductsService.Instance.SearchProductsMoto(selectedCategoryIDs, marcaId, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
-            
+
             model.Pager = new Pager(count, pageNo, recordSize.Value);
 
             return View(model);
@@ -130,13 +177,13 @@ namespace eCommerce.Web.Controllers
                     model.SearchedCategories = CategoryHelpers.GetAllCategoryChildrens(selectedCategory, model.Categories);
                 }
             }
-            
+
             model.SearchTerm = q;
             model.PriceFrom = from;
             model.PriceTo = to;
             model.SortBy = sortby;
             model.PageSize = recordSize;
-            
+
             var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;
 
             model.Products = ProductsService.Instance.SearchProducts(selectedCategoryIDs, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
@@ -175,7 +222,7 @@ namespace eCommerce.Web.Controllers
 
             var result = SharedService.Instance.SaveNewsletterSubscription(newsletterSubscription);
 
-            if(result)
+            if (result)
             {
                 jsonResult.Data = new
                 {

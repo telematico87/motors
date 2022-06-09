@@ -1,0 +1,27 @@
+﻿@model eCommerce.Web.ViewModels.HomeMarcasMoto
+
+<h1>Marcas</h1>
+
+@if (Model != null && Model.Marcas.Count > 0)
+{
+    <section class="flat-row flat-brand">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="owl-carousel-brand">
+                        <h3>Entro</h3>
+
+                        @foreach (Marca marca in Model.Marcas)
+                        {
+                            var urlImages = "~/Content/images/"+marca.Picture.URL; 
+                            <li>
+
+                                <img src="@urlImages" alt="">
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+}
