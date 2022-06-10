@@ -30,33 +30,22 @@ namespace eCommerce.Services
         }
         #endregion
 
-
-        public class ListaCambio{
-             public decimal Venta { get; set; }
-        }
-
-        public List<TipoCambio> ConvertirSoles()
-        {
-            List<ListaCambio> lstcambio = new List<ListaCambio>();
-            decimal VentaConvert; 
+         
+        public decimal GetTypeUltimateChanged()
+        { 
             var context = DataContextHelper.GetNewContext();
-            var tcam = context.TipoCambios.OrderBy(x => x.Fecha).ToList();
-             
-            //VentaConvert = Convert.ToDecimal(tcam);
-            //TipoCambioVenta = VentaConvert * Dolares;
-            return tcam;
+            var tipocam = context.TipoCambios.OrderByDescending(c => c.Fecha).Select(c => c.Venta).Take(1).ToList();
+            decimal changed = tipocam.Count > 0 ? tipocam[0] : 1 ; 
+            return changed;
         }
-
-
+         
         public List<TipoCambio> GetAllTipoCambio()
         {
             var context = DataContextHelper.GetNewContext();
             var tcambio = context.TipoCambios.ToList();
             return tcambio.ToList();
         }
-
          
-
         public List<TipoCambio> SearchTipoCambio(string searchTerm, int? pageNo, int recordSize, out int count)
         {
             var context = DataContextHelper.GetNewContext();

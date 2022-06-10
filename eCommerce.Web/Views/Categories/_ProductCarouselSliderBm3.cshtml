@@ -3,10 +3,10 @@
 
 @if (Model != null && Model.Count > 0)
 {
-    var tcambio = TipoCambioService.Instance.ConvertirSoles();
+    decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
 
-var tipoCambio = 4.01;
-<div class="owl-carousel-product" data-loop="@(Model.Count > 4 ? "true" : "false")">
+    //decimal tipoCambio = tcambio.Count > 0 ? (decimal)tcambio[0].Venta : 1;
+    <div class="owl-carousel-product" data-loop="@(Model.Count > 4 ? "true" : "false")">
     @foreach (var product in Model)
     {
 
@@ -24,8 +24,8 @@ var tipoCambio = 4.01;
 
         //var iconoMoneda = product.TipoMoneda == 2 ? "$" : "S/";
         var iconoMoneda = "S/";
-        var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * (decimal)tipoCambio : productPrice;
-        var productPriceNormal = product.TipoMoneda == 2 ? product.Price * (decimal)tipoCambio : product.Price;
+        var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+        var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
         var typeCoins = 1;
 
 
