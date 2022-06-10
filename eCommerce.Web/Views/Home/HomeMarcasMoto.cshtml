@@ -1,0 +1,25 @@
+﻿@model eCommerce.Web.ViewModels.HomeMarcasMoto
+
+@if (Model != null && Model.Marcas.Count > 0)
+{
+    <section class="flat-row flat-brand">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="owl-carousel-brand">
+
+                        @foreach (Marca marca in Model.Marcas)
+                        {
+                            <li>
+                                <a href="@Url.CatalogoMoto(0, marca.ID)" title="@marca.Descripcion">
+                                    @Html.Picture(picture: marca.Picture, classes: "home-marca", defaultPic: "site/default-bg.jpg", alt: marca.Descripcion != null ? marca.Descripcion : string.Empty)
+                                </a>
+
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+}

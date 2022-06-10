@@ -10,4 +10,10 @@ namespace eCommerce.Web.ViewModels
     {
         public List<Configuration> SlidersConfigurations { get; set; }
     }
+
+    public class HomeMarcasMoto
+    {
+        public List<Marca> Marcas { get; set; }
+    }  
+
 }

@@ -23,9 +23,9 @@
     <div class="card-header">
         <form action="@Url.ListAction("Products")">
             <div class="input-group">
-                <input name="searchterm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="@("Dashboard.Products.SearchPlaceholder".Localized())">
+                <input name="searchterm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="Buscar Productos por Nombre">
                 <select class="form-control custom-select" name="categoryid">
-                    <option value="">@("Dashboard.Products.SelectByCategory".Localized())</option>
+                    <option value="">Seleccionar por Categoria</option>
                     @foreach (var category in Model.Categories)
                     {
                         var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
