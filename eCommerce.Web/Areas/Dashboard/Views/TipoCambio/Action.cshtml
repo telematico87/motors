@@ -38,7 +38,7 @@
             <label>
               Venta
             </label>
-            <input class="form-control" type="number" name="Venta" value="@Model.Venta" placeholder="Venta" />
+            <input class="form-control" name="Venta" value="@Model.Venta" placeholder="Venta" />
         </div>
         <div class="form-group">
             <label>
@@ -80,19 +80,12 @@
         $.datepicker.setDefaults($.datepicker.regional["es"]);
         $("#txtFecha").datepicker({
             dateFormat: 'dd/mm/yy',
-            firstDay: 1
+            firstDay: 1, 
         }).datepicker("setDate", new Date());
+       
     });
-    //$('#txtFecha').datepicker({
-    //    format: 'DD-MM-YYYY', 
-    //    changeMonth: true,
-    //    changeYear: true,
-    //    firstDay: 1
-    //    }).datepicker("setDate", new Date());
-    //});
-
- 
-
+   
+     
     $("#actionForm").validate({
         errorClass: "alert alert-danger",
         errorElement: "div",

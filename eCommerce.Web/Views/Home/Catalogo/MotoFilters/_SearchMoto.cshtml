@@ -1,5 +1,6 @@
 ﻿@using eCommerce.Entities
 @using eCommerce.Shared
+@using eCommerce.Services
 @model eCommerce.Web.ViewModels.ProductsViewModel
 
 <div class="wrap-imagebox">
@@ -9,7 +10,7 @@
 
     @if (Model.Products != null && Model.Products.Count > 0)
     {
-
+        decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
 
         <div class="tab-product">
             <div class="row sort-box">
@@ -30,6 +31,12 @@
 
                     var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
 
+                    var iconoMoneda = "S/";
+                    var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+                    var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
+                    var typeCoins = 1;
+
+
                     <div class="col-lg-3 col-6">
                         <div class="product-box">
                             <div class="imagebox style2">
@@ -48,11 +55,11 @@
 
                                     </div>
                                     <div class="price">
-                                        <span class="sale">@productPrice.WithCurrency(0)</span>
+                                        <span class="sale">@productPriceDiscount.WithCurrency(typeCoins)</span>
                                         @if (product.Discount.HasValue && product.Discount.Value > 0)
                                         {
                                             <span class="regular">
-                                                @product.Price.WithCurrency(0)
+                                                 @productPriceNormal.WithCurrency(typeCoins)
                                             </span>
                                         }
                                     </div>

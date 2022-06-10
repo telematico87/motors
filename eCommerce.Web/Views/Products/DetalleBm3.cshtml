@@ -1,4 +1,5 @@
 @model eCommerce.Web.ViewModels.ProductDetalleViewModel
+@using eCommerce.Services
 
 @*@section IncludeHeaderStylesScripts{
         <link href="~/Content/lib/drift-1.4.0/drift-basic.min.css" rel="stylesheet" />
@@ -28,6 +29,12 @@
 
 @if (Model != null)
 {
+
+    decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+    var productPrice = Model.Discount.HasValue && Model.Discount.Value > 0 ? Model.Discount.Value : Model.Price;
+    var productPriceDiscount = Model.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+    var productPriceNormal = Model.TipoMoneda == 2 ? Model.Price * tipoCambio : Model.Price;
+    var typeCoins = 1;
 
     <section class="flat-row flat-product-detail">
         <div class="container-full">
