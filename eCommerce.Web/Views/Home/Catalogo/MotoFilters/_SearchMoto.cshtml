@@ -1,0 +1,142 @@
+﻿@using eCommerce.Entities
+@using eCommerce.Shared
+@using eCommerce.Services
+@model eCommerce.Web.ViewModels.ProductsViewModel
+
+<div class="wrap-imagebox">
+    @{
+        Html.RenderPartial("Catalogo/MotoFilters/_ListingFilter", Model);
+    }
+
+    @if (Model.Products != null && Model.Products.Count > 0)
+    {
+        decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+
+        <div class="tab-product">
+            <div class="row sort-box">
+                @*Un Producto*@
+
+                @foreach (var product in Model.Products)
+                {
+
+                    var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                    var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                    var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
+
+                    var detailsLink = Url.ProductDetails(category: product.Category.SanitizedName, ID: product.ID, sanitizedtitle: sanitizedSEOTitle);
+
+                    var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+
+                    var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
+
+                    var iconoMoneda = "S/";
+                    var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+                    var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
+                    var typeCoins = 1;
+
+
+                    <div class="col-lg-3 col-6">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
+                                    <a href="@detailsLink" title="">
+                                        @Html.Thumbnail(picture: thumbnail, targetSize: 200, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                    </a>
+                                </div>
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="@detailsLink">
+                                            <span>
+                                                @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                            </span>
+                                        </a>
+
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">@productPriceDiscount.WithCurrency(typeCoins)</span>
+                                        @if (product.Discount.HasValue && product.Discount.Value > 0)
+                                        {
+                                            <span class="regular">
+                                                 @productPriceNormal.WithCurrency(typeCoins)
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="@detailsLink" title="@("PP.Shopping.ViewProduct".Localized())">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div style="height: 9px;"></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning m-0" role="alert">
+            @("PP.Search.ProductsNotFound".Localized())
+        </div>
+    }
+
+</div>
+
+@*Paginacion*@
+
+@if (Model.Pager != null && Model.Pager.TotalPages > 1)
+{
+
+    <div class="blog-pagination">
+        <ul class="flat-pagination style1">
+            <li class="prev">
+                <a href="#" title="">
+                    <img src="images/icono/left-1.png" alt="">Anterior
+                </a>
+            </li>
+
+            @if (Model.Pager.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link disabled" href="#">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.SearchProducts(category: Model.CategoryName, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+
+
+            <li>
+                <a href="#" class="waves-effect" title="">01</a>
+            </li>
+            <li>
+                <a href="#" class="waves-effect" title="">02</a>
+            </li>
+            <li class="active">
+                <a href="#" class="waves-effect" title="">03</a>
+            </li>
+            <li>
+                <a href="#" class="waves-effect" title="">04</a>
+            </li>
+            <li class="next">
+                <a href="#" title="">
+                    Siguiente<img src="images/icono/right-1.png" alt="">
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+}

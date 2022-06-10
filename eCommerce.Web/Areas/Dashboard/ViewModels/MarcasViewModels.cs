@@ -23,8 +23,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string URL { get; set; } 
         public int? PictureID { get; set; }
         public virtual Picture Picture { get; set; }
-        public List<Catalogo> Catalogos { get; set; }
-
+        public List<Catalogo> Catalogos { get; set; } 
         public int CatalogoID { get; set; }
     }
 }

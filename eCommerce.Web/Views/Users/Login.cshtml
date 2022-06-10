@@ -5,7 +5,7 @@
     Model.PageURL = Url.Login();
     Model.PageImageURL = PictureHelper.PageImageURL("login.jpg");
 }
-
+<br />
 <div class="register-login-section spad">
     <div class="container" id="login-container">
         <div class="row">
@@ -14,15 +14,18 @@
                     <div class="page-content-header">
                         <h2>@Model.PageTitle</h2>
                     </div>
+                    <br />
                     @Html.Partial("_Login", Model)
                     <div class="switch-login">
                         <a href="@Url.Register()" class="or-login">
                             @("PP.Login.RegisterAccount".LocalizedString())
                         </a>
                     </div>
+                    <br />
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = Model.ReturnUrl })
                 </div>
             </div>
         </div>
     </div>
 </div>
+ 

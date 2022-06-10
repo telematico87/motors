@@ -1,10 +1,17 @@
 ﻿@model eCommerce.Web.ViewModels.ProductsByFeaturedCategoriesViewModel
 
-
-
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
-      
+
+    foreach (var featuredCategory in Model.Categories)
+    {
+        var currentLanguageCategoryRecord = featuredCategory.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+        var products = featuredCategory.Products != null ? featuredCategory.Products.Where(x => !x.IsDeleted && x.IsActive).OrderByDescending(x => x.ModifiedOn).Take(8).ToList() : null;
+
+    }
+
+    //Seccion Banner Publicidad
     <section class="flat-row flat-banner-box">
         <div class="container">
             <div class="row">
@@ -12,7 +19,8 @@
                     <div class="banner-box">
                         <div class="inner-box">
                             <a href="#" title="">
-                                <img src="Content/bm3/images/banner/banner-4.jpg" alt="">
+                                <img src="~/Content/bm3/images/banner/banner-4.jpg" alt="" class="img-res-no">
+                                <img src="~/Content/bm3/images/banner/banner-categoria-moto_1.jpg" alt="" class="img-res-si">
                             </a>
                         </div>
                     </div>
@@ -43,10 +51,10 @@
         </div>
     </section>
 
-    <section class="flat-row flat-banner-box">
+    <section class="flat-row flat-banner-box publicidad-2-web">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-3">
                     <div class="banner-box">
                         <div class="inner-box">
                             <a href="#" title="">
@@ -55,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-3">
                     <div class="banner-box">
                         <div class="inner-box">
                             <a href="#" title="">
@@ -68,27 +76,22 @@
         </div>
     </section>
 
-    <section class="flat-row flat-banner-box">
+    <section class="flat-row flat-banner-box publicidad-2-movil">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="banner-box">
-                        <div class="inner-box">
-                            <a href="#" title="">
-                                <img src="images/banner/banner-6.jpg" alt="">
-                            </a>
-                        </div>
+                <div class="banner-box two-half">
+                    <div class="inner-box">
+                        <a href="#" title="">
+                            <img src="~/Content/bm3/images/banner/banner-1.jpg" alt="">
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="banner-box">
-                        <div class="inner-box">
-                            <a href="#" title="">
-                                <img src="images/banner/banner-6.jpg" alt="">
-                            </a>
-                        </div>
+                    <div class="inner-box">
+                        <a href="#" title="">
+                            <img src="~/Content/bm3/images/banner/banner-1.jpg" alt="">
+                        </a>
                     </div>
-                </div>
+                    <div class="clearfix"></div>
+                </div>                
             </div>
         </div>
     </section>

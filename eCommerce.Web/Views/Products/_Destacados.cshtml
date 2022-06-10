@@ -1,0 +1,95 @@
+﻿@model eCommerce.Web.ViewModels.RelatedProductsViewModel
+
+@{
+    String iconoMoneda = "S/";
+
+    iconoMoneda = Model.TipoMonedaDestacado == 2 ? "$" : "S/";
+
+}
+
+
+@if (Model.Products != null && Model.Products.Count > 0)
+{
+    <section class="flat-product-imagebox style1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="text-box">
+                        <div class="inner-box">
+                            <h3>MOTOS RELACIONADAS</h3>
+                            <p>Te damos las opciones similares a lo que estás buscando.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="owl-carousel-product">
+                        @foreach (var product in Model.Products)
+                        {
+                            var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                            var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                            var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
+
+                            var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
+
+                            var detailsLink = Url.ProductDetails(category: product.Category.SanitizedName, ID: product.ID);
+
+                            var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+
+
+
+                            <div class="product-box">
+                                <div class="imagebox style2">
+                                    <div class="box-image">
+                                        <a href="#" title="">
+                                            @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                        </a>
+                                    </div>
+                                    <div class="box-content">
+                                        <div class="product-name" style="font-weight:bolder">
+                                            <a href="@detailsLink">
+                                                <h5>
+                                                    @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                                </h5>
+                                            </a>
+                                        </div>
+                                        <div class="price">
+                                            <span class="sale">
+                                                @productPrice.WithCurrency(product.TipoMoneda)
+                                            </span>
+                                            @if (product.Discount.HasValue && product.Discount.Value > 0)
+                                            {
+                                                <span class="regular">
+                                                    @product.Price.WithCurrency(product.TipoMoneda)
+
+                                                </span>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="box-top">
+                                        <div class="box-link">
+                                            @if (product.TipoProducto == false)
+                                            {
+                                                <a href="@detailsLink" title="@("PP.Shopping.ViewProduct".Localized())">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </a>
+                                            }
+                                            <a title="@("PP.Shopping.AddToCart".Localized())" data-id="@product.ID" data-price="@product.Price" class="pointerCursor btnAddToCart">
+                                                <i class="ti-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

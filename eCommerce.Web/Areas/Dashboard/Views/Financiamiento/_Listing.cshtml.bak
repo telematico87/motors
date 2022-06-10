@@ -1,0 +1,209 @@
+﻿@using eCommerce.Entities;
+@model eCommerce.Web.Areas.Dashboard.ViewModels.FinanciamientosListingViewModels
+
+@if (Model != null && Model.Financiamientos != null && Model.Financiamientos.Count > 0)
+{
+    
+    <table class="table table-hover table-responsive-sm m-0">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    Nombres
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Correo 
+                </th>
+                <th>
+                    Celular
+                </th>
+                <th>
+                    TipoDocumento
+                </th>
+                <th>
+                    NroDocumento
+                </th>
+                <th>
+                    Departamento
+                </th>
+                <th>
+                    Provincia
+                <th>
+                    Marca
+                </th>
+                <th>
+                    Modelo
+                </th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var financiamient in Model.Financiamientos)
+            {
+                
+            <tr>
+                <td>
+                    @financiamient.Nombre
+                </td>
+                <td>
+                    @financiamient.Apellido
+                </td>
+                <td>
+                    @financiamient.Correo
+                </td>
+                <td>
+                    @financiamient.Celular
+                </td>
+<<<<<<< HEAD
+                <td> 
+                    @financiamient.TipoDocumento
+=======
+                <td>
+                    
+
+                    @if (financiamient.TipoDocumento > 0)
+                    {
+                        var tipoDocumento = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == financiamient.TipoDocumento);
+
+                        if (tipoDocumento != null)
+                        {
+                            <span>
+                                @tipoDocumento.Valor
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span>
+                            -
+                        </span>
+                    }
+
+
+
+>>>>>>> dev
+                </td>
+                <td>
+                    @financiamient.NroDocumento
+                </td>
+                <td>
+                    @financiamient.Departamento
+                </td>
+                <td>
+                    @financiamient.Provincia
+                </td>
+                <td>
+                    @financiamient.Marca
+                </td>
+                <td>
+                    @financiamient.Modelo
+                </td>
+                 
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="@Url.EditAction("Financiamiento", financiamient.ID)">
+                            <i class="fas fa-edit mr-1"></i>
+                           Revisar
+                        </a>
+                        <button class="deleteButton btn btn-danger" data-id="@financiamient.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                           Eliminar
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    if (Model.Pager != null && Model.Pager.TotalPages > 1)
+    {
+        <nav class="my-2">
+            <ul class="pagination justify-content-center">
+                @if (Model.Pager.CurrentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">@("Dashboard.Pagination.Previous".Localized())</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, Model.Pager.CurrentPage - 1)">@("Dashboard.Pagination.Previous".Localized())</a>
+                    </li>
+                }
+
+                @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+                {
+                    var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
+
+                    <li class="page-item @active">
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, page)">
+                            @page
+                        </a>
+                    </li>
+                }
+
+                @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">@("Dashboard.Pagination.Next".Localized())</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Financiamiento(Model.SearchTerm, Model.Pager.CurrentPage + 1)">@("Dashboard.Pagination.Next".Localized())</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning rounded-0 m-0" role="alert">
+       No funciona
+    </div>
+}
+
+<script>
+    $(".deleteButton").click(function () {
+        var recordID = $(this).attr("data-id");
+
+        Swal.fire({
+            title: '@("Dashboard.Message.Warning".Localized())',
+            text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
+            cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
+        }).then((result) => {
+            if (result.value) {
+                addLoader("list-holder");
+				$.ajax({
+					url: "@Url.DeleteAction("Financiamiento")",
+                    type: "post",
+                    data: { id: recordID }
+				})
+                .done(function (response) {
+                    if (response != null && response.Success != undefined && response.Success) {
+                        window.location.href = "@Url.ListAction("Financiamiento")";
+				    }
+                    else {
+                        removeLoader("list-holder");
+                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+				    }
+				})
+                .fail(function () {
+                     removeLoader("list-holder");
+                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			    });
+            }
+        });
+    });
+</script>
+

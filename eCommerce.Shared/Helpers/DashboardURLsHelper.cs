@@ -210,6 +210,35 @@ namespace eCommerce.Shared.Helpers
         }
 
 
+        //Marca
+        public static string Marca(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", "Marca");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_EntityList", routeValues);
+            }
+            else routeURL = helper.RouteUrl("EntityList", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
 
         public static string Catalogo(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
         {
@@ -238,6 +267,65 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
+
+        public static string Financiamiento(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", "Financiamiento");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_EntityList", routeValues);
+            }
+            else routeURL = helper.RouteUrl("EntityList", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+
+
+        public static string TipoCambio(this UrlHelper helper, string searchTerm = "", int? pageNo = 0)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", "TipoCambio");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_EntityList", routeValues);
+            }
+            else routeURL = helper.RouteUrl("EntityList", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
 
 
         //crear url helper para color by fortiz
@@ -843,5 +931,27 @@ namespace eCommerce.Shared.Helpers
             routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
             return routeURL.ToLower();
         }
+
+
+
+        public static string ChangedProducts(this UrlHelper helper, string controller)
+        {
+            string routeURL = string.Empty;
+
+            var routeValues = new RouteValueDictionary();
+
+            routeValues.Add("Controller", controller);
+
+            if (ConfigurationsHelper.EnableMultilingual)
+            {
+                routeURL = helper.RouteUrl("LanguageBased_CategoriesbyCatalogo", routeValues);
+            }
+            else routeURL = helper.RouteUrl("CategoriesbyCatalogo", routeValues);
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+            return routeURL.ToLower();
+        }
+
+
     }
 }

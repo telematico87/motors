@@ -1,6 +1,7 @@
 ﻿using eCommerce.Entities;
 using eCommerce.Services;
 using eCommerce.Shared;
+using eCommerce.Shared.Commons;
 using eCommerce.Shared.Enums;
 using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Helpers;
@@ -20,7 +21,7 @@ namespace eCommerce.Web.Controllers
         public ActionResult Index()
         {
             /* if multi language is enabled and the home page is accessed without any language, redirect to the default language */
-            if(ConfigurationsHelper.EnableMultilingual && Request.Url.AbsolutePath.ToString().Equals("/"))
+            if (ConfigurationsHelper.EnableMultilingual && Request.Url.AbsolutePath.ToString().Equals("/"))
             {
                 return Redirect(Url.Home());
             }
@@ -35,8 +36,72 @@ namespace eCommerce.Web.Controllers
             {
                 SlidersConfigurations = ConfigurationsService.Instance.GetConfigurationsByType((int)ConfigurationTypes.Sliders)
             };
-
             return PartialView("_BannerSliderBm3", model);
+        }
+        
+        public ActionResult HomeMarcasMoto()
+        {                        
+            HomeMarcasMoto model = new HomeMarcasMoto
+            {
+                Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)                
+            };
+            return PartialView("HomeMarcasMoto", model);
+        }                       
+
+        //metodo para motos
+        public ActionResult CatalogoMoto(int categoryId, int marcaId, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
+        {
+            recordSize = recordSize ?? (int)RecordSizeEnums.Size20;
+
+            ProductsViewModel model = new ProductsViewModel
+            {
+                Categories = CategoriesService.Instance.GetCategoryByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID),
+                Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID),
+                CategoryID = 0,
+                MarcaID = 0
+            };
+
+            if (categoryId > 0)
+            {
+                var selectedCategory = CategoriesService.Instance.GetCategoryByID(categoryId);
+
+                if (selectedCategory == null) return HttpNotFound();
+                else
+                {
+                    model.CategoryID = selectedCategory.ID;
+                    model.CategoryName = selectedCategory.SanitizedName;
+                    model.SelectedCategory = selectedCategory;
+
+                    model.SearchedCategories = CategoryHelpers.GetAllCategoryChildrens(selectedCategory, model.Categories);
+                }
+            }
+
+            if (marcaId > 0)
+            {
+                var selectedMarca = MarcaService.Instance.GetMarcaByID(marcaId);
+
+                if (selectedMarca == null) return HttpNotFound();
+                else
+                {
+                    model.MarcaID = selectedMarca.ID;
+                    model.MarcaName = selectedMarca.Descripcion;
+                    model.SelectedMarca = selectedMarca;
+                }
+            }
+
+            model.SearchTerm = q;
+            model.PriceFrom = from;
+            model.PriceTo = to;
+            model.SortBy = sortby;
+            model.PageSize = recordSize;
+
+            var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;
+
+            model.Products = ProductsService.Instance.SearchProductsMoto(selectedCategoryIDs, marcaId, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
+
+            model.Pager = new Pager(count, pageNo, recordSize.Value);
+
+            return View(model);
         }
 
         public ActionResult Search(string category, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
@@ -62,13 +127,13 @@ namespace eCommerce.Web.Controllers
                     model.SearchedCategories = CategoryHelpers.GetAllCategoryChildrens(selectedCategory, model.Categories);
                 }
             }
-            
+
             model.SearchTerm = q;
             model.PriceFrom = from;
             model.PriceTo = to;
             model.SortBy = sortby;
             model.PageSize = recordSize;
-            
+
             var selectedCategoryIDs = model.SearchedCategories != null ? model.SearchedCategories.Select(x => x.ID).ToList() : null;
 
             model.Products = ProductsService.Instance.SearchProducts(selectedCategoryIDs, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
@@ -107,7 +172,7 @@ namespace eCommerce.Web.Controllers
 
             var result = SharedService.Instance.SaveNewsletterSubscription(newsletterSubscription);
 
-            if(result)
+            if (result)
             {
                 jsonResult.Data = new
                 {

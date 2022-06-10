@@ -1,10 +1,7 @@
 ﻿@model eCommerce.Web.ViewModels.HomeSlidersViewModel
 
-
 @if (Model != null && Model.SlidersConfigurations != null && Model.SlidersConfigurations.Count > 0)
-{
-
-   
+{   
     var j = 0;
 
     <section class="flat-row flat-slider style4">
@@ -18,6 +15,7 @@
                             @* TODO: Localizing Slider *@
 
                             var img = configuration.Value.GetSubstringText("#IMG#", "#TH#");
+                            var imgMovil = "site/sliders/aprilia-tuono-46g-1.jpg";
                             var topHeading = configuration.Value.GetSubstringText("#TH#", "#PG#");
                             var paragraph = configuration.Value.GetSubstringText("#PG#", "#LK#");
                             var link = configuration.Value.GetSubstringText("#LK#", "");
@@ -25,6 +23,7 @@
                             if (!string.IsNullOrEmpty(img))
                             {
                                 img = img.Replace("IMG#", "");
+                                imgMovil = imgMovil.Replace("IMG#", "");
                             }
                             if (!string.IsNullOrEmpty(topHeading))
                             {
@@ -38,29 +37,20 @@
                             {
                                 link = link.Replace("LK#", "");
                             }
-
-                            <div class="slider-item style8">
-                                <div class="item-image @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
-                                    @Html.Picture(img, classes: "img-fluid", alt: "Slider")
-                                </div> 
-                                <div class="clearfix"></div>
+                        <div class="slider-item style8">
+                            <div class="item-image-slider-web @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
+                                @Html.Picture(img, classes: "img-fluid", alt: "Slider")
                             </div>
+                            <div class="item-image-movil @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
+                                @Html.Picture(imgMovil, alt: "Slider")
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>                           
                             j++;
-
                         }
                     </div>
-
-
-
                 </div>
-
-
             </div>
         </div>
-    </section>
-    @Html.Partial("_VistaMarcaBm3")
+    </section>    
 }
-
-
-
-

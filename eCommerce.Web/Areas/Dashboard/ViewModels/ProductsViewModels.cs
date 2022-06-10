@@ -65,12 +65,20 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public List<ProductPicture> ProductPicturesList { get; set; }
 
         public List<Category> Categories { get; set; }
+        public List<Color> Colors { get; set; }
+        public List<ProductColor> ProductColors { get; set; }
 
-       public ProductoCaracteristica ProductoCaracteristica
-        { get; 
-          set; }
+       public ProductoCaracteristica ProductoCaracteristica { get; set; }
 
-        
+        public int CatalogoID { get; set; }
 
+        public List<Catalogo> Catalogos { get; set; }
+
+        public int MarcaID { get; set; }
+        public int TipoMoneda { get; set; }
+
+        public List<Marca> Marcas { get; set; }
+        public List<TablaMaster> TipoMonedas{ get; set; }
+      
     }
 }

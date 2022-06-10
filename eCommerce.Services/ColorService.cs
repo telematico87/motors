@@ -40,12 +40,6 @@ namespace eCommerce.Services
             return colors.ToList();
         }
 
-
-
-
-
-
-
         public List<Color> SearchColor(string searchTerm, int? pageNo, int recordSize, out int count)
         {
             var context = DataContextHelper.GetNewContext();
@@ -71,7 +65,6 @@ namespace eCommerce.Services
         public Color GetColorByID(int ID)
         {
             var context = DataContextHelper.GetNewContext();
-
             return context.Colors.FirstOrDefault(x => !x.IsDeleted && x.ID == ID);
         }
 
@@ -79,31 +72,23 @@ namespace eCommerce.Services
         public bool SaveColor(Color Color)
         {
             var context = DataContextHelper.GetNewContext();
-
             context.Colors.Add(Color);
-
             return context.SaveChanges() > 0;
         }
 
         public bool UpdateColor(Color color)
         {
             var context = DataContextHelper.GetNewContext();
-
             context.Entry(color).State = System.Data.Entity.EntityState.Modified;
-
             return context.SaveChanges() > 0;
         }
 
         public bool DeleteColor(int ID)
         {
             var context = DataContextHelper.GetNewContext();
-
             var colors = context.Colors.Find(ID);
-
             colors.IsDeleted = true;
-
             context.Entry(colors).State = System.Data.Entity.EntityState.Modified;
-
             return context.SaveChanges() > 0;
         }
 

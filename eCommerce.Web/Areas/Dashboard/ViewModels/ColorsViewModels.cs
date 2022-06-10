@@ -16,6 +16,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
     {
         public int ID { get; set; }
         public string Description { get; set; }
+        public string Valor { get; set; }
 
     }
 

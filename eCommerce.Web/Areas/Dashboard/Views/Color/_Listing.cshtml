@@ -9,29 +9,37 @@
                 <th>
                     @("Dashboard.Color.List.Name".Localized())
                 </th>
-                
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Acción
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var color in Model.Colors)
             {
-                <tr>
-                    <td>
-                        @color.Description
-                    </td> 
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-primary" href="@Url.EditAction("Color", color.ID)">
-                                <i class="fas fa-edit mr-1"></i>
-                                @("Dashboard.Color.Edit".Localized())
-                            </a>
-                            <button class="deleteButton btn btn-danger" data-id="@color.ID">
-                                <i class="fas fa-trash-alt mr-1"></i>
-                                @("Dashboard.Color.Delete".Localized())
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @color.Description
+                </td>
+                <td>
+                    @color.Valor
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="@Url.EditAction("Color", color.ID)">
+                            <i class="fas fa-edit mr-1"></i>
+                            @("Dashboard.Color.Edit".Localized())
+                        </a>
+                        <button class="deleteButton btn btn-danger" data-id="@color.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                            @("Dashboard.Color.Delete".Localized())
+                        </button>
+                    </div>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -104,13 +112,13 @@ else
             if (result.value) {
                 addLoader("list-holder");
 				$.ajax({
-					url: "@Url.DeleteAction("Color")",
+					url: "@Url.DeleteAction("Financiamiento")",
                     type: "post",
                     data: { id: recordID }
 				})
                 .done(function (response) {
                     if (response != null && response.Success != undefined && response.Success) {
-                        window.location.href = "@Url.ListAction("Color")";
+                        window.location.href = "@Url.ListAction("Financiamiento")";
 				    }
                     else {
                         removeLoader("list-holder");

@@ -27,7 +27,11 @@ namespace eCommerce.Services
             }
         }
 
-        private CategoriesService()
+        //private CategoriesService()
+        //{
+        //}
+
+        public CategoriesService()
         {
         }
         #endregion
@@ -57,7 +61,7 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            var categories = context.Categories
+                var categories = context.Categories
                                     .Where(x => !x.IsDeleted && x.isFeatured)
                                     .OrderBy(x => x.ID)
                                     .AsQueryable();
@@ -142,6 +146,18 @@ namespace eCommerce.Services
             return categories.ToList();
         }
 
+        public List<Category> GetCategoryByCatalogoID(int CatalogoId, int? pageNo = 1, int? recordSize = 0)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var categories = context.Categories
+                                    .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
+                                    .OrderBy(x => x.ID)
+                                    .AsQueryable();
+            var ret = categories.ToList();
+            return ret;
+        }
+
         public Category GetCategoryByID(int ID)
         {
             var context = DataContextHelper.GetNewContext();
@@ -149,7 +165,7 @@ namespace eCommerce.Services
             var category = context.Categories.Find(ID);
 
             return category != null && !category.IsDeleted ? category : null;
-        }
+        }       
 
         public CategoryRecord GetCategoryRecordByID(int ID)
         {
@@ -239,7 +255,7 @@ namespace eCommerce.Services
             if (parentCategoryID.HasValue && parentCategoryID.Value > 0)
             {
                 categories = categories.Where(x => x.ParentCategoryID == parentCategoryID.Value);
-            }
+            }                      
 
             count = categories.Count();
             

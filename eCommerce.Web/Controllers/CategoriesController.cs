@@ -29,6 +29,31 @@ namespace eCommerce.Web.Controllers
             return PartialView("_CategoriesMenu", model);
         }
 
+        public ActionResult CategoriesPictureMenu(string lang)
+        {
+            CategoriesMenuPictureViewModel model = new CategoriesMenuPictureViewModel();
+
+            var categories = CategoriesService.Instance.GetCategoryByCatalogoID(1);
+
+            if (categories != null && categories.Count > 0)
+            {
+
+                //remove uncategorized category from categories list.
+                categories = categories.Where(x => x.ID != 1).ToList();
+
+                model.Categories = categories;
+            }
+
+            var marcas = MarcaService.Instance.GetMarcaByCatalogoID(1);
+
+            if (marcas != null && marcas.Count > 0)
+            {
+                model.Marcas = marcas;
+            }
+
+            return PartialView("_CategoriesPictureMenu", model);
+        }
+
         public ActionResult CategoriesMenuForMobile()
         {
             if (AppDataHelper.IsMobile)

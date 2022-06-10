@@ -15,7 +15,7 @@
             Model.PageURL = Url.CreateAction("Categories");
         }
 
-        Model.PageImageURL = PictureHelper.PageImageURL("categories.jpg");
+        Model.PageImageURL = PictureHelper.PageImageURL("marca.jpg");
     }
 }
 
@@ -80,9 +80,24 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>
+                       @("Dashboard.Categories.Action.Catalogo".Localized())
+                    </label>
+                    <select class="form-control" name="CatalogoID" id="CatalogoID">
+                        <option value="0">@("Dashboard.Categories.Action.CatalogoNone".Localized())</option>
+                        @foreach (var catalogo in Model.Catalogos)
+                        {
+                            var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
+                            <option value="@catalogo.ID" @selected>
+                                @catalogo.Description
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
                         @("Dashboard.Categories.Action.ParentCategory".Localized())
                     </label>
-                    <select class="form-control" name="ParentCategoryID">
+                    <select class="form-control" name="ParentCategoryID" id="ParentCategoryID">
                         <option value="0">@("Dashboard.Categories.Action.ParentCategoryNone".Localized())</option>
                         @foreach (var category in Model.Categories.Where(x => x.ID != Model.CategoryID))
                         {
@@ -105,6 +120,11 @@
                         }
                     </select>
                 </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
 
                 <div class="form-group">
                     <label>
@@ -113,7 +133,7 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                @Url.SearchProducts(category: "").ToSiteURL()/
+                                @Url.CatalogoMoto(categoryId:0, marcaId:0).ToSiteURL()/
                             </span>
                         </div>
                         <input type="text" class="form-control" id="SanitizedName" name="SanitizedName" value="@Model.SanitizedName">
@@ -125,9 +145,20 @@
                         @("Dashboard.Categories.Action.SelectPicture".Localized())
                     </label>
                     <input id="categoryPicture" class="uPicUploadInput form-control" type="file" />
-                    <input type="hidden" name="PictureID" value="@Model.PictureID"/>
+                    <input type="hidden" name="PictureID" value="@Model.PictureID" />
                     <div id="pictureArea" class="pt-2">
                         @Html.Picture(Model.Picture, "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef", lazyLoad: false)
+                    </div>
+                </div>
+
+                <div class="form-group" id="pics-container-movil">
+                    <label>
+                        Imagen para Móvil
+                    </label>
+                    <input id="categoryPictureMovil" class="uPicUploadInput form-control" type="file" />
+                    <input type="hidden" name="PictureMovilID" value="@Model.PictureMovilID" />
+                    <div id="pictureMovilArea" class="pt-2">
+                        @Html.Picture(Model.PictureMovil, "image img-thumbnail", "height: 250px; width: 720px; border: 1px solid #efefef", lazyLoad: false)
                     </div>
                 </div>
 
@@ -175,6 +206,9 @@
 <div id="pictureTemplate" style="display:none">
     @Html.UserAvatar(new eCommerce.Entities.Picture(), "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef")
 </div>
+<div id="pictureMovilTemplate" style="display:none">
+    @Html.UserAvatar(new eCommerce.Entities.Picture(), "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef")
+</div>
 
 <script>
     $("#SanitizedName").keyup(function () {
@@ -185,7 +219,7 @@
         }
     });
 
-    
+
     $("#categoryPicture").change(function () {
 		var pictures = this.files;
 
@@ -194,7 +228,7 @@
 		for (var i = 0; i < pictures.length; i++) {
 			picsData.append("Picture", pictures[i]);
 		}
-        
+
         addLoader("pics-container");
 		$.ajax({
 			url: "@Url.UploadPictures()",
@@ -216,7 +250,83 @@
              Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
 		});
     });
-    
+
+    $("#categoryPictureMovil").change(function () {
+		var picturesMovil = this.files;
+
+		var picsData = new FormData();
+
+        for (var i = 0; i < picturesMovil.length; i++) {
+            picsData.append("Picture", picturesMovil[i]);
+		}
+
+        addLoader("pics-container-movil");
+		$.ajax({
+			url: "@Url.UploadPictures()",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+        .done(function (responses) {
+            if (responses != undefined) {
+                var picResponse = responses[0];
+                AttachNewImageMovil(picResponse.pictureURL, picResponse.ID);
+            }
+            removeLoader("pics-container-movil");
+        })
+        .fail(function () {
+             removeLoader("pics-container-movil");
+             Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+		});
+    });
+
+    $("#CatalogoID").change(function () {
+        var ID = $(this).val();
+        console.log("Hola");
+
+		$.ajax({
+            url: "/Categories/listarCategoriasPorCatalogo",
+			type: "GET",
+            data: ID,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+            .done(function (responses) {
+                console.log(responses);
+
+        })
+    });
+
+  //  function listarMarcas() {
+  //      $.ajax({
+  //          method: "GET",
+  //          url: "/Financiamiento/listarCategoriasPorCatalogo",
+  //          success: function (result) {
+  //              debugger;
+  //              console.log(result);
+  //              let Marca = result;
+  //              llenarCombo(Marca, "cboMarca", "Descripcion", "Descripcion", "0")
+  //          }
+  //      });
+  //  }
+
+  //  function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+  //      debugger;
+  //      var contenido = ""
+  //      var elemento;
+  //      contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
+  //      for (var j = 0; j < data.length; j++) {
+  //          elemento = data[j];
+  //          contenido +=
+  //              "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
+  //      }
+  //      contenido += "";
+  //      document.getElementById(id).innerHTML = contenido;
+  //  }
+
     function AttachNewImage(imageURL, imageID) {
         var $newimgHTML = $("#pictureTemplate").clone();
 
@@ -226,6 +336,17 @@
         $("input[name=PictureID]").val(imageID);
 
         $("#pictureArea").html($newimgHTML.html());
+    }
+
+    function AttachNewImageMovil(imageURL, imageID) {
+        var $newimgHTML = $("#pictureMovilTemplate").clone();
+
+        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+        $newimgHTML.find(".image").attr("data-id", imageID);
+
+        $("input[name=PictureMovilID]").val(imageID);
+
+        $("#pictureMovilArea").html($newimgHTML.html());
     }
 
     $("#actionForm").validate({
@@ -317,4 +438,6 @@
             }
         });
     });
+
+
 </script>

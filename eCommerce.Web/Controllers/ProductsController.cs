@@ -31,7 +31,7 @@ namespace eCommerce.Web.Controllers
                 return PartialView("_FeaturedProducts", model);
             }
         }
-        
+
         public ActionResult RecentProducts(int? productID, int pageSize = 0)
         {
             if (pageSize == 0)
@@ -45,37 +45,88 @@ namespace eCommerce.Web.Controllers
             };
 
             return PartialView("_RecentProducts", model);
-        }
+        }        
 
-        public ActionResult RelatedProducts(int categoryID, int recordSize = (int)RecordSizeEnums.Size6)
+        public ActionResult RelatedProducts(int categoryID, int ProductID, int recordSize = (int)RecordSizeEnums.Size6)
         {
-            RelatedProductsViewModel model = new RelatedProductsViewModel
+            try
             {
-                Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
-            };
+                RelatedProductsViewModel model = new RelatedProductsViewModel
+                {
+                    Products = ProductsService.Instance.SearchProducts(new List<int>() { categoryID }, null, null, null, null, 1, recordSize, activeOnly: true, out int count, stockCheckCount: null)
+                };
 
-            if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
+                if (model.Products == null || model.Products.Count < (int)RecordSizeEnums.Size6)
+                {
+                    //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
+                    model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
+                    model.IsFeaturedProductsOnly = true;
+                    var product = ProductsService.Instance.GetProductResponseByID(ProductID, activeOnly: false);
+
+                    model.TipoMonedaDestacado = product.TipoMoneda;
+
+                }
+
+                return PartialView("_Destacados", model);
+            }
+            catch (Exception ex)
             {
-                //the realted products are less than the specfified RelatedProductsRecordsSize, so instead show featured products
-                model.Products = ProductsService.Instance.SearchFeaturedProducts(recordSize);
-                model.IsFeaturedProductsOnly = true;
+
+                throw ex;
             }
 
-            return PartialView("_RelatedProducts", model);
         }
+        
 
         [HttpGet]
-        public ActionResult Details(int ID, string category)
+        public ActionResult DetalleBm3(int? ID, string category)
         {
-            ProductDetailsViewModel model = new ProductDetailsViewModel
+            ProductDetalleViewModel model = new ProductDetalleViewModel();
+
+            if (ID.HasValue)
             {
-                Product = ProductsService.Instance.GetProductByID(ID, activeOnly: false)
-            };
+                var product = ProductsService.Instance.GetProductResponseByID(ID.Value, activeOnly: false);
 
-            if (model.Product == null || !model.Product.Category.SanitizedName.ToLower().Equals(category))
-                return HttpNotFound();
+                if (product == null) return HttpNotFound();
 
-            model.Rating = CommentsService.Instance.GetProductRating(model.Product.ID);
+                var currentLanguageRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
+
+                model.ProductID = product.ID;
+                model.CategoryID = product.CategoryID;
+                model.Price = product.Price;
+                model.Discount = product.Discount;
+                model.Cost = product.Cost;
+                model.isFeatured = product.isFeatured;
+                model.StockQuantity = product.StockQuantity;
+                model.ProductPicturesList = product.ProductPictures;
+                model.ThumbnailPicture = product.ThumbnailPictureID;
+                model.SKU = product.SKU;
+                model.Barcode = product.Barcode;
+                model.Tags = product.Tags;
+                model.Supplier = product.Supplier;
+                model.InActive = !product.IsActive;
+                model.MarcaID = product.MarcaID;
+                model.CatalogoID = product.CatalogoID;
+                model.TipoMoneda = product.TipoMoneda;
+
+                model.ProductRecordID = currentLanguageRecord.ID;
+                model.Name = currentLanguageRecord.Name;
+                model.Summary = currentLanguageRecord.Summary;
+                model.Description = currentLanguageRecord.Description;
+
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
+                model.ProductoCaracteristica = product.ProductoCaracteristica;
+                model.TipoProducto = product.TipoProducto;
+                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
+            }
+
+            model.Categories = CategoriesService.Instance.GetCategories();
+            model.Colors = ColorService.Instance.GetAllColors();
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
+            model.Marcas = MarcaService.Instance.ListarMarca();
+            model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
         }

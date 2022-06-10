@@ -12,6 +12,8 @@ using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Enums;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using eCommerce.Shared.Commons;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -25,11 +27,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             //ProductsListingViewModel listarColor = new ProductsListingViewModel
             //{
             //    ColorID = colorID,
-            //    SearchTerm = searchTerm, 
+            //    SearchTerm = searchTerm,
             //    Colors = ColorService.Instance.GetAllColors()
             //};
 
-             
+
             ProductsListingViewModel model = new ProductsListingViewModel
             {
                 SearchTerm = searchTerm,
@@ -73,7 +75,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 var currentLanguageRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();               
+                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
 
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
@@ -87,20 +89,30 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.SKU = product.SKU;
                 model.Barcode = product.Barcode;
                 model.Tags = product.Tags;
-                model.Supplier = product.Supplier; 
+                model.Supplier = product.Supplier;
                 model.InActive = !product.IsActive;
-               
+                model.MarcaID = product.MarcaID;
+                model.CatalogoID = product.CatalogoID;
+                model.TipoMoneda = product.TipoMoneda;
+
                 model.ProductRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;
                 model.Summary = currentLanguageRecord.Summary;
                 model.Description = currentLanguageRecord.Description;
 
-                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications; 
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
                 model.ProductoCaracteristica = product.ProductoCaracteristica;
                 model.TipoProducto = product.TipoProducto;
+                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 
-            model.Categories = CategoriesService.Instance.GetCategories();
+            model.Categories = CategoriesService.Instance.GetCategoryByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            //model.Categories = CategoriesService.Instance.GetCategories();
+            model.Colors = ColorService.Instance.GetAllColors();
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
+            model.Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            //model.Marcas = MarcaService.Instance.ListarMarca();
+            model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
         }
@@ -126,17 +138,19 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.ID = model.ProductID;
                     product.CategoryID = model.CategoryID;
                     product.Price = model.Price;
-
                     product.Discount = model.Discount;
                     product.Cost = model.Cost;
                     product.SKU = model.SKU;
                     product.Barcode = model.Barcode;
                     product.Tags = model.Tags;
-                    product.Supplier = model.Supplier; 
-                    product.StockQuantity = model.StockQuantity; 
+                    product.Supplier = model.Supplier;
+                    product.StockQuantity = model.StockQuantity;
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
                     product.ProductoCaracteristica = model.ProductoCaracteristica;
+                    product.MarcaID = model.MarcaID;
+                    product.CatalogoID = model.CatalogoID;
+                    product.TipoMoneda = model.TipoMoneda;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -245,8 +259,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
                         TipoProducto = model.TipoProducto,
-                        ModifiedOn = DateTime.Now                        
-                    };
+                        ModifiedOn = DateTime.Now,
+                        MarcaId = model.MarcaID,
+                        CatalogoId = model.CatalogoID,
+                        TipoMoneda = model.TipoMoneda
+                };
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -354,21 +371,21 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     SuspensionPosterior = formCollection["SuspensionPosterior"]
 
                 },
-                 
+
                 consumo = new Consumo
                 {
                     Octanaje = formCollection["Octanaje"],
                     SistemaCombustible = formCollection["SistemaCombustible"],
                     CapacidadTanque = formCollection["CapacidadTanque"],
                     Autonomia = formCollection["Autonomia"],
-                    RendimientoGalon = formCollection["RendimientoGalon"] 
+                    RendimientoGalon = formCollection["RendimientoGalon"]
                 },
                 transmisiones = new Transmisions
                 {
                     Transmision = formCollection["Transmision"],
                     NroCambios = formCollection["NroCambios"],
                     VelocidadMaxima = formCollection["VelocidadMaxima"]
-                   
+
                 },
                 dimensiones = new Dimensiones
                 {
@@ -388,7 +405,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     AroRayos = formCollection["AroRayos"],
                     ColoresDisponibles = formCollection["ColoresDisponibles"],
                     Adicionales = formCollection["Adicionales"],
-                    Tablero = formCollection["Tablero"] 
+                    Tablero = formCollection["Tablero"]
                 },
             };
 
@@ -420,7 +437,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 Description = formCollection["Description"],
 
                 ProductSpecifications = new List<ProductSpecification>(),
-                ProductoCaracteristica = productoCaracteristicas
+                ProductoCaracteristica = productoCaracteristicas,
+                MarcaID = int.Parse(formCollection ["MarcaID"]),
+                CatalogoID = int.Parse(formCollection ["CatalogoID"]),
+                TipoMoneda = int.Parse(formCollection["TipoMoneda"])
             };
 
             foreach (string key in formCollection)
@@ -441,8 +461,117 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
                 }
             }
-            
+
             return model;
         }
+
+
+        //[HttpGet]
+        //public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
+        //{
+        //    Prueba pr = new Prueba();
+        //    List<CategoryResponse> catlist = new List<CategoryResponse>();
+        //    CategoryResponse objcat1 = new CategoryResponse();
+        //    objcat1.ID = 19;
+        //    objcat1.NombreCategoria = "Guantes";
+
+        //    CategoryResponse objcat2 = new CategoryResponse();
+        //    objcat2.ID = 20;
+        //    objcat2.NombreCategoria = "Cascos";
+
+        //    catlist.Add(objcat1);
+        //    catlist.Add(objcat2);
+
+        //    JsonResult result = new JsonResult();
+
+        //    pr.resultado = "hola";
+        //    pr.res = catlist;
+        //    //return Json(pr, JsonRequestBehavior.AllowGet);
+        //    //FinanciamientosViewModels model = new FinanciamientosViewModels();
+        //    //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+        //    //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+        //    //var response = new JavaScriptSerializer().Serialize(pr);
+        //    //var json = JsonSerializer.Serialize(res2);
+        //    //return Json(response, JsonRequestBehavior.AllowGet);
+
+        //    try
+        //    {
+        //        var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+
+        //        result.Data = new { Success = pr.ToString(), Message = string.Empty};
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Data = new { Success = false, Message = ex.Message };
+        //    }
+
+        //    return result;
+
+
+        //}
+
+        [HttpGet]
+        public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
+        {
+            Prueba pr = new Prueba();
+            List<CategoryResponse> catlist = new List<CategoryResponse>();
+            CatRepo cat = new CatRepo();
+
+            CategoryResponse objcat1 = new CategoryResponse();
+            objcat1.ID = 19;
+            objcat1.NombreCategoria = "Guantes";
+
+            CategoryResponse objcat2 = new CategoryResponse();
+            objcat2.ID = 20;
+            objcat2.NombreCategoria = "Cascos";
+
+            cat.IDS = objcat1.ID;
+            cat.nombre = objcat1.NombreCategoria;
+
+            catlist.Add(objcat1);
+            catlist.Add(objcat2);
+
+            JsonResult result = new JsonResult();
+            pr.resultado = "hola";
+            pr.res = catlist;
+            //return Json(pr, JsonRequestBehavior.AllowGet);
+            //FinanciamientosViewModels model = new FinanciamientosViewModels();
+            //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            var response = new JavaScriptSerializer().Serialize(pr);
+            //var json = JsonSerializer.Serialize(pr);
+            //return Json(response, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+                result.Data = new { Success = cat, Message = string.Empty};
+            }
+            catch (Exception ex)
+            {
+                result.Data = new { Success = false, Message = ex.Message };
+            }
+            return result;
+
+        }
+        
+        public class Prueba
+        {
+            public string resultado { get; set; }
+            public List<CategoryResponse> res { get; set; }
+        }
+
+        public class CategoryResponse
+        {
+            public int ID { get; set; }
+            public string NombreCategoria { get; set; }
+        }
+
+        public class CatRepo
+        {
+            public int IDS { get; set; }
+            public string nombre { get; set; }
+        }
+
+
     }
 }

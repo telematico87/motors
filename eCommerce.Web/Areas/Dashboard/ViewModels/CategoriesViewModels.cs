@@ -11,6 +11,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
     {
         public List<Category> Categories { get; set; }
         public List<Category> ParentCategories { get; set; }
+        public List<Catalogo> Catalogos { get; set; }
 
         public int? ParentCategoryID { get; set; }
         public string SearchTerm { get; set; }
@@ -37,9 +38,15 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
 
         public int? PictureID { get; set; }
         public virtual Picture Picture { get; set; }
+        
+        public int? PictureMovilID { get; set; }
+        public virtual Picture PictureMovil { get; set; }
 
         public virtual List<Product> Products { get; set; }
         public virtual List<CategoryRecord> CategoryRecords { get; set; }
         public List<Category> Categories { get; set; }
+        public List<Catalogo> Catalogos { get; set; }
+        public int CatalogoID { get; set; }
+        
     }
 }

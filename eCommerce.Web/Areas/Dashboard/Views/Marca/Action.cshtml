@@ -1,0 +1,279 @@
+﻿@model MarcasActionViewModel
+@{
+    if (Model != null)
+    {
+        if (Model.ID > 0)
+        {
+            Model.PageTitle = "Editar Marca";
+            Model.PageDescription = "Dashboard.Categories.EditCategoryDescription".LocalizedString();
+            Model.PageURL = Url.EditAction("Marca", Model.ID);
+        }
+        else
+        {
+            Model.PageTitle = "Crear Marca";
+            Model.PageDescription = "Dashboard.Categories.CreateCategoryDescription".LocalizedString();
+            Model.PageURL = Url.CreateAction("Marca");
+        }
+
+        Model.PageImageURL = PictureHelper.PageImageURL("categories.jpg");
+    }
+}
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        @Model.PageTitle
+    </h3>
+    <p>
+        @Model.PageDescription
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder mb-4">
+    <form id="actionForm" method="post">
+        <input type="hidden" name="hdCatalogoID" value="@Model.CatalogoID" />   
+        <div class="card mt-3">
+            
+            <div class="card-body">
+                <div class="form-group">
+                    <label>
+                       Descripción
+                    </label>
+                    <input class="form-control" name="Descripcion" value="@Model.Descripcion" placeholder="Descripción" />
+                </div>
+
+                <div class="form-group">
+                    <label>
+                       Resumen
+                    </label>
+                    <textarea class="form-control" name="Resumen" placeholder="Resumen" rows="2">@Model.Resumen</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                       URL
+                    </label>
+                    <input class="form-control" name="URL" placeholder="URL" value="@Model.URL" />
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>
+                       Catálogo
+                    </label>
+                    <select class="form-control" name="CatalogoID">
+                        <option value="0">--Seleccione--</option> 
+                        @foreach (var catalogo in Model.Catalogos)
+                        {
+                            var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
+
+                            <option value="@catalogo.ID" @selected>
+                                @catalogo.Description
+                            </option> 
+                        } 
+                    </select>
+                </div>
+
+                @*<div class="form-group">
+                    <label>
+                        @("Dashboard.Categories.Action.URL".Localized())
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                @Url.SearchProducts(category: "").ToSiteURL()/
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" id="SanitizedName" name="SanitizedName" value="@Model.SanitizedName">
+                    </div>
+                </div>*@
+
+                <div class="form-group" id="pics-container">
+                    <label>
+                        @("Dashboard.Categories.Action.SelectPicture".Localized())
+                    </label>
+                    <input id="categoryPicture" class="uPicUploadInput form-control" type="file" />
+                    <input type="hidden" name="PictureID" value="@Model.PictureID" />
+                    <div id="pictureArea" class="pt-2">
+                        @Html.Picture(Model.Picture, "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef", lazyLoad: false)
+                    </div>
+                </div>
+                 
+                <hr />
+                <div class="form-group mb-0">
+                    @if (Model.ID > 0)
+                    {
+                        <button class="btn btn-success" type="submit" id="actionButton">
+                            <i class="fas fa-edit mr-1"></i>
+                           Actualizar
+                        </button>
+                        <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ID">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                          Eliminar
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" type="submit" id="actionButton">
+                            <i class="fas fa-plus mr-1"></i>
+                          Guardar
+                        </button>
+                    }
+                    <a class="btn btn-secondary" href="@Url.ListAction("Marca")">
+                        <i class="fas fa-angle-double-left mr-1"></i>
+                       Cancelar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="pictureTemplate" style="display:none">
+    @Html.UserAvatar(new eCommerce.Entities.Picture(), "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef")
+</div>
+
+<script>
+    $("#SanitizedName").keyup(function () {
+        var titleValue = $(this).val();
+        if (titleValue) {
+            var sanitizedURL = titleValue.replace(/[^a-zA-Z0-9-]/g, "-").replace(/-{2,}/g, "-").toLowerCase();
+            $("#SanitizedName").val(sanitizedURL);
+        }
+    });
+
+
+    $("#categoryPicture").change(function () {
+		var pictures = this.files;
+
+		var picsData = new FormData();
+
+		for (var i = 0; i < pictures.length; i++) {
+			picsData.append("Picture", pictures[i]);
+		}
+
+        addLoader("pics-container");
+		$.ajax({
+			url: "@Url.UploadPictures()",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+        .done(function (responses) {
+            if (responses != undefined) {
+                var picResponse = responses[0];
+                AttachNewImage(picResponse.pictureURL, picResponse.ID);
+            }
+            removeLoader("pics-container");
+        })
+        .fail(function () {
+             removeLoader("pics-container");
+             Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+		});
+    });
+
+    function AttachNewImage(imageURL, imageID) {
+        var $newimgHTML = $("#pictureTemplate").clone();
+
+        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+        $newimgHTML.find(".image").attr("data-id", imageID);
+
+        $("input[name=PictureID]").val(imageID);
+
+        $("#pictureArea").html($newimgHTML.html());
+    }
+
+    $("#actionForm").validate({
+		errorClass: "alert alert-danger",
+		errorElement: "div",
+		rules: {
+			Name: {
+				required: true,
+				minlength: 3,
+				maxlength: 150
+			},
+			Description: {
+				minlength: 20
+			}
+		},
+		messages: {
+			Name: {
+				required: "@("Dashboard.Categories.Action.Validation.NameRequired".Localized())",
+				minlength: "@("Dashboard.Categories.Action.Validation.NameMinimumLength".Localized().ToString().Replace("{min}", "3"))",
+				maxlength: "@("Dashboard.Categories.Action.Validation.NameMaximumLength".Localized().ToString().Replace("{max}", "150"))"
+			},
+			Description: {
+				minlength: "@("Dashboard.Categories.Action.Validation.DescriptionMinimumLength".Localized().ToString().Replace("{min}", "5"))",
+			}
+		},
+		highlight: function (element, errorClass) {
+			$(element).removeClass(errorClass);
+		}
+	});
+
+    $("#actionForm").submit(function (e) {
+        if ($("#actionForm").valid()) {
+            addLoader("actionForm");
+            $.ajax({
+                type: "post",
+                data: $("#actionForm").serialize()
+			})
+            .done(function (response) {
+                if (response.Success) {
+                    window.location.href = "@Url.ListAction("Marca")";
+			    }
+                else {
+                    removeLoader("actionForm");
+                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+			    }
+            })
+            .fail(function () {
+                 removeLoader("actionForm");
+                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			});
+        }
+
+        e.preventDefault();
+    });
+
+    $(".deleteButton").click(function () {
+        var recordID = $(this).attr("data-id");
+
+        Swal.fire({
+            title: '@("Dashboard.Message.Warning".Localized())',
+            text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
+            cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
+        }).then((result) => {
+            if (result.value) {
+                addLoader("actionForm");
+				$.ajax({
+					url: "@Url.DeleteAction("Marca")",
+                    type: "post",
+                    data: { id: recordID }
+				})
+                .done(function (response) {
+                    if (response != null && response.Success != undefined && response.Success) {
+                        window.location.href = "@Url.ListAction("Marca")";
+				    }
+                    else {
+                        removeLoader("actionForm");
+                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+				    }
+				})
+                .fail(function () {
+                     removeLoader("actionForm");
+                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			    });
+            }
+        });
+    });
+</script>

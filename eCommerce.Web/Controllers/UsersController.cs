@@ -91,7 +91,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             JsonResult jsonResult = new JsonResult();
 
@@ -122,8 +122,8 @@ namespace eCommerce.Web.Controllers
             {
                 jsonResult.Data = new { Success = false, Messages = string.Join("<br />", result.Errors) };
             }
-
-            return jsonResult;
+            return Redirect(Url.Home());
+            // return jsonResult;
         }
         
         [HttpGet]
@@ -137,7 +137,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Login(LoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             JsonResult jsonResult = new JsonResult();
 
@@ -147,6 +147,7 @@ namespace eCommerce.Web.Controllers
             {
                 case SignInStatus.Success:
                     jsonResult.Data = new { Success = true, RequiresVerification = false };
+                    RedirectToAction("Index", "Home");
                     break;
                 case SignInStatus.RequiresVerification:
                     jsonResult.Data = new { Success = true, RequiresVerification = true };
@@ -160,7 +161,7 @@ namespace eCommerce.Web.Controllers
                     break;
             }
 
-            return jsonResult;
+            return Redirect(Url.Home()); 
         }
 
         [HttpPost]

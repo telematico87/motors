@@ -99,6 +99,42 @@
     <Compile Include="Migrations\202204120322036_v5.3_marca_id_picture.designer.cs">
       <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204141745418_v5.3_catalogo_intocateg.cs" />
+    <Compile Include="Migrations\202204141745418_v5.3_catalogo_intocateg.designer.cs">
+      <DependentUpon>202204141745418_v5.3_catalogo_intocateg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.cs" />
+    <Compile Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.designer.cs">
+      <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204210418272_v6_ubigeo.cs" />
+    <Compile Include="Migrations\202204210418272_v6_ubigeo.designer.cs">
+      <DependentUpon>202204210418272_v6_ubigeo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204210421291_v6.1_ubigeo.cs" />
+    <Compile Include="Migrations\202204210421291_v6.1_ubigeo.designer.cs">
+      <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204252116581_v7_categoria.cs" />
+    <Compile Include="Migrations\202204252116581_v7_categoria.designer.cs">
+      <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204270238420_addColorValue.cs" />
+    <Compile Include="Migrations\202204270238420_addColorValue.designer.cs">
+      <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.cs" />
+    <Compile Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.designer.cs">
+      <DependentUpon>202204270507027_addMarcaAndCatalogoInProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206030510442_v8_tipoCambio.cs" />
+    <Compile Include="Migrations\202206030510442_v8_tipoCambio.designer.cs">
+      <DependentUpon>202206030510442_v8_tipoCambio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206090508395_v9_valor_tipo_cambio.cs" />
+    <Compile Include="Migrations\202206090508395_v9_valor_tipo_cambio.designer.cs">
+      <DependentUpon>202206090508395_v9_valor_tipo_cambio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +178,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204120322036_v5.3_marca_id_picture.resx">
       <DependentUpon>202204120322036_v5.3_marca_id_picture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204141745418_v5.3_catalogo_intocateg.resx">
+      <DependentUpon>202204141745418_v5.3_catalogo_intocateg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204141813555_v5.4_edit_entidad_financiera.resx">
+      <DependentUpon>202204141813555_v5.4_edit_entidad_financiera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204210418272_v6_ubigeo.resx">
+      <DependentUpon>202204210418272_v6_ubigeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204210421291_v6.1_ubigeo.resx">
+      <DependentUpon>202204210421291_v6.1_ubigeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204252116581_v7_categoria.resx">
+      <DependentUpon>202204252116581_v7_categoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204270238420_addColorValue.resx">
+      <DependentUpon>202204270238420_addColorValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204270507027_addMarcaAndCatalogoInProduct.resx">
+      <DependentUpon>202204270507027_addMarcaAndCatalogoInProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206030510442_v8_tipoCambio.resx">
+      <DependentUpon>202206030510442_v8_tipoCambio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206090508395_v9_valor_tipo_cambio.resx">
+      <DependentUpon>202206090508395_v9_valor_tipo_cambio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

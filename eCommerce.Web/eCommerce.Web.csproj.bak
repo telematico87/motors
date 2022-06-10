@@ -233,6 +233,7 @@
     <Compile Include="Areas\API\Models\UserModels.cs" />
     <Compile Include="Areas\API\Providers\eCommerceOAuthProvider.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AroController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CatalogoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ColorController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardBaseController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CategoriesController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LitroController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\MarcaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\MedidaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ModeloController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\OrdersController.cs" />
@@ -250,11 +252,13 @@
     <Compile Include="Areas\Dashboard\Controllers\TallaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\CatalogosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ColorsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\LanguagesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CategoriesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ConfigurationsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\DashboardViewModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\MarcasViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\MedidasViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ModelosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\OrdersViewModels.cs" />
@@ -305,12 +309,25 @@
     <Content Include="Content\bm3\images\banner\banner-6.jpg" />
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
     <Content Include="Content\bm3\images\icono\icono-1.png" />
+    <Content Include="Content\bm3\images\icono\left-1.png" />
+    <Content Include="Content\bm3\images\icono\right-1.png" />
     <Content Include="Content\bm3\images\icono\top.png" />
     <Content Include="Content\bm3\images\logo\logo.png" />
     <Content Include="Content\bm3\images\logo\logo.svg" />
+    <Content Include="Content\bm3\images\marca\honda.png" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
+    <Content Include="Content\bm3\images\producto\fondo.jpg" />
+    <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
+    <Content Include="Content\bm3\images\producto\icono_best_points_envio_gratis.svg" />
+    <Content Include="Content\bm3\images\producto\icono_best_points_pago_en_linea.svg" />
     <Content Include="Content\bm3\images\producto\producto-1.jpg" />
     <Content Include="Content\bm3\images\producto\producto-2.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\2.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\3.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\4.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\5.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\6.jpg" />
+    <Content Include="Content\bm3\images\producto\thumb\s07.jpg" />
     <Content Include="Content\bm3\images\slider\slider-1.jpg" />
     <Content Include="Content\bm3\images\slider\slider-2.jpg" />
     <Content Include="Content\bm3\images\slider\slider-3.jpg" />
@@ -329,10 +346,13 @@
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
+    <Content Include="Content\bm3\javascript\slick-lightbox.js" />
+    <Content Include="Content\bm3\javascript\slick.js" />
     <Content Include="Content\bm3\javascript\smoothscroll.js" />
     <Content Include="Content\bm3\javascript\tether.min.js" />
     <Content Include="Content\bm3\javascript\waves.min.js" />
     <Content Include="Content\bm3\javascript\waypoints.min.js" />
+    <Content Include="Content\bm3\stylesheets\ajax-loader.gif" />
     <Content Include="Content\bm3\stylesheets\bootstrap.min.css" />
     <Content Include="Content\bm3\stylesheets\cloud-zoom.css" />
     <Content Include="Content\bm3\stylesheets\colors\color2.css" />
@@ -344,6 +364,7 @@
     <Content Include="Content\bm3\stylesheets\fonts\flexslider-icon-4.html" />
     <Content Include="Content\bm3\stylesheets\fonts\flexslider-icon.html" />
     <Content Include="Content\bm3\stylesheets\fonts\flexslider-icond41d.html" />
+    <Content Include="Content\bm3\stylesheets\fonts\slick.svg" />
     <Content Include="Content\bm3\stylesheets\images\ui-icons_444444_256x240.html" />
     <Content Include="Content\bm3\stylesheets\images\ui-icons_555555_256x240.html" />
     <Content Include="Content\bm3\stylesheets\images\ui-icons_777620_256x240.html" />
@@ -356,8 +377,14 @@
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
     <Content Include="Content\bm3\stylesheets\responsive.css" />
+    <Content Include="Content\bm3\stylesheets\responsive_2.css" />
     <Content Include="Content\bm3\stylesheets\shortcodes.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes_2.css" />
+    <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
+    <Content Include="Content\bm3\stylesheets\slick-theme.css" />
+    <Content Include="Content\bm3\stylesheets\slick.css" />
     <Content Include="Content\bm3\stylesheets\style.css" />
+    <Content Include="Content\bm3\stylesheets\style_2.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\images\12f7f99d-c762-4e15-9f9b-b9d70a6f89df.jpeg" />
@@ -5133,11 +5160,22 @@
     <Content Include="Content\bm3\fonts\font-themify\icon.eot" />
     <Content Include="Content\bm3\fonts\font-themify\icon.ttf" />
     <Content Include="Content\bm3\fonts\font-themify\icon.woff" />
+    <Content Include="Areas\Dashboard\Views\Catalogo\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Catalogo\Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Catalogo\_Listing.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Areas\Dashboard\Views\Marca\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Marca\_Listing.cshtml" />
+=======
+    <Content Include="Content\bm3\stylesheets\fonts\slick.eot" />
+    <Content Include="Content\bm3\stylesheets\fonts\slick.ttf" />
+    <Content Include="Content\bm3\stylesheets\fonts\slick.woff" />
+>>>>>>> dev
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" /> 
+    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
     <Content Include="Views\Shared\_HeaderBm3.cshtml" />
     <Content Include="Views\Shared\_FooterBm3.cshtml" />
     <Content Include="Views\Shared\_HeaderStylesBM3.cshtml" />
@@ -5146,10 +5184,10 @@
     <Content Include="Views\Categories\_CategoriaHomeSectionBm3.cshtml" />
     <Content Include="Views\Categories\_ProductByCategoriesBm3.cshtml" />
     <Content Include="Views\Categories\_ProductCategories.cshtml" />
-    <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" /> 
+    <Content Include="Views\Categories\_ProductCarouselSliderBm3.cshtml" />
     <Content Include="Views\Financiamientos\FinancieraEfectiva.cshtml" />
-    <Content Include="Views\Financiamientos\Financiamiento.cshtml" /> 
-    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" /> 
+    <Content Include="Views\Financiamientos\Financiamiento.cshtml" />
+    <Content Include="Views\Home\_VistaMarcaEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
@@ -5194,7 +5232,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32568/</IISUrl>
+          <IISUrl>http://localhost:32569/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

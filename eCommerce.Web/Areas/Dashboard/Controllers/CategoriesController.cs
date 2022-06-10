@@ -28,7 +28,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             };
 
             model.Categories = CategoriesService.Instance.SearchCategories(parentCategoryID, searchTerm, pageNo, recordSize, out int count);
-
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
             model.Pager = new Pager(count, pageNo, recordSize);
 
             return View(model);
@@ -55,16 +55,28 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.SanitizedName = category.SanitizedName;
                 model.Picture = category.Picture;
                 model.PictureID = category.PictureID;
+                model.PictureMovil = category.PictureMovil;
+                model.PictureMovilID = category.PictureMovilID;
 
                 model.CategoryRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;
                 model.Description = currentLanguageRecord.Description;
-                model.Summary = currentLanguageRecord.Summary;                
+                model.Summary = currentLanguageRecord.Summary;
+                model.CatalogoID = category.CatalogoID;
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
+            
 
             return View(model);
+        }
+        
+        [HttpGet]
+        public ActionResult listarCategoriasPorCatalogo(int? ID)
+        {            
+            var category = CategoriesService.Instance.GetCategoryByCatalogoID(ID.Value);
+            return Json(category, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -94,8 +106,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     category.PictureID = model.PictureID;
+                    category.PictureMovilID = model.PictureMovilID;
                     category.isFeatured = model.isFeatured;
                     category.SanitizedName = !string.IsNullOrEmpty(model.SanitizedName) ? model.SanitizedName : model.Name.SanitizeLowerString();
+                    category.CatalogoID = model.CatalogoID;
 
                     category.ModifiedOn = DateTime.Now;
 
@@ -114,7 +128,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         isNewRecord = true;
                     }
 
-                    currentCategoryRecord.CategoryID = category.ID;
+                    currentCategoryRecord.CategoryID = category.ID;                    
                     currentCategoryRecord.LanguageID = AppDataHelper.CurrentLanguage.ID;
                     currentCategoryRecord.Name = model.Name;
                     currentCategoryRecord.Description = model.Description;
@@ -152,8 +166,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     category.PictureID = model.PictureID;
+                    category.PictureMovilID = model.PictureMovilID;
                     category.isFeatured = model.isFeatured;
                     category.SanitizedName = !string.IsNullOrEmpty(model.SanitizedName) ? model.SanitizedName : model.Name.SanitizeLowerString();
+                    category.CatalogoID = model.CatalogoID;
 
                     var currentLanguageCategoryRecord = new CategoryRecord
                     {

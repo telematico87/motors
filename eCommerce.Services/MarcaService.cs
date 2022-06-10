@@ -30,24 +30,18 @@ namespace eCommerce.Services
             }
         }
 
-        private MarcaService()
+        public MarcaService()
         {
         }
         #endregion
 
-
-        //public List<Catalogo> ListarCatalogos()
+        //public List<Category> ListarCategoria()
         //{
-
-        //    //string consulta = "select * from Catalogoes";
-        //    //var cata = new List<Catalogo>();
-        //    //using (var connection = new SqlConnection(con))
-	       //    // {
-        //    //       connection.Open();
-        //    //       var resul = con.Query<cata>.ToList();
-	       //    // }
-             
+        //    var context = DataContextHelper.GetNewContext();
+        //    var categori = context.Categories.ToList();
+        //    return categori.ToList();
         //}
+         
 
         public List<Marca> SearchMarca(string searchTerm, int? pageNo, int recordSize, out int count)
         {
@@ -70,12 +64,29 @@ namespace eCommerce.Services
             return marca.OrderByDescending(x => x.Descripcion).Skip(skipCount).Take(recordSize).ToList();
         }
 
+        public List<Marca> ListarMarca()
+        {
+            var context = DataContextHelper.GetNewContext(); 
+            return context.Marcas.ToList();
+        }
+
 
         public Marca GetMarcaByID(int ID)
         {
             var context = DataContextHelper.GetNewContext();
 
             return context.Marcas.FirstOrDefault(x => !x.IsDeleted && x.ID == ID);
+        }
+
+        public List<Marca> GetMarcaByCatalogoID(int CatalogoId, int? pageNo = 1, int? recordSize = 0)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var marcas = context.Marcas
+                                    .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
+                                    .OrderBy(x => x.ID)
+                                    .AsQueryable();
+            return marcas.ToList();
         }
 
 
@@ -92,8 +103,10 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            marca.ModifiedOn = DateTime.Now;
-            context.Entry(marca).State = System.Data.Entity.EntityState.Modified;
+            //marca.ModifiedOn = DateTime.Now;
+            //context.Entry(marca).State = System.Data.Entity.EntityState.Modified; 
+            var existingCategory = context.Marcas.Find(marca.ID); 
+            context.Entry(existingCategory).CurrentValues.SetValues(marca);
 
             return context.SaveChanges() > 0;
         }
