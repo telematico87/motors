@@ -91,7 +91,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             JsonResult jsonResult = new JsonResult();
 
@@ -122,8 +122,8 @@ namespace eCommerce.Web.Controllers
             {
                 jsonResult.Data = new { Success = false, Messages = string.Join("<br />", result.Errors) };
             }
-
-            return jsonResult;
+            return Redirect(Url.Home());
+            // return jsonResult;
         }
         
         [HttpGet]
