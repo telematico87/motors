@@ -142,7 +142,7 @@ namespace eCommerce.Web.Controllers
 
             return View(model);
         }
-
+        
         public ActionResult PriceRangeFilter(decimal? priceFrom, decimal? priceTo)
         {
             var model = new PriceRangeFilterViewModel

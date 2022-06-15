@@ -1,6 +1,6 @@
 ﻿@using eCommerce.Entities
 @using eCommerce.Shared
-@using eCommerce.Services
+@using eCommerce.Services;
 @model eCommerce.Web.ViewModels.ProductsViewModel
 
 <div class="wrap-imagebox">
@@ -13,9 +13,7 @@
         decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
 
         <div class="tab-product">
-            <div class="row sort-box">
-                @*Un Producto*@
-
+            <div class="row sort-box">                
                 @foreach (var product in Model.Products)
                 {
 

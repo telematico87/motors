@@ -12,9 +12,13 @@
 <html lang="@AppDataHelper.CurrentLanguage.ShortCode.ToLower()" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>
 <head>
     @Html.Partial("_MetaTags", baseModel)
-    <script type = "text/javascript" src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&amp;region=GB" ></script> 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&amp;region=GB"></script>
     @Html.Partial("_HeaderStylesBM3")
     @*@RenderSection("IncludeHeaderStylesScripts", false)*@
+
+
+    <link href="~/Content/bm3/stylesheets/responsive_2.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="overlay"></div>

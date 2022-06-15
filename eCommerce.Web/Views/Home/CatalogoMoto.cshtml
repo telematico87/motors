@@ -92,17 +92,10 @@
                     <div class="widget widget-categories">
                         <div class="widget-title">
                             <h3>Categorías<span></span></h3>
-                        </div>
-
-                        @*@{
-                Html.RenderPartial("SearchFilters/_SearchInputFilter", Model);
-            }*@
-
+                        </div>                       
                         @{
                             Html.RenderPartial("Catalogo/MotoFilters/_CategoriesFilter", Model);
                         }
-
-
                     </div>
                     <div class="widget widget-price">
                         <div class="widget-title">

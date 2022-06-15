@@ -14,36 +14,42 @@
                         </div>
                     </div>
                     <ul class="social-list">
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL))
+                        {
                         <li>
-                            <a href="#" title="">
+                            <a href="@ConfigurationsHelper.FacebookURL" title="Facebook" target="_blank">
                                 <i class="fa fa-facebook" aria-hidden="true"></i>
                             </a>
                         </li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
+                        {
                         <li>
-                            <a href="#" title="">
+                            <a href="@ConfigurationsHelper.TwitterURL" title="Twitter" target="_blank">
                                 <i class="fa fa-twitter" aria-hidden="true"></i>
                             </a>
                         </li>
+
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
+                        {
                         <li>
-                            <a href="#" title="">
+                            <a href="@ConfigurationsHelper.InstagramURL" title="Instagram" target="_blank">
                                 <i class="fa fa-instagram" aria-hidden="true"></i>
                             </a>
                         </li>
+
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
+                        {
                         <li>
-                            <a href="#" title="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                            <a href="@ConfigurationsHelper.LinkedInURL" title="LinkedIn" target="_blank">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-dribbble" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-google" aria-hidden="true"></i>
-                            </a>
-                        </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -60,7 +66,7 @@
                             <a href="#" title="">Carrito</a>
                         </li>
                         <li>
-                            <a href="#" title="">Catálogo</a>
+                            <a href="@Url.CatalogoMoto(0,0)" title="">Catálogo</a>
                         </li>
                         <li>
                             <a href="#" title="">Ofertas</a>
@@ -83,12 +89,12 @@
                         <li>
                             <a href="#" title="">Términos y Condiciones</a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="#" title="">Libro de Reclamaciones</a>
                         </li>
                         <li>
                             <a href="#" title="">Devoluciones</a>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </div>
