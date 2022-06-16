@@ -64,7 +64,8 @@ namespace eCommerce.Web.Controllers
                     var product = ProductsService.Instance.GetProductResponseByID(ProductID, activeOnly: false);
 
                     model.TipoMonedaDestacado = product.TipoMoneda;
-
+                    model.Discount = Convert.ToDecimal(product.Discount);
+                    model.Price = Convert.ToDecimal(product.Price);
                 }
 
                 return PartialView("_Destacados", model);
