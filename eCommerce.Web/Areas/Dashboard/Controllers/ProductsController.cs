@@ -352,7 +352,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     TipoMotor = formCollection["TipoMotor"],
                     SistemaEnfriamiento = formCollection["SistemaEnfriamiento"],
                     SistemaEncendido = formCollection["SistemaEncendido"],
-                    SistemaArranque = formCollection["SistemaArranque"]
+                    SistemaArranque = formCollection["SistemaArranque"],
+                    Torque = formCollection["Torque"]
                 },
                 frenos = new Frenos {
                     FrenoDelantero = formCollection["FrenoDelantero"],

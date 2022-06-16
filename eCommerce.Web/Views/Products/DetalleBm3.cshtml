@@ -146,7 +146,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>22.0 NM  6,00 RPM</span>
+                                <span>@(Model.ProductoCaracteristica.motor.Torque == null ? "-" : Model.ProductoCaracteristica.motor.Torque)</span>
                             </div>
                             <div class="product-text">
                                 <span>TORQUE</span>
@@ -233,6 +233,10 @@
                                     <tr>
                                         <td>TIPO MOTOR</td>
                                         <td>@Model.ProductoCaracteristica.motor.TipoMotor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TORQUE</td>
+                                        <td>@Model.ProductoCaracteristica.motor.Torque</td>
                                     </tr>
                                     <tr>
                                         <td>SISTEMA DE ENCENDIDO</td>
