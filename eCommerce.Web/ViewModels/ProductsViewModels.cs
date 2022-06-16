@@ -48,6 +48,8 @@ namespace eCommerce.Web.ViewModels
         public Category Category { get; set; }
         public bool IsFeaturedProductsOnly { get; set; }
         public int TipoMonedaDestacado { get; set; }
+        public decimal? Discount { get; set; }
+        public decimal? Price { get; set; }
 
     }
 
