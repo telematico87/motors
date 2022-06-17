@@ -73,7 +73,7 @@
                                         <p class="info-description">@Model.Summary</p>
                                         <p class="info-description">PRECIO REFERENCIAL</p>
                                         <p class="info-price">@iconoMoneda @Model.Price</p>
-                                        <a class="info-select waves-effect" href="#">Quiero esta moto</a>
+                                        <a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51950650711">Quiero esta moto</a>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                 <i class="fa fa-motorcycle"></i>
                             </div>
                             <div class="product-value">
-                                <span>22.0 NM  6,00 RPM</span>
+                                <span>@(Model.ProductoCaracteristica.motor.Torque == null ? "-" : Model.ProductoCaracteristica.motor.Torque)</span>
                             </div>
                             <div class="product-text">
                                 <span>TORQUE</span>
@@ -233,6 +233,10 @@
                                     <tr>
                                         <td>TIPO MOTOR</td>
                                         <td>@Model.ProductoCaracteristica.motor.TipoMotor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TORQUE</td>
+                                        <td>@Model.ProductoCaracteristica.motor.Torque</td>
                                     </tr>
                                     <tr>
                                         <td>SISTEMA DE ENCENDIDO</td>
