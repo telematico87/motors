@@ -2273,12 +2273,6 @@
 		margin-bottom:20px;
 	}
 
-	.banner-box.two-half .inner-box,
-	.banner-box.thee-half .inner-box {
-		width:100%;
-		margin-bottom:20px;
-	}
-
 	.banner-box.two-half,
 	.banner-box.thee-half {
 		margin-bottom:0px;
@@ -2395,5 +2389,9 @@
 }
 
 @media (max-width:320px) {
-	
+	.banner-box.two-half .inner-box,
+	.banner-box.thee-half .inner-box {
+		width: 100%;
+		margin-bottom: 20px;
+	}
 }

@@ -1,47 +1,8 @@
 ﻿@model List<eCommerce.Entities.Category>
 
-
-<style>
-
-    .single-banner .inner-text h4 {
-        color: #252525;
-        font-weight: 700;
-        padding: 11px 28px;
-        background: #ffffff;
-        border-radius: 2px;
-    }
-
-    .single-banner .inner-text {
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        width: 100%;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        height: 100%;
-    }
-
-    .inner-text .text-category-movil {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 0.8em;
-        color: black;
-    }
-
-</style>
-
 @if (Model != null && Model.Count > 0)
 {
-    <section class="flat-row flat-banner-box category-shortcut-web">
+    <section class="flat-row flat-banner-box category-shortcut-web category-black">
         <div class="container">
             <div class="row"> 
                     @foreach (var category in Model)
