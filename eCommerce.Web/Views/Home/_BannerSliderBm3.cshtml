@@ -4,6 +4,14 @@
 {   
     var j = 0;
 
+    <style>
+
+        .img-movil-slider {
+            width: 100%
+        }
+
+    </style>
+
     <section class="flat-row flat-slider style4">
         <div class="container-full">
             <div class="row">
@@ -15,7 +23,7 @@
                             @* TODO: Localizing Slider *@
 
                             var img = configuration.Value.GetSubstringText("#IMG#", "#TH#");
-                            var imgMovil = "site/sliders/aprilia-tuono-46g-1.jpg";
+                            var imgMovil = "site/sliders/pistera_slider.jpg";
                             var topHeading = configuration.Value.GetSubstringText("#TH#", "#PG#");
                             var paragraph = configuration.Value.GetSubstringText("#PG#", "#LK#");
                             var link = configuration.Value.GetSubstringText("#LK#", "");
@@ -42,7 +50,7 @@
                                 @Html.Picture(img, classes: "img-fluid", alt: "Slider")
                             </div>
                             <div class="item-image-movil @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
-                                @Html.Picture(imgMovil, alt: "Slider")
+                                @Html.Picture(imgMovil, classes: "img-movil-slider", alt: "Slider")
                             </div>
                             <div class="clearfix"></div>
                         </div>                           

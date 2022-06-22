@@ -1,7 +1,7 @@
 ﻿<footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3 col-8">
                 <div class="widget-ft widget-about">
                     <div class="logo logo-ft">
                         <a href="#" title="">
@@ -10,47 +10,53 @@
                     </div>
                     <div class="widget-content">
                         <div class="info">
-                            <p>Distribuidora de Motocicletas, Repuestos y Accesorios de las marcas HERO, KTM, LIFAN, PIAGGIO, ACERBIS, ALPINE STARS, MOTUL.</p>                            
+                            <p>Distribuidora de Motocicletas, Repuestos y Accesorios de las marcas HERO, KTM, LIFAN, PIAGGIO, ACERBIS, ALPINE STARS, MOTUL.</p>
                         </div>
                     </div>
                     <ul class="social-list">
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-dribbble" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-google" aria-hidden="true"></i>
-                            </a>
-                        </li>
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.FacebookURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.FacebookURL" title="Facebook" target="_blank">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.TwitterURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.TwitterURL" title="Twitter" target="_blank">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.InstagramURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.InstagramURL" title="Instagram" target="_blank">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                        }
+                        @if (!string.IsNullOrEmpty(ConfigurationsHelper.LinkedInURL))
+                        {
+                            <li>
+                                <a href="@ConfigurationsHelper.LinkedInURL" title="LinkedIn" target="_blank">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-3 col-4">
                 <div class="widget-ft widget-menu">
-                    <div class="widget-title">
-                        <h3>Cuenta</h3>
+                    <div>
+                        <h3 class="widget-title-bm3"><i class="fa fa-angle-right"></i> Cuenta</h3>
                     </div>
                     <ul>
                         <li>
@@ -68,38 +74,14 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
-                <div class="widget-ft widget-info-ft">
-                    <div class="widget-title">
-                        <h3>Información</h3>
-                    </div>
-                    <ul class="cat-list-ft">
-                        <li>
-                            <a href="#" title="">Nosotros</a>
-                        </li>
-                        <li>
-                            <a href="#" title="">Contacto</a>
-                        </li>
-                        <li>
-                            <a href="#" title="">Términos y Condiciones</a>
-                        </li>
-                        <li>
-                            <a href="#" title="">Libro de Reclamaciones</a>
-                        </li>
-                        <li>
-                            <a href="#" title="">Devoluciones</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-6">
+            <div class="col-lg-3 col-8">
                 <div class="widget-ft widget-menu">
-                    <div class="widget-title">
-                        <h3>Contactos</h3>
+                    <div class="">
+                        <h3 class="widget-title-bm3"><i class="fa fa-angle-right"></i> Contactos</h3>
                     </div>
                     <ul>
-                        <li class="dir">                            
-                            <a href="https://goo.gl/maps/ntrea5NZ7DGTbkww7" target="_blank" style="text-decoration: underline">Av. Manuel Vera Enriquez 571, Trujillo</a>
+                        <li class="dir">
+                            <span><a href="https://goo.gl/maps/ntrea5NZ7DGTbkww7" target="_blank" style="text-decoration: underline">Av. Manuel Vera Enriquez 571, Trujillo</a></span>
                         </li>
                         <li class="mail">
                             <span><a href="mailto:gerencia@bm3motos.com" target="_blank" style="text-decoration: underline">gerencia@bm3motos.com</a></span>
@@ -122,6 +104,31 @@
                     </ul>
                 </div>
             </div>
+            <div class="col-lg-3 col-4">
+                <div class="widget-ft widget-info-ft">
+                    <div class="widget-title-bm3">
+                        <h3 class="widget-title-bm3"><i class="fa fa-angle-right"></i> Información</h3>
+                    </div>
+                    <ul class="cat-list-ft">
+                        <li>
+                            <a href="#" title="">Nosotros</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Contacto</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Términos y Condiciones</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Libro de Reclamaciones</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Devoluciones</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </footer>
@@ -133,7 +140,7 @@
                 <p class="copyright">Todos los derechos reservados © BM3 2022</p>
                 <p class="btn-scroll">
                     <a href="#" title="">
-                        <img src="/Content/bm3/images/icono/top.png" alt="">
+                        <img src="~/Content/bm3/images/icono/top.png" alt="">
                     </a>
                 </p>
             </div>

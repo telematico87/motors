@@ -10,6 +10,27 @@ input[type="checkbox"] {
 
 .category-black {
 	background-color: #1a1a1a;
+	margin-bottom: 20px;
+}
+
+.title-category-movil {
+	font-size: xx-large;
+	font-family: "BigNoodleTitling Oblique";
+	color: #f24726 !important;
+	font-weight: 400;
+}
+
+.line-category {
+	border: 0;
+	height: 1px;
+	background: #f24726;
+	background-image: linear-gradient(to right, #ccc, #f24726, #ccc);
+}
+
+.widget-title-bm3 {
+	color: #f24726 !important;
+	font-weight: 400;
+	font-family: "BigNoodleTitling Oblique";
 }
 
 /* Flat Slider
@@ -98,8 +119,8 @@ input[type="checkbox"] {
 .banner-box.three-half .inner-box {
 	float:left;
 	width:33.333%;
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:10px;
+	padding-right:5px;
 }
 
 .banner-box .inner-box a {
@@ -791,7 +812,7 @@ input[type="checkbox"] {
 /* Flat Imagebox Style1
 -------------------------------------------------------------- */
 .flat-imagebox.style1 {
-	padding:3px 0 9px;
+	padding:10px 0 9px;
 	position:relative;
 	z-index:99;
 }

@@ -5255,6 +5255,9 @@
     <Content Include="Areas\Dashboard\Views\TipoCambio\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\TipoCambio\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\TipoCambio\Action.cshtml" />
+    <Content Include="Content\bm3\stylesheets\fonts\Staatliches-Regular.ttf" />
+    <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling.ttf" />
+    <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling_oblique.ttf" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />

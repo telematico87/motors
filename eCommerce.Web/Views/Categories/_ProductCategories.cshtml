@@ -32,6 +32,8 @@
         background-color: white;
         padding: 5px;
     }
+
+    
 </style>
 
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
@@ -55,9 +57,10 @@
                         <div class="col-md-12" id="category-movil">
                             <div class="inner-box">                                
                                 <a href="@Url.CatalogoMoto(featuredCategory.ID)">
-                                    <h2 style="color: #474B4E !important;">
-                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                    <h2 class="title-category-movil">
+                                        <i class="fa fa-angle-right"></i> @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name.ToUpper() : string.Empty)
                                     </h2>
+                                    <hr class="line-category" />
                                 </a>
                             </div>
                         </div>
@@ -90,9 +93,10 @@
                         <div class="col-md-12" id="category-movil">
                             <div class="inner-box">
                                 <a href="@Url.CatalogoMoto(featuredCategory.ID)">
-                                    <h2  style="color: #474B4E !important;">
-                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                    <h2 class="title-category-movil">
+                                        <i class="fa fa-angle-right"></i> @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name.ToUpper() : string.Empty)
                                     </h2>
+                                    <hr class="line-category" />
                                 </a>
                             </div>
                         </div>
