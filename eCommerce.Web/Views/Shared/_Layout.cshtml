@@ -10,21 +10,39 @@
 
 <!DOCTYPE html>
 <html lang="@AppDataHelper.CurrentLanguage.ShortCode.ToLower()" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>
-<head> 
+<head>
     @Html.Partial("_MetaTags", baseModel)
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&amp;region=GB"></script>
-    @Html.Partial("_HeaderStylesBM3")
+    @*@Html.Partial("_HeaderStylesBM3")*@
     @*@RenderSection("IncludeHeaderStylesScripts", false)*@
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/cloud-zoom.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/flexslider.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/font-themify.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/slick-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/owl.video.play.html">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/waves.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/shortcodes_2.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/style_2.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/responsive_2.css">
+
 </head>
 <body>
     <div class="overlay"></div>
     @*<div id="preloder">
-        <div class="clear-loading loading-effect-2">
-            <span></span>
-        </div>
-    </div>*@
+            <div class="clear-loading loading-effect-2">
+                <span></span>
+            </div>
+        </div>*@
 
 
     @Html.Partial("_HeaderBm3")
@@ -33,6 +51,28 @@
 
     @Html.Partial("_FooterBm3")
     @Html.Partial("_Variables")
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/tether.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/waypoints.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.circlechart.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/easing.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.zoom.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&amp;region=GB"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/gmap3.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/waves.min.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/jquery.countdown.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/slick.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/slick-lightbox.js"></script>
+    <script type="text/javascript" src="~/Content/bm3/javascript/main.js"></script>
+
+
     @*@Html.Partial("_FooterStylesScripts")
         @RenderSection("IncludeFooterStyleScripts", false)*@
 </body>

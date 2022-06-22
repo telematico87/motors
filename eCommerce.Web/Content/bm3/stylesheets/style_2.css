@@ -1,6 +1,7 @@
 /* Import
 -------------------------------------------------------------- */
 @import url("font-awesome.css");
+
 @import url("font-themify.css");
 @import url("flexslider.css");
 @import url("owl.carousel.css");
@@ -12,6 +13,18 @@
 @import url("slick-theme.css");
 @import url("slick-lightbox.css");
 @import url("shortcodes.css");
+/*@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');*/
+
+@font-face {
+	font-family: "Staatliches";
+	src: url("fonts/Staatliches-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "BigNoodleTitling Oblique";
+	src: url("fonts/big_noodle_titling_oblique.ttf") format("truetype");
+}
+
 /*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i");
 @import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese");
 */
@@ -3457,18 +3470,18 @@ ol.comment-list li.comment .comment-text .comment-content p {
 /* Preloader
 -------------------------------------------------------------- */
 .preloader {
-	width:100%;
-	height:100%;
-	background-color:#fff;
-	position:fixed;
-	top:0;
-	left:0;
-	z-index:999999;
-	-webkit-transition:all 0.3s ease-in-out;
-	-moz-transition:all 0.3s ease-in-out;
-	-ms-transition:all 0.3s ease-in-out;
-	-o-transition:all 0.3s ease-in-out;
-	transition:all 0.3s ease-in-out;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 
 .clear-loading {

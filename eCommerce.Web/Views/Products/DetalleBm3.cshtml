@@ -1,7 +1,7 @@
 @model eCommerce.Web.ViewModels.ProductDetalleViewModel
 @using eCommerce.Services
 
- 
+
 
 <style>
     .product-detail-bar {
@@ -72,8 +72,18 @@
                                         @*<h3 class="info-version">2022</h3>*@
                                         <p class="info-description">@Model.Summary</p>
                                         <p class="info-description">PRECIO REFERENCIAL</p>
-                                        <p class="info-price">@iconoMoneda @Model.Price</p>
-                                        <a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51950650711">Quiero esta moto</a>
+                                        @if (Model.TipoMoneda == 2)
+                                        {
+                                            <p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>
+                                            <p class="info-description" style="font-size:x-large;">S/.@productPriceNormal.ToString("#,####") </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="info-price">@iconoMoneda @Model.Price.ToDecimalWithPoints(2)</p>
+                                        }
+
+                                        <a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>
+
                                     </div>
                                 </div>
                             </div>

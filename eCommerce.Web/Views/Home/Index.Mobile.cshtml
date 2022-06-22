@@ -7,10 +7,11 @@
         Model.PageDescription = "PP.Home.Description".LocalizedString();
         Model.PageURL = Url.Home();
         Model.PageImageURL = PictureHelper.PageImageURL("home.jpg");
-    }
+    }    
 
     Html.RenderAction("HomeSliders", "Home");
-    <br />
+    Html.RenderAction("HomeMarcasMoto", "Home");
+    Html.RenderAction("FeaturedCategories", "Categories", new { recordSize = 3, isForHomePage = true });
     Html.RenderAction("ProductsByFeaturedCategories", "Categories", new { recordSize = 3 });
 }
 
@@ -27,78 +28,70 @@
     </div>
 </div>
 
-@if (true)
-{
-    <section class="latest-blog spad py-0">
-        <div class="benefit-items">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="single-benefit">
-                            <div class="sb-icon">
-                                <i class="fas fa-shipping-fast"></i>
+    <section class="flat-iconbox">
+        <div class="container">
+            <div class="row row-cols-5">
+                <div class="col-md-3 col-6">
+                    <div class="iconbox">
+                        <div class="box-header">
+                            <div class="image">
+                                <img src="~/Content/bm3/images/producto/icono_best_points_confianza.svg" style="height: inherit;" alt="" />
                             </div>
-                            <div class="sb-text">
-                                <h6>@("PP.Home.Showcase.FastDelivery".LocalizedString())</h6>
-                                <p>@("PP.Home.Showcase.OnTimeDelivery".LocalizedString())</p>
+                            <div class="box-title">
+                                <h3>ENTREGA RÁPIDA</h3>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="single-benefit">
-                            <div class="sb-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div class="sb-text">
-                                <h6>@("PP.Home.Showcase.247Support".LocalizedString())</h6>
-                                <p>@("PP.Home.Showcase.AlwaysReadyToHelp".LocalizedString())</p>
-                            </div>
+                        <div class="box-content">
+                            <p>Entrega Rápida</p>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="single-benefit border-0">
-                            <div class="sb-icon">
-                                <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="iconbox">
+                        <div class="box-header">
+                            <div class="image">
+                                <img src="~/Content/bm3/images/producto/icono_best_points_envio_gratis.svg" alt="" style="height: inherit;" />
                             </div>
-                            <div class="sb-text">
-                                <h6>@("PP.Home.Showcase.SecurePayments".LocalizedString())</h6>
-                                <p>@("PP.Home.Showcase.SecurePaymentOptions".LocalizedString())</p>
+                            <div class="box-title">
+                                <h3>SOPORTE</h3>
                             </div>
+                        </div>
+                        <div class="box-content">
+                            <p>Siempre Atentos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="iconbox">
+                        <div class="box-header">
+                            <div class="image">
+                                <img src="~/Content/bm3/images/producto/icono_best_points_pago_en_linea.svg" style="height: inherit;" alt="" />
+                            </div>
+                            <div class="box-title">
+                                <h3>PAGOS SEGUROS</h3>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <p>Transacciones Seguras</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="iconbox">
+                        <div class="box-header">
+                            <div class="image">
+                                <img src="~/Content/bm3/images/producto/icono_best_points_confianza.svg" style="height: inherit;" alt="" />
+                            </div>
+                            <div class="box-title">
+                                <h3>CONFIANZA</h3>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <p>Protección de Datos</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="partner-logo" title="@("PP.Home.Showcase.OurPartners".LocalizedString())">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="~/Content/templates/fashi/img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}

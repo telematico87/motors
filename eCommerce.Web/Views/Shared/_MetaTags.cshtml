@@ -1,7 +1,7 @@
 ﻿@model eCommerce.Web.ViewModels.PageViewModel
 
 @{
-    var title = string.Format("{0} {1} {2}", Model.PageTitle, string.IsNullOrEmpty(Model.PageTitle) ? "" : "-", ConfigurationsHelper.ApplicationName).Replace("  ", " ").Trim();
+    var title = string.Format("{0} {1} {2}", "BM3 Motos | ", "Distribuidora de Motos, Repuestos y Accesorios | ", "Financiamientos");
 }
  
 <meta charset="utf-8" />
@@ -10,7 +10,7 @@
 
 <title>@title</title>
 @*<meta name="description" content="@Model.PageDescription">*@
-<meta name="description" content="Prueba">
+<meta name="description" content="BM3 Motos - Distribuidora de Motocicletas, Repuestos y Accesorios de las marcas HERO, KTM, LIFAN, PIAGGIO, ACERBIS, ALPINE STARS, MOTUL.">
 <meta property="og:title" content="@title" />
 <meta property="og:description" content="@Model.PageDescription" />
 <meta property="og:url" content="@Model.PageURL.ToSiteURL()" />
@@ -21,7 +21,7 @@
 <meta name="twitter:site" content="@ConfigurationsHelper.TwitterUsername" />
 <meta name="twitter:creator" content="@ConfigurationsHelper.TwitterUsername" />
 
-<link rel="shortcut icon" href="Content/bm3/favicon/favicon.png">
+<link rel="shortcut icon" href="~/Content/bm3/favicon/favicon.png">
 
 @foreach (var canonicalURL in Model.PageCanonicalURLs)
 {
