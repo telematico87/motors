@@ -391,15 +391,12 @@
     <Content Include="Content\bm3\stylesheets\mCustomScrollbar.css" />
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
-    <Content Include="Content\bm3\stylesheets\responsive.css" />
-    <Content Include="Content\bm3\stylesheets\responsive_2.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes_2.css" />
+    <Content Include="Content\bm3\stylesheets\responsive_3.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes_3.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
-    <Content Include="Content\bm3\stylesheets\style.css" />
-    <Content Include="Content\bm3\stylesheets\style_2.css" />
+    <Content Include="Content\bm3\stylesheets\style_3.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\images\07f5c4e6-0929-4fa5-b7ae-392bcbff9c1e.png" />
@@ -5255,6 +5252,9 @@
     <Content Include="Areas\Dashboard\Views\TipoCambio\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\TipoCambio\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\TipoCambio\Action.cshtml" />
+    <Content Include="Content\bm3\stylesheets\fonts\Staatliches-Regular.ttf" />
+    <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling.ttf" />
+    <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling_oblique.ttf" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5278,6 +5278,7 @@
     <Content Include="Views\Home\Catalogo\MotoFilters\_MarcasFilter.cshtml" />
     <Content Include="Views\Products\_Destacados.cshtml" />
     <Content Include="Views\Home\HomeMarcasMoto.cshtml" />
+    <Content Include="Views\Shared\HeadTags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

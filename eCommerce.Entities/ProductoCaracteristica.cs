@@ -57,6 +57,7 @@ namespace eCommerce.Entities
         public string SistemaEnfriamiento { get; set; }
         public string SistemaEncendido { get; set; }
         public string SistemaArranque { get; set; }
+        public string Torque { get; set; }
 
         public Motor()
         {
@@ -67,6 +68,7 @@ namespace eCommerce.Entities
             SistemaEnfriamiento = null;
             SistemaEncendido = null;
             SistemaArranque = null;
+            Torque = null;
         }
     }
 

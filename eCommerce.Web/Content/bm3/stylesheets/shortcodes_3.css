@@ -5,7 +5,32 @@ input[type="checkbox"] {
 /* Flat Brand
 -------------------------------------------------------------- */
 .flat-brand {
-	background-color:#1a1a1a;
+	background-color: #ffffff;
+}
+
+.category-black {
+	background-color: #1a1a1a;
+	margin-bottom: 20px;
+}
+
+.title-category-movil {
+	font-size: xx-large;
+	font-family: "BigNoodleTitling Oblique";
+	color: #f24726 !important;
+	font-weight: 400;
+}
+
+.line-category {
+	border: 0;
+	height: 1px;
+	background: #f24726;
+	background-image: linear-gradient(to right, #ccc, #f24726, #ccc);
+}
+
+.widget-title-bm3 {
+	color: #f24726 !important;
+	font-weight: 400;
+	font-family: "BigNoodleTitling Oblique";
 }
 
 /* Flat Slider
@@ -13,6 +38,41 @@ input[type="checkbox"] {
 .flat-slider {
 	padding:35px 0 14px;
 	background-color:#f5f5f5;
+}
+
+
+.single-banner .inner-text h4 {
+	color: #252525;
+	font-weight: 700;
+	padding: 11px 28px;
+	background: #ffffff;
+	border-radius: 2px;
+}
+
+.single-banner .inner-text {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 100%;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 100%;
+}
+
+.inner-text .text-category-movil {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 0.8em;
+	color: black;
 }
 
 .flat-slider.style2 {
@@ -33,7 +93,7 @@ input[type="checkbox"] {
 /* Flat Banner Box
 -------------------------------------------------------------- */
 .flat-banner-box {
-	padding:30px 0 30px;
+	padding:15px 0 15px;
 }
 
 /* Banner Box */
@@ -59,8 +119,8 @@ input[type="checkbox"] {
 .banner-box.three-half .inner-box {
 	float:left;
 	width:33.333%;
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:10px;
+	padding-right:5px;
 }
 
 .banner-box .inner-box a {
@@ -752,7 +812,7 @@ input[type="checkbox"] {
 /* Flat Imagebox Style1
 -------------------------------------------------------------- */
 .flat-imagebox.style1 {
-	padding:3px 0 9px;
+	padding:10px 0 9px;
 	position:relative;
 	z-index:99;
 }
@@ -1973,7 +2033,7 @@ body.background #header {
 body.background section.flat-row {
 	padding:0;
 	margin:0;
-	margin-bottom:30px;
+	margin-bottom:15px;
 }
 
 body.background section.flat-row.flat-slider {
