@@ -78,6 +78,8 @@ namespace eCommerce.Data
         public DbSet<TablaMaster> TablaMasters { get; set; }
         public DbSet<TipoCambio> TipoCambios { get; set; }
 
+        public DbSet<Contacto> Contactos { get; set; }
+
 
         public static eCommerceContext Create()
         {

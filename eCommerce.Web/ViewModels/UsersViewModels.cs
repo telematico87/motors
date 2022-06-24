@@ -26,6 +26,7 @@ namespace eCommerce.Web.ViewModels
     public class ForgotPasswordViewModel : PageViewModel
     {
         public string Username { get; set; }
+        public string Email { get; set; }
     }
 
     public class ResetPasswordViewModel : PageViewModel

@@ -110,9 +110,9 @@ namespace eCommerce.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                
+                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                 await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                
 
                 await UserManager.SendEmailAsync(user.Id, EmailTextHelpers.AccountRegisterEmailSubject(AppDataHelper.CurrentLanguage.ID), EmailTextHelpers.AccountRegisterEmailBody(AppDataHelper.CurrentLanguage.ID, Url.Action("Login", "Users", null, protocol: Request.Url.Scheme)));
 
@@ -228,10 +228,12 @@ namespace eCommerce.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<JsonResult> ForgotPassword(ForgotPasswordViewModel model)
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             var user = !string.IsNullOrEmpty(model.Username) ? await UserManager.FindByNameAsync(model.Username) : null;
+           // var email = !string.IsNullOrEmpty(model.Email) ? await UserManager.FindByEmailAsync(model.Email) : null;
+            string to_email = user.Email;
 
             if (user != null)
             {
@@ -239,7 +241,8 @@ namespace eCommerce.Web.Controllers
 
                 var callbackUrl = Url.Action("ResetPassword", "Users", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                await UserManager.SendEmailAsync(user.Id, "Reset " + ConfigurationsHelper.ApplicationName + " Password", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, to_email, "Cambio de Contrasena", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //await UserManager.SendEmailAsync(user.Id, "Reset " + ConfigurationsHelper.ApplicationName + " Password", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
             }
 
             // Don't reveal that the user does not exist or is not confirmed for security measures.
@@ -249,7 +252,8 @@ namespace eCommerce.Web.Controllers
             {
                 Data = new { Success = true }
             };
-            return jResult;
+            //return jResult;
+            return Redirect(Url.Home());
         }
 
         [AllowAnonymous]
@@ -267,7 +271,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             JsonResult jResult = new JsonResult();
 
@@ -289,8 +293,8 @@ namespace eCommerce.Web.Controllers
             {
                 jResult.Data = new { Success = false, Messages = "Unable to reset password." };
             }
-
-            return jResult;
+            return Redirect(Url.Home());
+            //return jResult;
         }
         
         public ActionResult UserProfile(string tab)
