@@ -66,6 +66,7 @@
     <Compile Include="Aro.cs" />
     <Compile Include="Catalogo.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="Contacto.cs" />
     <Compile Include="CustomEntities\Cart.cs" />
     <Compile Include="CustomEntities\CartItem.cs" />
     <Compile Include="CustomEntities\CategoryWithChildren.cs" />
