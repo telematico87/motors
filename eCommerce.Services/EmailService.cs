@@ -33,7 +33,7 @@ namespace eCommerce.Services
             }
         }
 
-        public Task SendToEmailAsync(string fromEmailAddressName, string fromEmailAddress, string toEmailAddress, string toEmailSubject, string toEmailBody)
+        public async Task SendToEmailAsync(string fromEmailAddressName, string fromEmailAddress, string toEmailAddress, string toEmailSubject, string toEmailBody)
         {
             try
             {
@@ -45,13 +45,15 @@ namespace eCommerce.Services
                 var plainTextContent = toEmailBody;
                 var htmlContent = toEmailBody;
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-
-                return client.SendEmailAsync(msg);
+                var response = await client.SendEmailAsync(msg);
+                //return client.SendEmailAsync(msg);
             }
             catch (Exception)
             {
-                return Task.CompletedTask;
+                 await Task.CompletedTask;
             }
+
+             
         }
     }
 }

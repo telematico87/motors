@@ -115,6 +115,7 @@
     <Compile Include="ColorService.cs" />
     <Compile Include="CommentsService.cs" />
     <Compile Include="ConfigurationsService.cs" />
+    <Compile Include="ContactoService.cs" />
     <Compile Include="DashboardService.cs" />
     <Compile Include="DataContextHelper.cs" />
     <Compile Include="eCommerceRoleManager.cs" />
