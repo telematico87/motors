@@ -91,7 +91,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<JsonResult> Register(RegisterViewModel model)
         {
             JsonResult jsonResult = new JsonResult();
 
@@ -110,11 +110,11 @@ namespace eCommerce.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                 await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                
+                 //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                 //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                 //await UserManager.SendEmailAsync(user.Id, "Confirme su cuenta", "Por favor confirme su cuenta haciendo clic <a href=\"" + callbackUrl + "\">Aquí</a>");                
 
-                await UserManager.SendEmailAsync(user.Id, EmailTextHelpers.AccountRegisterEmailSubject(AppDataHelper.CurrentLanguage.ID), EmailTextHelpers.AccountRegisterEmailBody(AppDataHelper.CurrentLanguage.ID, Url.Action("Login", "Users", null, protocol: Request.Url.Scheme)));
+                 await UserManager.SendEmailAsync(user.Id, EmailTextHelpers.AccountRegisterEmailSubject(AppDataHelper.CurrentLanguage.ID), EmailTextHelpers.AccountRegisterEmailBody(AppDataHelper.CurrentLanguage.ID, Url.Action("Login", "Users", null, protocol: Request.Url.Scheme)));
 
                 jsonResult.Data = new { Success = true };
             }
@@ -122,8 +122,8 @@ namespace eCommerce.Web.Controllers
             {
                 jsonResult.Data = new { Success = false, Messages = string.Join("<br />", result.Errors) };
             }
-            return Redirect(Url.Home());
-            // return jsonResult;
+            //return Redirect(Url.Home());
+             return jsonResult;
         }
         
         [HttpGet]
@@ -137,7 +137,7 @@ namespace eCommerce.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        public async Task<JsonResult> Login(LoginViewModel model)
         {
             JsonResult jsonResult = new JsonResult();
 
@@ -146,8 +146,7 @@ namespace eCommerce.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    jsonResult.Data = new { Success = true, RequiresVerification = false };
-                    RedirectToAction("Index", "Home");
+                    jsonResult.Data = new { Success = true, RequiresVerification = false }; 
                     break;
                 case SignInStatus.RequiresVerification:
                     jsonResult.Data = new { Success = true, RequiresVerification = true };
@@ -161,7 +160,8 @@ namespace eCommerce.Web.Controllers
                     break;
             }
 
-            return Redirect(Url.Home()); 
+            return jsonResult;
+            //return Redirect(Url.Home()); 
         }
 
         [HttpPost]
@@ -241,8 +241,8 @@ namespace eCommerce.Web.Controllers
 
                 var callbackUrl = Url.Action("ResetPassword", "Users", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                await new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, to_email, "Cambio de Contrasena", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                //await UserManager.SendEmailAsync(user.Id, "Reset " + ConfigurationsHelper.ApplicationName + " Password", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //await new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, to_email, "Cambio de Contrasena", "Please reset your " + ConfigurationsHelper.ApplicationName + " password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset " + ConfigurationsHelper.ApplicationName + " Password", "Por favor reinicie su " + ConfigurationsHelper.ApplicationName + " contraseña haciendo clic <a href=\"" + callbackUrl + "\">Aquí</a>");
             }
 
             // Don't reveal that the user does not exist or is not confirmed for security measures.
@@ -286,12 +286,12 @@ namespace eCommerce.Web.Controllers
                 }
                 else
                 {
-                    jResult.Data = new { Success = result.Succeeded, Messages = "Your password has been reset. Please login with your updated credentials now." };
+                    jResult.Data = new { Success = result.Succeeded, Messages = "Tu contraseña ha sido restablecida. Inicie sesión con sus credenciales actualizadas ahora." };
                 }
             }
             else
             {
-                jResult.Data = new { Success = false, Messages = "Unable to reset password." };
+                jResult.Data = new { Success = false, Messages = "No se puede restablecer la contraseña." };
             }
             return Redirect(Url.Home());
             //return jResult;
@@ -347,7 +347,7 @@ namespace eCommerce.Web.Controllers
             }
             else
             {
-                jResult.Data = new { Success = false, Message = "Invalid User" };
+                jResult.Data = new { Success = false, Message = "Usuario invalido" };
             }
 
             return jResult;
@@ -382,7 +382,7 @@ namespace eCommerce.Web.Controllers
             }
             else
             {
-                jResult.Data = new { Success = false, Message = "Invalid User" };
+                jResult.Data = new { Success = false, Message = "Usuario invalido" };
             }
 
             return jResult;
@@ -418,7 +418,7 @@ namespace eCommerce.Web.Controllers
             }
             else
             {
-                jResult.Data = new { Success = false, Message = "Invalid User" };
+                jResult.Data = new { Success = false, Message = "Usuario invalido" };
             }
 
             return jResult;

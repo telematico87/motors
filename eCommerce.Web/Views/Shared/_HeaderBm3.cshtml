@@ -256,6 +256,8 @@
     </div>
 </section>
 
+<script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
+ 
 @if (User.Identity.IsAuthenticated)
 {
     <form id="logOffForm" method="post" action="@Url.Logoff()">
