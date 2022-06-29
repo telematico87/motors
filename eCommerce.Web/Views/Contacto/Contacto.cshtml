@@ -1,154 +1,92 @@
 ﻿@model ContactosViewModels
 
-
-<br />
-
-
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10 text-center">
-        <img src="../Content/bm3/images/contacto/contacto2.jpg" alt="" class="img-fluid">
-    </div>
-    <div class="col-md-1"></div>
-</div>
-
-<br />
-<div class="card" style="background: repeat rgb(241, 240, 240);">
-    <form method="post" id="frmContacto">
-        <div class="card-body">
-            <br />
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="group-input">
-                        <label for="Nombre">Nombre: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
+<section class="flat-row flat-slider">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="slider">
+                    <div class="slider-item style8">
+                        <div class="item-image">
+                            <img src="~/Content/bm3/images/contacto/contact-web.jpg" alt="" />
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="group-input">
-                        <label for="Email">Email: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" id="txtEmail" name="Email" placeholder="Ingrese Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Email'">
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="group-input">
-                        <label for="Asunto">Asunto: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" id="txtAsunto" name="Asunto" placeholder="Ingrese Asunto" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Asunto'">
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="group-input">
-                        <label for="Mensaje">Mensaje: <span class="text-danger">*</span></label>
-                        <textarea rows="8" type="text" class="form-control" id="txtMensaje" name="Mensaje" placeholder="Ingrese Mensaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Mensaje'"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-
-            <br />
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-6">
-                    <button class="btn btn-success" type="submit" id="actionButton"><i class="ti-save"></i>  Enviar</button>
-                </div>
-            </div>
-            <br />
         </div>
-    </form>
-</div>
+    </div>
+</section>
 
- 
+<main id="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card" style="margin-bottom:20px; background: repeat rgb(241, 240, 240);">
+                    <form method="post" id="frmContacto">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="group-input">
+                                        <label for="Nombre">Nombre: <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="group-input">
+                                        <label for="Email">Email: <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" id="txtEmail" name="Email" placeholder="Ingrese Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Email'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="group-input">
+                                        <label for="Asunto">Asunto: <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" id="txtAsunto" name="Asunto" placeholder="Ingrese Asunto" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Asunto'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="group-input">
+                                        <label for="Mensaje">Mensaje: <span class="text-danger">*</span></label>
+                                        <textarea rows="8" type="text" class="form-control" id="txtMensaje" name="Mensaje" placeholder="Ingrese Mensaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Mensaje'"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12  text-center">
+                                    <button class="btn btn-danger" type="submit" id="actionButton"><i class="fa fa-send-o"></i>  Enviar</button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</main>
+
 <script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
-@*<script src="~/Content/lib/jquery-validation-1.19.1/jquery.validate.min.js"></script>
-<script src="~/Content/lib/jquery-validation-1.19.1/additional-methods.min.js"></script>*@
- 
-
-
 <script>
-
-    //$("#frmContacto").validate({
-    //    errorClass: "alert alert-danger",
-    //    errorElement: "div",
-    //    rules: {
-    //        Nombre: {
-    //            required: true,
-    //            minlength: 1,
-    //            maxlength: 50
-    //        },
-    //        Email: {
-    //            required: true,
-    //            minlength: 1,
-    //            maxlength: 50
-    //        },
-    //        Asunto: {
-    //            required: true,
-    //            minlength: 1,
-    //            maxlength: 100
-    //        },
-    //        Mensaje: {
-    //            required: true,
-    //            minlength: 1,
-    //            maxlength: 1000
-    //        },
-
-    //    },
-    //    messages: {
-    //        Nombre: {
-    //            required: "Nombre Requerido",
-    //            minlength: "Minimo 1",
-    //            maxlength: "Máximo 50"
-    //        },
-    //        Email: {
-    //            required: "Email Requerido",
-    //            minlength: "Minimo 1",
-    //            maxlength: "Máximo 50"
-    //        },
-    //        Asunto: {
-    //            required: "Asunto Requerido",
-    //            minlength: "Minimo 1",
-    //            maxlength: "Máximo 50"
-    //        },
-    //        Mensaje: {
-    //            required: "Mensaje Requerido",
-    //            minlength: "Minimo 1",
-    //            maxlength: "Máximo 100"
-    //        }
-
-
-    //    },
-    //    highlight: function (element, errorClass) {
-    //        $(element).removeClass(errorClass);
-    //    }
-    //});
 
 $(document).ready(function () {
 
     $("#frmContacto").submit(function (event) {
-        debugger;
-        GuardarContacto();
+        EnviarFormularioContacto();
         event.preventDefault();
     });
 
 
 });
 
- 
-function GuardarContacto() {
-    debugger;
+    function EnviarFormularioContacto() {
     $(".errorsRow .errorMessages", "#frmContacto").html("");
     $(".errorsRow", "#frmContacto").hide(200);
     $(".errorsRow .errorMessages", "#frmContacto").hide();
@@ -192,18 +130,14 @@ function GuardarContacto() {
                 model
             },
             success: function (result) {
-                debugger;
                 Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
                 window.location.href = '@Url.Home()';
+            },            
+            fail : function (jqXHR, textStatus, errorThrown) {                                
+                Swal.fire("Error al enviar", "Lo sentimos, no se pudo enviar. Intentalo más tarde", "error");
+                return false;
             }
-
         });
-
     }
-     
-    }
-
-
-
-
+}
 </script>
