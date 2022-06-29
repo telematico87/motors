@@ -74,12 +74,13 @@
                                         <p class="info-description">PRECIO REFERENCIAL</p>
                                         @if (Model.TipoMoneda == 2)
                                         {
-                                            <p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>
-                                            <p class="info-description" style="font-size:x-large;">S/.@productPriceNormal.ToString("#,####") </p>
+                                            <p class="info-price" style="font-size:xxx-large;">@iconoMoneda @Model.Price.ToString("#,####")</p>
+                                            <p class="info-description" style="font-size:x-large;">S/. @productPriceNormal.ToString("#,####") *</p>
+                                            <p class="info-description" style="font-size:inherit;">T/C: @tipoCambio (REFERENCIAL)</p>
                                         }
                                         else
                                         {
-                                            <p class="info-price">@iconoMoneda @Model.Price.ToDecimalWithPoints(2)</p>
+                                            <p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>
                                         }
 
                                         <a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>
@@ -101,7 +102,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/tanque-de-almacenamiento64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>@(Model.ProductoCaracteristica.consumo.CapacidadTanque == null ? "-" : Model.ProductoCaracteristica.consumo.CapacidadTanque)</span>
@@ -114,7 +115,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/engine64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>@(Model.ProductoCaracteristica.motor.Cilindrada == null ? "-" : Model.ProductoCaracteristica.motor.Cilindrada)</span>
@@ -127,7 +128,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/velocimetro64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>@(Model.ProductoCaracteristica.transmisiones.NroCambios == null ? "-" : Model.ProductoCaracteristica.transmisiones.NroCambios)</span>
@@ -140,7 +141,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/potencia64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>@(Model.ProductoCaracteristica.motor.Potencia == null ? "-" : Model.ProductoCaracteristica.motor.Potencia)</span>
@@ -153,7 +154,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/torque-wrench64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>@(Model.ProductoCaracteristica.motor.Torque == null ? "-" : Model.ProductoCaracteristica.motor.Torque)</span>
@@ -166,7 +167,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="product-icon">
-                                <i class="fa fa-motorcycle"></i>
+                                <img src="~/Content/bm3/images/icon-detalle/garantia64px.png" />
                             </div>
                             <div class="product-value">
                                 <span>16 MESES / 10 MIL KM</span>
@@ -185,35 +186,35 @@
         <div class="container">
             <ul class="product-detail-bar">
                 <li class="active">
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/ajuste24px.png" /></span>
                     <span class="bar-title">Caracter&iacute;sticas T&eacute;cnicas</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/engine24px.png" /></span>
                     <span class="bar-title">Motor y sistema el&eacute;ctrico</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/brake24px.png" /></span>
                     <span class="bar-title">Frenos</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/wheel24px.png" /></span>
                     <span class="bar-title">Aros y Llantas</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/suspension24px.png" /></span>
                     <span class="bar-title">Suspensi&oacute;n</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/transmision-manual24px.png" /></span>
                     <span class="bar-title">Transmisi&oacute;n</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/icon-fuel24px.png" /></span>
                     <span class="bar-title">Consumo</span>
                 </li>
                 <li>
-                    <span class="bar-icon"><i class="fa fa-motorcycle"></i></span>
+                    <span class="bar-icon"><img src="~/Content/bm3/images/icon-detalle/dimension24px.png" /></span>
                     <span class="bar-title">Dimensiones</span>
                 </li>
             </ul>

@@ -4,15 +4,15 @@
     @Html.AntiForgeryToken()
     <div class="group-input">
         <label for="FullName">@("PP.Register.FullName".LocalizedString()) <span class="text-danger">*</span></label>
-        <input class="form-control" name="FullName" placeholder="@("PP.Register.FullNamePlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.FullNamePlaceholder".LocalizedString())'" value="@Model.FullName">
+        <input class="form-control" name="FullName" id="txtNombres" placeholder="@("PP.Register.FullNamePlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.FullNamePlaceholder".LocalizedString())'" value="@Model.FullName">
     </div>
     <div class="group-input">
         <label for="Email">@("PP.Register.Email".LocalizedString()) <span class="text-danger">*</span></label>
-        <input class="form-control" name="Email" placeholder="@("PP.Register.EmailPlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.EmailPlaceholder".LocalizedString())'" value="@Model.Email">
+        <input class="form-control" name="Email" id="txtEmail" placeholder="@("PP.Register.EmailPlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.EmailPlaceholder".LocalizedString())'" value="@Model.Email">
     </div>
     <div class="group-input">
         <label for="username">@("PP.Register.Username".LocalizedString()) <span class="text-danger">*</span></label>
-        <input class="form-control" name="Username" placeholder="@("PP.Register.UsernamePlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.UsernamePlaceholder".LocalizedString())'" value="@Model.Username">
+        <input class="form-control" name="Username" id="txtUsername" placeholder="@("PP.Register.UsernamePlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.UsernamePlaceholder".LocalizedString())'" value="@Model.Username">
     </div>
     <div class="group-input">
         <label for="pass">@("PP.Register.Password".LocalizedString()) <span class="text-danger">*</span></label>
@@ -20,7 +20,7 @@
     </div>
     <div class="group-input">
         <label for="pass">@("PP.Register.ConfirmPassword".LocalizedString()) <span class="text-danger">*</span></label>
-        <input type="password" class="form-control" name="ConfirmPassword" placeholder="@("PP.Register.ConfirmPasswordPlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.ConfirmPasswordPlaceholder".LocalizedString())'">
+        <input type="password" class="form-control" name="ConfirmPassword" id="txtConfirmPassword" placeholder="@("PP.Register.ConfirmPasswordPlaceholder".LocalizedString())" onfocus="this.placeholder = ''" onblur="this.placeholder = '@("PP.Register.ConfirmPasswordPlaceholder".LocalizedString())'">
     </div>
     <div class="group-input errorsRow" style="display:none">
         <div class="alert alert-danger errorMessages mb-0" role="alert"></div>
@@ -29,31 +29,52 @@
     <button type="submit" id="registerButton" class="btn btn-success">@("PP.Register.RegisterAccount".LocalizedString())</button>
 </form>
 
+<script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
+
 <script>
-    var _fullNameRequired = "@("PP.Register.Validation.FullNameRequired".LocalizedString())";
-    var _usernameRequired = "@("PP.Register.Validation.UsernameRequired".LocalizedString())";
-    var _emailRequired = "@("PP.Register.Validation.EmailRequired".LocalizedString())";
-    var _emailFormat = "@("PP.Register.Validation.EmailFormat".LocalizedString())";
-    var _passwordRequired = "@("PP.Register.Validation.PasswordRequired".LocalizedString())";
-    var _confirmPasswordRequired = "@("PP.Register.Validation.ConfirmPasswordRequired".LocalizedString())";
-    var _passwordNotMatch = "@("PP.Register.Validation.PasswordNotMatched".LocalizedString())";
+    $(document).ready(function () {
 
-    validateRegisterForm();
+        $("#registerForm").submit(function (e) {
+            submitForm();
+            e.preventDefault();
+        });
 
-    $("#registerForm").submit(function (e) {
-        submitForm();
-
-        e.preventDefault();
     });
 
+     
     function submitForm() {
         $(".errorsRow .errorMessages", "#registerForm").html("");
         $(".errorsRow", "#registerForm").hide(200);
-        $(".errorsRow .errorMessages", "#registerForm").hide();
+        $(".errorsRow .errorMessages", "#registerForm").hide(); 
+            //addLoader("register-container"); 
 
-        if ($("#registerForm").valid()) {
-            addLoader("register-container");
+        let Nombres = $("#txtNombres").val();
+        let Email = $("#txtEmail").val();
+        let Username = $("#txtUsername").val();
+        let Password = $("#regPassword").val();
+        let ConfirPassword = $("#ConfirmPassword").val();
 
+        if (Nombres == "" || Nombres.length == 0) {
+            alertify.warning('Ingrese sus Nombres');
+            return false;
+        }
+        if (Email == "" || Email.length == 0) {
+            alertify.warning('Ingrese su Email');
+            return false;
+        }
+        if (Username == "" || Username.length == 0) {
+            alertify.warning('Ingrese su Usuario');
+            return false;
+        }
+        if (Password == "" || Password.length == 0) {
+            alertify.warning('Ingrese su Password');
+            return false;
+        }
+        if (ConfirPassword == "" || ConfirPassword.length == 0) {
+            alertify.warning('Confirme su Password');
+            return false;
+        }
+         
             $.ajax({
                 url: "@Url.Register()",
                 type: "post",
@@ -61,25 +82,24 @@
             })
             .done(function (response) {
                 if (response != null && response.Success) {
+                    console.log(response);
+                    Swal.fire("¡Registrado!", 'Se ha creado la cuenta con éxito', "success");
                     window.location.href = "@Url.Home()";
                 }
                 else {
-                    removeLoader("register-container");
-
+                    //removeLoader("register-container");
                     $(".errorsRow .errorMessages", "#registerForm").html(response.Messages);
                     $(".errorsRow", "#registerForm").show(200);
                     $(".errorsRow .errorMessages", "#registerForm").show();
                 }
              })
              .fail(function(jqXHR, textStatus, errorThrown) {
-                 removeLoader("register-container");
-                 
-                 Swal.fire("@("PP.Message.Error".Localized())", "@("PP.Message.GenericErrorMessage".Localized())", "error");
-
+                 //removeLoader("register-container"); 
+                 Swal.fire("@("PP.Message.Error".Localized())", "@("PP.Message.GenericErrorMessage".Localized())", "error"); 
                  console.log('jqXHR:' + jqXHR);
                  console.log('textStatus:' + textStatus);
                  console.log('errorThrown:' + errorThrown);
              });
-        }
+        
     }
 </script>
