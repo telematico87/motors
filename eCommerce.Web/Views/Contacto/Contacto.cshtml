@@ -37,7 +37,7 @@
                                 <div class="col-md-12">
                                     <div class="group-input">
                                         <label for="Email">Email: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" id="txtEmail" name="Email" placeholder="Ingrese Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Email'">
+                                        <input class="form-control" type="email" id="txtEmail" name="Email" placeholder="Ingrese Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Email'">
                                     </div>
                                 </div>
                             </div>
@@ -80,11 +80,25 @@ $(document).ready(function () {
 
     $("#frmContacto").submit(function (event) {
         EnviarFormularioContacto();
+        ValidaSoloTexto();
         event.preventDefault();
     });
 
 
 });
+
+    function ValidaSoloTexto() {
+        $("#txtNombre").bind('keypress', function (event) {
+            var regex = new RegExp("^[a-zA-Z ]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+         
+    }
+
 
     function EnviarFormularioContacto() {
     $(".errorsRow .errorMessages", "#frmContacto").html("");
