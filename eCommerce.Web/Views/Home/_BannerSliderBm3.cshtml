@@ -3,14 +3,12 @@
 @if (Model != null && Model.SlidersConfigurations != null && Model.SlidersConfigurations.Count > 0)
 {
     var j = 0;
-    string[] sliderMovil = { "adrenalina_movil.png", "apolonia_movil.png"};
+    string[] sliderMovil = { "adrenalina_movil.png", "apolonia_movil.png", "adrenalina_movil.png", "apolonia_movil.png", "adrenalina_movil.png", "apolonia_movil.png" };    
 
     <style>
-
         .img-movil-slider {
             width: 100%
         }
-
     </style>
 
     <section class="flat-row flat-slider style4">
@@ -24,7 +22,7 @@
                             @* TODO: Localizing Slider *@
 
                             var img = configuration.Value.GetSubstringText("#IMG#", "#TH#");
-                            var imgMovil = "site/sliders/" + sliderMovil[j].Trim();
+                            var imgMovil =  "site/sliders/" + sliderMovil[j].Trim();                            
                             var topHeading = configuration.Value.GetSubstringText("#TH#", "#PG#");
                             var paragraph = configuration.Value.GetSubstringText("#PG#", "#LK#");
                             var link = configuration.Value.GetSubstringText("#LK#", "");
