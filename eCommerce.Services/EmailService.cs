@@ -24,7 +24,7 @@ namespace eCommerce.Services
                 var plainTextContent = message.Body;
                 var htmlContent = message.Body;
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-
+                //var response = client.SendEmailAsync(msg);
                 return client.SendEmailAsync(msg);
             }
             catch (Exception)
@@ -45,13 +45,15 @@ namespace eCommerce.Services
                 var plainTextContent = toEmailBody;
                 var htmlContent = toEmailBody;
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-
-                return client.SendEmailAsync(msg);
+                //var response = await client.SendEmailAsync(msg);
+                return  client.SendEmailAsync(msg);
             }
             catch (Exception)
             {
                 return Task.CompletedTask;
             }
+
+             
         }
     }
 }

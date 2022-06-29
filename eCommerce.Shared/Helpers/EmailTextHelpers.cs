@@ -11,17 +11,17 @@ namespace eCommerce.Shared.Helpers
     {
         public static string AccountRegisterEmailSubject(int languageID)
         {
-            return string.Format("{0} Account Registered!", ConfigurationsHelper.ApplicationName);
+            return string.Format("{0} Cuenta Registrada!", ConfigurationsHelper.ApplicationName);
         }
 
         public static string AccountRegisterEmailBody(int languageID, string loginURL)
         {
-            return string.Format("Thanks for registering your account on {0}. Your account has been created successfully. You can login to your account here: {1}", ConfigurationsHelper.ApplicationName, loginURL);
+            return string.Format("Gracias por registrar su cuenta en {0}. Su cuenta ha sido creada con éxito. Puede iniciar sesión en su cuenta aquí: {1}", ConfigurationsHelper.ApplicationName, loginURL);
         }
 
         public static string OrderPlacedEmailSubject(int languageID, int orderID)
         {
-            return string.Format("Order Placed Successfully. Order# {0}", orderID);
+            return string.Format("Pedido realizado con éxito. Order# {0}", orderID);
         }
 
         public static string OrderPlacedEmailBody(int languageID, int orderID, string orderTrackingURL)
@@ -51,12 +51,12 @@ namespace eCommerce.Shared.Helpers
         
         public static string ContactMessageSubject_Admin()
         {
-            return string.Format("A new contact us message has been received on {0}", ConfigurationsHelper.ApplicationName);
+            return string.Format("Se ha recibido un nuevo mensaje de contacto con nosotros el {0}", ConfigurationsHelper.ApplicationName);
         }
 
         public static string ContactMessageBody_Admin(string subject, string name, string email, string message)
         {
-            return string.Format("A new message has been received on {0}. Following are the details. <br> Subject: {1}<br> Name: {2}<br> Email: {3}<br> Message Details: {4}", ConfigurationsHelper.ApplicationName, subject, name, email, message);
+            return string.Format("Se ha recibido un nuevo mensaje el {0}. Los siguientes son los detalles. <br> Subject: {1}<br> Nombre: {2}<br> Email: {3}<br> Detalles del mensaje: {4}", ConfigurationsHelper.ApplicationName, subject, name, email, message);
         }
     }
 }

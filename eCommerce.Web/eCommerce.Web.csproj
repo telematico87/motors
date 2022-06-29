@@ -275,6 +275,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\FinanciamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="ViewModels\BaseViewModels.cs" />
     <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\CommentsViewModels.cs" />
+    <Compile Include="ViewModels\ContactosViewModels.cs" />
     <Compile Include="ViewModels\FinanciamientosViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\CartViewModels.cs" />
@@ -321,6 +323,23 @@
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
     <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
+    <Content Include="Content\bm3\images\contacto\contacto.jpg" />
+    <Content Include="Content\bm3\images\contacto\contacto2.jpg" />
+    <Content Include="Content\bm3\images\icon-detalle\ajuste24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\brake24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\dimension24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\engine24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\engine64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\garantia64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\icon-fuel24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\icon-fuel64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\potencia64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\suspension24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\tanque-de-almacenamiento64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\torque-wrench64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\transmision-manual24px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\velocimetro64px.png" />
+    <Content Include="Content\bm3\images\icon-detalle\wheel24px.png" />
     <Content Include="Content\bm3\images\icono\icono-1.png" />
     <Content Include="Content\bm3\images\icono\left-1.png" />
     <Content Include="Content\bm3\images\icono\right-1.png" />
@@ -1092,8 +1111,27 @@
     <Content Include="Content\images\site\team\person2.jpg" />
     <Content Include="Content\images\site\team\person3.jpg" />
     <Content Include="Content\images\site\user-default-avatar.png" />
+    <Content Include="Content\js\contacto.js" />
     <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\site.js" />
+    <Content Include="Content\lib\alertify\alertify.js" />
+    <Content Include="Content\lib\alertify\alertify.min.js" />
+    <Content Include="Content\lib\alertify\css\alertify.css" />
+    <Content Include="Content\lib\alertify\css\alertify.min.css" />
+    <Content Include="Content\lib\alertify\css\alertify.rtl.css" />
+    <Content Include="Content\lib\alertify\css\alertify.rtl.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\bootstrap.css" />
+    <Content Include="Content\lib\alertify\css\themes\bootstrap.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\bootstrap.rtl.css" />
+    <Content Include="Content\lib\alertify\css\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\default.css" />
+    <Content Include="Content\lib\alertify\css\themes\default.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\default.rtl.css" />
+    <Content Include="Content\lib\alertify\css\themes\default.rtl.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\semantic.css" />
+    <Content Include="Content\lib\alertify\css\themes\semantic.min.css" />
+    <Content Include="Content\lib\alertify\css\themes\semantic.rtl.css" />
+    <Content Include="Content\lib\alertify\css\themes\semantic.rtl.min.css" />
     <Content Include="Content\lib\bootstrap-4.4.1\css\bootstrap-grid.css" />
     <Content Include="Content\lib\bootstrap-4.4.1\css\bootstrap-grid.min.css" />
     <Content Include="Content\lib\bootstrap-4.4.1\css\bootstrap-reboot.css" />
@@ -5282,6 +5320,7 @@
     <Content Include="Views\Products\_Destacados.cshtml" />
     <Content Include="Views\Home\HomeMarcasMoto.cshtml" />
     <Content Include="Views\Shared\HeadTags.cshtml" />
+    <Content Include="Views\Contacto\Contacto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
