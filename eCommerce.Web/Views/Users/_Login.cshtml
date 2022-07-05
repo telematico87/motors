@@ -69,7 +69,7 @@
                     debugger;
                     console.log(response);
                     if (response != null && response.Success) {
-                        Swal.fire("Bienvenido!", 'Acceso Correcto', "success");
+                        alertify.success('Bienvenido ' + response.Usuario);                       
                         window.location.href = "@(!string.IsNullOrEmpty(Model.ReturnUrl) ? Model.ReturnUrl : Url.Home())"; 
 
                 }

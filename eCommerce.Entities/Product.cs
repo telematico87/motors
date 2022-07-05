@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+ 
 
 namespace eCommerce.Entities
 {
@@ -11,9 +14,11 @@ namespace eCommerce.Entities
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
-
-        public decimal Price { get; set; }
-        public decimal? Discount { get; set; }
+       
+        public decimal Price { get; set; } 
+        
+        public decimal? Discount { get; set; } 
+        
         public decimal? Cost { get; set; }
         public bool isFeatured { get; set; }
         public int ThumbnailPictureID { get; set; }

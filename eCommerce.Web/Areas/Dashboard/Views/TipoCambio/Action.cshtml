@@ -20,6 +20,11 @@
     }
 }
 
+<link href="~/Content/lib/alertify/css/alertify.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/default.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/semantic.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/bootstrap.min.css" rel="stylesheet" />
+
 <div class="page-info-container">
     <h3 class="h3 mb-2 text-gray-800">
         @Model.PageTitle
@@ -36,9 +41,9 @@
 
         <div class="form-group">
             <label>
-              Venta
+                Venta
             </label>
-            <input class="form-control" name="Venta" value="@Model.Venta" placeholder="Venta" />
+            <input class="form-control" name="Venta" id="txtVenta" value="@Model.Venta" placeholder="0.00" onkeypress="return Decimal(this, event);" maxlength="4" />
         </div>
         <div class="form-group">
             <label>
@@ -75,63 +80,28 @@
     </form>
 </div>
 
+<script src="~/Content/lib/alertify/alertify.min.js"></script>
+<script src="~/Scripts/validaciones.js"></script>
+
 <script>
     $(function () {
         $.datepicker.setDefaults($.datepicker.regional["es"]);
         $("#txtFecha").datepicker({
             dateFormat: 'dd/mm/yy',
-            firstDay: 1, 
+            firstDay: 1,
         }).datepicker("setDate", new Date());
-       
-    });
-   
-     
-    $("#actionForm").validate({
-        errorClass: "alert alert-danger",
-        errorElement: "div",
-        rules: {
-            Description: {
-                required: true,
-                minlength: 4,
-                maxlength: 150
-            }
-        },
-        messages: {
-            Description
-                : {
-                required: "@("Dashboard.Color.Action.Validation.DescriptionRequired".Localized())",
 
-            }
-        },
-        highlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        }
     });
 
-    $("#actionForm").submit(function (e) {
-        if ($("#actionForm").valid()) {
-            addLoader("actionForm");
-            $.ajax({
-                type: "post",
-                data: $("#actionForm").serialize()
-			})
-            .done(function (response) {
-                if (response.Success) {
-                    window.location.href = "@Url.ListAction("TipoCambio")";
-			    }
-			    else {
-                    removeLoader("actionForm");
-                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-			    }
-			})
-            .fail(function () {
-                 removeLoader("actionForm");
-                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			});
-        }
 
-        e.preventDefault();
-    });
+    $(document).ready(function () {
+
+        $("#actionForm").submit(function (e) {
+            debugger;
+            submitForm();
+            e.preventDefault();
+        });
+
 
     $(".deleteButton").click(function () {
         var recordID = $(this).attr("data-id");
@@ -169,4 +139,37 @@
             }
         });
     });
+
+    });
+
+
+    function submitForm() {
+        debugger;
+        if ($("#txtVenta").val() == 0 || $("#txtVenta").val() == "") {
+            alertify.warning('El Valor Venta no puede ser 0');
+            return false;
+        }
+
+            addLoader("actionForm");
+            $.ajax({
+                type: "post",
+                data: $("#actionForm").serialize()
+			})
+            .done(function (response) {
+                if (response.Success) {
+                    window.location.href = "@Url.ListAction("TipoCambio")";
+			    }
+			    else {
+                    removeLoader("actionForm");
+                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+			    }
+			})
+            .fail(function () {
+                 removeLoader("actionForm");
+                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			});
+
+
+    }
+
 </script>

@@ -146,7 +146,7 @@ namespace eCommerce.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    jsonResult.Data = new { Success = true, RequiresVerification = false }; 
+                    jsonResult.Data = new { Success = true, RequiresVerification = false , Usuario = model.Username }; 
                     break;
                 case SignInStatus.RequiresVerification:
                     jsonResult.Data = new { Success = true, RequiresVerification = true };

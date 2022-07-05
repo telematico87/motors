@@ -1,6 +1,7 @@
 ﻿using eCommerce.Shared.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -79,7 +80,8 @@ namespace eCommerce.Shared.Extensions
         {
             //if(ConfigurationsHelper.DigitsAfterDecimalPoint > -1)
             //{
-            //    price = decimal.Round(price, ConfigurationsHelper.DigitsAfterDecimalPoint, MidpointRounding.AwayFromZero);
+            //price = decimal.Round(price, ConfigurationsHelper.DigitsAfterDecimalPoint, MidpointRounding.AwayFromZero);
+            price.ToString("0.00", CultureInfo.InvariantCulture);
             //}
             string iconoMoneda = tipoMoneda == 2 ? "$" : "S/";
 
@@ -90,7 +92,7 @@ namespace eCommerce.Shared.Extensions
 
         public static string ToDecimalWithPoints(this decimal price, int digitsAfterDecimalPoints)
         {
-            return price.ToString(string.Format("0.{0}", new string('0', digitsAfterDecimalPoints)));
+            return price.ToString(string.Format("0,{0}", new string('0', digitsAfterDecimalPoints)));
         }
 
         public static string GetSubstringText(this string Str, string Start, string End)

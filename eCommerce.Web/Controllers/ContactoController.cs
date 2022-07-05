@@ -40,13 +40,16 @@ namespace eCommerce.Web.Controllers
                 //Envió de Correos
                 if (res == true )
                 {
+                    DateTime FechaContacto = Convert.ToDateTime(contacto.Fecha);
+                    string fContactoString = FechaContacto.ToString("dd-MM-yyyy");
+
                     new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, model.Email, "Contacto BM3",
                     "Formulario de Contacto Ecommerce BM3" + "<br>" +
                     $"<p><strong>Nombre:</strong> {model.Nombre}</p>" +
                     $"<p><strong>Email:</strong> {model.Email} <strong></p>" +
                     $"<p><strong>Asunto:</strong> {model.Asunto}<strong></p>" +
                     $"<p><strong>Mensaje:</strong> {model.Mensaje}</p>" +
-                    $"<p><strong>Fecha:</strong> {DateTime.Now}</p>"
+                    $"<p><strong>Fecha:</strong> {fContactoString}</p>"
                     );
                 }
 
