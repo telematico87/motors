@@ -70,10 +70,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         throw new Exception("Tipo Cambio No Funciona".LocalizedString());
                     }
 
+                    DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
+                    //string fTipoCambio = FechaTipoCambio.ToString("dd-MM-yyyy");
+
                     tcambio.ID = model.ID;
                     tcambio.Venta = Convert.ToDecimal(model.Venta);
                     tcambio.Compra = 0;
-                    tcambio.Fecha = model.Fecha;
+                    tcambio.Fecha = FechaTipoCambio;
 
                     if (!TipoCambioService.Instance.UpdateTipoCambio(tcambio))
                     {
