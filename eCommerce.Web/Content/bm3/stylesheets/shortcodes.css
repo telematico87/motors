@@ -42,11 +42,18 @@ input[type="checkbox"] {
 
 
 .single-banner .inner-text h4 {
-	color: #252525;
-	font-weight: 700;
-	padding: 11px 28px;
-	background: #ffffff;
-	border-radius: 2px;
+	color: #fff;
+	font-weight: 700;		
+	font-size: xxx-large;
+}
+
+.single-banner .hr-category {
+	position: absolute;
+	height: 8px;
+	background-color: #e10303;	
+	bottom: 10px;
+	width: 80%;
+	transform: translate(50px, 0px);
 }
 
 .single-banner .inner-text {
@@ -555,13 +562,12 @@ input[type="checkbox"] {
 	margin: 5px 15px;
 }
 
-.imagebox .box-content .product-name a {
-	color:#484848;
-	font-size:14px;
-	line-height:18px;
-	font-weight: 700;
-	
-}
+	.imagebox .box-content .product-name a {
+		color: #000000;
+		font-size: 16px;
+		line-height: 18px;
+		font-weight: 700;
+	}
 
 .imagebox .box-content .product-name a:hover {
 	color:#f24726;
@@ -570,7 +576,7 @@ input[type="checkbox"] {
 .imagebox .box-content .price .sale {
 	display:block;
 	margin-right:14px;
-    font-size:18px;
+    font-size:20px;
     font-weight:700;
 }
 
@@ -835,7 +841,7 @@ input[type="checkbox"] {
 }
 
 .flat-product-imagebox .text-box p {
-    font-size: 14px;
+    font-size: 18px;
     color: #000000;
 }
 
