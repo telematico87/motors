@@ -377,7 +377,9 @@
     <Content Include="Content\bm3\javascript\jquery.flexslider-min.js" />
     <Content Include="Content\bm3\javascript\jquery.mCustomScrollbar.js" />
     <Content Include="Content\bm3\javascript\jquery.min.js" />
+    <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
+    <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
     <Content Include="Content\bm3\javascript\slick-lightbox.js" />
@@ -410,11 +412,15 @@
     <Content Include="Content\bm3\stylesheets\mCustomScrollbar.css" />
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
+    <Content Include="Content\bm3\stylesheets\responsiveTabs.css" />
+    <Content Include="Content\bm3\stylesheets\responsive.css" />
     <Content Include="Content\bm3\stylesheets\responsive_3.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes.css" />
     <Content Include="Content\bm3\stylesheets\shortcodes_3.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
+    <Content Include="Content\bm3\stylesheets\style.css" />
     <Content Include="Content\bm3\stylesheets\style_3.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
@@ -5197,7 +5203,6 @@
     <Content Include="Views\Products\_RecentProducts.cshtml" />
     <Content Include="Views\Products\_RelatedProducts.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_FooterStylesScripts.cshtml" />
     <Content Include="Views\Shared\_HeaderStylesScripts.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
