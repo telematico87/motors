@@ -71,7 +71,6 @@ namespace eCommerce.Services
         public TipoCambio GetTipoCambioByID(int ID)
         {
             var context = DataContextHelper.GetNewContext();
-
             return context.TipoCambios.FirstOrDefault(x => !x.IsDeleted && x.ID == ID);
         }
 
