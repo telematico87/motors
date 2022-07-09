@@ -22,15 +22,11 @@
 }
 
 @font-face {
-	font-family: "BigNoodleTitling Oblique";
+	font-family: "BigNoodleTitling Oblique";	
 	src: url("fonts/big_noodle_titling_oblique.ttf") format("truetype");
 	font-weight: 800;
 	font-style: oblique;
 }
-
-/*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i");
-@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese");
-*/
 
 /* Reset
 -------------------------------------------------------------- */
@@ -3568,12 +3564,14 @@ ol.comment-list li.comment .comment-text .comment-content p {
 		text-align: center;
 	}
 
-.inner-text .text-category {	
-	position: absolute;	
-	font-family: 'BigNoodleTitling Oblique';
-	text-align: center;	
+.inner-text .text-category {
+	position: absolute;
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	text-align: center;
 	bottom: 35px;
 	width: 100%;
+	font-weight: 800;
+	font-style: oblique;
 }
 
 
