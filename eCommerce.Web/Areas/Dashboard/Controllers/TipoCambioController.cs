@@ -46,7 +46,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 if (tcambio == null) return HttpNotFound();
 
                 model.ID = tcambio.ID;
-                model.Venta = tcambio.Venta;
+                model.Venta = tcambio.Venta.ToString();
                 model.Fecha = tcambio.Fecha;
             }
 
@@ -54,7 +54,17 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         }
 
 
-        [HttpPost, ValidateInput(false)]
+
+        public class Prueba
+        {
+            public int ID { get; set; }
+            public string Venta { get; set; }
+            public decimal Compra { get; set; }
+            public float valor { get; set; }
+            public DateTime Fecha { get; set; }
+        }
+
+        [HttpPost]
         public JsonResult Action(TipoCambiosActionViewModels model)
         {
             JsonResult json = new JsonResult();
@@ -70,11 +80,13 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         throw new Exception("Tipo Cambio No Funciona".LocalizedString());
                     }
 
+                    string ventastring = model.Venta.Replace(".", ",");
                     DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
+                    Decimal Ventatmp = Convert.ToDecimal(ventastring);
                     //string fTipoCambio = FechaTipoCambio.ToString("dd-MM-yyyy");
 
                     tcambio.ID = model.ID;
-                    tcambio.Venta = Convert.ToDecimal(model.Venta);
+                    tcambio.Venta = Ventatmp;
                     tcambio.Compra = 0;
                     tcambio.Fecha = FechaTipoCambio;
 
@@ -86,12 +98,16 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 }
                 else
                 {
+                    string ventastring = model.Venta.Replace(".", ",");
+                    DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
+                    Decimal Ventatmp = Convert.ToDecimal(ventastring);                     
+
                     TipoCambio tcambios = new TipoCambio
                     {
                         ID = model.ID,
-                        Venta = Convert.ToDecimal(model.Venta),
+                        Venta = Ventatmp,
                         Compra = 0,
-                        Fecha = model.Fecha
+                        Fecha = FechaTipoCambio,
                     };
 
                     if (!TipoCambioService.Instance.SaveTipoCambio(tcambios))
