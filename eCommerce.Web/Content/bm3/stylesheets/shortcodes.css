@@ -15,9 +15,10 @@ input[type="checkbox"] {
 
 .title-category-movil {
 	font-size: xx-large;
-	font-family: "BigNoodleTitling Oblique";
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
 	color: #f24726 !important;
 	font-weight: 400;
+	font-style: oblique;
 }
 
 .line-category {
@@ -30,7 +31,8 @@ input[type="checkbox"] {
 .widget-title-bm3 {
 	color: #f24726 !important;
 	font-weight: 400;
-	font-family: "BigNoodleTitling Oblique";
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-style: oblique;
 }
 
 /* Flat Slider
@@ -4535,7 +4537,7 @@ input[type="checkbox"]:checked + label:before {
 		font-weight: 800;
 		color: #ffffff;
 		margin-bottom: 10px;		
-		font-family: "BigNoodleTitling Oblique";
+		font-family: 'BigNoodleTitling Oblique', sans-serif;
 	}
 
 .product-detail .info-version {

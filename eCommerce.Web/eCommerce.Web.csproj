@@ -320,8 +320,10 @@
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.png" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.png" />
+    <Content Include="Content\bm3\images\banner\efectiva.png" />
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
+    <Content Include="Content\bm3\images\banner\santander.png" />
     <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto2.jpg" />
@@ -350,6 +352,7 @@
     <Content Include="Content\bm3\images\menu\logo-efectiva.jpg" />
     <Content Include="Content\bm3\images\menu\logo-santander.png" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
+    <Content Include="Content\bm3\images\producto\background_detail.png" />
     <Content Include="Content\bm3\images\producto\fondo.jpg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_envio_gratis.svg" />
@@ -414,14 +417,11 @@
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
     <Content Include="Content\bm3\stylesheets\responsiveTabs.css" />
     <Content Include="Content\bm3\stylesheets\responsive.css" />
-    <Content Include="Content\bm3\stylesheets\responsive_3.css" />
     <Content Include="Content\bm3\stylesheets\shortcodes.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes_3.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
     <Content Include="Content\bm3\stylesheets\style.css" />
-    <Content Include="Content\bm3\stylesheets\style_3.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\images\07f5c4e6-0929-4fa5-b7ae-392bcbff9c1e.png" />
