@@ -32,6 +32,7 @@ input[type="checkbox"] {
 	color: #f24726 !important;
 	font-weight: 400;
 	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-style: oblique;
 }
 
 /* Flat Slider

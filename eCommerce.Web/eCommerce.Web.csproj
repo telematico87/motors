@@ -320,8 +320,10 @@
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.png" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.png" />
+    <Content Include="Content\bm3\images\banner\efectiva.png" />
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
+    <Content Include="Content\bm3\images\banner\santander.png" />
     <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto2.jpg" />
@@ -350,6 +352,7 @@
     <Content Include="Content\bm3\images\menu\logo-efectiva.jpg" />
     <Content Include="Content\bm3\images\menu\logo-santander.png" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
+    <Content Include="Content\bm3\images\producto\background_detail.png" />
     <Content Include="Content\bm3\images\producto\fondo.jpg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_envio_gratis.svg" />
