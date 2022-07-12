@@ -5160,6 +5160,7 @@
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.js.map" />
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.min.js.map" />
     <Content Include="Areas\Dashboard\Views\Shared\UnAuthorized.cshtml" />
+    <Content Include="Scripts\insert_into_configurations.sql" />
     <Content Include="Scripts\validaciones.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
