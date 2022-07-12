@@ -1,11 +1,11 @@
 ﻿@model eCommerce.Web.ViewModels.PageViewModel
 @{
-	var baseModel = Model;
+    var baseModel = Model;
 
-	if (baseModel == null)
-	{
-		baseModel = new eCommerce.Web.ViewModels.PageViewModel();
-	}
+    if (baseModel == null)
+    {
+        baseModel = new eCommerce.Web.ViewModels.PageViewModel();
+    }
 }
 
 <!DOCTYPE html>
@@ -37,17 +37,17 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bm3/stylesheets/responsiveTabs.css">
 
     <link href="~/Content/lib/alertify/css/alertify.min.css" rel="stylesheet" />
-    <link href="~/Content/lib/alertify/css/themes/default.min.css" rel="stylesheet" /> 
+    <link href="~/Content/lib/alertify/css/themes/default.min.css" rel="stylesheet" />
     <link href="~/Content/lib/alertify/css/themes/semantic.min.css" rel="stylesheet" />
     <link href="~/Content/lib/alertify/css/themes/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="overlay"></div>
-    @*<div id="preloder">
-            <div class="clear-loading loading-effect-2">
-                <span></span>
-            </div>
-        </div>*@
+<body>   
+    @*<div class="overlay"></div>
+    <div class="preloader">
+        <div class="clear-loading loading-effect-2">
+            <span></span>
+        </div>
+    </div>*@
 
 
     @Html.Partial("_HeaderBm3")
