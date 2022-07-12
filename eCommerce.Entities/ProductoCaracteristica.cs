@@ -175,6 +175,7 @@ namespace eCommerce.Entities
         public string Adicionales { get; set; }
 
         public string Tablero { get; set; }
+        //public string Garantia { get; set; }
 
         public Destacados()
         {
@@ -187,6 +188,7 @@ namespace eCommerce.Entities
             ColoresDisponibles = null;
             Adicionales = null;
             Tablero = null;
+            //Garantia = null;
         }
     }
 }

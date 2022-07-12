@@ -49,7 +49,7 @@
                             <div class="product-box">
                                 <div class="imagebox style2">
                                     <div class="box-image">
-                                        <a href="#" title="">
+                                        <a href="@detailsLink" title="">
                                             @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
                                         </a>
                                     </div>
@@ -83,7 +83,7 @@
                                                     <i class="ti-shopping-cart"></i>
                                                 </a>
                                             }
-                                            <a title="@("PP.Shopping.AddToCart".Localized())" data-id="@product.ID" data-price="@product.Price" class="pointerCursor btnAddToCart">
+                                            <a href="@detailsLink" title="@("PP.Shopping.AddToCart".Localized())" data-id="@product.ID" data-price="@product.Price" class="pointerCursor btnAddToCart">
                                                 <i class="ti-eye"></i>
                                             </a>
                                         </div>
