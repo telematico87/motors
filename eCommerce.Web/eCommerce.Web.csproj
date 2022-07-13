@@ -5160,6 +5160,7 @@
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.js.map" />
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.min.js.map" />
     <Content Include="Areas\Dashboard\Views\Shared\UnAuthorized.cshtml" />
+    <Content Include="Scripts\insert_into_configurations.sql" />
     <Content Include="Scripts\validaciones.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -5373,9 +5374,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32569/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:32569/</IISAppRootUrl>
+          <IISUrl>http://localhost:32789/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

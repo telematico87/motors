@@ -14,6 +14,9 @@
             Model.PageTitle = "Crear Tipo de Cambio";
             Model.PageDescription = "Dashboard.Color.CreateColorDescription".LocalizedString();
             Model.PageURL = Url.CreateAction("TipoCambio");
+            DateTime fecha = new DateTime();
+            fecha = DateTime.Now;
+            //Model.fechaConvert = fecha;
         }
 
         Model.PageImageURL = PictureHelper.PageImageURL("promos.jpg");
@@ -43,13 +46,13 @@
             <label>
                 Venta
             </label>
-            <input class="form-control" name="Venta" id="txtVenta" value="@Model.Venta" placeholder="0.00" onkeypress="return Decimal(this, event);" maxlength="4" />
+            <input class="form-control" name="Venta" id="txtVenta" value="@(Model.Venta == "0" || Model.Venta == string.Empty || Model.Venta == null ? Model.Venta : Model.Venta.ToString().Replace(",", "."))" placeholder="0.00"  maxlength="4" onkeypress="return Decimal(this, event);" />
         </div>
         <div class="form-group">
             <label>
                 Fecha
             </label>
-            <input class="form-control" id="txtFecha" name="Fecha" value="@Model.Fecha" />
+            <input class="form-control" id="txtFecha" name="Fecha" value="@(Model.Fecha == Convert.ToDateTime("01/01/0001") ?  DateTime.Now : Model.Fecha )"  />
         </div>
 
         <hr />
@@ -83,18 +86,26 @@
 <script src="~/Content/lib/alertify/alertify.min.js"></script>
 <script src="~/Scripts/validaciones.js"></script>
 
-<script>
-    $(function () {
-        $.datepicker.setDefaults($.datepicker.regional["es"]);
-        $("#txtFecha").datepicker({
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-        }).datepicker("setDate", new Date());
-
-    });
-
+<script> 
 
     $(document).ready(function () {
+
+     
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        $("#txtFecha").datepicker({
+            firstDay: 1, 
+            showAnim: "slide",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            monthNamesShort: ["Ene", "Feb", "Mar", "Abr",
+                "May", "Jun", "Jul", "Ago",
+                "Set", "Oct", "Nov", "Dic"],
+            dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            //dayNamesShort: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            duration: "slow",
+
+        }) 
 
         $("#actionForm").submit(function (e) {
             debugger;
@@ -150,10 +161,27 @@
             return false;
         }
 
+        let Venta = $("#txtVenta").val();
+        let Fecha = $("#txtFecha").val();
+        let valor = 5.55;
+
+        var model = new Object();
+        model.Venta = Venta;
+        model.Fecha = Fecha;
+        model.valor = valor;
+
+        console.log($("#actionForm").serialize());
             addLoader("actionForm");
-            $.ajax({
-                type: "post",
-                data: $("#actionForm").serialize()
+        $.ajax({ 
+            method: "POST",
+            //url: "/TipoCambio/Action",
+            data: {
+                "Venta": Venta,
+                "Fecha": Fecha,
+                "valor": valor,
+            },  
+            
+             //data: $("#actionForm").serialize()
 			})
             .done(function (response) {
                 if (response.Success) {

@@ -22,10 +22,11 @@
             {
                 <tr>
                     <td>
-                        @tcambio.Venta
+
+                        @tcambio.Venta.ToString().Replace(",", ".")
                     </td>
                     <td>
-                        @tcambio.Fecha
+                        @tcambio.Fecha.ToString("dd/MM/yyyy")
                     </td>
                     <td>
                         <div class="btn-group" role="group">

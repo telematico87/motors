@@ -170,7 +170,7 @@
                                 <img src="~/Content/bm3/images/icon-detalle/garantia64px.png" />
                             </div>
                             <div class="product-value">
-                                <span>-</span>
+                                <span>@(Model.ProductoCaracteristica.destacados.Garantia == null ? "-" : Model.ProductoCaracteristica.destacados.Garantia)</span>
                             </div>
                             <div class="product-feature">
                                 <span>GARANT&Iacute;A</span>
