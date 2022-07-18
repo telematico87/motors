@@ -1,5 +1,6 @@
 @model eCommerce.Web.ViewModels.ProductDetalleViewModel
 @using eCommerce.Services
+ 
 
 
 
@@ -32,6 +33,8 @@
     var productPriceDiscount = Model.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
     var productPriceNormal = Model.TipoMoneda == 2 ? Model.Price * tipoCambio : Model.Price;
     var typeCoins = 1;
+    var NumeroWhatsApp = ConfigurationsHelper.WhatsAppNumber;
+    var textoWhatsApp = "Quiero Información sobre esta moto: " + Model.Name;
 
     <section class="flat-row flat-product-detail">
         <div class="container-full">
@@ -82,8 +85,9 @@
                                         {
                                             <p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>
                                         }
-
-                                        <a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>
+                                       
+                                        <a class="info-select waves-effect" target="_blank" href=" https://wa.me/@NumeroWhatsApp?text=@textoWhatsApp">Quiero esta moto</a>
+                                        @*<a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>*@
 
                                     </div>
                                 </div>

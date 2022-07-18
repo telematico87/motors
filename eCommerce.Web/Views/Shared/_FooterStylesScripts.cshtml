@@ -64,8 +64,9 @@
 <div id="google-facebook-scripts"></div>
 
 @if (!string.IsNullOrEmpty(ConfigurationsHelper.WhatsAppNumber))
-{
-    <a href="https://wa.me/@ConfigurationsHelper.WhatsAppNumber" class="whatsapp-floater" target="_blank">
+        {
+            //var NumeroWP = "+"+ConfigurationsHelper.WhatsAppNumber;
+            <a href="https://wa.me/@ConfigurationsHelper.WhatsAppNumber?text=Quiero%20informaci%C3%B3n" class="whatsapp-floater" target="_blank">
         <i class="fa fa-whatsapp whatsapp-float-icon"></i>
     </a>
 }
