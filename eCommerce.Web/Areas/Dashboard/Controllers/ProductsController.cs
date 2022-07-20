@@ -406,7 +406,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     AroRayos = formCollection["AroRayos"],
                     ColoresDisponibles = formCollection["ColoresDisponibles"],
                     Adicionales = formCollection["Adicionales"],
-                    Tablero = formCollection["Tablero"]
+                    Tablero = formCollection["Tablero"],
+                    Garantia = formCollection["Garantia"]
                 },
             };
 

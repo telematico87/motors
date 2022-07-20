@@ -14,11 +14,19 @@
             Model.PageTitle = "Crear Tipo de Cambio";
             Model.PageDescription = "Dashboard.Color.CreateColorDescription".LocalizedString();
             Model.PageURL = Url.CreateAction("TipoCambio");
+            DateTime fecha = new DateTime();
+            fecha = DateTime.Now;
+            //Model.fechaConvert = fecha;
         }
 
         Model.PageImageURL = PictureHelper.PageImageURL("promos.jpg");
     }
 }
+
+<link href="~/Content/lib/alertify/css/alertify.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/default.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/semantic.min.css" rel="stylesheet" />
+<link href="~/Content/lib/alertify/css/themes/bootstrap.min.css" rel="stylesheet" />
 
 <div class="page-info-container">
     <h3 class="h3 mb-2 text-gray-800">
@@ -36,15 +44,15 @@
 
         <div class="form-group">
             <label>
-              Venta
+                Venta
             </label>
-            <input class="form-control" name="Venta" value="@Model.Venta" placeholder="Venta" />
+            <input class="form-control" name="Venta" id="txtVenta" value="@(Model.Venta == "0" || Model.Venta == string.Empty || Model.Venta == null ? Model.Venta : Model.Venta.ToString().Replace(",", "."))" placeholder="0.00"  maxlength="4" onkeypress="return Decimal(this, event);" />
         </div>
         <div class="form-group">
             <label>
                 Fecha
             </label>
-            <input class="form-control" id="txtFecha" name="Fecha" value="@Model.Fecha" />
+            <input class="form-control" id="txtFecha" name="Fecha" value="@(Model.Fecha == Convert.ToDateTime("01/01/0001") ?  DateTime.Now : Model.Fecha )"  />
         </div>
 
         <hr />
@@ -75,63 +83,36 @@
     </form>
 </div>
 
-<script>
-    $(function () {
+<script src="~/Content/lib/alertify/alertify.min.js"></script>
+<script src="~/Scripts/validaciones.js"></script>
+
+<script> 
+
+    $(document).ready(function () {
+
+     
         $.datepicker.setDefaults($.datepicker.regional["es"]);
         $("#txtFecha").datepicker({
-            dateFormat: 'dd/mm/yy',
             firstDay: 1, 
-        }).datepicker("setDate", new Date());
-       
-    });
-   
-     
-    $("#actionForm").validate({
-        errorClass: "alert alert-danger",
-        errorElement: "div",
-        rules: {
-            Description: {
-                required: true,
-                minlength: 4,
-                maxlength: 150
-            }
-        },
-        messages: {
-            Description
-                : {
-                required: "@("Dashboard.Color.Action.Validation.DescriptionRequired".Localized())",
+            showAnim: "slide",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            monthNamesShort: ["Ene", "Feb", "Mar", "Abr",
+                "May", "Jun", "Jul", "Ago",
+                "Set", "Oct", "Nov", "Dic"],
+            dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            //dayNamesShort: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            duration: "slow",
 
-            }
-        },
-        highlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        }
-    });
+        }) 
 
-    $("#actionForm").submit(function (e) {
-        if ($("#actionForm").valid()) {
-            addLoader("actionForm");
-            $.ajax({
-                type: "post",
-                data: $("#actionForm").serialize()
-			})
-            .done(function (response) {
-                if (response.Success) {
-                    window.location.href = "@Url.ListAction("TipoCambio")";
-			    }
-			    else {
-                    removeLoader("actionForm");
-                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-			    }
-			})
-            .fail(function () {
-                 removeLoader("actionForm");
-                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			});
-        }
+        $("#actionForm").submit(function (e) {
+            debugger;
+            submitForm();
+            e.preventDefault();
+        });
 
-        e.preventDefault();
-    });
 
     $(".deleteButton").click(function () {
         var recordID = $(this).attr("data-id");
@@ -169,4 +150,54 @@
             }
         });
     });
+
+    });
+
+
+    function submitForm() {
+        debugger;
+        if ($("#txtVenta").val() == 0 || $("#txtVenta").val() == "") {
+            alertify.warning('El Valor Venta no puede ser 0');
+            return false;
+        }
+
+        let Venta = $("#txtVenta").val();
+        let Fecha = $("#txtFecha").val();
+        let valor = 5.55;
+
+        var model = new Object();
+        model.Venta = Venta;
+        model.Fecha = Fecha;
+        model.valor = valor;
+
+        console.log($("#actionForm").serialize());
+            addLoader("actionForm");
+        $.ajax({ 
+            method: "POST",
+            //url: "/TipoCambio/Action",
+            data: {
+                "Venta": Venta,
+                "Fecha": Fecha,
+                "valor": valor,
+            },  
+            
+             //data: $("#actionForm").serialize()
+			})
+            .done(function (response) {
+                if (response.Success) {
+                    window.location.href = "@Url.ListAction("TipoCambio")";
+			    }
+			    else {
+                    removeLoader("actionForm");
+                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+			    }
+			})
+            .fail(function () {
+                 removeLoader("actionForm");
+                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+			});
+
+
+    }
+
 </script>

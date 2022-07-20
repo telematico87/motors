@@ -1,5 +1,6 @@
 ﻿using eCommerce.Entities;
 using eCommerce.Services;
+using eCommerce.Shared.Helpers;
 using eCommerce.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,25 @@ namespace eCommerce.Web.Controllers
                     Fecha = DateTime.Now,  
                 };
 
-                var res = ContactoService.Instance.SaveContacto(contacto); 
-                result.Data = new { Success = res };
+                var res = ContactoService.Instance.SaveContacto(contacto);
+                result.Data = new { Success = res , Codigo = 200};
+                //Envió de Correos
+                if (res == true )
+                {
+                    DateTime FechaContacto = Convert.ToDateTime(contacto.Fecha);
+                    string fContactoString = FechaContacto.ToString("dd-MM-yyyy");
+
+                    new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, model.Email, "Contacto BM3",
+                    "Formulario de Contacto Ecommerce BM3" + "<br>" +
+                    $"<p><strong>Nombre:</strong> {model.Nombre}</p>" +
+                    $"<p><strong>Email:</strong> {model.Email} <strong></p>" +
+                    $"<p><strong>Asunto:</strong> {model.Asunto}<strong></p>" +
+                    $"<p><strong>Mensaje:</strong> {model.Mensaje}</p>" +
+                    $"<p><strong>Fecha:</strong> {fContactoString}</p>"
+                    );
+                }
+
+
             }
             catch (Exception ex)
             {

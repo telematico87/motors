@@ -12,7 +12,9 @@
 @import url("slick.css");
 @import url("slick-theme.css");
 @import url("slick-lightbox.css");
-@import url("shortcodes_3.css");
+@import url("shortcodes.css");
+@import url("responsiveTabs.css");
+/*@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');*/
 
 @font-face {
 	font-family: "Staatliches";
@@ -22,12 +24,9 @@
 @font-face {
 	font-family: "BigNoodleTitling Oblique";
 	src: url("fonts/big_noodle_titling_oblique.ttf") format("truetype");
+	font-weight: 800;
+	font-style: oblique;
 }
-
-/*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i");
-@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese");
-*/
-
 
 /* Reset
 -------------------------------------------------------------- */
@@ -453,10 +452,10 @@ h4 {
 }
 
 .sale {
-	color:#f24726;
-	font-weight:500;
-	font-size:22px;
-	font-family:'Nunito';
+	color: #e10303;
+	font-weight: 500;
+	font-size: 22px;
+	font-family: 'Nunito';
 }
 
 .regular {
@@ -1745,6 +1744,8 @@ ul.flat-unstyled li > ul > li > a {
 	display: inline-block;
 	padding-left: 10px;
 	word-spacing: 0;
+	font-size: 1.2em;
+	font-weight: 600;
 }
 
 #mainnav.style4 {
@@ -3565,10 +3566,16 @@ ol.comment-list li.comment .comment-text .comment-content p {
 
 .inner-text .text-category {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	text-align: center;
+	bottom: 35px;
+	width: 100%;
+	font-weight: 800;
+	font-style: oblique;
+	font-size: 40px !important;
 }
+
+
 
 .productlarge-movil {
 	display: none

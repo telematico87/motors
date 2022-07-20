@@ -34,7 +34,7 @@ namespace eCommerce.Services
         public decimal GetTypeUltimateChanged()
         { 
             var context = DataContextHelper.GetNewContext();
-            var tipocam = context.TipoCambios.OrderByDescending(c => c.Fecha).Select(c => c.Venta).Take(1).ToList();
+            var tipocam = context.TipoCambios.Where(c => !c.IsDeleted).OrderByDescending(c => c.Fecha).Select(c => c.Venta).Take(1).ToList();
             decimal changed = tipocam.Count > 0 ? tipocam[0] : 1 ; 
             return changed;
         }
@@ -71,7 +71,6 @@ namespace eCommerce.Services
         public TipoCambio GetTipoCambioByID(int ID)
         {
             var context = DataContextHelper.GetNewContext();
-
             return context.TipoCambios.FirstOrDefault(x => !x.IsDeleted && x.ID == ID);
         }
 

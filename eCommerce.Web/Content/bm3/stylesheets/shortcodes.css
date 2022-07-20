@@ -15,9 +15,10 @@ input[type="checkbox"] {
 
 .title-category-movil {
 	font-size: xx-large;
-	font-family: "BigNoodleTitling Oblique";
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
 	color: #f24726 !important;
 	font-weight: 400;
+	font-style: oblique;
 }
 
 .line-category {
@@ -30,7 +31,8 @@ input[type="checkbox"] {
 .widget-title-bm3 {
 	color: #f24726 !important;
 	font-weight: 400;
-	font-family: "BigNoodleTitling Oblique";
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-style: oblique;
 }
 
 /* Flat Slider
@@ -42,11 +44,18 @@ input[type="checkbox"] {
 
 
 .single-banner .inner-text h4 {
-	color: #252525;
-	font-weight: 700;
-	padding: 11px 28px;
-	background: #ffffff;
-	border-radius: 2px;
+	color: #fff;
+	font-weight: 700;		
+	font-size: xxx-large;
+}
+
+.single-banner .hr-category {
+	position: absolute;
+	height: 8px;
+	background-color: #e10303;	
+	bottom: 10px;
+	width: 80%;
+	transform: translate(50px, 0px);
 }
 
 .single-banner .inner-text {
@@ -555,13 +564,12 @@ input[type="checkbox"] {
 	margin: 5px 15px;
 }
 
-.imagebox .box-content .product-name a {
-	color:#484848;
-	font-size:14px;
-	line-height:18px;
-	font-weight: 700;
-	
-}
+	.imagebox .box-content .product-name a {
+		color: #000000;
+		font-size: 16px;
+		line-height: 18px;
+		font-weight: 700;
+	}
 
 .imagebox .box-content .product-name a:hover {
 	color:#f24726;
@@ -570,7 +578,7 @@ input[type="checkbox"] {
 .imagebox .box-content .price .sale {
 	display:block;
 	margin-right:14px;
-    font-size:18px;
+    font-size:20px;
     font-weight:700;
 }
 
@@ -835,7 +843,7 @@ input[type="checkbox"] {
 }
 
 .flat-product-imagebox .text-box p {
-    font-size: 14px;
+    font-size: 18px;
     color: #000000;
 }
 
@@ -4523,6 +4531,15 @@ input[type="checkbox"]:checked + label:before {
 	margin-bottom: 10px;
 }
 
+	.product-detail .info-title {
+		display: block;
+		font-size: 55px;
+		font-weight: 800;
+		color: #ffffff;
+		margin-bottom: 10px;		
+		font-family: 'BigNoodleTitling Oblique', sans-serif;
+	}
+
 .product-detail .info-version {
 	display: block;
 	font-size: 25px;
@@ -4537,6 +4554,13 @@ input[type="checkbox"]:checked + label:before {
 	color: #ffffff;
 	margin-bottom: 25px;
 }
+
+	.product-detail .info-summary {
+		display: block;
+		font-size: 24px;
+		color: #ffffff;
+		margin-bottom: 25px;
+	}
 
 .product-detail .info-price {
 	display: block;
@@ -4594,6 +4618,13 @@ input[type="checkbox"]:checked + label:before {
     font-size: 12px;
     line-height: 12px;
 }
+
+	.product-attribute .product-feature span {
+		display: inline-block;
+		color: black;
+		font-size: 14px;
+		line-height: 14px;
+	}
 
 .queue i {
 	color:#f24726;

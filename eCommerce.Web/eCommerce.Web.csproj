@@ -320,8 +320,10 @@
     <Content Include="Content\bm3\images\banner\banner-7.jpg" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_efectiva.png" />
     <Content Include="Content\bm3\images\banner\banner_categoria_financiera_santander.png" />
+    <Content Include="Content\bm3\images\banner\efectiva.png" />
     <Content Include="Content\bm3\images\banner\Logo-efectiva.png" />
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
+    <Content Include="Content\bm3\images\banner\santander.png" />
     <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto2.jpg" />
@@ -350,6 +352,7 @@
     <Content Include="Content\bm3\images\menu\logo-efectiva.jpg" />
     <Content Include="Content\bm3\images\menu\logo-santander.png" />
     <Content Include="Content\bm3\images\menu\menu.jpg" />
+    <Content Include="Content\bm3\images\producto\background_detail.png" />
     <Content Include="Content\bm3\images\producto\fondo.jpg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_confianza.svg" />
     <Content Include="Content\bm3\images\producto\icono_best_points_envio_gratis.svg" />
@@ -377,7 +380,9 @@
     <Content Include="Content\bm3\javascript\jquery.flexslider-min.js" />
     <Content Include="Content\bm3\javascript\jquery.mCustomScrollbar.js" />
     <Content Include="Content\bm3\javascript\jquery.min.js" />
+    <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
+    <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
     <Content Include="Content\bm3\javascript\slick-lightbox.js" />
@@ -410,12 +415,13 @@
     <Content Include="Content\bm3\stylesheets\mCustomScrollbar.css" />
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
-    <Content Include="Content\bm3\stylesheets\responsive_3.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes_3.css" />
+    <Content Include="Content\bm3\stylesheets\responsiveTabs.css" />
+    <Content Include="Content\bm3\stylesheets\responsive.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
-    <Content Include="Content\bm3\stylesheets\style_3.css" />
+    <Content Include="Content\bm3\stylesheets\style.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\images\07f5c4e6-0929-4fa5-b7ae-392bcbff9c1e.png" />
@@ -5154,6 +5160,8 @@
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.js.map" />
     <Content Include="Content\lib\bootstrap-rtl-4.2.1\js\bootstrap.min.js.map" />
     <Content Include="Areas\Dashboard\Views\Shared\UnAuthorized.cshtml" />
+    <Content Include="Scripts\insert_into_configurations.sql" />
+    <Content Include="Scripts\validaciones.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -5196,7 +5204,6 @@
     <Content Include="Views\Products\_RecentProducts.cshtml" />
     <Content Include="Views\Products\_RelatedProducts.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_FooterStylesScripts.cshtml" />
     <Content Include="Views\Shared\_HeaderStylesScripts.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -5367,9 +5374,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32569/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:32569/</IISAppRootUrl>
+          <IISUrl>http://localhost:32789/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

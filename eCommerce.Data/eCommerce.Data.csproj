@@ -143,6 +143,14 @@
     <Compile Include="Migrations\202206240341242_v11_tabla_contacto_fecha.designer.cs">
       <DependentUpon>202206240341242_v11_tabla_contacto_fecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207030348231_v10_decimal3.cs" />
+    <Compile Include="Migrations\202207030348231_v10_decimal3.designer.cs">
+      <DependentUpon>202207030348231_v10_decimal3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207120455420_v11_campo_garantia.cs" />
+    <Compile Include="Migrations\202207120455420_v11_campo_garantia.designer.cs">
+      <DependentUpon>202207120455420_v11_campo_garantia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +227,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206240341242_v11_tabla_contacto_fecha.resx">
       <DependentUpon>202206240341242_v11_tabla_contacto_fecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207030348231_v10_decimal3.resx">
+      <DependentUpon>202207030348231_v10_decimal3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207120455420_v11_campo_garantia.resx">
+      <DependentUpon>202207120455420_v11_campo_garantia.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

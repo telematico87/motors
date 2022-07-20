@@ -526,10 +526,13 @@
 		margin-top:15px;
 		text-align:center;
 	}
-	
-	
 
-	
+	.has-mega-menu .catalogo-moto .btn-submenu {
+		display: none;
+	}
+
+
+
 
 	.publicidad-2-web {
 		display: none;
@@ -749,6 +752,10 @@
 		top:-15px;
 	}
 
+	.catalogo-moto .btn-submenu {
+		display: none !important;
+	}	
+
 	#mainnav-mobi ul.menu li.has-mega-menu .submenu .row ul {
 		padding-left:30px;word-spacing:2px;padding-right:40px;
 	}
@@ -818,6 +825,11 @@
 		font-size: 32px;
 		margin-bottom: 5px;
 	}
+	
+	.product-detail .info-title {
+		font-size: 32px;
+		margin-bottom: 5px;
+	}
 
 	.product-detail .info-version {
 		font-size: 25px;
@@ -826,6 +838,12 @@
 
 	.product-detail .info-description {
 		font-size: 13px;
+		line-height: 22px;
+		margin-bottom: 20px;
+	}
+	
+	.product-detail .info-summary {
+		font-size: 20px;
 		line-height: 22px;
 		margin-bottom: 20px;
 	}
@@ -862,6 +880,11 @@
 		font-size: 10px;
 		line-height: 14px;
 	}
+
+		.product-attribute .product-feature span {
+			font-size: 12px;
+			line-height: 14px;
+		}
 	
 	.product-detail-bar {
 		text-align: left;
@@ -892,7 +915,7 @@
 	}
 	
 	.tecnical-specs {
-		padding: 20px 0 10px 0;
+		padding: 0;
 	}
 	
 	.tecnical-specs h1, .tecnical-specs h2, .tecnical-specs h3, .tecnical-specs h4 {
@@ -947,8 +970,8 @@
 	}
 
 	.flat-product-imagebox .text-box p {
-		font-size: 12px;
-		line-height: 18px;
+		font-size: 18px;
+		line-height: 20px;
 		margin-bottom: 25px;
 	}
 
@@ -1405,13 +1428,7 @@
 		padding-left: 20px;
 	}
 
-	.category-shortcut-web {
-		display: block;
-	}
-
-	.category-shortcut-movil {
-		display: none;
-	}
+	
 
 	.item-image-movil {
 		display: block;
@@ -1483,9 +1500,10 @@
 }
 
 @media only screen and (max-width:767px) {
+
 	ul.flat-unstyled,
 	ul.flat-support {
-		text-align:center;
+		text-align: center;
 	}
 
 	.img-res-no {
@@ -1500,13 +1518,9 @@
 		display: block;
 	}
 
-	.category-shortcut-web {
-		display: none;
-	}
+	
 
-	.category-shortcut-movil {
-		display: block;		
-	}
+	
 
 	.header-middle #logo {
 		text-align: center;
@@ -1920,14 +1934,7 @@
 		display: block;
 	}
 
-	.category-shortcut-movil {
-		display: block;
-	}
 	
-	.category-shortcut-web {
-		display: none;
-	}
-
 	.container {
 		max-width:100%;
 	}

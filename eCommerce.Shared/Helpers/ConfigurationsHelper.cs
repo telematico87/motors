@@ -336,6 +336,57 @@ namespace eCommerce.Shared.Helpers
             }
         }
 
+
+        //Nuevos contactos
+        public static string BM3Description
+        {
+            get
+            {
+                return (GetConfigValue<string>("BM3Description"));
+            }
+        }
+
+
+
+        public static string PhoneAccesorio
+        {
+            get
+            {
+                return (GetConfigValue<string>("PhoneAccesorio"));
+            }
+        }
+        public static string PhoneRepuesto
+        {
+            get
+            {
+                return (GetConfigValue<string>("PhoneRepuesto"));
+            }
+        }
+
+        public static string PhoneServicio
+        {
+            get
+            {
+                return (GetConfigValue<string>("PhoneServicio"));
+            }
+        }
+
+        public static string PhoneVenta
+        {
+            get
+            {
+                return (GetConfigValue<string>("PhoneVenta"));
+            }
+        }
+
+        public static string Direccion_AddresLine1
+        {
+            get
+            {
+                return (GetConfigValue<string>("Direccion_AddresLine1"));
+            }
+        }
+
         public static Environments Environment
         {
             get

@@ -3,18 +3,8 @@
 @if (Model != null && Model.Count > 0)
 {
 
-    <style>
 
-        .titulo-category-movil {
-            width: 100%;
-            text-align: left;
-            padding: 10px 0px 0px;
-            color: white;
-            font-family: "BigNoodleTitling Oblique";
-        }
-    </style>
-
-    <section class="flat-row flat-banner-box category-shortcut-web category-black">
+    <section class="flat-row flat-banner-box category-shortcut-web">
         <div class="container">
             <div class="row">
                 @foreach (var category in Model)
@@ -27,12 +17,13 @@
                         <div class="banner-box">
                             <div class="inner-box single-banner" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
 
-                                <a class="inner-text" href="@Url.CatalogoMoto(category.ID)">
+                                <a class="inner-text" href="@Url.CatalogoMoto(category.ID, 0)">
                                     @Html.Picture(picture: category.Picture, defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     @*@Html.Picture(picture: pictureMovil, classes: "img-res-si", defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)*@
                                     <h4 class="text-category">
-                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                        @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name.ToUpper() : string.Empty)
                                     </h4>
+                                    <hr class="hr-category" />
                                 </a>
                             </div>
                         </div>
@@ -40,40 +31,6 @@
                 }
             </div>
         </div>
-    </section>
-
-
-    <section class="category-shortcut-movil category-black">
-        <div class="container">            
-            <div class="row">
-                <div class="banner-box three-half">
-                    @foreach (var category in Model)
-                    {
-                        var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-                        Picture pictureMovil = new Picture();
-                        pictureMovil.URL = "categoria_movil.jpg";
-
-                        
-
-                    <div class="inner-box single-banner" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
-
-                        <div class="titulo-category-movil">
-                            <h4>
-                                @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
-                            </h4>
-                        </div>
-
-                        <a href="@Url.SearchProducts(category: category.SanitizedName)">
-                            @Html.Picture(picture: category.Picture, defaultPic: "site/default-bg.jpg", alt: currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
-
-                        </a>
-                    </div>
-
-
-                    }
-                </div>
-            </div>
-        </div>
-    </section>
+    </section>    
 
 }
