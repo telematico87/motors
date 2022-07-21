@@ -8,6 +8,11 @@
     .product-detail-bar {
         width: 108% !important;
     }
+
+    .tecnical-specs.cssTamanio {
+        font-size: 14px;
+    }
+
 </style>
 
 @{
@@ -77,15 +82,17 @@
                                         <p class="info-description">PRECIO REFERENCIAL</p>
                                         @if (Model.TipoMoneda == 2)
                                         {
-                                            <p class="info-price" style="font-size:xxx-large;">@iconoMoneda @Model.Price.ToString("#,####")</p>
-                                            <p class="info-description" style="font-size:x-large;">S/. @productPriceNormal.ToString("#,####") *</p>
+                                            <p class="info-price" style="font-size:xxx-large;">@iconoMoneda @productPrice.ToString("#,####")</p>
+                                            @*<p class="info-price" style="font-size:xxx-large;">@iconoMoneda @Model.Price.ToString("#,####")</p>*@
+                                            <p class="info-description" style="font-size:x-large;">S/. @productPriceDiscount.ToString("#,####") *</p>
                                             <p class="info-description" style="font-size:inherit;">* T/C: @tipoCambio (REFERENCIAL)</p>
                                         }
                                         else
                                         {
-                                            <p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>
+                                            <p class="info-price">@iconoMoneda @productPriceDiscount.ToString("#,####")</p>
+                                            @*<p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>*@
                                         }
-                                       
+
                                         <a class="info-select waves-effect" target="_blank" href=" https://wa.me/@NumeroWhatsApp?text=@textoWhatsApp">Quiero esta moto</a>
                                         @*<a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>*@
 
@@ -230,7 +237,7 @@
                 <div class="resp-tabs-container hor_1">
                     <div>
 
-                        <div class="tecnical-specs">
+                        <div class="tecnical-specs" style="text-align:justify;">
 
                             @Html.Raw(@Model.Description)
 
@@ -238,7 +245,7 @@
 
                     </div>
                     <div>
-                        <div class="tecnical-specs">
+                        <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
                                     <tr>
@@ -270,7 +277,7 @@
                         </div>
                     </div>
                     <div>                        
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -288,7 +295,7 @@
                     </div>
                     <div>
                         
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -314,7 +321,7 @@
                     </div>
                     <div>
                         
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -332,7 +339,7 @@
                     </div>
                     <div>
                         
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -354,7 +361,7 @@
                     </div>
                     <div>
                         
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -384,7 +391,7 @@
                     </div>
                     <div>
                         
-                            <div class="tecnical-specs">
+                            <div class="tecnical-specs cssTamanio">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -477,7 +484,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="brand-desc">
-                                                <h4> @marca.Resumen</h4>
+                                                <h4 style="text-align: justify; font-family: 'Open Sans', sans-serif;"> @marca.Resumen</h4>
                                             </div>
                                         </div>
                                     }
