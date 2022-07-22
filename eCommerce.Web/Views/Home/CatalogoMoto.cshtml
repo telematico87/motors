@@ -6,8 +6,8 @@
     CategoryRecord currentLanguageCategoryRecord = null;
 
     var haveParentCategory = false;
-    var pCategoryId = 0;
-    var pMarcaId = 0;
+    int pCategoryId = Model.CategoryID != null ? Model.CategoryID.Value : 0;
+    int pMarcaId = Model.MarcaID != null ? Model.MarcaID.Value : 0;
 
     if (Model != null)
     {
@@ -128,7 +128,7 @@
                                 <a href="#" class="waves-effect">FILTRO</a>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <a href="#" class="waves-effect">ACTUALIZAR</a>
+                                <a href="#" class="waves-effect">LIMPIAR</a>
                             </div>
                         </div>
                     </div>

@@ -13,7 +13,7 @@
         decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
 
         <div class="tab-product">
-            <div class="row sort-box">                
+            <div class="row sort-box">
                 @foreach (var product in Model.Products)
                 {
 
@@ -57,7 +57,7 @@
                                         @if (product.Discount.HasValue && product.Discount.Value > 0)
                                         {
                                             <span class="regular">
-                                                 @productPriceNormal.WithCurrency(typeCoins)
+                                                @productPriceNormal.WithCurrency(typeCoins)
                                             </span>
                                         }
                                     </div>
@@ -90,47 +90,60 @@
 
 @if (Model.Pager != null && Model.Pager.TotalPages > 1)
 {
+    int pCategoryID = Model.CategoryID != null ? Model.CategoryID.Value : 0;
+    int pMarcaID = Model.MarcaID != null ? Model.MarcaID.Value : 0;
 
     <div class="blog-pagination">
         <ul class="flat-pagination style1">
-            <li class="prev">
-                <a href="#" title="">
-                    <img src="images/icono/left-1.png" alt="">Anterior
-                </a>
-            </li>
+
 
             @if (Model.Pager.CurrentPage == 1)
             {
-                <li class="page-item disabled">
-                    <a class="page-link disabled" href="#">
-                        <i class="fa fa-angle-double-right"></i>
+
+                <li class="prev disabled">
+                    <a href="#" title="">
+                        <img src="~/Content/bm3/images/icono/left-1.png" alt="">Anterior
                     </a>
                 </li>
             }
             else
             {
-                <li class="page-item">
-                    <a class="page-link" href="@Url.SearchProducts(category: Model.CategoryName, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)">
-                        <i class="fa fa-angle-double-left"></i>
+                <li class="prev">
+                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                        <img src="~/Content/bm3/images/icono/left-1.png" alt="">Anterior
                     </a>
                 </li>
             }
 
+            @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+            {
+                var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
 
-            <li>
-                <a href="#" class="waves-effect" title="">01</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect" title="">02</a>
-            </li>
-            <li class="active">
-                <a href="#" class="waves-effect" title="">03</a>
-            </li>            
-            <li class="next">
-                <a href="#" title="">
-                    Siguiente<img src="images/icono/right-1.png" alt="">
-                </a>
-            </li>
+                <li class="@active">
+                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: page, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" class="waves-effect" title="">@page</a>
+                </li>
+
+            }
+
+
+            @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
+            {
+                <li class="next disabled">
+                    <a href="#" title="">
+                        Siguiente<img src="~/Content/bm3/images/icono/right-1.png" alt="">
+                    </a>
+                </li>
+            }
+            else
+            {
+
+                <li class="next">
+                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage + 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                        Siguiente<img src="~/Content/bm3/images/icono/right-1.png" alt="">
+                    </a>
+                </li>
+            }
+
         </ul>
         <div class="clearfix"></div>
     </div>
