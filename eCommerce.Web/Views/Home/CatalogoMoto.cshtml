@@ -164,59 +164,23 @@
 
 <script>
 
-
-
-    $("input[name='grupoCategoria']").click(function () {
-
-
-        debugger;
-
+    $("input[name='grupoCategoria']").click(function () {        
 
         if ($(this).is(':checked')) {
 
+            alert("Ok");
 
-            let codCatalogo = $(this).val();
+            @*let codCategoriaID = $(this).val();            
+            let MarcasCheck = $('input[name=grupoMarca]:checked');
+            console.log(MarcasCheck);
+            
+            let ruta = '@Url.Action("BuscarCategoria", "Home")';
+            let data = { idCategoria: codCategoriaID, idMarca = 0 };
 
-            @{
-                var codCatalogoC = 
-             }
-
-
-            let ruta = '@Url.Action("CatalogoMoto", "Home")';
-
-            let ruta2 = '@Url.Action("CatalogoMoto", "Home", new { category = "5", marca = "1" })';
-            let ruta3 = '@Url.CatalogoMoto(categoryId: "__category__", marcaId: "__marca__", q: "")';
-            ruta3.replace("__category__", "0");
-            ruta3.replace("__marca__", "5");
-
-            alert("ruta: " + ruta3);
-            //alert("ruta: " + ruta);
-
-            linkVerPdf = "Home/CatalogoMoto";
-
-            @*var url = '@Url.Action("CatalogoMoto", "Home", new { category = 22, marca = 0 })';*@
-            var url2 = '@Url.Action("CatalogoMoto", "Home", new { category = "_id_" })';
-            var urfinal = url2.replace('_id_', codCatalogo);
-
-            alert("urlFinal: " + urfinal);
-
-
-            //window.location.href = urfinal;
-
-            @*$.ajax({
-                url: '@Url.Action("CatalogoMoto", "Home")',
-                type: 'POST',
-                data: { categoryId: 24, marcaId: 0 },
-                success: function(result) {
-
-                }, error: function () {
-                    alert("error");
-                }
+            $.post(url, data).done(function (data) {
+                console.log("OK");
+            }).fail(manejarError).always(function () {
             });*@
-
-            //console.log(linkVerPdf)
-            //location.href = linkVerPdf;
-
         }
     });
 
