@@ -93,16 +93,9 @@
                         <div class="widget-title">
                             <h3>Categorías<span></span></h3>
                         </div>
-
-                        @*@{
-                Html.RenderPartial("SearchFilters/_SearchInputFilter", Model);
-            }*@
-
                         @{
                             Html.RenderPartial("Catalogo/MotoFilters/_CategoriesFilter", Model);
                         }
-
-
                     </div>
                     <div class="widget widget-price">
                         <div class="widget-title">
@@ -122,21 +115,21 @@
                             </div>
                         </div>
                     </div>
-                        @{
-                            Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
-                        }
+                    @{
+                        Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
+                    }
 
-                        <div class="widget widget-button">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <a href="#" class="waves-effect">FILTRO</a>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <a href="#" class="waves-effect">ACTUALIZAR</a>
-                                </div>
+                    <div class="widget widget-button">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <a href="#" class="waves-effect">FILTRO</a>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <a href="#" class="waves-effect">ACTUALIZAR</a>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             @*Catalogo de Productos*@
             <div class="col-lg-9 col-md-8">
@@ -168,3 +161,27 @@
         </div>
     </div>
 </section>-->
+
+<script>
+
+    $("input[name='grupoCategoria']").click(function () {        
+
+        if ($(this).is(':checked')) {
+
+            alert("Ok");
+
+            @*let codCategoriaID = $(this).val();            
+            let MarcasCheck = $('input[name=grupoMarca]:checked');
+            console.log(MarcasCheck);
+            
+            let ruta = '@Url.Action("BuscarCategoria", "Home")';
+            let data = { idCategoria: codCategoriaID, idMarca = 0 };
+
+            $.post(url, data).done(function (data) {
+                console.log("OK");
+            }).fail(manejarError).always(function () {
+            });*@
+        }
+    });
+
+</script>

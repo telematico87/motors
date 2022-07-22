@@ -46,7 +46,12 @@ namespace eCommerce.Web.Controllers
                 Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID)                
             };
             return PartialView("HomeMarcasMoto", model);
-        }                       
+        }
+
+        [HttpPost]
+        public ActionResult BuscarCategoria(int idCategoria, int idMarca) {
+            return RedirectToAction("CatalogoMoto", "Home", new { categoryId = idCategoria, marcaId = idMarca });
+        }
 
         //metodo para motos
         public ActionResult CatalogoMoto(int categoryId, int marcaId, string q, decimal? from, decimal? to, string sortby, int? pageNo, int? recordSize)
@@ -142,7 +147,7 @@ namespace eCommerce.Web.Controllers
 
             return View(model);
         }
-
+        
         public ActionResult PriceRangeFilter(decimal? priceFrom, decimal? priceTo)
         {
             var model = new PriceRangeFilterViewModel

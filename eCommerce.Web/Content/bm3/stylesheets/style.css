@@ -22,7 +22,7 @@
 }
 
 @font-face {
-	font-family: "BigNoodleTitling Oblique";	
+	font-family: "BigNoodleTitling Oblique";
 	src: url("fonts/big_noodle_titling_oblique.ttf") format("truetype");
 	font-weight: 800;
 	font-style: oblique;
@@ -2336,7 +2336,7 @@ ul.menu li.column-1 .submenu > li > a i {
 /* Sidebar */
 .sidebar .widget {
 	margin-bottom:36px;
-	
+
 }
 
 .sidebar .widget .widget-title h3 {
@@ -2522,7 +2522,7 @@ ul.product-list li .info-product .price .regular {
 .widget-tags ul.tag-list li a:hover {
 	color:#FFF;
 	background-color:#f24726;
-	
+
 }
 
 

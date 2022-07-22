@@ -12,7 +12,7 @@
         <li>
             <label>
                 <a href="@Url.CatalogoMoto(categoryId: 0, marcaId : marcaId, q: Model.SearchTerm)">
-                    <input type="checkbox" @(categoryId==0 ? "checked" : string.Empty) name="grupo-1" /><span>Todas las Categorias</span>
+                    <input type="checkbox" @(categoryId==0 ? "checked" : string.Empty) name="grupoCategoria" /><span>Todas las Categorias</span>
                 </a>
             </label>
         </li>
@@ -24,7 +24,7 @@
             <li>
                 <label>
                     <a href="@Url.CatalogoMoto(categoryId: category.ID, marcaId: marcaId, q: Model.SearchTerm)">
-                        <input type="checkbox" @(category.ID == categoryId ? "checked" : string.Empty) name="grupo-1" value="@(category.ID)" /><span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</span>
+                        <input type="checkbox" @(category.ID == categoryId ? "checked" : string.Empty) name="grupoCategoria" value="@(category.ID)" /><span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</span>
                     </a>
                 </label>
             </li>
