@@ -6,6 +6,8 @@
     CategoryRecord currentLanguageCategoryRecord = null;
 
     var haveParentCategory = false;
+    var pCategoryId = 0;
+    var pMarcaId = 0;
 
     if (Model != null)
     {
@@ -34,7 +36,8 @@
 
 }
 
-<input id="searchURL" type="hidden" value="@Url.SearchProducts(category: !string.IsNullOrEmpty(Model.CategoryName) ? Model.CategoryName : string.Empty, q: Model.SearchTerm)" />
+@*<input id="searchURL" type="hidden" value="@Url.SearchProducts(category: !string.IsNullOrEmpty(Model.CategoryName) ? Model.CategoryName : string.Empty, q: Model.SearchTerm)" />*@
+<input id="searchURL" type="hidden" value="@Url.CatalogoMoto(categoryId: pCategoryId, marcaId: pMarcaId, q: Model.SearchTerm)" />
 
 @*<div class="breacrumb-section">
         <div class="container">

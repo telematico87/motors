@@ -47,7 +47,7 @@
     <script>
         $("#sortBy").change(function () {
             var val = $(this).val();
-
+            
             if (val) {
                 $("[name=sortBy]").val(val);
                 $("[name=sortBy]").removeAttr("disabled");
@@ -62,6 +62,7 @@
 
         $("#recordSize").change(function () {
             var val = $(this).val();
+            
 
             if (val) {
                 $("[name=recordSize]").val(val);

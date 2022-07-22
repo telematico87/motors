@@ -418,6 +418,7 @@ function Search() {
             if (recordSize) {
                 url = url + (!url.includes("?") ? "?" : "&") + "recordsize=" + recordSize;
             }
+            console.log("url search: " + url);
 
             window.location.href = url;
         }, 100);

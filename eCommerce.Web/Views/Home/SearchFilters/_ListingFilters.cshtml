@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-8">
                 <div class="select-option">
-                    <select class="sorting" id="sortBy">
+                    <select class="sorting" id="sortByA">
                         <option value="latest" @(string.IsNullOrEmpty(Model.SortBy) || Model.SortBy == "latest" ? "selected" : string.Empty)>@("PP.Search.SortBy.LatestProducts".LocalizedString())</option>
                         <option value="price" @(Model.SortBy == "price" ? "selected" : string.Empty)>@("PP.Search.SortBy.PriceLowToHigh".LocalizedString())</option>
                         <option value="price-high" @(Model.SortBy == "price-high" ? "selected" : string.Empty)>@("PP.Search.SortBy.PriceHighToLow".LocalizedString())</option>
@@ -38,7 +38,8 @@
         <input type="hidden" name="recordSize" value="@Model.PageSize" @(!Model.PageSize.HasValue || Model.PageSize == (int)RecordSizeEnums.Size8 ? "disabled=disabled" : string.Empty) />
     </div>
     <script>
-        $("#sortBy").change(function () {
+        $("#sortByA").change(function () {
+            
             var val = $(this).val();
 
             if (val) {
@@ -55,6 +56,7 @@
 
         $("#recordSize").change(function () {
             var val = $(this).val();
+            alert("Record: " + val);
 
             if (val) {
                 $("[name=recordSize]").val(val);

@@ -168,12 +168,12 @@ namespace eCommerce.Services
 
             if (from.HasValue && from.Value > 0.0M)
             {
-                products = products.Where(x => x.Price >= from.Value);
+                products = products.Where(x => x.Discount >= from.Value);
             }
 
             if (to.HasValue && to.Value > 0.0M)
             {
-                products = products.Where(x => x.Price <= to.Value);
+                products = products.Where(x => x.Discount <= to.Value);
             }
 
             if (stockCheckCount.HasValue && stockCheckCount.Value > 0)
@@ -185,11 +185,11 @@ namespace eCommerce.Services
             {
                 if (string.Equals(sortby, "price-high", StringComparison.OrdinalIgnoreCase))
                 {
-                    products = products.OrderByDescending(x => x.Price);
+                    products = products.OrderByDescending(x => x.Discount);
                 }
                 else
                 {
-                    products = products.OrderBy(x => x.Price);
+                    products = products.OrderBy(x => x.Discount);
                 }
             }
             else //sortBy Product Date
