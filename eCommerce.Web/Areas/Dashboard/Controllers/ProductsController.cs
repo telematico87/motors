@@ -465,101 +465,72 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             }
 
             return model;
-        }
+        }       
+                       
 
-
-        //[HttpGet]
-        //public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
-        //{
-        //    Prueba pr = new Prueba();
-        //    List<CategoryResponse> catlist = new List<CategoryResponse>();
-        //    CategoryResponse objcat1 = new CategoryResponse();
-        //    objcat1.ID = 19;
-        //    objcat1.NombreCategoria = "Guantes";
-
-        //    CategoryResponse objcat2 = new CategoryResponse();
-        //    objcat2.ID = 20;
-        //    objcat2.NombreCategoria = "Cascos";
-
-        //    catlist.Add(objcat1);
-        //    catlist.Add(objcat2);
-
-        //    JsonResult result = new JsonResult();
-
-        //    pr.resultado = "hola";
-        //    pr.res = catlist;
-        //    //return Json(pr, JsonRequestBehavior.AllowGet);
-        //    //FinanciamientosViewModels model = new FinanciamientosViewModels();
-        //    //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-        //    //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-        //    //var response = new JavaScriptSerializer().Serialize(pr);
-        //    //var json = JsonSerializer.Serialize(res2);
-        //    //return Json(response, JsonRequestBehavior.AllowGet);
-
-        //    try
-        //    {
-        //        var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-
-        //        result.Data = new { Success = pr.ToString(), Message = string.Empty};
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Data = new { Success = false, Message = ex.Message };
-        //    }
-
-        //    return result;
-
-
-        //}
-
-        [HttpGet]
-        public JsonResult ListarCategoriasbyCatalogo(int CatalogoID)
+        [HttpPost]
+        public JsonResult Consultor(int CatalogoID)
         {
-            Prueba pr = new Prueba();
-            List<CategoryResponse> catlist = new List<CategoryResponse>();
-            CatRepo cat = new CatRepo();
-
-            CategoryResponse objcat1 = new CategoryResponse();
-            objcat1.ID = 19;
-            objcat1.NombreCategoria = "Guantes";
-
-            CategoryResponse objcat2 = new CategoryResponse();
-            objcat2.ID = 20;
-            objcat2.NombreCategoria = "Cascos";
-
-            cat.IDS = objcat1.ID;
-            cat.nombre = objcat1.NombreCategoria;
-
-            catlist.Add(objcat1);
-            catlist.Add(objcat2);
-
             JsonResult result = new JsonResult();
-            pr.resultado = "hola";
-            pr.res = catlist;
-            //return Json(pr, JsonRequestBehavior.AllowGet);
-            //FinanciamientosViewModels model = new FinanciamientosViewModels();
-            //pr.res = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-            //var res2 = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-            var response = new JavaScriptSerializer().Serialize(pr);
-            //var json = JsonSerializer.Serialize(pr);
-            //return Json(response, JsonRequestBehavior.AllowGet);
             try
             {
                 var operation = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
-                result.Data = new { Success = cat, Message = string.Empty};
+                result.Data = new { Success = operation, Message = string.Empty };
             }
             catch (Exception ex)
             {
                 result.Data = new { Success = false, Message = ex.Message };
             }
-            return result;
-
+            return result; 
         }
-        
-        public class Prueba
+
+        [HttpPost]
+        public JsonResult LoadCategoriesAndMarcasByCatalogoID(int CatalogoID)
         {
-            public string resultado { get; set; }
-            public List<CategoryResponse> res { get; set; }
+
+            List<Category> categories = CategoriesService.Instance.GetCategoryByCatalogoID(CatalogoID);
+            List<Marca> marcas = MarcaService.Instance.GetMarcaByCatalogoID(CatalogoID);
+            List<CategoryResponse> categoriesResponse = new List<CategoryResponse>();
+            List<MarcaResponse> marcaResponses = new List<MarcaResponse>();
+
+            foreach (Category cat in categories) {
+
+                var categoryResponse = new CategoryResponse();
+
+                var currentLanguageCategoryRecord = cat.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+                var nameCategory = "";
+
+                if (currentLanguageCategoryRecord != null)
+                {
+                    nameCategory = currentLanguageCategoryRecord.Name;
+                }
+                else
+                {
+                    nameCategory = cat.SanitizedName;
+                }
+
+                categoryResponse.ID = cat.ID;
+                categoryResponse.NombreCategoria = nameCategory;
+                categoriesResponse.Add(categoryResponse);
+            }
+            
+            foreach (Marca marca in marcas) {
+
+                var marcaResponse = new MarcaResponse();
+                marcaResponse.ID = marca.ID;
+                marcaResponse.NombreMarca = marca.Descripcion;
+                marcaResponses.Add(marcaResponse);
+            }
+
+            CatalogoChangeResponse response = new CatalogoChangeResponse();
+            response.Categorias = categoriesResponse;
+            response.Marcas = marcaResponses;
+            return Json(response);
+        }
+
+        public class CatalogoChangeResponse {
+            public List<CategoryResponse> Categorias { get; set; }
+            public List<MarcaResponse> Marcas { get; set; }
         }
 
         public class CategoryResponse
@@ -567,13 +538,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             public int ID { get; set; }
             public string NombreCategoria { get; set; }
         }
-
-        public class CatRepo
+        
+        public class MarcaResponse
         {
-            public int IDS { get; set; }
-            public string nombre { get; set; }
-        }
-
+            public int ID { get; set; }
+            public string NombreMarca { get; set; }
+        }     
 
     }
 }

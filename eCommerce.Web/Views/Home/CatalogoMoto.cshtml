@@ -92,7 +92,7 @@
                     <div class="widget widget-categories">
                         <div class="widget-title">
                             <h3>Categorías<span></span></h3>
-                        </div>                       
+                        </div>
                         @{
                             Html.RenderPartial("Catalogo/MotoFilters/_CategoriesFilter", Model);
                         }
@@ -115,21 +115,21 @@
                             </div>
                         </div>
                     </div>
-                        @{
-                            Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
-                        }
+                    @{
+                        Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
+                    }
 
-                        <div class="widget widget-button">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <a href="#" class="waves-effect">FILTRO</a>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <a href="#" class="waves-effect">ACTUALIZAR</a>
-                                </div>
+                    <div class="widget widget-button">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <a href="#" class="waves-effect">FILTRO</a>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <a href="#" class="waves-effect">ACTUALIZAR</a>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             @*Catalogo de Productos*@
             <div class="col-lg-9 col-md-8">
@@ -161,3 +161,63 @@
         </div>
     </div>
 </section>-->
+
+<script>
+
+
+
+    $("input[name='grupoCategoria']").click(function () {
+
+
+        debugger;
+
+
+        if ($(this).is(':checked')) {
+
+
+            let codCatalogo = $(this).val();
+
+            @{
+                var codCatalogoC = 
+             }
+
+
+            let ruta = '@Url.Action("CatalogoMoto", "Home")';
+
+            let ruta2 = '@Url.Action("CatalogoMoto", "Home", new { category = "5", marca = "1" })';
+            let ruta3 = '@Url.CatalogoMoto(categoryId: "__category__", marcaId: "__marca__", q: "")';
+            ruta3.replace("__category__", "0");
+            ruta3.replace("__marca__", "5");
+
+            alert("ruta: " + ruta3);
+            //alert("ruta: " + ruta);
+
+            linkVerPdf = "Home/CatalogoMoto";
+
+            @*var url = '@Url.Action("CatalogoMoto", "Home", new { category = 22, marca = 0 })';*@
+            var url2 = '@Url.Action("CatalogoMoto", "Home", new { category = "_id_" })';
+            var urfinal = url2.replace('_id_', codCatalogo);
+
+            alert("urlFinal: " + urfinal);
+
+
+            //window.location.href = urfinal;
+
+            @*$.ajax({
+                url: '@Url.Action("CatalogoMoto", "Home")',
+                type: 'POST',
+                data: { categoryId: 24, marcaId: 0 },
+                success: function(result) {
+
+                }, error: function () {
+                    alert("error");
+                }
+            });*@
+
+            //console.log(linkVerPdf)
+            //location.href = linkVerPdf;
+
+        }
+    });
+
+</script>
