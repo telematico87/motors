@@ -104,6 +104,8 @@ namespace eCommerce.Web.Controllers
 
             model.Products = ProductsService.Instance.SearchProductsMoto(selectedCategoryIDs, marcaId, model.SearchTerm, model.PriceFrom, model.PriceTo, model.SortBy, pageNo, recordSize.Value, activeOnly: true, out int count, stockCheckCount: null);
 
+            model.Products = getProductWithoutDolar(model.Products, model.PriceFrom, model.PriceTo);
+
             model.Pager = new Pager(count, pageNo, recordSize.Value);
 
             return View(model);
@@ -159,6 +161,18 @@ namespace eCommerce.Web.Controllers
             };
 
             return PartialView("SearchFilters/_PriceRangeFilter", model);
+        }
+
+        public ActionResult MotoPriceRangeFilter(decimal? priceFrom, decimal? priceTo)
+        {
+            var model = new PriceRangeFilterViewModel
+            {
+                PriceFrom = priceFrom,
+                PriceTo = priceTo,
+                MaxPrice = ProductsService.Instance.GetMaxProductPrice()
+            };
+
+            return PartialView("Catalogo/MotoFilters/_MotoPriceRangeFilter", model);
         }
 
         public List<Product> getProductWithoutDolar(List<Product> products, decimal? priceFrom, decimal? priceTo)
