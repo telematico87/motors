@@ -382,8 +382,8 @@
     <Content Include="Content\bm3\javascript\jquery.min.js" />
     <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
-    <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\main.js" />
+    <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
     <Content Include="Content\bm3\javascript\slick-lightbox.js" />
     <Content Include="Content\bm3\javascript\slick.js" />
@@ -5330,6 +5330,7 @@
     <Content Include="Views\Home\HomeMarcasMoto.cshtml" />
     <Content Include="Views\Shared\HeadTags.cshtml" />
     <Content Include="Views\Contacto\Contacto.cshtml" />
+    <Content Include="Views\Home\Catalogo\MotoFilters\_MotoPriceRangeFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

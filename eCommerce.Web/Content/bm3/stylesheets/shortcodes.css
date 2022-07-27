@@ -3972,6 +3972,16 @@ body.background .flat-imagebox.style4 .owl-carousel-product.owl-theme .owl-contr
 	margin-bottom:22px;
 }
 
+	#shop .sidebar .widget-button button {
+		display: block;
+		padding: 5px 15px;
+		color: #ffffff;
+		font-weight: 600;
+		background: #f24726;
+		text-align: center;
+		margin-bottom: 5px;
+	}
+
 #shop .sidebar .widget .widget-title h3 span:before {
 	
 }

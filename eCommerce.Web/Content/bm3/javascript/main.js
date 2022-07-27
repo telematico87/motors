@@ -410,14 +410,14 @@
         });
     }; // Tab Productdetail
 
-    var filterPrice = function () {
+    var filterPrice = function (minimo, maximo, from, to) {
         if ($().slider) {
             $(function () {
                 $("#slider-range").slider({
                     range: true,
-                    min: 2000,
-                    max: 20000,
-                    values: [3000, 10000],
+                    min: minimo,
+                    max: maximo,
+                    values: [from, to],
                     slide: function (event, ui) {
                         $("#amount").val("S/" + ui.values[0] + " - " + "S/" + ui.values[1]);
                     }
@@ -454,6 +454,11 @@
 
     // Dom Ready
     $(function () {
+        var minamountMoto = 0;
+        var maxamountMoto = $("#maxamountMoto").val();
+        var fromMoto = $("#fromMoto").val();
+        var toMoto = $("#toMoto").val();
+
         responsiveMenu();
         waveButton();
         slider();
@@ -468,9 +473,44 @@
         toggleWidget();
         toggleCatlist();
         tabProductDetail();
-        filterPrice();
+        filterPrice(minamountMoto, maxamountMoto, fromMoto, toMoto);
         responsiveTabs();
         removePreloader();
+
     });
 
 })(jQuery);
+
+
+var searchTimeout;
+function Search() {
+    clearTimeout(searchTimeout);
+
+    var searchURL = $("#searchURL").val();
+    if (searchURL) {
+        searchTimeout = setTimeout(function () {
+            var url = searchURL;
+            var priceMin = $("[name=fromMoto]").val();
+            var priceMax = $("[name=toMoto]").val();
+
+            var sortBy = $("[name=sortBy]:enabled").val();
+            var recordSize = $("[name=recordSize]:enabled").val();
+
+            if (priceMin) {
+                url = url + (!url.includes("?") ? "?" : "&") + "from=" + priceMin;
+            }
+            if (priceMax) {
+                url = url + (!url.includes("?") ? "?" : "&") + "to=" + priceMax;
+            }
+            if (sortBy) {
+                url = url + (!url.includes("?") ? "?" : "&") + "sortby=" + sortBy;
+            }
+            if (recordSize) {
+                url = url + (!url.includes("?") ? "?" : "&") + "recordsize=" + recordSize;
+            }
+            console.log("url search: " + url);
+
+            window.location.href = url;
+        }, 100);
+    }
+}

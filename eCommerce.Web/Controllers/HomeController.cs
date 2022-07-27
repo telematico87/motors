@@ -161,6 +161,38 @@ namespace eCommerce.Web.Controllers
             return PartialView("SearchFilters/_PriceRangeFilter", model);
         }
 
+        public List<Product> getProductWithoutDolar(List<Product> products, decimal? priceFrom, decimal? priceTo)
+        {
+
+            List<Product> ProductWithoutDolar = new List<Product>();
+            decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+
+            foreach (Product p in products)
+            {
+                //Moneda es Dolar?
+                if (p.TipoMoneda.Equals(2))
+                {
+                    var DiscountTemp = p.Discount * tipoCambio;
+                    if (priceFrom.HasValue && priceTo.HasValue)
+                    {
+                        if (DiscountTemp >= priceFrom && DiscountTemp <= priceTo)
+                        {
+                            ProductWithoutDolar.Add(p);
+                        }
+                    }
+                    else
+                    {
+                        ProductWithoutDolar.Add(p);
+                    }
+                }
+                else
+                {
+                    ProductWithoutDolar.Add(p);
+                }
+            }
+            return ProductWithoutDolar;
+        }
+
         [ValidateAntiForgeryToken]
         public JsonResult SubscribeNewsLetter(string email)
         {
