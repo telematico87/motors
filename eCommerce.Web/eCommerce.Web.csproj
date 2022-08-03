@@ -744,7 +744,12 @@
     <Content Include="Content\images\fb9f4a3b-03a8-4a64-8b7b-1132e84371db.jpg" />
     <Content Include="Content\images\ffdd1b1b-a2e4-4e93-8fd6-689fb51265f6.jpg" />
     <Content Include="Content\images\moto\012222-Yamaha-MT-09-SP-EBB28621-633x388.jpg" />
+    <Content Include="Content\bm3\images\home\400x650-2.jpg" />
     <Content Include="Content\images\moto\580b585b2edbce24c47b2d01.png" />
+    <Content Include="Content\bm3\images\home\600x900.jpg" />
+    <Content Include="Content\bm3\images\home\750x300.gif" />
+    <Content Include="Content\bm3\images\home\750x320-2.jpg" />
+    <Content Include="Content\bm3\images\home\750x320.jpg" />
     <Content Include="Content\images\moto\accesorios.jpg" />
     <Content Include="Content\images\moto\adventure.jpg" />
     <Content Include="Content\images\moto\banner_moto.jpg" />
