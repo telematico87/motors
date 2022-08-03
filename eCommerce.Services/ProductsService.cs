@@ -52,7 +52,6 @@ namespace eCommerce.Services
                 products = products.Skip(skip)
                                    .Take(recordSize.Value);
             }
-
             return products.ToList();
         }
 
@@ -75,7 +74,6 @@ namespace eCommerce.Services
                 products = products.Skip(skip)
                                        .Take(recordSize.Value);
             }
-
             return products.ToList();
         }
 
@@ -381,6 +379,10 @@ namespace eCommerce.Services
             product.MarcaId = productResponse.MarcaID;
             product.CatalogoId = productResponse.CatalogoID;
             product.TipoMoneda = productResponse.TipoMoneda;
+            product.EtiquetaOferta = productResponse.EtiquetaOferta;
+            product.IncluyeSoat = productResponse.IncluyeSoat;
+            product.EtiquetaSoat = productResponse.EtiquetaSoat;
+
             return product;
         }
         

@@ -35,6 +35,9 @@ namespace eCommerce.Entities.Response
         public int MarcaID { get; set; }
         public int CatalogoID { get; set; }
         public int TipoMoneda { get; set; }
+        public string EtiquetaOferta { get; set; }
+        public string EtiquetaSoat { get; set; }
+        public bool IncluyeSoat { get; set; }
 
         public ProductoCaracteristica ProductoCaracteristica { get; set;}       
     }
