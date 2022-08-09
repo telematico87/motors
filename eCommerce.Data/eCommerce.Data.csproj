@@ -151,6 +151,10 @@
     <Compile Include="Migrations\202207120455420_v11_campo_garantia.designer.cs">
       <DependentUpon>202207120455420_v11_campo_garantia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208060348455_oferta.cs" />
+    <Compile Include="Migrations\202208060348455_oferta.designer.cs">
+      <DependentUpon>202208060348455_oferta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -233,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207120455420_v11_campo_garantia.resx">
       <DependentUpon>202207120455420_v11_campo_garantia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208060348455_oferta.resx">
+      <DependentUpon>202208060348455_oferta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
