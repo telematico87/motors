@@ -301,31 +301,43 @@
                         }
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>
-                        Descuento
-                    </label>
-                    <div class="input-group">
-                        @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
-                        {
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
-                            <div class="input-group-append">
-                                <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Descuento
+                            </label>
+                            <div class="input-group">
+                                @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
+                                {
+                                    <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="input-group-prepend">
+                                        <!--<span class="input-group-text">-->@*@ConfigurationsHelper.CurrencySymbol*@<!--</span>-->
+                                        <span class="input-group-text icono-moneda">@iconoMoneda</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="Discount" value="@Model.Discount">
+                                }
                             </div>
-                        }
-                        else
-                        {
-                            <div class="input-group-prepend">
-                                <!--<span class="input-group-text">-->@*@ConfigurationsHelper.CurrencySymbol*@<!--</span>-->
-                                <span class="input-group-text icono-moneda">@iconoMoneda</span>
-                            </div>
-                            <input type="text" class="form-control" name="Discount" value="@Model.Discount">
-                        }
+                        </div>
                     </div>
-                    <div class="input-group">                                                   
-                            <input type="text" class="form-control" name="Etiqueta Descuento" value="">                        
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Etiqueta Descuento
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="EtiquetaOferta" value="@Model.EtiquetaOferta">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label>
                         Precio Costo
@@ -348,6 +360,24 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" name="IncluyeSoat" value="true" class="form-check-input" id="IncluyeSoat" @(Model.IncluyeSoat ? "checked" : string.Empty)>
+                            <label>
+                                Incluye Soat
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Etiqueta SOAT
+                            </label>                            
+                            <input type="text" class="form-control" name="EtiquetaSoat" value="@Model.EtiquetaSoat">
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>
                         @("Dashboard.Products.Action.Barcode".Localized())
@@ -849,22 +879,22 @@
         }
         contenido += "";
         document.getElementById(id).innerHTML = contenido;
-    }        
+    }
 
      $("#cboCatalogo").change(function () {
 
-         let varCatalogoID = $("#cboCatalogo").val();         
+         let varCatalogoID = $("#cboCatalogo").val();
          let url = "@Url.Action("LoadCategoriesAndMarcasByCatalogoID", "Products")";
          let data = { CatalogoID: varCatalogoID };
 
-         $.post(url, data).done(function (data) {                  
+         $.post(url, data).done(function (data) {
              llenarCombo(data.Categorias, "cboCategoria", "NombreCategoria", "ID", "0");
              llenarCombo(data.Marcas, "cboMarca", "NombreMarca", "ID", "0");
          }).fail(manejarError).always(function () {
          });
      });
 
-    function manejarError(err) {        
+    function manejarError(err) {
         console.log(err.responseText);
     }
 
