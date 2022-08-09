@@ -41,6 +41,9 @@ namespace eCommerce.Entities
         public int MarcaId { get; set; }
         public int CatalogoId { get; set; }
         public int TipoMoneda { get; set; }
+        public string EtiquetaOferta { get; set; }
+        public string EtiquetaSoat { get; set; }
+        public bool IncluyeSoat { get; set; }        
     }
 
     public class ProductRecord : BaseEntity

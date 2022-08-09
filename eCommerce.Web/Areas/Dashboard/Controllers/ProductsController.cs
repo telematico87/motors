@@ -103,6 +103,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
                 model.ProductoCaracteristica = product.ProductoCaracteristica;
                 model.TipoProducto = product.TipoProducto;
+                model.EtiquetaOferta = product.EtiquetaOferta;
+                model.EtiquetaSoat = product.EtiquetaSoat;
+                model.IncluyeSoat = product.IncluyeSoat;
                 model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 
@@ -151,6 +154,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.MarcaID = model.MarcaID;
                     product.CatalogoID = model.CatalogoID;
                     product.TipoMoneda = model.TipoMoneda;
+                    product.EtiquetaOferta = model.EtiquetaOferta;
+                    product.EtiquetaSoat = model.EtiquetaSoat;
+                    product.IncluyeSoat = model.IncluyeSoat;
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
