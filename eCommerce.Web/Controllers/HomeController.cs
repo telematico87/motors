@@ -275,5 +275,13 @@ namespace eCommerce.Web.Controllers
 
             return jsonResult;
         }
+
+
+        public ActionResult Nosotros()
+        {
+            return View();
+        }
+
+
     }
 }

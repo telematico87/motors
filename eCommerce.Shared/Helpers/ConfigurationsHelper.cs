@@ -387,6 +387,34 @@ namespace eCommerce.Shared.Helpers
             }
         }
 
+
+        //Mision, vision e historia
+        public static string Historia
+        {
+            get
+            {
+                return (GetConfigValue<string>("Historia"));
+            }
+        }
+
+        public static string Mision
+        {
+            get
+            {
+                return (GetConfigValue<string>("Mision"));
+            }
+        }
+
+        public static string Vision
+        {
+            get
+            {
+                return (GetConfigValue<string>("Vision"));
+            }
+        }
+
+
+
         public static Environments Environment
         {
             get

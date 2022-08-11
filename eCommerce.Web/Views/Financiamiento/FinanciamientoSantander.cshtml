@@ -5,20 +5,32 @@
     input[type="checkbox"] {
         opacity: 1;
     }
+
+
 </style>
+ 
+<link href="~/Content/css/financiamiento_mobile.css" rel="stylesheet" />
 
-
-<br />
-    <div class="row"> 
-            <div class="col-md-1"></div>
-            <div class="col-md-10 text-center">
-                <img src="../Content/bm3/images/banner/banner_categoria_financiera_santander.png" alt="" class="img-fluid">
+<br /> 
+<section class="flat-row flat-slider">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="slider">
+                    <div class="slider-item style8">
+                        <div class="item-image">
+                            <img src="../Content/bm3/images/banner/banner_categoria_financiera_santander.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-1"></div> 
+        </div>
     </div>
-
+</section>
+ 
     <br />
-<div class="card" style="background: repeat rgb(241, 240, 240);">
+<div class="card" id="mod_financiera" style="background: repeat rgb(241, 240, 240);">
     <form method="post" id="frmSantander">
         <div class="card-body">
             <div class="row">
@@ -328,7 +340,8 @@
                             model
                         },
                         success: function (result) {
-                             Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
+                            Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
+
                              window.location.href = "@Url.Home()";
                         }
 
@@ -336,6 +349,26 @@
 
                 }
 
+
+    //function Limpiar() {
+
+    //     $("#txtNombre").val('');
+    //     $("#txtApellido").val();
+    //     $("#txtCelular").val();
+    //     $("#txtCorreo").val();
+    //     $("#cboTipoDocumento").val();
+    //     $("#txtNroDocumento").val();
+    //     $("#cboInteresCompra").val();
+    //     $("#cboDepartamento").val();
+    //     $("#cboProvincia").val();
+    //     $("#cboMarca").val();
+    //     $("#txtModelo").val(); 
+    //     $("#cboRangoIngresos").val();
+    //     $("#cboMontoFinanciar").val();
+    //     document.getElementById('PoliticaPrivacidad').checked;
+    //     document.getElementById('PoliticaPrivacidad').checked;
+         
+    //}
 
         function listarMarcas() {
             $.ajax({

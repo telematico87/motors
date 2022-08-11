@@ -1,6 +1,7 @@
 ﻿@model FinanciamientosViewModels
 
- 
+
+<link href="~/Content/css/financiamiento_mobile.css" rel="stylesheet" />
 <style>
     input[type="checkbox"] {
         opacity: 1;
@@ -8,197 +9,206 @@
 </style>
 
 <br />
- 
-    
+
+
+<section class="flat-row flat-slider">
+    <div class="container-full">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10 text-center">
-                <img src="../Content/bm3/images/banner/banner_categoria_financiera_efectiva.png" alt="" class="img-fluid">
+            <div class="col-md-12">
+                <div class="slider">
+                    <div class="slider-item style8">
+                        <div class="item-image">
+                            <img src="../Content/bm3/images/banner/banner_categoria_financiera_efectiva.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
-     
-    <br />
-    <div class="card" style="background: repeat rgb(241, 240, 240);">
-        <form method="post" id="frmEfectiva">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Nombre">Nombre<span class="text-danger">*</span></label>
-                            <input class="form-control" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
-                            <input class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Apellidos'">
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Celular">Celular<span class="text-danger">*</span></label>
-                            <input class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Celular'" maxlength="9">
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Correo">Email<span class="text-danger">*</span></label>
-                            <input class="form-control" id="txtCorreo" name="Correo" type="email" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Correo'">
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
-                            <select id="cboTipoDocumento" class="form-control custom-select" name="TipoDocumento">
-                                <option value="1">DNI</option>
-                                <option value="2">C.Extranjería</option>
-                                <option value="3">Pasaporte</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
-                            <input class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="InteresCompra">Interés de Compra<span class="text-danger">*</span></label>
-                            <select id="cboInteresCompra" class="form-control custom-select" name="InteresCompra">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Departamento">Departamento<span class="text-danger">*</span></label>
-                            <select id="cboDepartamento" class="form-control" name="Departamento">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Provincia">Provincia<span class="text-danger">*</span></label>
-                            <select id="cboProvincia" class="form-control custom-select" name="Provincia">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Marca">Marca<span class="text-danger">*</span></label>
-                            <select id="cboMarca" class="form-control custom-select" name="Marca">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="Modelo">Modelo<span class="text-danger">*</span></label>
-                            <input class="form-control" id="txtModelo" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="TipoVivienda">Tipo de Vivienda<span class="text-danger">*</span></label>
-                            <select id="cboTipoVivienda" class="form-control custom-select">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="SituacionLaboral">Situación Laboral<span class="text-danger">*</span></label>
-                            <select id="cboSituacionLaboral" class="form-control custom-select" name="SituacionLaboral">
-                                <option value="0">--Seleccionar--</option>
-                                <option value="Formal">Formal</option>
-                                <option value="Informal">Informal</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="group-input">
-                            <label for="EstadoCivil">Estado Civil<span class="text-danger">*</span></label>
-                            <select id="cboEstadoCivil" class="form-control custom-select" name="EstadoCivil">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="group-input">
-                            <label for="RangoIngresos">Rango de Ingresos<span class="text-danger">*</span></label>
-                            <select id="cboRangoIngresos" class="form-control custom-select" name="RangoIngresos">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6 form-check">
-                        <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
-                        <label class="form-check-label" for="PoliticaPrivacidad">
-                            He leído y acepto la política de privacidad
-                        </label>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6 form-check">
-                        <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
-                        <label class="form-check-label" for="AceptoComunicaciones">
-                            Acepto recibir comunicaciones comerciales de LA EMPRESA
-                        </label>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6">
-                        <button class="btn btn-success" type="submit" id="actionButton"><i class="ti-save"></i>  Enviar</button>
-                    </div>
-                </div>
-                <br />
-            </div>
-        </form>
     </div>
-   
+</section>
 
-    <script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
-    <script>
+<br />
+<div class="card" id="mod_financiera" style="background: repeat rgb(241, 240, 240);">
+    <form method="post" id="frmEfectiva">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Nombre">Nombre<span class="text-danger">*</span></label>
+                        <input class="form-control" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
+                        <input class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Apellidos'">
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Celular">Celular<span class="text-danger">*</span></label>
+                        <input class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Celular'" maxlength="9">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Correo">Email<span class="text-danger">*</span></label>
+                        <input class="form-control" id="txtCorreo" name="Correo" type="email" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Correo'">
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
+                        <select id="cboTipoDocumento" class="form-control custom-select" name="TipoDocumento">
+                            <option value="1">DNI</option>
+                            <option value="2">C.Extranjería</option>
+                            <option value="3">Pasaporte</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
+                        <input class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="InteresCompra">Interés de Compra<span class="text-danger">*</span></label>
+                        <select id="cboInteresCompra" class="form-control custom-select" name="InteresCompra">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Departamento">Departamento<span class="text-danger">*</span></label>
+                        <select id="cboDepartamento" class="form-control" name="Departamento">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Provincia">Provincia<span class="text-danger">*</span></label>
+                        <select id="cboProvincia" class="form-control custom-select" name="Provincia">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Marca">Marca<span class="text-danger">*</span></label>
+                        <select id="cboMarca" class="form-control custom-select" name="Marca">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="Modelo">Modelo<span class="text-danger">*</span></label>
+                        <input class="form-control" id="txtModelo" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="TipoVivienda">Tipo de Vivienda<span class="text-danger">*</span></label>
+                        <select id="cboTipoVivienda" class="form-control custom-select">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="SituacionLaboral">Situación Laboral<span class="text-danger">*</span></label>
+                        <select id="cboSituacionLaboral" class="form-control custom-select" name="SituacionLaboral">
+                            <option value="0">--Seleccionar--</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Informal">Informal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="group-input">
+                        <label for="EstadoCivil">Estado Civil<span class="text-danger">*</span></label>
+                        <select id="cboEstadoCivil" class="form-control custom-select" name="EstadoCivil">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="group-input">
+                        <label for="RangoIngresos">Rango de Ingresos<span class="text-danger">*</span></label>
+                        <select id="cboRangoIngresos" class="form-control custom-select" name="RangoIngresos">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-6 form-check">
+                    <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
+                    <label class="form-check-label" for="PoliticaPrivacidad">
+                        He leído y acepto la política de privacidad
+                    </label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-6 form-check">
+                    <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
+                    <label class="form-check-label" for="AceptoComunicaciones">
+                        Acepto recibir comunicaciones comerciales de LA EMPRESA
+                    </label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <button class="btn btn-success" type="submit" id="actionButton"><i class="ti-save"></i>  Enviar</button>
+                </div>
+            </div>
+            <br />
+        </div>
+    </form>
+</div>
+
+
+<script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
+<script>
         $(document).ready(function () {
             listarMarcas();
             listarEstadoCivil();
@@ -212,13 +222,13 @@
 
             $("#frmEfectiva").submit(function (event) {
 
-                GuardarFinanciamiento(); 
-                event.preventDefault();  
+                GuardarFinanciamiento();
+                event.preventDefault();
             })
-             
+
         });
 
-         
+
         function ValidaSoloTexto() {
             $("#txtNombre").bind('keypress', function (event) {
                 var regex = new RegExp("^[a-zA-Z ]+$");
@@ -258,7 +268,7 @@
                 }
             });
         }
-         
+
         function GuardarFinanciamiento() {
 
                 var Nombre = $("#txtNombre").val();
@@ -434,7 +444,7 @@
                 }
             });
         }
-         
+
         function llenarComboDpto(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
             debugger;
             var contenido = ""
@@ -448,7 +458,7 @@
             contenido += "";
             document.getElementById(id).innerHTML = contenido;
         }
-         
+
         function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
             debugger;
             var contenido = ""
@@ -462,7 +472,7 @@
             contenido += "";
             document.getElementById(id).innerHTML = contenido;
         }
-         
+
         $("#cboDepartamento").on('change', function () {
             debugger;
             var cboDpto = $("#cboDepartamento").val();
@@ -483,9 +493,9 @@
         });
 
 
-    </script>
+</script>
 
-    
+
 
 
 
