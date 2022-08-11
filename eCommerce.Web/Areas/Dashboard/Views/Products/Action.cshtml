@@ -363,10 +363,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="checkbox" name="IncluyeSoat" value="true" class="form-check-input" id="IncluyeSoat" @(Model.IncluyeSoat ? "checked" : string.Empty)>
-                            <label>
-                                Incluye Soat
-                            </label>
+                            <div class="form-check" title="Marque si Incluye Soat">
+                                <input type="checkbox" name="IncluyeSoat" value="true" class="form-check-input" id="IncluyeSoat" @(Model.IncluyeSoat ? "checked" : string.Empty)>
+                                <input type="hidden" name="IncluyeSoat" value="false">
+
+                                <label class="form-check-label" for="IncluyeSoat">
+                                    Incluye Soat
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">

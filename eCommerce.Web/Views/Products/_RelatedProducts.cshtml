@@ -22,30 +22,57 @@
                         thumbnail = selectedThumbnail != null ? selectedThumbnail.Picture : product.ProductPictures.FirstOrDefault().Picture;
                     }
 
-                    <div class="card text-center card-product">
-                        <div class="card-product__img">
-                            <a href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)">
-                                @Html.Picture(thumbnail, "card-img", alt: product.Name)
-                            </a>
-                            <ul class="card-product__imgOverlay">
-                                <li><button class="link-button" data-href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)"><i class="fas fa-link"></i></button></li>
-                                <li><button class="btnAddToCart" data-id="@product.ID"><i class="fas fa-shopping-cart"></i></button></li>
-                            </ul>
+                    var showEtiquetaOferta = false;
+                    var showEtiquetaSoat = false;
+                    var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+
+                    if (productPrice > 0 && product.EtiquetaOferta != null & !product.EtiquetaOferta.Equals(""))
+                    {
+                        showEtiquetaOferta = true;
+                    }
+
+                    if (product.IncluyeSoat)
+                    {
+                        showEtiquetaSoat = true;
+                    }
+
+                <div class="card text-center card-product">
+                    @if (showEtiquetaOferta)
+                    {
+                        <div class="featuredes">
+                            @product.EtiquetaOferta
                         </div>
-                        <div class="card-body">
-                            <a href="@Url.SearchProducts(product.Category.SanitizedName)" class="card-link">
-                                @product.Category.Name
-                            </a>
-                            <h4 class="card-product__title">
-                                <a href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)">
-                                    @product.Name
-                                </a>
-                            </h4>
-                            <p class="card-product__price ltr-dir">
-                                @product.Price.WithCurrency()
-                            </p>
+                    }
+
+                    @if (showEtiquetaSoat)
+                    {
+                        <div class="soat">
+                            @product.EtiquetaSoat
                         </div>
+                    }
+                    <div class="card-product__img">
+                        <a href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)">
+                            @Html.Picture(thumbnail, "card-img", alt: product.Name)
+                        </a>
+                        <ul class="card-product__imgOverlay">
+                            <li><button class="link-button" data-href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)"><i class="fas fa-link"></i></button></li>
+                            <li><button class="btnAddToCart" data-id="@product.ID"><i class="fas fa-shopping-cart"></i></button></li>
+                        </ul>
                     </div>
+                    <div class="card-body">
+                        <a href="@Url.SearchProducts(product.Category.SanitizedName)" class="card-link">
+                            @product.Category.Name
+                        </a>
+                        <h4 class="card-product__title">
+                            <a href="@Url.ProductDetails(product.Category.SanitizedName, product.ID)">
+                                @product.Name
+                            </a>
+                        </h4>
+                        <p class="card-product__price ltr-dir">
+                            @product.Price.WithCurrency()
+                        </p>
+                    </div>
+                </div>
                 }
             </div>
         </div>

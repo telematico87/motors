@@ -301,6 +301,9 @@ namespace eCommerce.Services
             response.MarcaID = product.MarcaId;
             response.CatalogoID = product.CatalogoId;
             response.TipoMoneda = product.TipoMoneda;
+            response.EtiquetaOferta = product.EtiquetaOferta;
+            response.EtiquetaSoat = product.EtiquetaSoat;
+            response.IncluyeSoat = product.IncluyeSoat;
             response.ProductoCaracteristica = productoCaracteristica;
             return response;
         }

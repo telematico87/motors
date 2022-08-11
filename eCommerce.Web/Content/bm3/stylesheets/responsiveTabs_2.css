@@ -52,9 +52,9 @@ h2.resp-accordion {
 }
 
 .resp-tab-active {
-    background: #858585!important;
-    border-top: 5px solid #f24726!important;
-	color: #ffffff!important;
+    background: #858585 !important;
+    border-top: 5px solid #e10303 !important;
+    color: #ffffff !important;
 }
 
 .resp-content-active, .resp-accordion-active {
