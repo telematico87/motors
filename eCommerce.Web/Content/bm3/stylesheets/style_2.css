@@ -1390,9 +1390,9 @@ ul.flat-unstyled li > ul > li > a {
 	background-color:#e58400;
 }
 
-.header-bottom.style3 {
-	background-color:#f24726;
-}
+	.header-bottom.style3 {
+		background-color: #e10303;
+	}
 
 /* Menu Mega
 -------------------------------------------------------------- */

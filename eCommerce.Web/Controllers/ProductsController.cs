@@ -120,6 +120,9 @@ namespace eCommerce.Web.Controllers
                 model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;
                 model.ProductoCaracteristica = product.ProductoCaracteristica;
                 model.TipoProducto = product.TipoProducto;
+                model.EtiquetaOferta = product.EtiquetaOferta;
+                model.EtiquetaSoat = product.EtiquetaSoat;
+                model.IncluyeSoat = product.IncluyeSoat;
                 model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 

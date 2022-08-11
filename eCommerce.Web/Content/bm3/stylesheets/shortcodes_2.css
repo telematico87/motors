@@ -29,7 +29,7 @@ input[type="checkbox"] {
 }
 
 .widget-title-bm3 {
-	color: #f24726 !important;
+	color: #e10303 !important;
 	font-weight: 400;
 	font-family: 'BigNoodleTitling Oblique', sans-serif;
 	font-style: oblique;
@@ -104,6 +104,82 @@ input[type="checkbox"] {
 .flat-banner-box {
 	padding:15px 0 15px;
 }
+
+/*Etiqueta Oferta*/
+
+.featureDetail {
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	color: #ffffff;
+	font-size: 2em;
+	background-color: rgba(255, 3, 3, 1);
+	position: absolute;
+	left: 30px;
+	top: 20px;
+	padding: 5px 5px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	font-weight: 800;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+.soatDetail {
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	color: #ffffff;
+	font-size: 2em;
+	background-color: rgba(255, 3, 3, 1);
+	position: absolute;
+	left: 30px;
+	top: 65px;
+	padding: 5px 5px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	font-weight: 800;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+
+.product-box .featuredes {
+	color: #ffffff;
+	font-size: 8px;
+	background-color: rgba(255, 3, 3, 1);
+	position: absolute;
+	left: 0;
+	top: 0px;
+	padding: 0px 3px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	font-weight: 700;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+.product-box .soat {
+	color: #ffffff;
+	font-size: 8px;
+	background-color: rgba(255, 3, 3, 1);
+	position: absolute;
+	right: 0;
+	top: 0px;
+	padding: 0px 3px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	font-weight: 700;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+/*Fin Etiqueta Oferta*/
+
 
 /* Banner Box */
 .banner-box.two-half {
@@ -644,17 +720,17 @@ input[type="checkbox"] {
     top:5px;
 }
 
-.imagebox .box-top .box-link a {
-    font-weight:600;
-	color:#ffffff;
-    display:block;
-    height:30px;
-    width:30px;
-	line-height:30px;
-    background:#f24726;
-    border-radius:50%;
-	margin-bottom:5px
-}
+	.imagebox .box-top .box-link a {
+		font-weight: 600;
+		color: #ffffff;
+		display: block;
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		background: #e10303;
+		border-radius: 50%;
+		margin-bottom: 5px
+	}
 
 .imagebox .box-top .box-link a i {
 	font-size:16px;
@@ -665,10 +741,10 @@ input[type="checkbox"] {
 	padding-right:10px;
 }
 
-.imagebox .box-top .box-link a:hover {
-	color:#f24726;
-    background:#ffded9;
-}
+	.imagebox .box-top .box-link a:hover {
+		color: #e10303;
+		background: #ffded9;
+	}
 
 .imagebox .box-top .box-link a.compare {
 	margin-right:18px;
@@ -4048,15 +4124,15 @@ body.background .flat-imagebox.style4 .owl-carousel-product.owl-theme .owl-contr
 	margin-bottom:30px;
 }
 
-#shop .sidebar .widget-button a {
-	display: block;
-	padding: 5px 15px;
-	color: #ffffff;
-	font-weight: 600;
-	background: #f24726;
-	text-align: center;
-	margin-bottom: 5px;
-}
+	#shop .sidebar .widget-button a {
+		display: block;
+		padding: 5px 15px;
+		color: #ffffff;
+		font-weight: 600;
+		background: #e10303;
+		text-align: center;
+		margin-bottom: 5px;
+	}
 
 #shop .sidebar .widget-color {
 	margin-bottom:7px;
@@ -4157,11 +4233,11 @@ body.background .flat-imagebox.style4 .owl-carousel-product.owl-theme .owl-contr
 
 /* Ui Slider */
 .ui-slider .ui-slider-handle {
-	width:12px;
-	height:12px;
-	background-color:#fff;
-	border:2px solid #fd7e21;
-	border-radius:50%;
+	width: 12px;
+	height: 12px;
+	background-color: #fff;
+	border: 2px solid #e10303;
+	border-radius: 50%;
 }
 
 .ui-widget-header {
@@ -4580,14 +4656,14 @@ input[type="checkbox"]:checked + label:before {
 	margin-bottom: 35px;
 }
 
-.product-detail .info-select {
-	display: inline-block;
-	background: #f24726;
-	font-size: 18px;
-	color: #ffffff;
-	padding: 20px 35px;
-	text-transform: uppercase;
-}
+	.product-detail .info-select {
+		display: inline-block;
+		background: #e10303;
+		font-size: 18px;
+		color: #ffffff;
+		padding: 20px 35px;
+		text-transform: uppercase;
+	}
 
 .product-detail .info-select:hover {
 	background: #e10303;

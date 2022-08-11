@@ -27,7 +27,16 @@
         var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
         var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
         var typeCoins = 1;
+        var showEtiquetaOferta = false;
+        var showEtiquetaSoat = false;
 
+        if (productPrice > 0 && product.EtiquetaOferta != null & !product.EtiquetaOferta.Equals("")) {
+            showEtiquetaOferta = true;
+        }
+        
+        if (product.IncluyeSoat) {
+            showEtiquetaSoat = true;
+        }
 
         <div class="product-box">
             <div class="imagebox style2">
@@ -36,12 +45,21 @@
                         @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
                     </a>
                 </div>
-                <div class="featuredes">
-                    28%
-                </div>
-                <div class="soat">
-                    SOAT Gratis
-                </div>
+                @if (showEtiquetaOferta)
+                {
+                    <div class="featuredes">
+                        @product.EtiquetaOferta
+                    </div>
+                }
+
+
+                @if (showEtiquetaSoat)
+                {                    
+                    <div class="soat">
+                        @product.EtiquetaSoat
+                    </div>
+                }
+
                 <div class="box-content">
                     <div class="product-name" style="font-weight:bolder">
                         <a href="@detailsLink">
