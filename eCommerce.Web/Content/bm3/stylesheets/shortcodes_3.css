@@ -123,6 +123,7 @@ input[type="checkbox"] {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-khtml-border-radius: 5px;
+	z-index: 1;
 }
 
 .soatDetail {
@@ -141,6 +142,7 @@ input[type="checkbox"] {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-khtml-border-radius: 5px;
+	z-index: 1;
 }
 
 
