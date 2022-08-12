@@ -1,8 +1,5 @@
 @model eCommerce.Web.ViewModels.ProductDetalleViewModel
 @using eCommerce.Services
- 
-
-
 
 <style>
     .product-detail-bar {
@@ -10,8 +7,21 @@
     }
 
     .tecnical-specs.cssTamanio {
-        font-size: 14px;
+        font-size: medium;
     }
+
+    .detail-price-normal {
+        text-decoration: line-through;
+        font-size: xx-large !important;
+    }
+
+    .marca-description {
+        text-align: justify;
+        font-family: 'Open Sans', sans-serif;
+        font-size: large;
+        line-height: 1.5;
+    }
+
 
 </style>
 
@@ -19,13 +29,10 @@
     String iconoMoneda = "S/";
     if (Model != null)
     {
-
-
         if (Model.ProductID > 0)
         {
             iconoMoneda = Model.TipoMoneda == 2 ? "$" : "S/";
             var productStockTextColor = Model.StockQuantity > 0 ? "text-success bold" : "text-danger bold";
-
         }
     }
 }
@@ -37,16 +44,54 @@
     var productPrice = Model.Discount.HasValue && Model.Discount.Value > 0 ? Model.Discount.Value : Model.Price;
     var productPriceDiscount = Model.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
     var productPriceNormal = Model.TipoMoneda == 2 ? Model.Price * tipoCambio : Model.Price;
+    var productPriceNormalSoles = Model.Price;
+
     var typeCoins = 1;
     var NumeroWhatsApp = ConfigurationsHelper.WhatsAppNumber;
     var textoWhatsApp = "Quiero Información sobre esta moto: " + Model.Name;
+    var showEtiquetaOferta = false;
+    var showEtiquetaSoat = false;
+
+    if (Model.Discount.HasValue && Model.Discount.Value > 0)
+    {
+        showEtiquetaOferta = true;
+    }
+
+    if (Model.IncluyeSoat)
+    {
+        showEtiquetaSoat = true;
+    }
+
 
     <section class="flat-row flat-product-detail">
+
+
+
         <div class="container-full">
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-detail" style="background-image: url(/Content/bm3/images/producto/background_detail.png); background-size: cover;">
+
+
+                        @if (showEtiquetaOferta)
+                        {
+                            <div class="featureDetail">
+                                @Model.EtiquetaOferta
+                            </div>
+                        }
+
+                        @if (showEtiquetaSoat)
+                        {
+                            <div class="soatDetail">
+                                @Model.EtiquetaSoat
+                            </div>
+                        }
+
                         <div class="container">
+
+
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-product-img" id="pics-container">
@@ -82,20 +127,29 @@
                                         <p class="info-description">PRECIO REFERENCIAL</p>
                                         @if (Model.TipoMoneda == 2)
                                         {
-                                            <p class="info-price" style="font-size:xxx-large;">@iconoMoneda @productPrice.ToString("#,####")</p>
-                                            @*<p class="info-price" style="font-size:xxx-large;">@iconoMoneda @Model.Price.ToString("#,####")</p>*@
+                                            <p class="info-price">
+                                                @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+                                                {
+                                                    <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
+                                                }
+                                                <span style="font-size:xxx-large;">@iconoMoneda @productPrice.ToString("#,####")</span>
+                                            </p>
                                             <p class="info-description" style="font-size:x-large;">S/. @productPriceDiscount.ToString("#,####") *</p>
                                             <p class="info-description" style="font-size:inherit;">* T/C: @tipoCambio (REFERENCIAL)</p>
                                         }
                                         else
                                         {
-                                            <p class="info-price">@iconoMoneda @productPriceDiscount.ToString("#,####")</p>
-                                            @*<p class="info-price">@iconoMoneda @Model.Price.ToString("#,####")</p>*@
+                                            <p class="info-price">
+
+                                                @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+                                                {
+                                                    <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
+                                                }
+                                                <span>@iconoMoneda @productPriceDiscount.ToString("#,####")</span>
+                                            </p>
                                         }
 
                                         <a class="info-select waves-effect" target="_blank" href=" https://wa.me/@NumeroWhatsApp?text=@textoWhatsApp">Quiero esta moto</a>
-                                        @*<a class="info-select waves-effect" target="_blank" href="https://api.whatsapp.com/send?phone=51947909276">Quiero esta moto</a>*@
-
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +247,7 @@
         </div>
     </section>
 
-   
+
 
     <section class="flat-product-content">
         <div class="container">
@@ -276,140 +330,140 @@
                             </table>
                         </div>
                     </div>
-                    <div>                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>TIPO DE FRENO DELANTERO</td>
-                                            <td>@Model.ProductoCaracteristica.frenos.FrenoDelantero</td>
-                                        </tr>
-                                        <tr>
-                                            <td>TIPO DE FRENO POSTERIOR</td>
-                                            <td>@Model.ProductoCaracteristica.frenos.FrenoTrasero</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
-                    </div>
                     <div>
-                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>NEUM&Aacute;TICOS DELANTEROS</td>
-                                            <td>@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NEUM&Aacute;TICOS POSTERIOR</td>
-                                            <td>@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior</td>
-                                        </tr>
-                                        <tr>
-                                            <td>ARO DELANTERO</td>
-                                            <td>@Model.ProductoCaracteristica.arollanta.AroDelantero</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NEUM&Aacute;TICOS POSTERIOR</td>
-                                            <td>@Model.ProductoCaracteristica.arollanta.AroPosterior</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
-                    </div>
-                    <div>
-                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>SUSPENSI&Oacute;N DELANTEROS</td>
-                                            <td>@Model.ProductoCaracteristica.suspension.SuspensionDelantera</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SUSPENSI&Oacute;N POSTERIOR</td>
-                                            <td>@Model.ProductoCaracteristica.suspension.SuspensionPosterior</td>
-                                        </tr>
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>TIPO DE FRENO DELANTERO</td>
+                                        <td>@Model.ProductoCaracteristica.frenos.FrenoDelantero</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TIPO DE FRENO POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.frenos.FrenoTrasero</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                                    </tbody>
-                                </table>
-                            </div>                        
                     </div>
                     <div>
-                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>TRANSMISI&Oacute;N</td>
-                                            <td>@Model.ProductoCaracteristica.transmisiones.Transmision</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NRO CAMBIOS</td>
-                                            <td>@Model.ProductoCaracteristica.transmisiones.NroCambios</td>
-                                        </tr>
-                                        <tr>
-                                            <td>VELOCIDAD M&Aacute;XIMA</td>
-                                            <td>@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
+
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>NEUM&Aacute;TICOS DELANTEROS</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.NeumaticoDelantero</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEUM&Aacute;TICOS POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.NeumaticoPosterior</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ARO DELANTERO</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.AroDelantero</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEUM&Aacute;TICOS POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.arollanta.AroPosterior</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <div>
-                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>OCTANAJE</td>
-                                            <td>@Model.ProductoCaracteristica.consumo.Octanaje</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SISTEMA COMBUSTIBLE</td>
-                                            <td>@Model.ProductoCaracteristica.consumo.SistemaCombustible</td>
-                                        </tr>
-                                        <tr>
-                                            <td>CAPACIDAD TANQUE</td>
-                                            <td>@Model.ProductoCaracteristica.consumo.CapacidadTanque</td>
-                                        </tr>
-                                        <tr>
-                                            <td>AUTONOM&Iacute;A</td>
-                                            <td>@Model.ProductoCaracteristica.consumo.Autonomia</td>
-                                        </tr>
-                                        <tr>
-                                            <td>RENDIMIENTO GAL&Oacute;N</td>
-                                            <td>@Model.ProductoCaracteristica.consumo.RendimientoGalon</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
+
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>SUSPENSI&Oacute;N DELANTEROS</td>
+                                        <td>@Model.ProductoCaracteristica.suspension.SuspensionDelantera</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SUSPENSI&Oacute;N POSTERIOR</td>
+                                        <td>@Model.ProductoCaracteristica.suspension.SuspensionPosterior</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div>
-                        
-                            <div class="tecnical-specs cssTamanio">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>PESO NETO</td>
-                                            <td>@Model.ProductoCaracteristica.dimensiones.Peso</td>
-                                        </tr>
-                                        <tr>
-                                            <td>CARGA UTIL</td>
-                                            <td>@Model.ProductoCaracteristica.dimensiones.CargaUtil</td>
-                                        </tr>
-                                        <tr>
-                                            <td>PASAJEROS</td>
-                                            <td>@Model.ProductoCaracteristica.dimensiones.Pasajeros</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
+
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>TRANSMISI&Oacute;N</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.Transmision</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NRO CAMBIOS</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.NroCambios</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VELOCIDAD M&Aacute;XIMA</td>
+                                        <td>@Model.ProductoCaracteristica.transmisiones.VelocidadMaxima</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div>
+
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>OCTANAJE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.Octanaje</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SISTEMA COMBUSTIBLE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.SistemaCombustible</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CAPACIDAD TANQUE</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.CapacidadTanque</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AUTONOM&Iacute;A</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.Autonomia</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RENDIMIENTO GAL&Oacute;N</td>
+                                        <td>@Model.ProductoCaracteristica.consumo.RendimientoGalon</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div>
+
+                        <div class="tecnical-specs cssTamanio">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>PESO NETO</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.Peso</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CARGA UTIL</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.CargaUtil</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PASAJEROS</td>
+                                        <td>@Model.ProductoCaracteristica.dimensiones.Pasajeros</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -443,8 +497,9 @@
                 <div class="col-md-6">
                     <div class="banner-box">
                         <div class="inner-box">
-                            <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="">
-                                <img src="~/Content/bm3/images/banner/efectiva.png" alt="">
+                            @*<a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento Efectiva">*@
+                            <a href="#" title="Financiamiento Efectiva">
+                                <img src="~/Content/bm3/images/banner/efectiva-v2.jpg" alt="">
                             </a>
                         </div>
                     </div>
@@ -452,8 +507,9 @@
                 <div class="col-md-6">
                     <div class="banner-box">
                         <div class="inner-box">
-                            <a href="@Url.FinanciamientoSantander()" title="">
-                                <img src="~/Content/bm3/images/banner/santander.png" alt="">
+                            @*<a href="@Url.FinanciamientoSantander()" title="Financiamiento Santander">*@
+                            <a href="#" title="Financiamiento Santander">
+                                <img src="~/Content/bm3/images/banner/santander-v2.jpg" alt="">
                             </a>
                         </div>
                     </div>
@@ -483,8 +539,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-9">
-                                            <div class="brand-desc">
-                                                <h4 style="text-align: justify; font-family: 'Open Sans', sans-serif;"> @marca.Resumen</h4>
+                                            <div>
+                                                <p class="marca-description">@marca.Resumen</p>
                                             </div>
                                         </div>
                                     }

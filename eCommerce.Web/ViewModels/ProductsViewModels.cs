@@ -121,5 +121,8 @@ namespace eCommerce.Web.ViewModels
 
         public List<Marca> Marcas { get; set; }
         public List<TablaMaster> TipoMonedas { get; set; }
+        public string EtiquetaOferta { get; set; }
+        public string EtiquetaSoat { get; set; }
+        public bool IncluyeSoat { get; set; }
     }
 }

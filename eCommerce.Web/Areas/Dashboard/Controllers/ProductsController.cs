@@ -438,6 +438,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 TipoProducto = formCollection["TipoProducto"].Contains("true"),
                 ProductPictures = formCollection["ProductPictures"],
                 ThumbnailPicture = !string.IsNullOrEmpty(formCollection["ThumbnailPicture"]) ? int.Parse(formCollection["ThumbnailPicture"]) : 0,
+                
+                EtiquetaOferta = formCollection["EtiquetaOferta"],
+                EtiquetaSoat = formCollection["EtiquetaSoat"],
+                IncluyeSoat = formCollection["IncluyeSoat"].Contains("true"),
 
                 ProductRecordID = !string.IsNullOrEmpty(formCollection["ProductRecordID"]) ? int.Parse(formCollection["ProductRecordID"]) : 0,
                 Name = formCollection["Name"],
@@ -449,6 +453,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 MarcaID = int.Parse(formCollection ["MarcaID"]),
                 CatalogoID = int.Parse(formCollection ["CatalogoID"]),
                 TipoMoneda = int.Parse(formCollection["TipoMoneda"])
+                
             };
 
             foreach (string key in formCollection)
