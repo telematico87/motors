@@ -1,4 +1,17 @@
-﻿
+﻿<style>
+    .about-description {
+        text-align: justify;
+        font-size: large;
+        line-height: 1.5;
+    }
+    .about-title {
+        font-family: 'BigNoodleTitling Oblique', sans-serif;
+        font-weight: 800;
+        font-style: oblique;
+        font-size: 40px;
+    }
+
+</style>
  
 <section class="flat-row flat-slider">
     <div class="container-full">
@@ -18,38 +31,38 @@
 </section>
 
 <br />
-<div class="card" style="background: repeat rgb(241, 240, 240);"> 
+@*<div class="card" style="background: repeat rgb(241, 240, 240);">*@ 
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-xs-3">
-                    <div class="banner-box">
+                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
                         <div class="inner-box">
                             <br />
-                            <h3>HISTORIA</h3><br />
-                            <div class="content" style="text-align: justify; font-size: 14px;">
-                               @ConfigurationsHelper.Historia
+                            <h3 class="about-title">HISTORIA</h3><br />
+                            <div class="about-description">
+                                @ConfigurationsHelper.Historia
                             </div>
-                             
+
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-3">
-                    <div class="banner-box">
+                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
                         <div class="inner-box">
                             <br />
-                            <h3>VISIÓN</h3>
+                            <h3 class="about-title">VISIÓN</h3>
                             <br />
-                            <div class="content" style="text-align: justify; font-size: 14px;">
+                            <div class="about-description">
                                 @ConfigurationsHelper.Vision
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                    <div class="banner-box">
+                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
                         <div class="inner-box">
                             <br />
-                            <h3>MISIÓN</h3><br />
-                            <div class="content" style="text-align: justify; font-size: 14px;">
-                                @ConfigurationsHelper.Mision
+                            <h3 class="about-title">MISIÓN</h3><br />
+                            <div class="about-description">
+                                @ConfigurationsHelper.Mision 
                             </div>
                         </div>
                     </div>
@@ -57,6 +70,4 @@
 
             </div> 
         </div> 
-</div>
-<br />
-<br />
+@*</div>*@
