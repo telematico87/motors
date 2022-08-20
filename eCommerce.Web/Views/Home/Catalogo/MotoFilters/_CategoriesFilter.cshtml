@@ -18,6 +18,7 @@
         </li>
         @foreach (var categoryWithChildren in categoriesWithChildren)
         {
+            //Cargar Categorias
             var category = categoryWithChildren.Category;
 
             var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);          
