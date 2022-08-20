@@ -2,40 +2,6 @@
 
 @Html.Partial("_ProductByCategoriesBm3")
 
-<style>
-    #productlarge {
-        height: 307px;
-        text-align: center;
-        /* padding-top: 285px; */
-        background-color: #efefef;
-        background-repeat: no-repeat;
-        background-position: center;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-size: auto;
-        align-items: center !important;
-        justify-content: center !important;
-        display: flex !important;
-    }
-
-    .productlarge2 {
-        color: #ffffff;
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 18px;
-        display: inline-block;
-        position: relative;
-    }
-
-    .descubrir {
-        background-color: white;
-        padding: 5px;
-    }
-
-    
-</style>
-
 @if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
 {
     var reverse = false;
@@ -80,7 +46,7 @@
                         <div class="col-md-3" id="category-web" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : null))">
                             <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
                                 <div class="inner-box">
-                                    <h2 class="productlarge2">
+                                    <h2 class="productlarge-title">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
                                     <a class="descubrir" href="@Url.CatalogoMoto(featuredCategory.ID)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
@@ -104,7 +70,7 @@
                         <div class="col-md-3" id="category-web" title="@("PP.Home.FeaturedCategories.BrowseCategoryProducts".LocalizedString().Replace("{category}", currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty))">
                             <div id="productlarge" class="banner-box" data-setbg="@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg")" style="background-image: url(@Html.PictureSource(picture: featuredCategory.Picture, defaultPic: "site/default-bg.jpg"))">
                                 <div class="inner-box">
-                                    <h2 class="productlarge2">
+                                    <h2 class="productlarge-title">
                                         @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
                                     </h2>
                                     <a class="descubrir" href="@Url.CatalogoMoto(featuredCategory.ID)">@("PP.Home.FeaturedCategories.DiscoverMoreProducts".Localized())</a>
