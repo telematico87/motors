@@ -13,8 +13,8 @@
         <ul class="cat-list style1 widget-content">
             <li>
                 <label>
-                    <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: 0, q: Model.SearchTerm)">
-                        <input type="checkbox" @(marcaId==0 ? "checked" : string.Empty) name="grupoMarca" /><span>Todas las Marcas</span>
+                    <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: 0)">
+                        <input type="radio" @(marcaId==0 ? "checked" : string.Empty) name="grupoMarca" value="0" /><span>Todas las Marcas</span>
                     </a>
                 </label>
 
@@ -24,8 +24,8 @@
             {               
                 <li>
                     <label>
-                        <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: marca.ID, q: Model.SearchTerm)">
-                            <input type="checkbox" @(marca.ID == marcaId ? "checked" : string.Empty) name="grupoMarca" value="@(marca.ID)" /><span>@(marca.Descripcion != null ? marca.Descripcion : string.Empty)</span>                            
+                        <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: marca.ID)">
+                            <input type="radio" @(marca.ID == marcaId ? "checked" : string.Empty) name="grupoMarca" value="@(marca.ID)" /><span>@(marca.Descripcion != null ? marca.Descripcion : string.Empty)</span>                            
                         </a>
                     </label>
                 </li>

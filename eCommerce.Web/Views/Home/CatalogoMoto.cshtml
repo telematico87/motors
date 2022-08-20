@@ -145,24 +145,38 @@
 
 <script>
 
-    $("input[name='grupoCategoria']").click(function () {        
+    $("input[name='grupoCategoria']").click(function () {
 
         if ($(this).is(':checked')) {
-
-            alert("Ok");
-
-            @*let codCategoriaID = $(this).val();            
-            let MarcasCheck = $('input[name=grupoMarca]:checked');
-            console.log(MarcasCheck);
-            
-            let ruta = '@Url.Action("BuscarCategoria", "Home")';
-            let data = { idCategoria: codCategoriaID, idMarca = 0 };
-
-            $.post(url, data).done(function (data) {
-                console.log("OK");
-            }).fail(manejarError).always(function () {
-            });*@
+            let categoryId = $(this).val();
+            let marcaId = $('input[name=grupoMarca]:checked').val();
+            botonRedirect(categoryId, marcaId);
         }
     });
 
+    $("input[name='grupoMarca']").click(function () {
+
+        if ($(this).is(':checked')) {
+            let marcaId = $(this).val();
+            let categoryId = $('input[name=grupoCategoria]:checked').val();
+            botonRedirect(categoryId, marcaId);
+        }
+    });
+
+    function botonRedirect(categoryId, marcaId) {
+
+        let url = createUrl(categoryId, marcaId);
+        window.location.href = url;              
+    }
+
+    function createUrl(categoryId, marcaId) {
+        var getUrl = window.location;                
+        var pathname = getUrl.pathname;
+        const arrayPath = pathname.split("/");
+        arrayPath[3] = categoryId;
+        arrayPath[5] = marcaId;
+        var newPath = "/" + arrayPath[1] + "/" + arrayPath[2] + "/" + arrayPath[3] + "/" + arrayPath[4] + "/" + arrayPath[5];
+        var url = getUrl.origin + newPath + getUrl.search;
+        return url;
+    }
 </script>

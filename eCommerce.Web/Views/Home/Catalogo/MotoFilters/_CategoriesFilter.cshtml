@@ -11,8 +11,8 @@
     <ul class="cat-list style1 widget-content">      
         <li>
             <label>
-                <a href="@Url.CatalogoMoto(categoryId: 0, marcaId : marcaId, q: Model.SearchTerm)">
-                    <input type="checkbox" @(categoryId==0 ? "checked" : string.Empty) name="grupoCategoria" /><span>Todas las Categorias</span>
+                <a href="@Url.CatalogoMoto(categoryId: 0, marcaId : marcaId)">
+                    <input type="radio" @(categoryId==0 ? "checked" : string.Empty) name="grupoCategoria" value="0" /><span>Todas las Categorias</span>
                 </a>
             </label>
         </li>
@@ -24,8 +24,8 @@
             var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);          
             <li>
                 <label>
-                    <a href="@Url.CatalogoMoto(categoryId: category.ID, marcaId: marcaId, q: Model.SearchTerm)">
-                        <input type="checkbox" @(category.ID == categoryId ? "checked" : string.Empty) name="grupoCategoria" value="@(category.ID)" /><span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</span>
+                    <a href="@Url.CatalogoMoto(categoryId: category.ID, marcaId: marcaId)">
+                        <input type="radio" @(category.ID == categoryId ? "checked" : string.Empty) name="grupoCategoria" value="@(category.ID)" /><span>@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</span>
                     </a>
                 </label>
             </li>
