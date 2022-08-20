@@ -42,6 +42,8 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public int RangoIngreso { get; set; }
         public int MontoFinanciar { get; set; }
         public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
+        public bool TieneInicial { get; set; }
+        public decimal MontoInicial { get; set; }
 
         public List<MantenedorFinanciera> listaEstadoCivil { get; set; }
         public List<MantenedorFinanciera> listaTipoVivienda { get; set; }

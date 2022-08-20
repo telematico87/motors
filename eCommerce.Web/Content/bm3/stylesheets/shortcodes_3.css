@@ -2,6 +2,39 @@ input[type="checkbox"] {
 	opacity:0;
 }
 
+/*Financiamiento  */
+
+.btn-tprimary {
+	color: #fff;
+	background-color: #e10303;
+	border-color: #e10303;
+}
+
+	.btn-tprimary :hover {
+		color: #fff;
+		background-color: #e10303;
+		border-color: #e10303;
+	}
+
+#mod_financiera input::placeholder {
+	font-size: 0.9em;
+}
+
+#mod_financiera label {
+	font-size: 1.2em;
+}
+
+.formulario_financiera {
+	padding: 25px 20px;
+	background-color: white;
+	border-radius: 20px 20px 0px 0px;
+}
+
+#formMontoInicial {
+	display: none;
+}
+
+
 /* Flat Brand
 -------------------------------------------------------------- */
 .flat-brand {

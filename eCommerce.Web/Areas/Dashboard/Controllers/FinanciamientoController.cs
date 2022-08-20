@@ -74,6 +74,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.TipoDocumento = financi.TipoDocumento; 
                 model.TipoFinanciera = financi.TipoFinanciera;
                 model.MontoFinanciar = financi.MontoFinanciar;
+                model.TieneInicial = financi.TieneInicial;
+                model.MontoInicial = financi.MontoInicial;
              
             }
             model.listaTipoDocumento = new MantenedorFinanciera().ListarTipoDocumento();
@@ -82,8 +84,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             model.listaRangoIngreso = new MantenedorFinanciera().ListarRangoIngreso();
             model.listaInteresCompra = new MantenedorFinanciera().ListarInteresCompra();
             model.listaMontoFinanciar = new MantenedorFinanciera().ListarMontoFinanciar();
-            model.listaTipoFinanciera = new MantenedorFinanciera().ListarTipoFinanciera();
-            //model.Marca = MarcaService.Instance.ListarMarca();
+            model.listaTipoFinanciera = new MantenedorFinanciera().ListarTipoFinanciera();            
 
             return View(model);
         }

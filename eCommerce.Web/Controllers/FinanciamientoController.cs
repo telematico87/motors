@@ -98,8 +98,8 @@ namespace eCommerce.Web.Controllers
                 var dptoNombre = dpto[1];
 
                 var financ = new Financiamiento
-               
-                { 
+
+                {
                     Nombre = model.Nombre,
                     Apellido = model.Apellido,
                     Celular = model.Celular,
@@ -119,7 +119,9 @@ namespace eCommerce.Web.Controllers
                     PoliticaPrivacidad = model.PoliticaPrivacidad,
                     AceptoComunicaciones = model.AceptoComunicaciones,
                     MontoFinanciar = model.MontoFinanciar,
-                    TipoFinanciera = model.TipoFinanciera
+                    TipoFinanciera = model.TipoFinanciera,
+                    TieneInicial = model.TieneInicial,
+                    MontoInicial = model.MontoInicial
                 };
 
                 var res = FinanciamientoService.Instance.SaveFinanciamiento(financ);

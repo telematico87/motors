@@ -6,12 +6,11 @@
     input[type="checkbox"] {
         opacity: 1;
     }
+
+    
 </style>
 
-<br />
-
-
-<section class="flat-row flat-slider">
+<section class="flat-row">
     <div class="container-full">
         <div class="row">
             <div class="col-md-12">
@@ -28,184 +27,191 @@
     </div>
 </section>
 
-<br />
-<div class="card" id="mod_financiera" style="background: repeat rgb(241, 240, 240);">
-    <form method="post" id="frmEfectiva">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Nombre">Nombre<span class="text-danger">*</span></label>
-                        <input class="form-control" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
-                        <input class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Apellidos'">
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Celular">Celular<span class="text-danger">*</span></label>
-                        <input class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Celular'" maxlength="9">
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Correo">Email<span class="text-danger">*</span></label>
-                        <input class="form-control" id="txtCorreo" name="Correo" type="email" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Correo'">
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
-                        <select id="cboTipoDocumento" class="form-control custom-select" name="TipoDocumento">
-                            <option value="1">DNI</option>
-                            <option value="2">C.Extranjería</option>
-                            <option value="3">Pasaporte</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
-                        <input class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
+<section>
 
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="InteresCompra">Interés de Compra<span class="text-danger">*</span></label>
-                        <select id="cboInteresCompra" class="form-control custom-select" name="InteresCompra">
-                        </select>
-                    </div>
+    <div class="container-full" style="background-color:whitesmoke;">
+        <div class="container" id="mod_financiera">
+            <div class="row" style="padding:10px;">
+                <div class="form-group">
+                    <h3>Para solicitar financiamiento, complete el siguiente formulario.</h3>
                 </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Departamento">Departamento<span class="text-danger">*</span></label>
-                        <select id="cboDepartamento" class="form-control" name="Departamento">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
             </div>
+            <div class="formulario_financiera">
 
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Provincia">Provincia<span class="text-danger">*</span></label>
-                        <select id="cboProvincia" class="form-control custom-select" name="Provincia">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Marca">Marca<span class="text-danger">*</span></label>
-                        <select id="cboMarca" class="form-control custom-select" name="Marca">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="Modelo">Modelo<span class="text-danger">*</span></label>
-                        <input class="form-control" id="txtModelo" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'">
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="TipoVivienda">Tipo de Vivienda<span class="text-danger">*</span></label>
-                        <select id="cboTipoVivienda" class="form-control custom-select">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
+                <form method="post" id="frmEfectiva">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Nombre">Nombre<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Apellidos'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Celular">Celular<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Celular'" maxlength="9">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Correo">Email<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="txtCorreo" name="Correo" type="email" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Correo'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>
+                                    <select id="cboTipoDocumento" class="form-control custom-select" name="TipoDocumento">
+                                        <option value="1">DNI</option>
+                                        <option value="2">C.Extranjería</option>
+                                        <option value="3">Pasaporte</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="SituacionLaboral">Situación Laboral<span class="text-danger">*</span></label>
-                        <select id="cboSituacionLaboral" class="form-control custom-select" name="SituacionLaboral">
-                            <option value="0">--Seleccionar--</option>
-                            <option value="Formal">Formal</option>
-                            <option value="Informal">Informal</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="group-input">
-                        <label for="EstadoCivil">Estado Civil<span class="text-danger">*</span></label>
-                        <select id="cboEstadoCivil" class="form-control custom-select" name="EstadoCivil">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="InteresCompra">Interés de Compra<span class="text-danger">*</span></label>
+                                    <select id="cboInteresCompra" class="form-control custom-select" name="InteresCompra">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Departamento">Departamento<span class="text-danger">*</span></label>
+                                    <select id="cboDepartamento" class="form-control" name="Departamento">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="group-input">
-                        <label for="RangoIngresos">Rango de Ingresos<span class="text-danger">*</span></label>
-                        <select id="cboRangoIngresos" class="form-control custom-select" name="RangoIngresos">
-                        </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Provincia">Provincia<span class="text-danger">*</span></label>
+                                    <select id="cboProvincia" class="form-control custom-select" name="Provincia">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Marca">Marca<span class="text-danger">*</span></label>
+                                    <select id="cboMarca" class="form-control custom-select" name="Marca">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Modelo">Modelo<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtModelo" name="Modelo" placeholder="Ingrese Modelo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Modelo'">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="TipoVivienda">Tipo de Vivienda<span class="text-danger">*</span></label>
+                                    <select id="cboTipoVivienda" class="form-control custom-select">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="SituacionLaboral">Situación Laboral<span class="text-danger">*</span></label>
+                                    <select id="cboSituacionLaboral" class="form-control custom-select" name="SituacionLaboral">
+                                        <option value="0">--Seleccionar--</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Informal">Informal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="EstadoCivil">Estado Civil<span class="text-danger">*</span></label>
+                                    <select id="cboEstadoCivil" class="form-control custom-select" name="EstadoCivil">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="RangoIngresos">Rango de Ingresos<span class="text-danger">*</span></label>
+                                    <select id="cboRangoIngresos" class="form-control custom-select" name="RangoIngresos">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-check">
+                                <input type="checkbox" name="TieneInicial" id="TieneInicial">
+                                <label class="form-check-label" for="TieneInicial">
+                                    ¿Cuentas con Inicial?
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="formMontoInicial">
+                                    <label for="MontoInicial">Monto Inicial</label>
+                                    <input type="number" required class="form-control" id="txtMontoInicial" name="txtMontoInicial" placeholder="Ingrese Monto Inicial" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Monto Inicial'" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-check">
+                                <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
+                                <label class="form-check-label" for="PoliticaPrivacidad">
+                                    He leído y acepto la política de privacidad
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-check">
+                                <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
+                                <label class="form-check-label" for="AceptoComunicaciones">
+                                    Acepto recibir comunicaciones comerciales de LA EMPRESA
+                                </label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-tprimary" type="submit" id="actionButton"><i class="fa fa-paper-plane" aria-hidden="true"></i> Solicitar Financiamiento</button>
+                            </div>
+                        </div>
+                        <br />
                     </div>
-                </div>
-                <div class="col-md-1"></div>
+                </form>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-6 form-check">
-                    <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
-                    <label class="form-check-label" for="PoliticaPrivacidad">
-                        He leído y acepto la política de privacidad
-                    </label>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-6 form-check">
-                    <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
-                    <label class="form-check-label" for="AceptoComunicaciones">
-                        Acepto recibir comunicaciones comerciales de LA EMPRESA
-                    </label>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-6">
-                    <button class="btn btn-success" type="submit" id="actionButton"><i class="ti-save"></i>  Enviar</button>
-                </div>
-            </div>
-            <br />
         </div>
-    </form>
-</div>
+    </div>
 
+</section>
 
 <script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
 <script>
@@ -224,7 +230,18 @@
 
                 GuardarFinanciamiento();
                 event.preventDefault();
-            })
+            });
+
+            $("input[name='TieneInicial']").click(function () {
+
+                if ($(this).is(':checked')) {
+                    $("#formMontoInicial").show(300);
+                } else {
+                    $("#formMontoInicial").hide(300);
+                }
+            });
+
+
 
         });
 
@@ -291,6 +308,8 @@
                 var AceptoComunicaciones = document.getElementById('PoliticaPrivacidad').checked;
                 var MontoFinanciar = 0;
                 var TipoFinanciera = 1;
+                var TieneInicial = document.getElementById('TieneInicial').checked;
+                var MontoInicial = $("#txtMontoInicial").val();
 
 
             if (Nombre == "" || Nombre.length == 0) {
@@ -309,7 +328,7 @@
                 alertify.warning('Ingrese un Documento');
                 return false;
             } else if (Modelo == "" || Modelo.length == 0) {
-                alertify.warning('Ingrese un Correo');
+                alertify.warning('Ingrese Modelo');
                 return false;
             } else if (TipoVivienda == "" || TipoVivienda.length == 0) {
                 alertify.warning('Ingrese un TipoVivienda');
@@ -325,7 +344,7 @@
             else {
 
 
-                    var model = new Object();
+                var model = new Object();
                 model.Nombre = Nombre;
                 model.Apellido = Apellido;
                 model.Celular = Celular;
@@ -346,6 +365,8 @@
                 model.AceptoComunicaciones = AceptoComunicaciones;
                 model.MontoFinanciar = MontoFinanciar;
                 model.TipoFinanciera = TipoFinanciera;
+                model.TieneInicial = TieneInicial;
+                model.MontoInicial = MontoInicial;
 
                  $.ajax({
                     method: "POST",
@@ -354,8 +375,8 @@
                         model
                     },
                     success: function (result) {
-                        debugger;
-                        Swal.fire("Bien Hecho!", 'Enviado Correctamente', "success");
+
+                        Swal.fire("Gracias por tu Preferencia!", 'Enviado Correctamente', "success");
                         window.location.href = "@Url.Home()";
                     }
 
@@ -372,7 +393,7 @@
                 method: "GET",
                 url: "/Financiamiento/listarMarca",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboMarca", "Descripcion", "Descripcion", "0")
@@ -385,7 +406,7 @@
                 method: "GET",
                 url: "/Financiamiento/listarEstadoCivil",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboEstadoCivil", "Valor", "Valor", "0")
@@ -398,7 +419,7 @@
                 method: "GET",
                 url: "/Financiamiento/listaTipoVivienda",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboTipoVivienda", "Valor", "Codigo", "0")
@@ -411,7 +432,7 @@
                 method: "GET",
                 url: "/Financiamiento/listaRangoIngreso",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboRangoIngresos", "Valor", "Codigo", "0")
@@ -424,7 +445,7 @@
                 method: "GET",
                 url: "/Financiamiento/listaInteresCompra",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboInteresCompra", "Valor", "Codigo", "0")
@@ -437,7 +458,7 @@
                 method: "GET",
                 url: "/Financiamiento/listarDepartamentos",
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarComboDpto(Marca, "cboDepartamento", "NombreUbigeo", "CodDep", "0")
@@ -446,7 +467,7 @@
         }
 
         function llenarComboDpto(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
-            debugger;
+
             var contenido = ""
             var elemento;
             contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
@@ -460,7 +481,7 @@
         }
 
         function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
-            debugger;
+
             var contenido = ""
             var elemento;
             contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
@@ -474,7 +495,7 @@
         }
 
         $("#cboDepartamento").on('change', function () {
-            debugger;
+
             var cboDpto = $("#cboDepartamento").val();
             var splitdepart = cboDpto.split('|');
             var departamento = splitdepart[0];
@@ -483,7 +504,7 @@
                 url: "/Financiamiento/listarProvincias",
                 data: { departamento },
                 success: function (result) {
-                    debugger;
+
                     console.log(result);
                     let Marca = result;
                     llenarCombo(Marca, "cboProvincia", "NombreUbigeo", "NombreUbigeo", "0")

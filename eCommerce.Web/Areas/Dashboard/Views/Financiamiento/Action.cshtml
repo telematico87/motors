@@ -64,7 +64,7 @@
             {
                 <input type="text" class="form-control" value="-" disabled />
             }
-             
+
         </div>
         <div class="form-group">
             <label>
@@ -108,8 +108,8 @@
             else
             {
                 <input type="text" class="form-control" value="-" disabled />
-            }         
-        </div> 
+            }
+        </div>
         <div class="form-group">
             <label>
                 Situación Laboral
@@ -145,7 +145,7 @@
             {
                 <input type="text" class="form-control" value="-" disabled />
             }
-             
+
         </div>
         <div class="form-group">
             <label>
@@ -155,14 +155,21 @@
             {
                 var tfinanciera = Model.listaTipoFinanciera.FirstOrDefault(x => x.Codigo == Model.TipoFinanciera);
                 <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
-            } 
+            }
         </div>
+
         <div class="form-group">
             <label>
                 Situación Sentimiental
             </label>
-            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />  
-        </div> 
+            <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />
+        </div>
+        <div class="form-group">
+            <label for="MontoInicial">
+                Monto Inicial
+            </label>
+            <input class="form-control" name="MontoInicial" value="@(Model.MontoInicial)" placeholder="SituacionLaboral" disabled />
+        </div>
         <hr />
         <div class="form-group mb-0">
             <a class="btn btn-secondary" href="@Url.ListAction("Financiamiento")">
