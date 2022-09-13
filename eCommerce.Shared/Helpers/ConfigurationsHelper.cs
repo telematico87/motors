@@ -120,6 +120,14 @@ namespace eCommerce.Shared.Helpers
                 return (GetConfigValue<string>("Email"));
             }
         }
+        
+        public static string EmailFooter
+        {
+            get
+            {
+                return (GetConfigValue<string>("EmailFooter"));
+            }
+        }
 
         public static string AdminEmailAddress
         {

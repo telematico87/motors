@@ -94,6 +94,9 @@ namespace eCommerce.Web.Controllers
 
                 currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
 
+                model.ProductRecords = product.ProductRecords;
+                model.Category = product.Category;
+
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
                 model.Price = product.Price;
@@ -110,7 +113,7 @@ namespace eCommerce.Web.Controllers
                 model.InActive = !product.IsActive;
                 model.MarcaID = product.MarcaID;
                 model.CatalogoID = product.CatalogoID;
-                model.TipoMoneda = product.TipoMoneda;
+                model.TipoMoneda = product.TipoMoneda;                
 
                 model.ProductRecordID = currentLanguageRecord.ID;
                 model.Name = currentLanguageRecord.Name;

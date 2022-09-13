@@ -39,6 +39,29 @@
 
 @if (Model != null)
 {
+    if (Model != null && Model.ProductRecords != null && Model.Category !=null)
+    {
+        var currentLanguageProductRecord = Model.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+        var currentLanguageCategoryRecord = Model.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+        Model.PageTitle = currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : ConfigurationsHelper.ApplicationName;
+        Model.PageDescription = currentLanguageProductRecord != null ? currentLanguageProductRecord.Summary : string.Empty;
+        //Model.PageURL = Url.SearchProducts(category: currentLanguageCategoryRecord.Category.SanitizedName,  q: Model. SearchTerm);
+        //Model.PageURL = Url.SearchProducts(category: currentLanguageCategoryRecord.Category.SanitizedName,  q: "");
+
+        var haveParentCategory = Model.Category != null && Model.Category.ParentCategory != null;
+
+    }
+    else
+    {
+        Model.PageTitle = "PP.Search.Title".LocalizedString().Replace("{application}", ConfigurationsHelper.ApplicationName);
+        Model.PageDescription = "PP.Search.Description".LocalizedString();
+        //Model.PageURL = Url.SearchProducts(q: Model.SearchTerm);
+        Model.PageURL = Url.SearchProducts(q: "");
+    }
+
+    Model.PageImageURL = PictureHelper.PageImageURL("search.jpg");
 
     decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
     var productPrice = Model.Discount.HasValue && Model.Discount.Value > 0 ? Model.Discount.Value : Model.Price;

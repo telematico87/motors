@@ -1,26 +1,11 @@
-﻿<style>
-    .about-description {
-        text-align: justify;
-        font-size: large;
-        line-height: 1.5;
-    }
-    .about-title {
-        font-family: 'BigNoodleTitling Oblique', sans-serif;
-        font-weight: 800;
-        font-style: oblique;
-        font-size: 40px;
-    }
-
-</style>
- 
-<section class="flat-row flat-slider">
+﻿<section class="flat-row">
     <div class="container-full">
         <div class="row">
             <div class="col-md-12">
                 <div class="slider">
                     <div class="slider-item style8">
                         <div class="item-image">
-                            <img src="~/Content/bm3/images/nosotros/banner_nosotros.jpg" />
+                            <img src="~/Content/bm3/images/nosotros/nosotros banner.jpg" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -30,44 +15,44 @@
     </div>
 </section>
 
-<br />
-@*<div class="card" style="background: repeat rgb(241, 240, 240);">*@ 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-xs-3">
-                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
-                        <div class="inner-box">
-                            <br />
-                            <h3 class="about-title">HISTORIA</h3><br />
-                            <div class="about-description">
-                                @ConfigurationsHelper.Historia
-                            </div>
+<section class="flat-row">
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-3">
+                <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
+                    <div class="inner-box">
+                        <br />
+                        <h3 class="about-title">HISTORIA</h3><br />
+                        <div class="about-description">
+                            @ConfigurationsHelper.Historia
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-3">
+                <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
+                    <div class="inner-box">
+                        <br />
+                        <h3 class="about-title">VISIÓN</h3>
+                        <br />
+                        <div class="about-description">
+                            @ConfigurationsHelper.Vision
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xs-3">
-                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
-                        <div class="inner-box">
-                            <br />
-                            <h3 class="about-title">VISIÓN</h3>
-                            <br />
-                            <div class="about-description">
-                                @ConfigurationsHelper.Vision
-                            </div>
-                        </div>
-                    </div>
-                    <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
-                        <div class="inner-box">
-                            <br />
-                            <h3 class="about-title">MISIÓN</h3><br />
-                            <div class="about-description">
-                                @ConfigurationsHelper.Mision 
-                            </div>
+                <div class="banner-box" style="padding-top: 50px; padding-bottom: 50px;">
+                    <div class="inner-box">
+                        <br />
+                        <h3 class="about-title">MISIÓN</h3><br />
+                        <div class="about-description">
+                            @ConfigurationsHelper.Mision
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </div> 
-        </div> 
-@*</div>*@
+        </div>
+    </div>
+</section>

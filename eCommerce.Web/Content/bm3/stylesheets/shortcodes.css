@@ -256,6 +256,23 @@ input[type="checkbox"] {
 
 /*Fin Etiqueta Oferta*/
 
+/*Nosotros */
+
+.about-description {
+	text-align: justify;
+	font-size: large;
+	line-height: 1.5;
+}
+
+.about-title {
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-weight: 800;
+	font-style: oblique;
+	font-size: 40px;
+}
+
+/*Fin Nosotros*/
+
 
 /* Banner Box */
 .banner-box.two-half {

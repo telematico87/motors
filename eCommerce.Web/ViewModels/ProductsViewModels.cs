@@ -80,6 +80,8 @@ namespace eCommerce.Web.ViewModels
     {
         public int ProductID { get; set; }
         public Product Product { get; set; }
+        public List<ProductRecord> ProductRecords { get; set; }
+        public Category Category { get; set; }
 
         public int CategoryID { get; set; }
         public decimal Price { get; set; }
@@ -123,6 +125,8 @@ namespace eCommerce.Web.ViewModels
         public List<TablaMaster> TipoMonedas { get; set; }
         public string EtiquetaOferta { get; set; }
         public string EtiquetaSoat { get; set; }
+        //public string SearchTerm { get; set; }
         public bool IncluyeSoat { get; set; }
+        
     }
 }
