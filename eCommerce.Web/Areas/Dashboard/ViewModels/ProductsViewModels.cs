@@ -61,6 +61,9 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
 
         public bool TipoProducto { get; set; }
         public string ProductPictures { get; set; }
+        public string ProductColorsPicture { get; set; }
+        public string ProductColorsId { get; set; }
+        public string ProductColorsStock { get; set; }
         public int ThumbnailPicture { get; set; }
         public string EtiquetaOferta { get; set; }
         public string EtiquetaSoat { get; set; }

@@ -4,6 +4,17 @@
 		display: none;
 	}
 
+	#sel-color-web {
+		display: display;
+	}	
+
+	#sel-color-mobile {
+		display: none;
+		text-align: center;
+	}
+
+	
+
 	.category-shortcut-movil {
 		display:none;
 	}
@@ -817,7 +828,7 @@
 	}
 	
 	.product-detail .info-brand {
-		font-size: 15px;
+		font-size: 35px;
 		margin-bottom: 5px;
 	}
 
@@ -827,7 +838,7 @@
 	}
 	
 	.product-detail .info-title {
-		font-size: 32px;
+		font-size: 62px;
 		margin-bottom: 5px;
 	}
 
@@ -837,7 +848,7 @@
 	}
 
 	.product-detail .info-description {
-		font-size: 13px;
+		font-size: 18px;
 		line-height: 22px;
 		margin-bottom: 20px;
 	}
@@ -2149,6 +2160,7 @@
 		display: block;
 	}
 
+
 }
 
 @media only screen and (min-width:480px) {
@@ -2156,6 +2168,21 @@
 }
 
 @media only screen and (max-width:480px) {
+
+	#sel-color-mobile {		
+		display: block;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+
+	#pics-container img {
+				
+	}
+
+	#sel-color-web {
+		display: none;
+	}
 
 	.home-marca {
 		height: 80px;

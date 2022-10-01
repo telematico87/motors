@@ -1,5 +1,6 @@
 ﻿using eCommerce.Entities;
 using eCommerce.Services;
+using eCommerce.Shared.Commons;
 using eCommerce.Shared.Enums;
 using eCommerce.Shared.Extensions;
 using eCommerce.Shared.Helpers;
@@ -127,6 +128,8 @@ namespace eCommerce.Web.Controllers
                 model.EtiquetaSoat = product.EtiquetaSoat;
                 model.IncluyeSoat = product.IncluyeSoat;
                 model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
+                model.StockDisponibleEtiqueta = StockDisponible(model.ProductColors, model.StockQuantity);
+                model.FirsPicture = FirstPicture(model.ProductColors, model.ProductPicturesList);
             }
 
             model.Categories = CategoriesService.Instance.GetCategories();
@@ -136,6 +139,39 @@ namespace eCommerce.Web.Controllers
             model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
+        }
+
+        public string StockDisponible(List<ProductColor> productColors, int stock) {
+
+            string respuesta = "DISPONIBLE";
+
+            if (productColors != null && productColors.Count > 0)
+            {
+                var firstProductPicture = productColors.First();
+                if (firstProductPicture.Stock <= 0)
+                {
+                    return "AGOTADO";
+                }
+            }
+            else if (stock <= 0) {
+                return "AGOTADO";
+            }           
+            return respuesta;
+        }
+
+        public Picture FirstPicture(List<ProductColor> productColors, List<ProductPicture> productPicturesList)
+        {           
+            if (productColors != null && productColors.Count > 0)
+            {
+                var firstProductPicture = productColors.First();                
+                return firstProductPicture.Picture;
+            }
+            else if (productPicturesList != null && productPicturesList.Count > 0)
+            {
+                var firstProductPicture = productPicturesList.First();                
+                return firstProductPicture.Picture;
+            }
+            return new Picture();
         }
 
     }

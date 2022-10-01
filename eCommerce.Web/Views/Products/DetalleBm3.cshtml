@@ -22,6 +22,64 @@
         line-height: 1.5;
     }
 
+    .myColorBox .has-photo .activeColor {
+        border: 1px solid, white;
+    }
+
+    
+
+        .myColorBox:hover {
+            animation-name: in;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+        }
+
+    #stockDisponible {
+        font-family: 'BigNoodleTitling Oblique', sans-serif;
+        color: #ffffff;
+        font-size: 2em;
+        background-color: rgba(255, 3, 3, 1);
+        position: absolute;
+        right: 0;
+        top: 10px;
+        padding: 5px 5px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        font-weight: 800;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -khtml-border-radius: 5px;
+        z-index: 1;
+    }
+
+    #pics-container img {
+        /*object-fit: cover;*/
+        -webkit-transition: opacity 1s ease-in-out;
+        -moz-transition: opacity 1s ease-in-out;
+        -o-transition: opacity 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .div-colors {
+        margin-top: 10px;
+    }
+
+    .d-inline-block {
+        border: #929292 3px outset;        
+        display: inline-block !important;
+    }
+
+    
+
+    .btncolor {
+        
+        padding: 0px 27px 27px !important;
+        
+    }
+
+    
+
 
 </style>
 
@@ -77,106 +135,160 @@
 
     if (Model.Discount.HasValue && Model.Discount.Value > 0)
     {
-        showEtiquetaOferta = true;
+        if (!Model.EtiquetaOferta.IsEmpty()) {
+            showEtiquetaOferta = true;
+        }
     }
 
-    if (Model.IncluyeSoat)
+    if (Model.IncluyeSoat && Model.EtiquetaSoat != null)
     {
         showEtiquetaSoat = true;
     }
 
 
     <section class="flat-row flat-product-detail">
-
-
-
         <div class="container-full">
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-detail" style="background-image: url(/Content/bm3/images/producto/background_detail.png); background-size: cover;">
 
-
                         @if (showEtiquetaOferta)
                         {
-                            <div class="featureDetail">
+                            <div class="featureDetail">                                
                                 @Model.EtiquetaOferta
                             </div>
                         }
 
                         @if (showEtiquetaSoat)
                         {
-                            <div class="soatDetail">
+                            <div class="soatDetail">                                
                                 @Model.EtiquetaSoat
                             </div>
                         }
+                   
+                    <div class="container">                       
 
-                        <div class="container">
-
-
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-product-img" id="pics-container">
-                                        @if (Model.ProductPicturesList != null && Model.ProductPicturesList.Count > 0)
-                                        {
-                                            var firstProductPicture = Model.ProductPicturesList.First();
-
-                                            <img src='@Html.PictureSource(firstProductPicture.Picture.URL)' data-id="@firstProductPicture.PictureID" />
-                                        }
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="stockDisponible">
+                                    @Model.StockDisponibleEtiqueta
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="product-info">
-                                        @if (Model.MarcaID > 0)
-                                        {
-                                            var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
-
-                                            if (marca != null)
-                                            {
-                                                <h3 class="info-brand"> @marca.Descripcion</h3>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span>
-                                                -
-                                            </span>
-                                        }
-
-                                        <h3 class="info-title">@Model.Name</h3>
-                                        @*<h3 class="info-version">2022</h3>*@
-                                        <p class="info-summary">@Model.Summary</p>
-                                        <p class="info-description">PRECIO REFERENCIAL</p>
-                                        @if (Model.TipoMoneda == 2)
-                                        {
-                                            <p class="info-price">
-                                                @if (Model.Discount.HasValue && Model.Discount.Value > 0)
-                                                {
-                                                    <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
-                                                }
-                                                <span style="font-size:xxx-large;">@iconoMoneda @productPrice.ToString("#,####")</span>
-                                            </p>
-                                            <p class="info-description" style="font-size:x-large;">S/. @productPriceDiscount.ToString("#,####") *</p>
-                                            <p class="info-description" style="font-size:inherit;">* T/C: @tipoCambio (REFERENCIAL)</p>
-                                        }
-                                        else
-                                        {
-                                            <p class="info-price">
-
-                                                @if (Model.Discount.HasValue && Model.Discount.Value > 0)
-                                                {
-                                                    <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
-                                                }
-                                                <span>@iconoMoneda @productPriceDiscount.ToString("#,####")</span>
-                                            </p>
-                                        }
-
-                                        <a class="info-select waves-effect" target="_blank" href=" https://wa.me/@NumeroWhatsApp?text=@textoWhatsApp">Quiero esta moto</a>
-                                    </div>
+                                <div class="form-product-img" id="pics-container" style="text-align: center">
+                                    @if (Model.FirsPicture != null)
+                                    {
+                                        <img src='@Html.PictureSource(Model.FirsPicture.URL)' data-id="@Model.FirsPicture.ID" />
+                                    }
                                 </div>
                             </div>
+
+                            @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
+                            {
+                                var firstProductPicture = Model.ProductColors.First();
+
+                                <div class="col-md-12" id="sel-color-mobile">
+                                    <div class="div-colors">
+                                        @foreach (ProductColor product in Model.ProductColors)
+                                        {
+                                            if (product.ProductID.Equals(firstProductPicture.ProductID))
+                                            {
+                                                <div class="d-inline-block">
+                                                    <button data-color-id="@product.Color.ID" data-color-stock="@product.Stock" class="myColorBox has-photo activeColor inline-color btncolor" data-selected-color="true" style="background-color: @product.Color.Valor;" title="@product.Color.Description" onclick="changeColor(this)" data-color="13119" data-color-path="@product.Picture.URL" data-color-hex="@product.Color.Valor" data-color-hex-secondary="" data-toggle="tooltip" data-placement="bottom" data-original-title="@product.Color.Description">
+                                                    </button>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="d-none d-md-inline-block">
+                                                    <button data-color-id="@product.Color.ID" data-color-stock="@product.Stock" class="myColorBox has-photo  inline-color btncolor" data-selected-color="false" style="background-color:@product.Color.Valor;" title="@product.Color.Description" onclick="changeColor(this)" data-color="13121" data-color-path="@product.Picture.URL" data-color-hex="@product.Color.Valor" data-color-hex-secondary="" data-toggle="tooltip" data-placement="bottom" data-original-title="@product.Color.Description">
+                                                    </button>
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                            }
+
+                            <div class="col-md-6">
+                                <div class="product-info">
+                                    @if (Model.MarcaID > 0)
+                                    {
+                                        var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
+
+                                        if (marca != null)
+                                        {
+                                            <h3 class="info-brand"> @marca.Descripcion</h3>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            -
+                                        </span>
+                                    }
+
+                                    <h3 class="info-title">@Model.Name</h3>
+                                    @*<h3 class="info-version">2022</h3>*@
+                                    <p class="info-summary">@Model.Summary</p>
+                                    <p class="info-description">PRECIO REFERENCIAL</p>
+                                    @if (Model.TipoMoneda == 2)
+                                    {
+                                        <p class="info-price">
+                                            @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+                                            {
+                                                <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
+                                            }
+                                            <span style="font-size:xxx-large;">@iconoMoneda @productPrice.ToString("#,####")</span>
+                                        </p>
+                                        <p class="info-description" style="font-size:x-large;">S/. @productPriceDiscount.ToString("#,####") *</p>
+                                        <p class="info-description" style="font-size:inherit;">* T/C: @tipoCambio (REFERENCIAL)</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="info-price">
+
+                                            @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+                                            {
+                                                <span class="detail-price-normal">@iconoMoneda @productPriceNormalSoles.ToString("#,####")</span>
+                                            }
+                                            <span>@iconoMoneda @productPriceDiscount.ToString("#,####")</span>
+                                        </p>
+                                    }
+
+                                    <a class="info-select waves-effect" target="_blank" href=" https://wa.me/@NumeroWhatsApp?text=@textoWhatsApp">Quiero esta moto</a>
+                                </div>
+                            </div>
+                            @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
+                            {
+                                var firstProductPicture = Model.ProductColors.First();
+
+                                <div class="col-md-12" id="sel-color-web">
+                                    <div class="div-colors">
+                                        @foreach (ProductColor product in Model.ProductColors)
+                                        {
+                                            if (product.ProductID.Equals(firstProductPicture.ProductID))
+                                            {
+                                                <div class="d-inline-block">
+                                                    <button data-color-id="@product.Color.ID" data-color-stock="@product.Stock" class="myColorBox has-photo activeColor inline-color btncolor" data-selected-color="true" style="background-color: @product.Color.Valor;" title="@product.Color.Description" onclick="changeColor(this)" data-color="13119" data-color-path="@product.Picture.URL" data-color-hex="@product.Color.Valor" data-color-hex-secondary="" data-toggle="tooltip" data-placement="bottom" data-original-title="@product.Color.Description">
+                                                    </button>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="d-none d-md-inline-block">
+                                                    <button data-color-id="@product.Color.ID" data-color-stock="@product.Stock" class="myColorBox has-photo  inline-color btncolor" data-selected-color="false" style="background-color:@product.Color.Valor;" title="@product.Color.Description" onclick="changeColor(this)" data-color="13121" data-color-path="@product.Picture.URL" data-color-hex="@product.Color.Valor" data-color-hex-secondary="" data-toggle="tooltip" data-placement="bottom" data-original-title="@product.Color.Description">
+                                                    </button>
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                            }
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -588,6 +700,13 @@
 
 }
 <script>
+
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        StockDisponibleEtiqueta();
+
+    });
+
      $("#productPictures").change(function () {
 		var pictures = this.files;
 		var picsData = new FormData();
@@ -623,5 +742,43 @@
         $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
         $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
         $("#picturesArea").append($newimgHTML.html());
+    }
+
+    function changeColor(element) {
+
+        console.log("changecolor");
+        var path = "/content/images/";        
+        var picture_path = element.getAttribute("data-color-path");
+        var color_id = element.getAttribute("data-color-id");        
+        var title = element.getAttribute("title");
+        var tooltip_title = element.getAttribute("data-original-title");
+        var color_stock = element.getAttribute("data-color-stock");
+
+        var picture = document.getElementById("pics-container").getElementsByTagName("img");                              
+        var imagen = picture[0];        
+        imagen.src = path + picture_path;
+        imagen.title = title;
+
+        if (color_stock > 0) {
+            $("#stockDisponible").html("DISPONIBLE");
+            $("#stockDisponible").css("background-color", "green");
+        } else {
+            $("#stockDisponible").html("AGOTADO");
+            $("#stockDisponible").css("background-color", "rgba(255, 3, 3, 1)");
+        }
+    } 
+
+    function StockDisponibleEtiqueta() {
+
+        var etiqueta = $("#stockDisponible").html();
+        etiqueta = etiqueta.trim();
+        console.log("iMPRIMIRE");
+        console.log(etiqueta);
+        if (etiqueta === "AGOTADO") {
+            $("#stockDisponible").css("background-color", "rgba(255, 3, 3, 1)");
+        } else {
+            $("#stockDisponible").css("background-color", "green");
+        }
+
     }
 </script>

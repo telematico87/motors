@@ -30,10 +30,13 @@
         var showEtiquetaOferta = false;
         var showEtiquetaSoat = false;
 
-        if (productPrice > 0 && product.EtiquetaOferta != null & !product.EtiquetaOferta.Equals("")) {
-            showEtiquetaOferta = true;
+        if (productPrice > 0 && product.EtiquetaOferta != null) {
+            if (!product.EtiquetaOferta.Equals(""))
+            {
+                showEtiquetaOferta = true;
+            }
         }
-        
+
         if (product.IncluyeSoat) {
             showEtiquetaSoat = true;
         }

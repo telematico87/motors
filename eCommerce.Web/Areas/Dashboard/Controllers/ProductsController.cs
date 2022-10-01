@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using eCommerce.Shared.Commons;
+using System.Configuration;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -21,16 +22,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
     {
         public ActionResult Index(int? categoryID, bool? showOnlyLowStock, string searchTerm, int? pageNo/*, string colorID*/)
         {
-            var recordSize = (int)RecordSizeEnums.Size10;
-
-
-            //ProductsListingViewModel listarColor = new ProductsListingViewModel
-            //{
-            //    ColorID = colorID,
-            //    SearchTerm = searchTerm,
-            //    Colors = ColorService.Instance.GetAllColors()
-            //};
-
+            var recordSize = (int)RecordSizeEnums.Size10;          
 
             ProductsListingViewModel model = new ProductsListingViewModel
             {
@@ -138,6 +130,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         throw new Exception("Dashboard.Products.Action.Validation.ProductNotFound".LocalizedString());
                     }
 
+                    var stockFinal = calcularStock(model.StockQuantity, model.ProductColorsStock);
+
                     product.ID = model.ProductID;
                     product.CategoryID = model.CategoryID;
                     product.Price = model.Price;
@@ -147,7 +141,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     product.Barcode = model.Barcode;
                     product.Tags = model.Tags;
                     product.Supplier = model.Supplier;
-                    product.StockQuantity = model.StockQuantity;
+                    product.StockQuantity = stockFinal;
                     product.isFeatured = model.isFeatured;
                     product.ModifiedOn = DateTime.Now;
                     product.ProductoCaracteristica = model.ProductoCaracteristica;
@@ -162,7 +156,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     {
                         var pictureIDs = model.ProductPictures
                                                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                                    .Select(ID => int.Parse(ID)).ToList();
+                                                    .Select(ID => int.Parse(ID)).ToList();                        
 
                         if (pictureIDs.Count > 0)
                         {
@@ -177,6 +171,43 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                             product.ThumbnailPictureID = model.ThumbnailPicture != 0 ? model.ThumbnailPicture : pictureIDs.First();
                         }
+
+                        if (!string.IsNullOrEmpty(model.ProductColorsPicture))
+                        {
+                            var colorPictureIDs = model.ProductColorsPicture
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+
+                            var colorIds = model.ProductColorsId
+                                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Select(ID => int.Parse(ID)).ToList();
+
+                            var colorStocks = model.ProductColorsStock
+                                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Select(ID => int.Parse(ID)).ToList();
+
+                            if (colorPictureIDs.Count > 0)
+                            {
+                                var newProductColors = new List<ProductColor>();
+
+                                for (int i = 0; i < colorPictureIDs.Count; i++)
+                                {
+
+                                    ProductColor pcolor = new ProductColor();
+                                    pcolor.ProductID = product.ID;
+                                    pcolor.PictureID = colorPictureIDs[i];
+                                    pcolor.ColorID = colorIds[i];
+                                    pcolor.Stock = colorStocks[i];
+                                    newProductColors.Add(pcolor);
+                                }
+
+                                if (!ProductsService.Instance.UpdateProductPictureColors(product.ID, newProductColors))
+                                {
+                                    throw new Exception("Dashboard.Products.Action.Validation.UnableToUpdateProductPictures".LocalizedString());
+                                }
+                            }
+
+                        }                                                  
                     }
 
                     product.IsActive = !model.InActive;
@@ -248,6 +279,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 else
                 {
                     var caracteristica = ProductsService.Instance.ProductoCaracteristicaToString(model.ProductoCaracteristica);
+                    var stockFinal = calcularStock(model.StockQuantity, model.ProductColorsStock);
 
                     Product product = new Product
                     {
@@ -261,7 +293,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         Tags = model.Tags,
                         Supplier = model.Supplier,
 
-                        StockQuantity = model.StockQuantity,
+                        StockQuantity = stockFinal,
                         Caracteristica = caracteristica,
                         isFeatured = model.isFeatured,
                         TipoProducto = model.TipoProducto,
@@ -269,7 +301,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         MarcaId = model.MarcaID,
                         CatalogoId = model.CatalogoID,
                         TipoMoneda = model.TipoMoneda
-                };
+                    };
+
+                    
 
                     if (!string.IsNullOrEmpty(model.ProductPictures))
                     {
@@ -286,12 +320,55 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         }
                     }
 
+
+
                     product.IsActive = !model.InActive;
 
                     if (!ProductsService.Instance.SaveProduct(product))
                     {
                         throw new Exception("Dashboard.Products.Action.Validation.UnableToCreateProduct".LocalizedString());
                     }
+
+                    if (!string.IsNullOrEmpty(model.ProductPictures))
+                    {                        
+                        if (!string.IsNullOrEmpty(model.ProductColorsPicture))
+                        {
+                            var colorPictureIDs = model.ProductColorsPicture
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+
+                            var colorIds = model.ProductColorsId
+                                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Select(ID => int.Parse(ID)).ToList();
+
+                            var colorStocks = model.ProductColorsStock
+                                                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Select(ID => int.Parse(ID)).ToList();
+
+                            if (colorPictureIDs.Count > 0)
+                            {
+                                var newProductColors = new List<ProductColor>();
+
+                                for (int i = 0; i < colorPictureIDs.Count; i++)
+                                {
+
+                                    ProductColor pcolor = new ProductColor();
+                                    pcolor.ProductID = product.ID;
+                                    pcolor.PictureID = colorPictureIDs[i];
+                                    pcolor.ColorID = colorIds[i];
+                                    pcolor.Stock = colorStocks[i];
+                                    newProductColors.Add(pcolor);
+                                }
+
+                                if (!ProductsService.Instance.UpdateProductPictureColors(product.ID, newProductColors))
+                                {
+                                    throw new Exception("Dashboard.Products.Action.Validation.UnableToUpdateProductPictures".LocalizedString());
+                                }
+                            }
+
+                        }
+
+                    }                    
 
                     var currentLanguageRecord = new ProductRecord
                     {
@@ -326,6 +403,16 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             }
 
             return json;
+        }
+
+        public int calcularStock(int stockProducto, String productColorStock) {
+
+            var colorStocks = productColorStock.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ID => int.Parse(ID)).ToList();
+            var stock = colorStocks.Sum();
+            if (stock <= 0) {
+                return stockProducto;
+            }
+            return stock;
         }
 
         [HttpPost]
@@ -437,6 +524,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 InActive = formCollection["InActive"].Contains("true"),
                 TipoProducto = formCollection["TipoProducto"].Contains("true"),
                 ProductPictures = formCollection["ProductPictures"],
+                ProductColorsPicture = formCollection["ProductColorsPicture"],
+                ProductColorsId = formCollection["ProductColorsId"],
+                ProductColorsStock = formCollection["ProductColorsStock"],
                 ThumbnailPicture = !string.IsNullOrEmpty(formCollection["ThumbnailPicture"]) ? int.Parse(formCollection["ThumbnailPicture"]) : 0,
                 
                 EtiquetaOferta = formCollection["EtiquetaOferta"],

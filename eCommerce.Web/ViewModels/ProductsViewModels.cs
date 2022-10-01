@@ -91,6 +91,8 @@ namespace eCommerce.Web.ViewModels
         public bool InActive { get; set; }
 
         public int StockQuantity { get; set; }
+        public string StockDisponibleEtiqueta { get; set; }
+        public Picture FirsPicture { get; set; }
 
         public int ProductRecordID { get; set; }
         public string Name { get; set; }

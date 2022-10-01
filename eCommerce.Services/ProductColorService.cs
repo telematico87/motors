@@ -34,7 +34,9 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            var productColor = context.ProductsColors
+           
+
+            var productColor = context.ProductsColors.Include("Color").Include("Picture")
                                 .Where(x => x.ProductID == ProductID && !x.IsDeleted)
                                 .AsQueryable().ToList();
             return productColor;

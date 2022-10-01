@@ -50,13 +50,10 @@ namespace eCommerce.Entities
     {
         public int ProductID { get; set; }
         public virtual Product Product { get; set; }
-
         public int LanguageID { get; set; }
-
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
-
         public virtual List<ProductSpecification> ProductSpecifications { get; set; }
     }
 }

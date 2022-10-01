@@ -377,7 +377,7 @@
                         <div class="form-group">
                             <label>
                                 Etiqueta SOAT
-                            </label>                            
+                            </label>
                             <input type="text" class="form-control" name="EtiquetaSoat" value="@Model.EtiquetaSoat">
                         </div>
                     </div>
@@ -420,6 +420,31 @@
                         {
                             foreach (var picture in Model.ProductPicturesList)
                             {
+                                var stockColor = 0.0;
+                                var idColorStock = 0;
+                                var colorName = "";
+                                var existeColorStock = false;
+                                var textoBoton = "Agregar Color/Stock";
+                                var classBoton = "btn btn-info btn-block";
+
+                                ProductColor pc = new ProductColor();
+
+                                if (Model.ProductColors != null && Model.ProductColors.Count > 0)
+                                {
+                                    pc = Model.ProductColors.FirstOrDefault(x => x.PictureID == picture.PictureID);
+
+                                    if (pc != null){
+                                        existeColorStock = true;
+                                        stockColor = pc.Stock;
+                                        idColorStock = pc.ColorID;
+                                        colorName = pc.Color.Description;
+                                        textoBoton = "Eliminar Color/Stock";
+                                        classBoton = "btn btn-danger btn-block";
+                                    }
+                                }
+
+                                var divColor = existeColorStock? "block" : "none";
+
                                 <div class="thisImage col-md-3">
                                     <div class="card mt-4">
                                         <div class="uPicHolder card-body text-center">
@@ -427,8 +452,28 @@
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
+                                                <input type="hidden" name="productImageId" class="stock-color-image-id" id="@string.Format("product-image-id-{0}", picture.PictureID)" value="@picture.PictureID" />
                                                 <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
                                                 <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
+
+                                                <button class="@classBoton" type="button" id="@string.Format("btn-add-color-id-{0}", picture.PictureID)" onclick="showhideColorStock(@picture.PictureID)">@textoBoton</button>                                                
+                                                <div class="div-product-color" style="display: @divColor" data-id="div-product-color-@picture.PictureID">
+                                                    <label>Color</label>
+                                                    <select class="form-control sel-color" id="@string.Format("sel-color-id-{0}", picture.PictureID)">
+                                                        @if (existeColorStock)
+                                                        {
+                                                            <option value="@idColorStock">@colorName</option>
+                                                        }
+
+                                                        <option value="0">Seleccione...</option>
+                                                        @foreach (var color in Model.Colors)
+                                                        {
+                                                            <option value="@color.ID">@color.Description</option>
+                                                        }
+                                                    </select>
+                                                    <label>Stock</label>
+                                                    <input type="number" class="form-control stock-color" id="@string.Format("stock-color-id-{0}", picture.PictureID)" value="@stockColor" min="0" max="100" />
+                                                </div>
                                             </li>
                                         </ul>
                                         <div class="card-footer">
@@ -440,6 +485,10 @@
                         }
                     </div>
                     <input type="hidden" name="ProductPictures" id="pictureIDs" />
+                    <input type="hidden" name="ProductColorsPicture" id="colorStockIDs" />
+                    <input type="hidden" name="ProductColorsId" id="colorIDs" />
+                    <input type="hidden" name="ProductColorsStock" id="stockByColors" />
+
                 </div>
 
                 <div class="form-group">
@@ -795,6 +844,12 @@
 
                 <hr />
                 <div class="form-group mb-0">
+
+                    @*<button class="btn btn-success" type="button" onclick="testData()">
+                        <i class="fas fa-edit mr-1"></i>
+                        Test Data
+                    </button>*@
+
                     @if (Model.ProductID > 0)
                     {
                         <button class="btn btn-success" type="submit" id="actionButton">
@@ -831,8 +886,23 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
+                    <input type="hidden" name="productImageId" class="stock-color-image-id" value="0" />
                     <input type="radio" name="ThumbnailPicture" class="mr-1" value=''>
                     <label class="imageInputLabel">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
+                    <button class="btn btn-info btn-block" type="button">Agregar Color/Stock</button>
+                    <div class="div-product-color" style="display:none">
+                        <label>Color</label>
+                        <select class="form-control sel-color">
+                            <option value="0">Seleccione...</option>
+
+                            @foreach (var color in Model.Colors)
+                            {
+                                <option value="@color.ID">@color.Description</option>
+                            }
+                        </select>
+                        <label>Stock</label>
+                        <input type="number" class="form-control stock-color" value="0" min="0" max="100" />
+                    </div>
                 </li>
             </ul>
             <div class="card-footer">
@@ -883,6 +953,10 @@
         }
         contenido += "";
         document.getElementById(id).innerHTML = contenido;
+    }
+
+    function testData(id) {                
+        $("#btn-add-color-id-" + id).html("New Text");
     }
 
      $("#cboCatalogo").change(function () {
@@ -1126,6 +1200,13 @@
 
         $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
         $newimgHTML.find(".image").attr("data-id", imageID);
+        $newimgHTML.find(".sel-color").attr("id", "sel-color-id-"+imageID);
+        $newimgHTML.find(".stock-color").attr("id", "stock-color-id-"+imageID);
+        $newimgHTML.find(".div-product-color").attr("data-id", "div-product-color-"+imageID);
+        $newimgHTML.find("input[name=productImageId]").val(imageID);
+        $newimgHTML.find("input[name=productImageId]").attr("id", "product-image-id"+imageID);
+        $newimgHTML.find("button:contains('Agregar Color/Stock')").attr('onClick', 'showhideColorStock('+ imageID+')');
+        $newimgHTML.find("button:contains('Agregar Color/Stock')").attr("id", "btn-add-color-id-" + imageID);
         $newimgHTML.find("input[name=ThumbnailPicture]").val(imageID);
         $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
         $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
@@ -1133,16 +1214,68 @@
         $("#picturesArea").append($newimgHTML.html());
     }
 
+    function showhideColorStock(id) {
+
+        $('[data-id="div-product-color-'+id+'"]').css('visibility', 'visible');
+
+        if ($('[data-id="div-product-color-' + id + '"]').is(":visible")) {
+            $('[data-id="div-product-color-' + id + '"]').css('display', 'none');
+            $("#product-image-id-" + id).val("0");
+            $("#btn-add-color-id-" + id).html("Agregar Color/Stock");
+            $("#btn-add-color-id-" + id).removeAttr("class");
+            $("#btn-add-color-id-" + id).attr("class", "btn btn-info btn-block");
+
+
+        } else {
+            $('[data-id="div-product-color-' + id + '"]').css('display', 'block');
+            $("#product-image-id-" + id).val(id);
+            $("#btn-add-color-id-" + id).html("Eliminar Color/Stock");
+            $("#btn-add-color-id-" + id).removeAttr("class");
+            $("#btn-add-color-id-" + id).attr("class", "btn btn-danger btn-block");
+            $("#sel-color-id-" + id).val("0");
+            $("#stock-color-id-" + id).val("0.0");            
+        }
+    }
+
     $("#actionForm").submit(function (e) {
         updateEditFields();
 
         var imageIDs = [];
+        var colorStockIds = [];
+        var colorIds = [];
+        var stockByColors = [];
+
         $("#picturesArea .image").each(function () {
             var imageID = $(this).attr("data-id");
-
             imageIDs.push(imageID);
         });
+
+        $("#picturesArea .stock-color-image-id").each(function () {
+            var imageID = $(this).val();
+            if (imageID > 0) {
+
+                var colorId = $("#sel-color-id-" + imageID).val();
+                var stock = $("#stock-color-id-" + imageID).val();
+
+                if (colorId > 0) {
+                    colorStockIds.push(imageID);
+                    colorIds.push(colorId);
+                    stockByColors.push(stock);
+                }                
+            }
+        });
+
+        //console.log("colorStockIds:");
+        //console.log(colorStockIds);
+        //console.log("colorIds:");
+        //console.log(colorIds);
+        //console.log("stockByColors:");
+        //console.log(stockByColors);
+
         $("#pictureIDs").val(imageIDs.join());
+        $("#colorStockIDs").val(colorStockIds.join());
+        $("#colorIDs").val(colorIds.join());
+        $("#stockByColors").val(stockByColors.join());
 
         if ($("#actionForm").valid()) {
             addLoader("actionForm");

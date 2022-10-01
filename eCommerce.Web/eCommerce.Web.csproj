@@ -247,7 +247,6 @@
     <Compile Include="Areas\Dashboard\Controllers\MedidaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ModeloController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\Dashboard\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\PromosController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\RolesController.cs" />
@@ -428,12 +427,12 @@
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
     <Content Include="Content\bm3\stylesheets\responsiveTabs.css" />
-    <Content Include="Content\bm3\stylesheets\responsive.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes.css" />
+    <Content Include="Content\bm3\stylesheets\responsive_2.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes_2.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
-    <Content Include="Content\bm3\stylesheets\style.css" />
+    <Content Include="Content\bm3\stylesheets\style_2.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\financiamiento_mobile.css" />

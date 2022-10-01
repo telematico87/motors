@@ -159,6 +159,14 @@
     <Compile Include="Migrations\202208201444584_montoInicialEnFinanciamiento.designer.cs">
       <DependentUpon>202208201444584_montoInicialEnFinanciamiento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209140258193_product-color-stock.cs" />
+    <Compile Include="Migrations\202209140258193_product-color-stock.designer.cs">
+      <DependentUpon>202209140258193_product-color-stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209150157441_corregirColorStock.cs" />
+    <Compile Include="Migrations\202209150157441_corregirColorStock.designer.cs">
+      <DependentUpon>202209150157441_corregirColorStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -247,6 +255,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208201444584_montoInicialEnFinanciamiento.resx">
       <DependentUpon>202208201444584_montoInicialEnFinanciamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209140258193_product-color-stock.resx">
+      <DependentUpon>202209140258193_product-color-stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209150157441_corregirColorStock.resx">
+      <DependentUpon>202209150157441_corregirColorStock.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

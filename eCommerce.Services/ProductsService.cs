@@ -477,6 +477,19 @@ namespace eCommerce.Services
             return context.SaveChanges() > 0;
         }
 
+        public bool UpdateProductPictureColors(int productID, List<ProductColor> newColors)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var oldColors = context.ProductsColors.Where(p => p.ProductID == productID);
+
+            context.ProductsColors.RemoveRange(oldColors);
+
+            context.ProductsColors.AddRange(newColors);
+
+            return context.SaveChanges() > 0;
+        }
+
         public bool UpdateProductRecord(ProductRecord productRecord)
         {
             var context = DataContextHelper.GetNewContext();
