@@ -90,9 +90,46 @@ namespace eCommerce.Entities
 
             List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
             lis.Add(new MantenedorFinanciera(1, "EFECTIVA"));
-            lis.Add(new MantenedorFinanciera(2, "SANTANDER"));
+            lis.Add(new MantenedorFinanciera(2, "MIGRANTE"));
       
             return lis;
         }
+
+        public string obtenerValor(string mantenedor, int codigo) {
+
+            var model = new MantenedorFinanciera();
+            switch (mantenedor)
+            {
+                case "EstadoCivil":
+                    model = ListarEstadoCivil().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "TipoDocumento":
+                    model = ListarTipoDocumento().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "TipoVivienda":
+                    model = ListarTipoVivienda().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "RangoIngreso":
+                    model = ListarRangoIngreso().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "InteresCompra":
+                    model = ListarInteresCompra().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "MontoFinanciar":
+                    model = ListarMontoFinanciar().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "TipoFinanciera":
+                    model = ListarTipoFinanciera().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                default:
+                    model.Valor = "";
+                    break;
+            }
+            
+            if (model == null) {
+                return "";
+            }
+            return model.Valor.ToUpper().Trim();        
+        } 
     }
 }

@@ -50,13 +50,19 @@
     <link href="~/Content/lib/alertify/css/themes/bootstrap.min.css" rel="stylesheet" />
 
 </head>
-<body>   
+<body>
     <div class="overlay"></div>
     <div class="preloader">
         <div class="clear-loading loading-effect-2">
             <span></span>
         </div>
     </div>
+
+    @{ 
+
+        Session.LCID = 10250;
+    }
+
 
 
     @Html.Partial("_HeaderBm3")

@@ -55,7 +55,7 @@ namespace eCommerce.Web.Controllers
 
 
                     //Envio al Administrador
-                    new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, model.Email, "Contacto BM3",
+                    new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, ConfigurationsHelper.SendGrid_FromEmailAddress, "Contacto BM3",
                     "Formulario de Contacto Ecommerce BM3" + "<br>" +
                     $"<p><strong>Nombre:</strong> {model.Nombre}</p>" +
                     $"<p><strong>Email:</strong> {model.Email} <strong></p>" +

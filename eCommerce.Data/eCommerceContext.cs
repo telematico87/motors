@@ -79,7 +79,7 @@ namespace eCommerce.Data
         public DbSet<TipoCambio> TipoCambios { get; set; }
 
         public DbSet<Contacto> Contactos { get; set; }
-
+        public DbSet<LogSystem> LogSystems { get; set; }
 
         public static eCommerceContext Create()
         {

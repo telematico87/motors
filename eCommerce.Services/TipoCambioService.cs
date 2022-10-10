@@ -76,12 +76,10 @@ namespace eCommerce.Services
 
 
         public bool SaveTipoCambio(TipoCambio TipoCambio)
-        {
-            var context = DataContextHelper.GetNewContext();
-
-            context.TipoCambios.Add(TipoCambio);
-
-            return context.SaveChanges() > 0;
+        {            
+                var context = DataContextHelper.GetNewContext();
+                context.TipoCambios.Add(TipoCambio);
+                return context.SaveChanges() > 0;                                  
         }
 
         public bool UpdateTipoCambio(TipoCambio tcambio)

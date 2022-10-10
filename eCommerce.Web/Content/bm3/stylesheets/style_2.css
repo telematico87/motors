@@ -1935,6 +1935,8 @@ ul.menu li.column-1 .submenu > li > a i {
 	left:0;
 	z-index:1000;
 	background-color:#222222;
+	height: 100%;
+	padding: 20px;
 }
 
 #mainnav-mobi > ul {
@@ -1960,6 +1962,11 @@ ul.menu li.column-1 .submenu > li > a i {
 	padding:0 20px;
 	color:#fff;
 	border:none;
+	font-size: 18px;
+}
+
+#mainnav-mobi ul > li > a > i {
+		padding-right: 5px;
 }
 
 #mainnav-mobi ul.submenu {

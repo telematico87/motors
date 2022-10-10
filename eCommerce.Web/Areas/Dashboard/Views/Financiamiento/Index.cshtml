@@ -10,13 +10,18 @@
     }
 }
 
-<div class="page-info-container">
-    <h3 class="h3 mb-2 text-gray-800">
-        @Model.PageTitle
-    </h3>
-    <p>
-        @Model.PageDescription
-    </p>
+<div class="row">
+    <div class="col-md-8">
+        <h3 class="h3 mb-2 text-gray-800">
+            @Model.PageTitle
+        </h3>
+        <p>
+            @Model.PageDescription
+        </p>
+    </div>
+    <div class="col-md-4" style="text-align: right">
+        <a class="btn btn-primary" href="@Url.Action("DownloadExcel","Financiamiento")">Exportar Excel</a>
+    </div>       
     <hr />
 </div>
 
@@ -26,7 +31,7 @@
             <div class="input-group">
                 <input name="searchterm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="Buscar Financimiento">
                 <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i> @("Dashboard.Color.Search".Localized())</button>
-                <a href="@Url.ListAction("Financiamiento")" role="button" class="form-control btn btn-primary"><i class="fas fa-redo-alt"></i> @("Dashboard.Color.Reset".Localized())</a>                
+                <a href="@Url.ListAction("Financiamiento")" role="button" class="form-control btn btn-primary"><i class="fas fa-redo-alt"></i> @("Dashboard.Color.Reset".Localized())</a>
             </div>
         </form>
     </div>

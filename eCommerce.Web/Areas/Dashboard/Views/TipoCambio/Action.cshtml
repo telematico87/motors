@@ -20,7 +20,15 @@
         }
 
         Model.PageImageURL = PictureHelper.PageImageURL("promos.jpg");
+
+
+
+
+
     }
+
+    DateTime hoy = DateTime.Now;
+    string fechaActual = hoy.ToString("dd/MM/yyyy");
 }
 
 <link href="~/Content/lib/alertify/css/alertify.min.css" rel="stylesheet" />
@@ -41,20 +49,22 @@
 <div class="page-data-holder mb-4">
     <form id="actionForm" method="post">
         <input type="hidden" name="ID" value="@Model.ID" />
-
         <div class="form-group">
-            <label>
-                Venta
-            </label>
-            <input class="form-control" name="Venta" id="txtVenta" value="@(Model.Venta == "0" || Model.Venta == string.Empty || Model.Venta == null ? Model.Venta : Model.Venta.ToString().Replace(",", "."))" placeholder="0.00"  maxlength="4" onkeypress="return Decimal(this, event);" />
-        </div>
-        <div class="form-group">
-            <label>
-                Fecha
-            </label>
-            <input class="form-control" id="txtFecha" name="Fecha" value="@(Model.Fecha == Convert.ToDateTime("01/01/0001") ?  DateTime.Now : Model.Fecha )"  />
-        </div>
+            <div class="col-md-4">
+                <label>
+                    Fecha
+                </label>
+                <input class="form-control" id="txtFecha" name="Fecha" value="@(Model.Fecha == Convert.ToDateTime("01/01/0001") ?  fechaActual : Model.Fecha.ToString("dd/MM/yyyy") )" />
+            </div>
+            <div class="col-md-4">
+                <label>
+                    Venta
+                </label>
+                @*<input class="form-control" type="number" min="0.0" max="100" name="Venta" id="txtVenta" value="@(Model.Venta == "0" || Model.Venta == string.Empty || Model.Venta == null ? Model.Venta : Model.Venta.ToString().Replace(",", "."))" maxlength="4" onkeypress="return Decimal(this, event);" />*@
+                <input class="form-control" step="0.01" type="number" min="0" max="100" name="Venta" id="txtVenta" value="@(Model.ID > 0 ? Model.Venta.ToString() : "0")"  maxlength="4"/>
+            </div>
 
+        </div>       
         <hr />
         <div class="form-group mb-0">
             @if (Model.ID > 0)
@@ -86,14 +96,15 @@
 <script src="~/Content/lib/alertify/alertify.min.js"></script>
 <script src="~/Scripts/validaciones.js"></script>
 
-<script> 
+<script>
+
 
     $(document).ready(function () {
 
-     
+
         $.datepicker.setDefaults($.datepicker.regional["es"]);
         $("#txtFecha").datepicker({
-            firstDay: 1, 
+            firstDay: 1,
             showAnim: "slide",
             changeMonth: true,
             changeYear: true,
@@ -105,7 +116,7 @@
             //dayNamesShort: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
             duration: "slow",
 
-        }) 
+        })
 
         $("#actionForm").submit(function (e) {
             debugger;
@@ -170,17 +181,20 @@
         model.Fecha = Fecha;
         model.valor = valor;
 
+        console.log(model);
+
         console.log($("#actionForm").serialize());
-            addLoader("actionForm");
-        $.ajax({ 
+
+        addLoader("actionForm");
+        $.ajax({
             method: "POST",
             //url: "/TipoCambio/Action",
             data: {
                 "Venta": Venta,
                 "Fecha": Fecha,
-                "valor": valor,
-            },  
-            
+                "Compra": valor,
+            },
+
              //data: $("#actionForm").serialize()
 			})
             .done(function (response) {
@@ -196,8 +210,6 @@
                  removeLoader("actionForm");
                  Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
 			});
-
-
     }
 
 </script>

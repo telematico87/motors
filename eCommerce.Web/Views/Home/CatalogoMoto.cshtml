@@ -99,14 +99,13 @@
                         @{
                             Html.RenderPartial("Catalogo/MotoFilters/_CategoriesFilter", Model);
                         }
-                    </div>                   
-
+                    </div>
                     @{
-                        Html.RenderAction("MotoPriceRangeFilter", new { priceFrom = Model.PriceFrom, priceTo = Model.PriceTo });
+                        Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
                     }
 
                     @{
-                        Html.RenderPartial("Catalogo/MotoFilters/_MarcasFilter", Model);
+                        Html.RenderAction("MotoPriceRangeFilter", new { priceFrom = Model.PriceFrom, priceTo = Model.PriceTo });
                     }
 
 

@@ -167,6 +167,14 @@
     <Compile Include="Migrations\202209150157441_corregirColorStock.designer.cs">
       <DependentUpon>202209150157441_corregirColorStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210081408541_fechaSolicitud.cs" />
+    <Compile Include="Migrations\202210081408541_fechaSolicitud.designer.cs">
+      <DependentUpon>202210081408541_fechaSolicitud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210092109346_LogSystem.cs" />
+    <Compile Include="Migrations\202210092109346_LogSystem.designer.cs">
+      <DependentUpon>202210092109346_LogSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -261,6 +269,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209150157441_corregirColorStock.resx">
       <DependentUpon>202209150157441_corregirColorStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210081408541_fechaSolicitud.resx">
+      <DependentUpon>202210081408541_fechaSolicitud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210092109346_LogSystem.resx">
+      <DependentUpon>202210092109346_LogSystem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

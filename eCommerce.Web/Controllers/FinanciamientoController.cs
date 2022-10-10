@@ -96,9 +96,9 @@ namespace eCommerce.Web.Controllers
             {
                 var dpto = model.Departamento.Split('|');
                 var dptoNombre = dpto[1];
+                DateTime localDate = DateTime.Now;
 
                 var financ = new Financiamiento
-
                 {
                     Nombre = model.Nombre,
                     Apellido = model.Apellido,
@@ -121,10 +121,18 @@ namespace eCommerce.Web.Controllers
                     MontoFinanciar = model.MontoFinanciar,
                     TipoFinanciera = model.TipoFinanciera,
                     TieneInicial = model.TieneInicial,
-                    MontoInicial = model.MontoInicial
+                    MontoInicial = model.MontoInicial,
+                    FechaSolicitud = localDate,
+                    IsActive = true,
+                    ModifiedOn = localDate
                 };
 
                 var res = FinanciamientoService.Instance.SaveFinanciamiento(financ);
+
+                if (res) {                    
+                    FinanciamientoService.Instance.sendEmailToUserTemplate(financ);
+                    FinanciamientoService.Instance.sendEmailToAdmin(financ);
+                }
 
                 result.Data = new { Success = res };
             }
@@ -134,8 +142,6 @@ namespace eCommerce.Web.Controllers
             }
             return result;
         }
-
-
 
 
 
