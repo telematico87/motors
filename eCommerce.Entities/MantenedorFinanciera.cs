@@ -59,7 +59,8 @@ namespace eCommerce.Entities
             List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
             lis.Add(new MantenedorFinanciera(1, "S/930 - S/1,500"));
             lis.Add(new MantenedorFinanciera(2, "S/1,501 - S/3,000"));
-            lis.Add(new MantenedorFinanciera(3, "S/3,001 a más"));
+            lis.Add(new MantenedorFinanciera(3, "S/3,001 - S/5,000"));
+            lis.Add(new MantenedorFinanciera(3, "S/5,001 a más"));
             return lis;
         }
 
@@ -82,6 +83,7 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(1, "S/. 0 - S/. 1,000"));
             lis.Add(new MantenedorFinanciera(2, "S/. 1,001 - S/. 3,000"));
             lis.Add(new MantenedorFinanciera(3, "S/. 3,001 - S/. 5,000"));
+            lis.Add(new MantenedorFinanciera(4, "S/. 5,001 - o más"));
             return lis;
         }
 
@@ -89,6 +91,7 @@ namespace eCommerce.Entities
         {
 
             List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
+            lis.Add(new MantenedorFinanciera(0, "CUALQUIERA"));
             lis.Add(new MantenedorFinanciera(1, "EFECTIVA"));
             lis.Add(new MantenedorFinanciera(2, "MIGRANTE"));
       

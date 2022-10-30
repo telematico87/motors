@@ -184,11 +184,8 @@ input[type="checkbox"] {
 .featureDetail {
 	font-family: 'BigNoodleTitling Oblique', sans-serif;
 	color: #ffffff;
-	font-size: 2em;
-	background-color: rgba(255, 3, 3, 1);
-	position: absolute;
-	left: 30px;
-	top: 20px;
+	font-size: 1.6em;
+	background-color: rgba(255, 3, 3, 1);	
 	padding: 5px 5px;
 	text-transform: uppercase;
 	border-radius: 5px;
@@ -198,16 +195,15 @@ input[type="checkbox"] {
 	border-radius: 5px;
 	-khtml-border-radius: 5px;
 	z-index: 1;
+	margin-bottom: 2px;
+	text-align:center;
 }
 
 .soatDetail {
 	font-family: 'BigNoodleTitling Oblique', sans-serif;
 	color: #ffffff;
-	font-size: 2em;
+	font-size: 1.6em;
 	background-color: rgba(255, 3, 3, 1);
-	position: absolute;
-	left: 30px;
-	top: 65px;
 	padding: 5px 5px;
 	text-transform: uppercase;
 	border-radius: 5px;
@@ -217,16 +213,22 @@ input[type="checkbox"] {
 	border-radius: 5px;
 	-khtml-border-radius: 5px;
 	z-index: 1;
+	margin-bottom: 2px;
+	text-align: center;
 }
 
 
+
+
 .product-box .featuredes {
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-style: oblique;
 	color: #ffffff;
-	font-size: 8px;
+	font-size: 10px;
 	background-color: rgba(255, 3, 3, 1);
 	position: absolute;
-	left: 0;
-	top: 0px;
+	left: 3px;
+	top: 3px;
 	padding: 0px 3px;
 	text-transform: uppercase;
 	border-radius: 5px;
@@ -238,12 +240,14 @@ input[type="checkbox"] {
 }
 
 .product-box .soat {
+	font-family: 'BigNoodleTitling Oblique', sans-serif;
+	font-style: oblique;
 	color: #ffffff;
-	font-size: 8px;
+	font-size: 10px;
 	background-color: rgba(255, 3, 3, 1);
 	position: absolute;
-	right: 0;
-	top: 0px;
+	right: 3px;
+	top: 3px;
 	padding: 0px 3px;
 	text-transform: uppercase;
 	border-radius: 5px;
@@ -4183,7 +4187,7 @@ body.background .flat-imagebox.style4 .owl-carousel-product.owl-theme .owl-contr
     top: -1px;
 	display: inline-block;
     padding-left: 5px;
-    font-size: 14px;
+    font-size: 16px;
 	transition: all .3s;
 }
 
@@ -4332,11 +4336,11 @@ body.background .flat-imagebox.style4 .owl-carousel-product.owl-theme .owl-contr
 
 /* Ui Slider */
 .ui-slider .ui-slider-handle {
-	width: 12px;
-	height: 12px;
-	background-color: #fff;
-	border: 2px solid #e10303;
-	border-radius: 50%;
+	width: 12px !important;
+	height: 18px !important;
+	background-color: #fff !important;
+	border: 2px solid #e10303 !important;
+	border-radius: 0% !important;
 }
 
 .ui-widget-header {
@@ -4717,12 +4721,13 @@ input[type="checkbox"]:checked + label:before {
 }
 
 	.product-detail .info-title {
+		font-family: 'BigNoodleTitling Oblique', sans-serif;
+		font-style: oblique;
 		display: block;
 		font-size: 55px;
 		font-weight: 800;
 		color: #ffffff;
-		margin-bottom: 10px;		
-		font-family: 'BigNoodleTitling Oblique', sans-serif;
+		margin-bottom: 10px;
 	}
 
 .product-detail .info-version {

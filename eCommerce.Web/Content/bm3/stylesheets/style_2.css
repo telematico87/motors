@@ -2361,9 +2361,9 @@ ul.menu li.column-1 .submenu > li > a i {
 	content:'';
 	position:absolute;
 	background-color:#484848;
-	height:2px;
-	width:15px;
-	top:9px;
+	height:4px;
+	width:18px;
+	top:8px;
 	right:0;
 	cursor:pointer;
 }
@@ -2372,9 +2372,9 @@ ul.menu li.column-1 .submenu > li > a i {
 	content:'';
 	position:absolute;
 	background-color:#484848;
-	height:15px;
-	width:2px;
-	top:2.5px;
+	height:18px;
+	width:4px;
+	top:1.5px;
 	right:6.5px;
 	cursor:pointer;
 	opacity:0;

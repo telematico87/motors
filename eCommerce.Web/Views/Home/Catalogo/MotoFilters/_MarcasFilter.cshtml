@@ -14,7 +14,7 @@
             <li>
                 <label>
                     <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: 0)">
-                        <input type="radio" @(marcaId==0 ? "checked" : string.Empty) name="grupoMarca" value="0" /><span>Todas las Marcas</span>
+                        <input type="radio" @(marcaId==0 ? "checked" : string.Empty) name="grupoMarca" value="0" /><span>TODAS LAS MARCAS</span>
                     </a>
                 </label>
 
@@ -25,7 +25,7 @@
                 <li>
                     <label>
                         <a href="@Url.CatalogoMoto(categoryId: categoryId, marcaId: marca.ID)">
-                            <input type="radio" @(marca.ID == marcaId ? "checked" : string.Empty) name="grupoMarca" value="@(marca.ID)" /><span>@(marca.Descripcion != null ? marca.Descripcion : string.Empty)</span>                            
+                            <input type="radio" @(marca.ID == marcaId ? "checked" : string.Empty) name="grupoMarca" value="@(marca.ID)" /><span>@(marca.Descripcion != null ? marca.Descripcion.ToUpper() : string.Empty)</span>                            
                         </a>
                     </label>
                 </li>

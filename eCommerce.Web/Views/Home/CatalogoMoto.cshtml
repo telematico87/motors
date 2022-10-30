@@ -35,6 +35,13 @@
     ViewBag.SearchTerm = Model.SearchTerm;
 
 }
+<style>
+    #btn-limpiar {
+        color: #e10303 !important;
+        background-color: transparent !important;
+        border: 1px solid #e10303;
+    }
+</style>
 
 @*<input id="searchURL" type="hidden" value="@Url.SearchProducts(category: !string.IsNullOrEmpty(Model.CategoryName) ? Model.CategoryName : string.Empty, q: Model.SearchTerm)" />*@
 <input id="searchURL" type="hidden" value="@Url.CatalogoMoto(categoryId: pCategoryId, marcaId: pMarcaId, q: Model.SearchTerm)" />
@@ -76,7 +83,8 @@
                 <div class="slider">
                     <div class="slider-item style8">
                         <div class="item-image">
-                            <img src="~/Content/bm3/images/catalogo/catalogo_moto.jpg" alt="" />
+                            <img src="~/Content/bm3/images/catalogo/catal_moto_web.png" alt="" class="img-res-no" />
+                            <img src="~/Content/bm3/images/catalogo/catal_moto_movil.png" alt="" class="img-res-si" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -165,11 +173,11 @@
     function botonRedirect(categoryId, marcaId) {
 
         let url = createUrl(categoryId, marcaId);
-        window.location.href = url;              
+        window.location.href = url;
     }
 
     function createUrl(categoryId, marcaId) {
-        var getUrl = window.location;                
+        var getUrl = window.location;
         var pathname = getUrl.pathname;
         const arrayPath = pathname.split("/");
         arrayPath[3] = categoryId;

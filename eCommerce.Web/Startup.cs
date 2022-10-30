@@ -16,11 +16,16 @@ namespace eCommerce.Web
         {
             ConfigureAuth(app);
 
+            //System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("es-ES", true);
+            //culture.NumberFormat.NumberDecimalSeparator = ".";
+            //System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+
             ConfigurationsHelper.UpdateConfigurations(ConfigurationsService.Instance.GetAllConfigurations());
 
             var enabledLanguages = LanguagesService.Instance.GetLanguages(enabledLanguagesOnly: true, resourceLanguagesOnly: false);
-            
-            if(enabledLanguages != null && enabledLanguages.Count > 0)
+
+            if (enabledLanguages != null && enabledLanguages.Count > 0)
             {
                 var languageIDsWithResources = LanguagesService.Instance.LanguagesWithResources();
                 LanguagesHelper.LoadLanguages(enabledLanguages: enabledLanguages, defaultLanguage: enabledLanguages.FirstOrDefault(x => x.IsDefault), languageIDsWithResources: languageIDsWithResources);

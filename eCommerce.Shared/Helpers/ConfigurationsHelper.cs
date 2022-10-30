@@ -421,6 +421,14 @@ namespace eCommerce.Shared.Helpers
             }
         }
 
+        public static string HorarioAtencion
+        {
+            get
+            {
+                return (GetConfigValue<string>("HorarioAtencion"));
+            }
+        }
+
 
 
         public static Environments Environment

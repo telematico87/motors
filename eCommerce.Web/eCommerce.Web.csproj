@@ -339,6 +339,10 @@
     <Content Include="Content\bm3\images\banner\Santander-Logo.png" />
     <Content Include="Content\bm3\images\banner\santander.png" />
     <Content Include="Content\bm3\images\catalogo\catalogo_moto.jpg" />
+    <Content Include="Content\bm3\images\catalogo\catal_moto_movil.jpg" />
+    <Content Include="Content\bm3\images\catalogo\catal_moto_movil.png" />
+    <Content Include="Content\bm3\images\catalogo\catal_moto_web.jpg" />
+    <Content Include="Content\bm3\images\catalogo\catal_moto_web.png" />
     <Content Include="Content\bm3\images\contacto\contacto.jpg" />
     <Content Include="Content\bm3\images\contacto\contacto2.jpg" />
     <Content Include="Content\bm3\images\home\home-casco-movil.jpg" />

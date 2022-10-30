@@ -69,11 +69,18 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
 
+                string precioStr = product.Price.ToString();
+                string dsctoStr = product.Discount.ToString();
+                string costStr = product.Cost.ToString();
+                precioStr = precioStr.Replace(",", ".");
+                dsctoStr = dsctoStr.Replace(",", ".");
+                costStr = costStr.Replace(",", ".");
+
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
-                model.Price = product.Price;
-                model.Discount = product.Discount;
-                model.Cost = product.Cost;
+                model.PriceStr = precioStr;
+                model.DiscountStr = dsctoStr;
+                model.CostStr = costStr;
                 model.isFeatured = product.isFeatured;
                 model.StockQuantity = product.StockQuantity;
                 model.ProductPicturesList = product.ProductPictures;

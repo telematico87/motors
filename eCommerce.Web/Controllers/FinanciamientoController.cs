@@ -124,7 +124,8 @@ namespace eCommerce.Web.Controllers
                     MontoInicial = model.MontoInicial,
                     FechaSolicitud = localDate,
                     IsActive = true,
-                    ModifiedOn = localDate
+                    ModifiedOn = localDate,
+                    Ocupacion = model.Ocupacion
                 };
 
                 var res = FinanciamientoService.Instance.SaveFinanciamiento(financ);

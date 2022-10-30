@@ -175,6 +175,10 @@
     <Compile Include="Migrations\202210092109346_LogSystem.designer.cs">
       <DependentUpon>202210092109346_LogSystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210280420264_ocupacion.cs" />
+    <Compile Include="Migrations\202210280420264_ocupacion.designer.cs">
+      <DependentUpon>202210280420264_ocupacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -275,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210092109346_LogSystem.resx">
       <DependentUpon>202210092109346_LogSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210280420264_ocupacion.resx">
+      <DependentUpon>202210280420264_ocupacion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

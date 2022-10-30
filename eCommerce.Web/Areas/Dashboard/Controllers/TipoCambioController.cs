@@ -14,9 +14,7 @@ using System.Web.Mvc;
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
     public class TipoCambioController : DashboardBaseController
-    {
-
-        
+    {        
         public ActionResult Index(string searchTerm, int? pageNo)
         {
             var pageSize = (int)RecordSizeEnums.Size10;
@@ -55,17 +53,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
             return View(model);
         }
-
-
-
-        public class Prueba
-        {
-            public int ID { get; set; }
-            public string Venta { get; set; }
-            public decimal Compra { get; set; }
-            public float valor { get; set; }
-            public DateTime Fecha { get; set; }
-        }
+       
 
         [HttpPost]
         public JsonResult Action(TipoCambiosActionViewModels model)
@@ -85,7 +73,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     string ventaStr = model.Venta.Replace(".", ",");
                     DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
-                    Decimal Ventatmp = Convert.ToDecimal(ventaStr);
+                    Decimal Ventatmp2 = Convert.ToDecimal(ventaStr);
+                    Decimal Ventatmp = Convert.ToDecimal(model.Venta);
                     
                     tcambio.ID = model.ID;
                     tcambio.Venta = Ventatmp;
@@ -100,9 +89,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 }
                 else
                 {       
-                    string ventaStr = model.Venta.Replace(".", ",");
+                    //string ventaStr = model.Venta.Replace(".", ",");
                     DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd/MM/yyyy"));                    
-                    Decimal venta = Convert.ToDecimal(ventaStr);
+                    Decimal venta = Convert.ToDecimal(model.Venta);
                     Decimal compra = model.Compra;
                     TipoCambio tcambios = new TipoCambio
                     {

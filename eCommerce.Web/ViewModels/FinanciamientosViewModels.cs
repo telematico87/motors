@@ -24,6 +24,7 @@ namespace eCommerce.Web.ViewModels
         public int TipoVivienda { get; set; }
         public string SituacionLaboral { get; set; }
         public string SituacionSentimental { get; set; }
+        public string Ocupacion { get; set; }
         public int RangoIngreso { get; set; }
         public bool PoliticaPrivacidad { get; set; }
         public bool AceptoComunicaciones { get; set; }

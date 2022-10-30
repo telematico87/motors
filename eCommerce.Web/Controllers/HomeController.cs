@@ -74,7 +74,7 @@ namespace eCommerce.Web.Controllers
                 else
                 {
                     model.CategoryID = selectedCategory.ID;
-                    model.CategoryName = selectedCategory.SanitizedName;
+                    model.CategoryName = selectedCategory.SanitizedName.ToUpper();
                     model.SelectedCategory = selectedCategory;
 
                     model.SearchedCategories = CategoryHelpers.GetAllCategoryChildrens(selectedCategory, model.Categories);
@@ -89,7 +89,7 @@ namespace eCommerce.Web.Controllers
                 else
                 {
                     model.MarcaID = selectedMarca.ID;
-                    model.MarcaName = selectedMarca.Descripcion;
+                    model.MarcaName = selectedMarca.Descripcion.ToUpper();
                     model.SelectedMarca = selectedMarca;
                 }
             }
@@ -164,7 +164,9 @@ namespace eCommerce.Web.Controllers
         }
 
         public ActionResult MotoPriceRangeFilter(decimal? priceFrom, decimal? priceTo)
-        {
+        {                        
+            int precioMaximo = (int) Math.Ceiling(ProductsService.Instance.GetMaxProductPrice());
+
             var model = new PriceRangeFilterViewModel
             {
                 PriceFrom = priceFrom,
@@ -250,6 +252,7 @@ namespace eCommerce.Web.Controllers
 
             try
             {
+                
                 //send order placed notification email to admin emails
                 await new EmailService()
                                  .SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName,

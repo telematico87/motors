@@ -10,5 +10,6 @@ namespace eCommerce.Web.ViewModels
         public decimal? PriceFrom { get; set; }
         public decimal? PriceTo { get; set; }
         public decimal MaxPrice { get; set; }
+        public int MaxPriceInt { get; set; }
     }
 }

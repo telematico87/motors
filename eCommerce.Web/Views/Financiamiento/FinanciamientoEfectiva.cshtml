@@ -157,20 +157,26 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="RangoIngresos">Rango de Ingresos<span class="text-danger">*</span></label>
                                     <select id="cboRangoIngresos" class="form-control custom-select" name="RangoIngresos">
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="MontoFinanciar">Monto a Financiar<span class="text-danger">*</span></label>
                                     <select id="cboMontoFinanciar" class="form-control custom-select" name="MontoFinanciar">
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="MontoFinanciar">Ocupación<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtOcupacion" name="txtOcupacion" placeholder="Ingrese Ocupación" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Ocupación'" maxlength="50">                                    
                                 </div>
                             </div>
                         </div>
@@ -316,9 +322,10 @@
                 var MontoFinanciar = $("#cboMontoFinanciar").val();
                 var PoliticaPrivacidad = document.getElementById('PoliticaPrivacidad').checked;
                 var AceptoComunicaciones = document.getElementById('PoliticaPrivacidad').checked;                
-                var TipoFinanciera = 1;
+                var TipoFinanciera = 0;
                 var TieneInicial = document.getElementById('TieneInicial').checked;
                 var MontoInicial = $("#txtMontoInicial").val();
+                var Ocupacion = $("#txtOcupacion").val();
 
 
             if (Nombre == "" || Nombre.length == 0) {
@@ -374,6 +381,7 @@
                 model.TipoFinanciera = TipoFinanciera;
                 model.TieneInicial = TieneInicial;
                 model.MontoInicial = MontoInicial;
+                model.Ocupacion = Ocupacion
 
                  $.ajax({
                     method: "POST",

@@ -118,16 +118,14 @@ namespace eCommerce.Services
             var montoFinanciar = m.obtenerValor("MontoFinanciar", financiamiento.MontoFinanciar);
             var rangoIngreso = m.obtenerValor("RangoIngreso", financiamiento.RangoIngreso);
             var interesCompra = m.obtenerValor("InteresCompra", financiamiento.InteresCompra);
-            var tipoVivienda = m.obtenerValor("TipoVivienda", financiamiento.TipoVivienda);
-            var financiera = m.obtenerValor("TipoFinanciera", financiamiento.TipoFinanciera);
+            var tipoVivienda = m.obtenerValor("TipoVivienda", financiamiento.TipoVivienda);            
             var nombreCompleto = financiamiento.Nombre.Trim() + " " + financiamiento.Apellido.Trim();            
             var nroDocumento = tipoDoc.Valor.Trim() + " " + financiamiento.NroDocumento.Trim();
 
             //Envio al Administrador
             new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, ConfigurationsHelper.SendGrid_FromEmailAddress, "Solicitud de Financiamiento "+nombreCompleto,
             "<h1>BM3 Motos</h1>" +
-            $"<h3>Solicitud de Financiamiento</h3>" +
-            $"<h3>FINANCIERA { financiera } </h3>" +
+            $"<h3>Solicitud de Financiamiento</h3>" +            
             $"<p>Titular: <strong>{nombreCompleto}</strong></p>" +
             $"<p>Nro Documento:  <strong>{nroDocumento}</strong></p>" +
             $"<p>Email:{financiamiento.Correo}</p>" +
@@ -141,6 +139,7 @@ namespace eCommerce.Services
             $"<p>Tipo Vivienda: <strong>{tipoVivienda}</strong></p>" +             
             $"<p>Situación Laboral: <strong>{financiamiento.SituacionLaboral}</strong></p>" +             
             $"<p>Estado Civil: <strong>{financiamiento.SituacionSentimental}</strong></p>" +                         
+            $"<p>Ocupación: <strong>{financiamiento.Ocupacion}</strong></p>" +                         
             $"<p>Departamento: <strong>{financiamiento.Departamento}</strong></p>" + 
             $"<p>Provincia: <strong>{ financiamiento.Provincia}</strong></p>"            
             );

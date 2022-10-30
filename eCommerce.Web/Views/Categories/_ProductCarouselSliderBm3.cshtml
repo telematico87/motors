@@ -7,110 +7,110 @@
 
     //decimal tipoCambio = tcambio.Count > 0 ? (decimal)tcambio[0].Venta : 1;
     <div class="owl-carousel-product" data-loop="@(Model.Count > 4 ? "true" : "false")">
-    @foreach (var product in Model)
-    {
+        @foreach (var product in Model)
+        {
 
-        var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+            var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-        var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+            var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-        var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
+            var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
 
-        var detailsLink = Url.ProductDetails(category: product.Category.SanitizedName, ID: product.ID, sanitizedtitle: sanitizedSEOTitle);
+            var detailsLink = Url.ProductDetails(category: product.Category.SanitizedName, ID: product.ID, sanitizedtitle: sanitizedSEOTitle);
 
-        var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+            var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
 
-        var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
+            var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
 
-        //var iconoMoneda = product.TipoMoneda == 2 ? "$" : "S/";
-        var iconoMoneda = "S/";
-        var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
-        var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
-        var typeCoins = 1;
-        var showEtiquetaOferta = false;
-        var showEtiquetaSoat = false;
+            //var iconoMoneda = product.TipoMoneda == 2 ? "$" : "S/";
+            var iconoMoneda = "S/";
+            var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+            var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
+            var typeCoins = 1;
+            var showEtiquetaOferta = false;
+            var showEtiquetaSoat = false;
 
-        if (productPrice > 0 && product.EtiquetaOferta != null) {
-            if (!product.EtiquetaOferta.Equals(""))
+            if (productPrice > 0 && product.EtiquetaOferta != null)
             {
-                showEtiquetaOferta = true;
-            }
-        }
-
-        if (product.IncluyeSoat) {
-            showEtiquetaSoat = true;
-        }
-
-        <div class="product-box">
-            <div class="imagebox style2">
-                <div class="box-image">
-                    <a href="@detailsLink" title="">
-                        @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
-                    </a>
-                </div>
-                @if (showEtiquetaOferta)
+                if (!product.EtiquetaOferta.Equals(""))
                 {
-                    <div class="featuredes">
-                        @product.EtiquetaOferta
-                    </div>
+                    showEtiquetaOferta = true;
                 }
+            }
 
+            if (product.IncluyeSoat)
+            {
+                showEtiquetaSoat = true;
+            }
 
-                @if (showEtiquetaSoat)
-                {                    
-                    <div class="soat">
-                        @product.EtiquetaSoat
-                    </div>
-                }
-
-                <div class="box-content">
-                    <div class="product-name" style="font-weight:bolder">
-                        <a href="@detailsLink">
-                            <h5>
-                                @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
-                            </h5>
+            <div class="product-box">
+                <div class="imagebox style2">
+                    <div class="box-image">
+                        <a href="@detailsLink" title="">
+                            @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
                         </a>
                     </div>
-                    <div class="price">
-                        <span class="sale">
-                            @productPriceDiscount.WithCurrency(typeCoins)
-                        </span>
-                        @if (product.Discount.HasValue && product.Discount.Value > 0)
-                        {
-                            <span class="regular">
-                                @productPriceNormal.WithCurrency(typeCoins)
-                            </span>
+                    @if (showEtiquetaOferta)
+                    {
+                        <div class="featuredes">
+                            @product.EtiquetaOferta
+                        </div>
+                    }
 
-                        }
 
-                    </div>
-                </div>
-                <div class="box-top">
-                    <div class="box-link">
-                        @if (product.TipoProducto == false)
-                        {
-                            <a href="@detailsLink" title="@("PP.Shopping.ViewProduct".Localized())">
-                                <i class="ti-shopping-cart"></i>
+                    @if (showEtiquetaSoat)
+                    {
+                        <div class="soat">
+                            @product.EtiquetaSoat
+                        </div>
+                    }
+
+                    <div class="box-content">
+                        <div class="product-name" style="font-weight:bolder">
+                            <a href="@detailsLink">
+                                <h5>
+                                    @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                </h5>
                             </a>
-                        }
-                        <a href="@detailsLink" title="@("PP.Shopping.AddToCart".Localized())" data-id="@product.ID" data-price="@product.Price" class="pointerCursor btnAddToCart">
-                            <i class="ti-eye"></i>
-                        </a>
+                        </div>
+                        <div class="price">
+                            <span class="sale">
+                                @productPriceDiscount.WithCurrency(typeCoins)                                
+                            </span>
+                            @if (product.Discount.HasValue && product.Discount.Value > 0)
+                            {
+                                <span class="regular">
+                                    @productPriceNormal.WithCurrency(typeCoins)
+                                </span>
+
+                            }
+
+                        </div>
+                    </div>
+                    <div class="box-top">
+                        <div class="box-link">
+                            @if (product.TipoProducto == false)
+                            {
+                                <a href="@detailsLink" title="@("PP.Shopping.ViewProduct".Localized())">
+                                    <i class="ti-shopping-cart"></i>
+                                </a>
+                            }
+                            <a href="@detailsLink" title="@("PP.Shopping.AddToCart".Localized())" data-id="@product.ID" data-price="@product.Price" class="pointerCursor btnAddToCart">
+                                <i class="ti-eye"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-
-
-</div>
+        }
+    </div>
 }
 else
 {
-<div>
-    <div class="alert alert-warning m-0" role="alert">
-        @("PP.Search.ProductsNotFound".Localized())
+    <div>
+        <div class="alert alert-warning m-0" role="alert">
+            @("PP.Search.ProductsNotFound".Localized())
+        </div>
     </div>
-</div>
 }
 

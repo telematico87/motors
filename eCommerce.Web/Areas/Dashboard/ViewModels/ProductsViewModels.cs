@@ -41,8 +41,11 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
 
         public int CategoryID { get; set; }
         public decimal Price { get; set; }
+        public string PriceStr { get; set; }
         public decimal? Discount { get; set; }
+        public string DiscountStr { get; set; }
         public decimal? Cost { get; set; }
+        public string CostStr { get; set; }
         public bool isFeatured { get; set; }
         public bool InActive { get; set; }
 

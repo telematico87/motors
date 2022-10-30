@@ -22,15 +22,16 @@ namespace eCommerce.Entities
         public string Modelo { get; set; } 
         public int TipoVivienda { get; set; }
         public string SituacionLaboral { get; set; }
-        public string SituacionSentimental { get; set; }
+        public string SituacionSentimental { get; set; }        
         public int RangoIngreso { get; set; }
         public bool PoliticaPrivacidad { get; set; }
         public bool AceptoComunicaciones { get; set; } 
         public int MontoFinanciar { get; set; }  
-        public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
+        public int TipoFinanciera { get; set; } //0: Cualquiera, 1: Efectiva, 2: Migrante
         public bool TieneInicial { get; set; }
         public decimal MontoInicial { get; set; }
-        public DateTime FechaSolicitud { get; set; }           
-        
+        public DateTime FechaSolicitud { get; set; }
+        public string Ocupacion { get; set; }
+
     }
 }
