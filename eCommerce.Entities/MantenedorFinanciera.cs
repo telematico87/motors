@@ -20,6 +20,16 @@ namespace eCommerce.Entities
         }
 
 
+        public List<MantenedorFinanciera> ListarAntiguedadLaboral()
+        {
+
+            List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
+            lis.Add(new MantenedorFinanciera(1, "MENOR A 3 MESES"));
+            lis.Add(new MantenedorFinanciera(2, "ENTRE 3 Y 6 MESES"));
+            lis.Add(new MantenedorFinanciera(3, "ENTRE 6 MESES Y 1 AÑO"));
+            lis.Add(new MantenedorFinanciera(3, "MÁS DE 1 AÑO"));
+            return lis;
+        }
         public List<MantenedorFinanciera> ListarEstadoCivil()
         {
 
@@ -40,6 +50,15 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(2, "C. EXTRANJERÍA"));
             lis.Add(new MantenedorFinanciera(3, "PASAPORTE"));            
 
+            return lis;
+        }
+        
+        public List<MantenedorFinanciera> ListarFinancieras()
+        {
+            List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
+            lis.Add(new MantenedorFinanciera(0, "CUALQUIERA"));
+            lis.Add(new MantenedorFinanciera(1, "EFECTIVA"));
+            lis.Add(new MantenedorFinanciera(2, "MIGRANTE"));
             return lis;
         }
 
@@ -123,6 +142,9 @@ namespace eCommerce.Entities
                     break;
                 case "TipoFinanciera":
                     model = ListarTipoFinanciera().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "AntiguedadLaboral":
+                    model = ListarAntiguedadLaboral().FirstOrDefault(d => d.Codigo == codigo);
                     break;
                 default:
                     model.Valor = "";

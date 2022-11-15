@@ -121,7 +121,7 @@ namespace eCommerce.Web.ViewModels
         public List<Catalogo> Catalogos { get; set; }
 
         public int MarcaID { get; set; }
-        public int TipoMoneda { get; set; }
+        public int TipoMoneda { get; set; } //1: Soles, 2: Dolar
 
         public List<Marca> Marcas { get; set; }
         public List<TablaMaster> TipoMonedas { get; set; }

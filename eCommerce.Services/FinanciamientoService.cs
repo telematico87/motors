@@ -90,8 +90,8 @@ namespace eCommerce.Services
         {
             //Envio al Usuario
             MantenedorFinanciera m = new MantenedorFinanciera();
-            var templateId = "d-b354ccd66c3e4bd1a8f00452435641f5";
-            var financiera = f.TipoFinanciera.Equals(1) ? "Efectiva" : "Migrante";
+            var templateId = "d-b354ccd66c3e4bd1a8f00452435641f5";            
+            var financiera = m.obtenerValor("TipoFinanciera", f.TipoFinanciera);
             var asunto = "BM3 Motos - Recibimos tu Solicitud de Financiamiento";
             var nombreCompleto = f.Nombre.Trim() + " " + f.Apellido.Trim();
             var montoFinanciar = m.ListarMontoFinanciar().FirstOrDefault(d => d.Codigo == f.MontoFinanciar);
@@ -102,7 +102,7 @@ namespace eCommerce.Services
                 nombre = nombreCompleto,
                 modelo = f.Modelo,
                 marca = f.Marca,
-                financiamiento = montoFinanciar.Valor,
+                financiamiento = "S/"+ f.MontoAFinanciar.ToString("N"),
                 financiera = financiera
             };
 
@@ -115,29 +115,35 @@ namespace eCommerce.Services
             MantenedorFinanciera m = new MantenedorFinanciera();
             
             var tipoDoc = m.ListarTipoDocumento().FirstOrDefault(d => d.Codigo == financiamiento.TipoDocumento);
-            var montoFinanciar = m.obtenerValor("MontoFinanciar", financiamiento.MontoFinanciar);
+            
             var rangoIngreso = m.obtenerValor("RangoIngreso", financiamiento.RangoIngreso);
             var interesCompra = m.obtenerValor("InteresCompra", financiamiento.InteresCompra);
             var tipoVivienda = m.obtenerValor("TipoVivienda", financiamiento.TipoVivienda);            
+            var antiguedadLaboral = m.obtenerValor("AntiguedadLaboral", financiamiento.TipoVivienda);            
             var nombreCompleto = financiamiento.Nombre.Trim() + " " + financiamiento.Apellido.Trim();            
             var nroDocumento = tipoDoc.Valor.Trim() + " " + financiamiento.NroDocumento.Trim();
+            var financiera = m.obtenerValor("TipoFinanciera", financiamiento.TipoFinanciera);
 
             //Envio al Administrador
             new EmailService().SendToEmailAsync(ConfigurationsHelper.SendGrid_FromEmailAddressName, ConfigurationsHelper.SendGrid_FromEmailAddress, ConfigurationsHelper.SendGrid_FromEmailAddress, "Solicitud de Financiamiento "+nombreCompleto,
             "<h1>BM3 Motos</h1>" +
             $"<h3>Solicitud de Financiamiento</h3>" +            
+            $"<p>Financiera de Preferencia: <strong>{financiera}</strong></p>" +
             $"<p>Titular: <strong>{nombreCompleto}</strong></p>" +
             $"<p>Nro Documento:  <strong>{nroDocumento}</strong></p>" +
+            $"<p>Fecha Nacimiento:  <strong>{financiamiento.FechaNacimiento.ToString("dd/MM/yyyy")}</strong></p>" +
             $"<p>Email:{financiamiento.Correo}</p>" +
             $"<p>Celular: <strong>{financiamiento.Celular} </strong></p>" +
+            $"<p>Ingreso Neto: <strong>S/. {financiamiento.IngresoNeto}</strong></p>" +
             $"<p>Modelo: <strong>{financiamiento.Modelo} </strong></p>" +
             $"<p>Marca: <strong>{financiamiento.Marca} </strong></p>" +
-            $"<p>Rango de Ingresos: <strong>{rangoIngreso}</strong></p>" +
-            $"<p>Inicial: <strong>{financiamiento.MontoInicial}</strong></p>" +
-            $"<p>Monto a Financiar: <strong>{montoFinanciar}</strong></p>" +             
+            $"<p>Precio: <strong>S/. {financiamiento.Precio}</strong></p>" +            
+            $"<p>Inicial: <strong>S/. {financiamiento.MontoInicial}</strong></p>" +
+            $"<p>Monto a Financiar: <strong>S/. {financiamiento.MontoAFinanciar}</strong></p>" +             
             $"<p>Interés de Compra: <strong>{interesCompra}</strong></p>" +             
             $"<p>Tipo Vivienda: <strong>{tipoVivienda}</strong></p>" +             
-            $"<p>Situación Laboral: <strong>{financiamiento.SituacionLaboral}</strong></p>" +             
+            $"<p>Situación Laboral: <strong>{financiamiento.SituacionLaboral}</strong></p>" +
+            $"<p>Antiguedad Laboral: <strong>{antiguedadLaboral}</strong></p>" +
             $"<p>Estado Civil: <strong>{financiamiento.SituacionSentimental}</strong></p>" +                         
             $"<p>Ocupación: <strong>{financiamiento.Ocupacion}</strong></p>" +                         
             $"<p>Departamento: <strong>{financiamiento.Departamento}</strong></p>" + 

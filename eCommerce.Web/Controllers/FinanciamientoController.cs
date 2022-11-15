@@ -1,5 +1,7 @@
 ﻿using eCommerce.Entities;
+using eCommerce.Entities.Response;
 using eCommerce.Services;
+using eCommerce.Shared.Helpers;
 using eCommerce.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -51,6 +53,20 @@ namespace eCommerce.Web.Controllers
             var model = new MantenedorFinanciera().ListarEstadoCivil();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpGet]
+        public ActionResult listarAntiguedadLaboral()
+        { 
+            var model = new MantenedorFinanciera().ListarAntiguedadLaboral();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listarFinanciera()
+        {
+            var model = new MantenedorFinanciera().ListarFinancieras();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public ActionResult listaTipoVivienda()
@@ -98,34 +114,58 @@ namespace eCommerce.Web.Controllers
                 var dptoNombre = dpto[1];
                 DateTime localDate = DateTime.Now;
 
+                decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+                var moto = ProductsService.Instance.GetProductByID(model.IDModelo);
+                decimal amountFinance = 0;
+                decimal priceFinal = 0;
+                if (moto != null) {                    
+                    var priceInitial = moto.Discount.HasValue && moto.Discount.Value > 0 ? moto.Discount.Value : moto.Price;
+                    priceFinal = moto.TipoMoneda == 2 ? priceInitial * tipoCambio : priceInitial;
+                    amountFinance = (priceFinal - model.MontoInicial);
+                }
+               
+                DateTime fechaNacimiento = Convert.ToDateTime(model.FechaNacimiento);
+
                 var financ = new Financiamiento
                 {
                     Nombre = model.Nombre,
                     Apellido = model.Apellido,
+                    FechaNacimiento = fechaNacimiento,
                     Celular = model.Celular,
                     Correo = model.Correo,
                     TipoDocumento = model.TipoDocumento,
                     NroDocumento = model.NroDocumento,
+                    SituacionSentimental = model.SituacionSentimental,
+
                     InteresCompra = model.InteresCompra,
                     Departamento = dptoNombre,
                     Provincia = model.Provincia,
                     Distrito = model.Distrito,
-                    Marca = model.Marca,
-                    Modelo = model.Modelo,
                     TipoVivienda = model.TipoVivienda,
                     SituacionLaboral = model.SituacionLaboral,
-                    SituacionSentimental = model.SituacionSentimental,
-                    RangoIngreso = model.RangoIngreso,
+                    AntiguedadLaboral = model.AntiguedadLaboral,
+
+                    IDMarca = model.IDMarca,
+                    Marca = model.Marca,
+                    IDModelo = model.IDModelo,
+                    Modelo = model.Modelo,
+                    Precio = priceFinal,
+                    IngresoNeto = model.IngresoNeto,
+                    MontoInicial = model.MontoInicial,
+                    MontoAFinanciar = amountFinance,
+
+                    Ocupacion = model.Ocupacion,
+                    TipoFinanciera = model.TipoFinanciera,
                     PoliticaPrivacidad = model.PoliticaPrivacidad,
                     AceptoComunicaciones = model.AceptoComunicaciones,
-                    MontoFinanciar = model.MontoFinanciar,
-                    TipoFinanciera = model.TipoFinanciera,
+
+                    RangoIngreso = model.RangoIngreso,                    
+                    MontoFinanciar = model.MontoFinanciar,                    
                     TieneInicial = model.TieneInicial,
-                    MontoInicial = model.MontoInicial,
+                    
                     FechaSolicitud = localDate,
                     IsActive = true,
-                    ModifiedOn = localDate,
-                    Ocupacion = model.Ocupacion
+                    ModifiedOn = localDate                    
                 };
 
                 var res = FinanciamientoService.Instance.SaveFinanciamiento(financ);

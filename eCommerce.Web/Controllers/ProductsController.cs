@@ -78,7 +78,12 @@ namespace eCommerce.Web.Controllers
             }
 
         }
-        
+
+        [HttpGet]
+        public ActionResult productosByMarcaID(Int32 idMarca) {
+            var products = ProductsService.Instance.GetProductsByMarcaID(idMarca);            
+            return Json(products, JsonRequestBehavior.AllowGet);            
+        }        
 
         [HttpGet]
         public ActionResult DetalleBm3(int? ID, string category)

@@ -1,6 +1,7 @@
 ﻿using eCommerce.Data;
 using eCommerce.Entities;
 using eCommerce.Entities.Response;
+using eCommerce.Shared.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -413,6 +414,28 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             return IDs.Select(id => context.Products.Find(id)).Where(x=>!x.IsDeleted && x.IsActive && !x.Category.IsDeleted).OrderBy(x=>x.ID).ToList();
+        }
+        
+        public List<ProductSimple> GetProductsByMarcaID(Int32 id)
+        {
+            List<ProductSimple> list = new List<ProductSimple>();
+            var context = DataContextHelper.GetNewContext();
+            List<Product> products = context.Products.Where(x => x.MarcaId == id).ToList();
+            decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+
+            products.ForEach( p=>
+                {
+                    var currentLanguageRecord = p.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);                    
+                    ProductSimple ps = new ProductSimple();                    
+                    var price = p.Discount.HasValue && p.Discount.Value > 0 ? p.Discount.Value : p.Price;
+                    var priceWithTypeChange = p.TipoMoneda == 2 ? price * tipoCambio : price;                 
+                    ps.Id = p.ID; ;
+                    ps.Name = currentLanguageRecord.Name;
+                    ps.Money = p.TipoMoneda == 1 ? "S/" : "$";
+                    ps.Price = priceWithTypeChange;
+                    list.Add(ps);
+                });
+            return list;
         }
 
         public ProductRecord GetProductRecordByID(int ID)
