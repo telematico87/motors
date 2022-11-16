@@ -78,6 +78,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.TieneInicial = financi.TieneInicial;
                 model.MontoInicial = financi.MontoInicial;
                 model.FechaSolicitud = financi.FechaSolicitud;
+                model.Modelo = financi.Modelo;
+                model.AntiguedadLaboral = financi.AntiguedadLaboral;
+                model.MontoAFinanciar = financi.MontoAFinanciar;
+                model.IngresoNeto = financi.IngresoNeto;
              
             }
             model.listaTipoDocumento = new MantenedorFinanciera().ListarTipoDocumento();
@@ -87,6 +91,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             model.listaInteresCompra = new MantenedorFinanciera().ListarInteresCompra();
             model.listaMontoFinanciar = new MantenedorFinanciera().ListarMontoFinanciar();
             model.listaTipoFinanciera = new MantenedorFinanciera().ListarTipoFinanciera();            
+            model.listaAntiguedadLaboral = new MantenedorFinanciera().ListarAntiguedadLaboral();            
 
             return View(model);
         }

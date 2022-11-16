@@ -132,8 +132,7 @@
     var productPriceDiscount = Model.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
     var productPriceNormal = Model.TipoMoneda == 2 ? Model.Price * tipoCambio : Model.Price;
     var productPriceNormalSoles = Model.Price;
-
-    var typeCoins = 1;
+    
     var NumeroWhatsApp = ConfigurationsHelper.WhatsAppNumber;
     var textoWhatsApp = "Quiero Información sobre esta moto: " + Model.Name;
     var showEtiquetaOferta = false;

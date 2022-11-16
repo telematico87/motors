@@ -4,13 +4,13 @@
     {
         if (Model.ID > 0)
         {
-             
+
             Model.PageTitle = "Detalle Financiamiento";
             Model.PageDescription = Model.TipoFinanciera == 1 ? "Financiera Efectiva" : "Financiera Migrante";
-            Model.PageURL = Url.EditAction("Financiamiento", Model.ID); 
+            Model.PageURL = Url.EditAction("Financiamiento", Model.ID);
 
         }
-         
+
     }
 }
 
@@ -57,8 +57,8 @@
             </label>
             @if (Model.TipoDocumento > 0)
             {
-                var tfinanciera = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == Model.TipoDocumento);
-                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+                var tdocumento = Model.listaTipoDocumento.FirstOrDefault(x => x.Codigo == Model.TipoDocumento);
+                <input type="text" class="form-control" value="@tdocumento.Valor" disabled />
             }
             else
             {
@@ -70,7 +70,7 @@
             <label>
                 Nro Documento
             </label>
-            <input class="form-control" name="Description" value="@(Model.NroDocumento==null ? "-" : Model.NroDocumento)" placeholder="NroDocumento" disabled />
+            <input class="form-control" name="Description" value="@(Model.NroDocumento == null ? "-" : Model.NroDocumento)" placeholder="NroDocumento" disabled />
         </div>
         <div class="form-group">
             <label>
@@ -94,7 +94,7 @@
             <label>
                 Modelo
             </label>
-            <input class="form-control" name="Description" value="@(Model.Modelo==null ? "-" : Model.Modelo)" placeholder="Modelo" disabled />
+            <input class="form-control" name="Description" value="@(Model.Modelo == null ? "-" : Model.Modelo)" placeholder="Modelo" disabled />
         </div>
         <div class="form-group">
             <label>
@@ -102,8 +102,8 @@
             </label>
             @if (Model.TipoVivienda > 0)
             {
-                var tfinanciera = Model.listaTipoVivienda.FirstOrDefault(x => x.Codigo == Model.TipoVivienda);
-                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+                var tipoVivienda = Model.listaTipoVivienda.FirstOrDefault(x => x.Codigo == Model.TipoVivienda);
+                <input type="text" class="form-control" value="@tipoVivienda.Valor" disabled />
             }
             else
             {
@@ -119,40 +119,42 @@
 
         <div class="form-group">
             <label>
-                Rango de Ingreso
+                Antiguedad Laboral
             </label>
-            @if (Model.RangoIngreso > 0)
+            @if (Model.AntiguedadLaboral > 0)
             {
-                var tfinanciera = Model.listaRangoIngreso.FirstOrDefault(x => x.Codigo == Model.RangoIngreso);
-                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
+                var antiguedadLaboral = Model.listaAntiguedadLaboral.FirstOrDefault(x => x.Codigo == Model.AntiguedadLaboral);
+                <input type="text" class="form-control" value="@antiguedadLaboral.Valor" disabled />
             }
             else
             {
                 <input type="text" class="form-control" value="-" disabled />
             }
+        </div>
 
+        <div class="form-group">
+            <label>
+                Ingreso Neto
+            </label>
+            <input class="form-control" name="txtIngresoNeto" type="number" step="any" value="@(Model.IngresoNeto)" placeholder="Ingreso Neto" disabled />
+        </div>
+        <div class="form-group">
+            <label for="MontoInicial">
+                Monto Inicial
+            </label>
+            <input class="form-control" name="MontoInicial" value="@(Model.MontoInicial)" placeholder="SituacionLaboral" disabled />
         </div>
         <div class="form-group">
             <label>
                 Monto a Financiar
             </label>
-            @if (Model.MontoFinanciar > 0)
-            {
-                var tfinanciera = Model.listaMontoFinanciar.FirstOrDefault(x => x.Codigo == Model.MontoFinanciar);
-                <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
-            }
-            else
-            {
-                <input type="text" class="form-control" value="-" disabled />
-            }
-
+            <input class="form-control" name="txtMontoAFinanciar" type="number" step="any" value="@(Model.MontoAFinanciar)" placeholder="Monto A Financiar" disabled />
         </div>
         <div class="form-group">
             <label>
-                Tipo de Financiera
+                Financiera Preferida
             </label>
-            @if (Model.TipoFinanciera > 0)
-            {
+            @{
                 var tfinanciera = Model.listaTipoFinanciera.FirstOrDefault(x => x.Codigo == Model.TipoFinanciera);
                 <input type="text" class="form-control" value="@tfinanciera.Valor" disabled />
             }
@@ -164,12 +166,7 @@
             </label>
             <input class="form-control" name="SituacionSentimental" value="@(Model.SituacionSentimental == null || Model.SituacionSentimental == "0" ? "-" : Model.SituacionSentimental)" placeholder="Modelo" disabled />
         </div>
-        <div class="form-group">
-            <label for="MontoInicial">
-                Monto Inicial
-            </label>
-            <input class="form-control" name="MontoInicial" value="@(Model.MontoInicial)" placeholder="SituacionLaboral" disabled />
-        </div>
+
         <hr />
         <div class="form-group mb-0">
             <a class="btn btn-secondary" href="@Url.ListAction("Financiamiento")">
@@ -179,5 +176,5 @@
         </div>
     </form>
 </div>
- 
+
 

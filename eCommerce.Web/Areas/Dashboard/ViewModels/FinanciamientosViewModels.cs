@@ -28,6 +28,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public int ID { get; set; }
         public string Nombre { get; set; } 
         public string Apellido { get; set; } 
+        public string FechaNacimiento { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public int TipoDocumento { get; set; }
@@ -37,9 +38,12 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string Marca { get; set; }
         public string Modelo { get; set; } 
         public int TipoVivienda { get; set; }
+        public int AntiguedadLaboral { get; set; }
         public string SituacionLaboral { get; set; }
         public string SituacionSentimental { get; set; }
         public int RangoIngreso { get; set; }
+        public decimal IngresoNeto { get; set; }
+        public decimal MontoAFinanciar { get; set; }
         public int MontoFinanciar { get; set; }
         public int TipoFinanciera { get; set; } //1: Efectiva, 2: CajaSullana, 3: Santander
         public bool TieneInicial { get; set; }
@@ -54,6 +58,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public List<MantenedorFinanciera> listaMontoFinanciar { get; set; }
         public List<MantenedorFinanciera> listaTipoDocumento { get; set; }
         public List<MantenedorFinanciera> listaTipoFinanciera { get; set; }
+        public List<MantenedorFinanciera> listaAntiguedadLaboral { get; set; }
 
         public MantenedorFinanciera financiera { get; set; }
 
