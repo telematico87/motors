@@ -183,6 +183,10 @@
     <Compile Include="Migrations\202211151342002_financimientoNuevosCampos.designer.cs">
       <DependentUpon>202211151342002_financimientoNuevosCampos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212120200478_cambios-financiamiento.cs" />
+    <Compile Include="Migrations\202212120200478_cambios-financiamiento.designer.cs">
+      <DependentUpon>202212120200478_cambios-financiamiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211151342002_financimientoNuevosCampos.resx">
       <DependentUpon>202211151342002_financimientoNuevosCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212120200478_cambios-financiamiento.resx">
+      <DependentUpon>202212120200478_cambios-financiamiento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

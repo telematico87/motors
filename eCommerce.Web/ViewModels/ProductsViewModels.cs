@@ -16,6 +16,7 @@ namespace eCommerce.Web.ViewModels
         public List<Product> Products { get; set; }
 
         public int? CategoryID { get; set; }       
+        public int? CatalogoID { get; set; }
         public string CategoryName { get; set; }
         public Category SelectedCategory { get; set; }
         public List<Category> SearchedCategories { get; set; }

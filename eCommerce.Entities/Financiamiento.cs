@@ -23,6 +23,7 @@ namespace eCommerce.Entities
         public string Distrito { get; set; }
         public int TipoVivienda { get; set; }
         public string SituacionLaboral { get; set; }
+        public int IDSituacionLaboral { get; set; }
         public int AntiguedadLaboral { get; set; }
 
         public int IDMarca { get; set; }

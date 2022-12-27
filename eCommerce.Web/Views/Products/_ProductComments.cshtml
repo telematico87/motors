@@ -14,6 +14,7 @@
     <div class="row comments-container">
         <div class="col-lg-8">
             <h4>@commentsTitle</h4>
+            <h4>COmentario JLP</h4>
             <div class="col-container">
                 <div class="comment-option">
                     @if (haveComments)
@@ -31,12 +32,12 @@
                                     <div class="at-rating" title="@("PP.ProductDetails.Description".LocalizedString().Replace("{commentRating}", comment.Rating.ToString()))">
                                         @for (int i = 1; i <= comment.Rating; i++)
                                         {
-                                            <i class="fas fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
                                         }
 
                                         @for (int i = 1; i <= defaultStars; i++)
                                         {
-                                            <i class="far fa-star"></i>
+                                            <i class="fa fa-star"></i>
                                         }
                                     </div>
                                     <div class="at-reply">@comment.Text</div>
@@ -65,7 +66,7 @@
                                 <div class="rating">
                                     @for (int i = 1; i <= defaultRating; i++)
                                     {
-                                        <i class="ratingStar fas fa-star" data-value="@i"></i>
+                                        <i class="ratingStar fa fa-star" data-value="@i"></i>
                                     }
                                 </div>
                                 <span id="ratingDisplay">5</span> @("PP.ProductDetails.Star".Localized())

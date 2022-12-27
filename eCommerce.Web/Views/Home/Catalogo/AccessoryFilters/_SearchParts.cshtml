@@ -1,0 +1,163 @@
+﻿@using eCommerce.Entities
+@using eCommerce.Shared
+@using eCommerce.Services;
+@model eCommerce.Web.ViewModels.ProductsViewModel
+
+<div class="wrap-imagebox">
+    @{
+//Html.RenderPartial("Catalogo/AccessoryFilters/_ListingFilter", Model);
+    }
+
+    @if (Model.Products != null && Model.Products.Count > 0)
+    {
+        decimal tipoCambio = TipoCambioService.Instance.GetTypeUltimateChanged();
+
+        <div class="tab-product">            
+            <div class="row sort-box">
+                @foreach (var product in Model.Products)
+                {
+
+                    var currentLanguageProductRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                    var currentLanguageProductCategoryRecord = product.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                    var sanitizedSEOTitle = AppDataHelper.CurrentLanguage.ShortCode == LanguagesHelper.EnglishLanguageShortCode && currentLanguageProductRecord != null ? currentLanguageProductRecord.Name.SanitizeLowerString() : string.Empty;
+
+                    var detailsLink = Url.ProductPartsDetail(category: product.Category.SanitizedName, ID: product.ID, sanitizedtitle: sanitizedSEOTitle);
+
+                    var productPrice = product.Discount.HasValue && product.Discount.Value > 0 ? product.Discount.Value : product.Price;
+
+                    var thumbnail = PictureHelper.GetProductThumbnail(product.ProductPictures, product.ThumbnailPictureID);
+
+                    var iconoMoneda = "S/";
+                    var productPriceDiscount = product.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
+                    var productPriceNormal = product.TipoMoneda == 2 ? product.Price * tipoCambio : product.Price;
+                    var typeCoins = 1;
+                    var showEtiquetaOferta = false;
+
+
+                    if (productPrice > 0 && product.EtiquetaOferta != null && !product.EtiquetaOferta.Equals(""))
+                    {
+                        showEtiquetaOferta = true;
+                    }
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="product-box">
+                            <div class="imagebox style2">
+                                <div class="box-image">
+                                    <a href="@detailsLink" title="">
+                                        @Html.Thumbnail(picture: thumbnail, targetSize: 300, seoTitle: sanitizedSEOTitle, classes: "m-auto", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                    </a>
+                                </div>
+
+                                @if (showEtiquetaOferta)
+                                {
+                                    <div class="featuredes">
+                                        @product.EtiquetaOferta
+                                    </div>
+                                }
+
+                                <div class="box-content">
+                                    <div class="product-name">
+                                        <a href="@detailsLink">
+                                            <span>
+                                                @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="sale">@productPriceDiscount.WithCurrency(typeCoins)</span>
+                                        @if (product.Discount.HasValue && product.Discount.Value > 0)
+                                        {
+                                            <span class="regular">
+                                                @productPriceNormal.WithCurrency(typeCoins)
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="box-top">
+                                    <div class="box-link">
+                                        <a href="@detailsLink" title="@("PP.Shopping.ViewProduct".Localized())">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div style="height: 9px;"></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning m-0" role="alert">
+            @("PP.Search.ProductsNotFound".Localized())
+        </div>
+    }
+
+</div>
+
+@*Paginacion*@
+
+@if (Model.Pager != null && Model.Pager.TotalPages > 1)
+{
+    int pCategoryID = Model.CategoryID != null ? Model.CategoryID.Value : 0;
+    int pMarcaID = Model.MarcaID != null ? Model.MarcaID.Value : 0;
+
+    <div class="blog-pagination">
+        <ul class="flat-pagination style1">
+
+
+            @if (Model.Pager.CurrentPage == 1)
+            {
+
+                <li class="prev disabled">
+                    <a href="#" title="">
+                        <img src="~/Content/bm3/images/icono/left-1.png" alt="">Anterior
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="prev">
+                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                        <img src="~/Content/bm3/images/icono/left-1.png" alt="">Anterior
+                    </a>
+                </li>
+            }
+
+            @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+            {
+                var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
+
+                <li class="@active">
+                    <a href="@Url.CatalogoParts(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: page, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" class="waves-effect" title="">@page</a>
+                </li>
+
+            }
+
+
+            @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
+            {
+                <li class="next disabled">
+                    <a href="#" title="">
+                        Siguiente<img src="~/Content/bm3/images/icono/right-1.png" alt="">
+                    </a>
+                </li>
+            }
+            else
+            {
+
+                <li class="next">
+                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage + 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                        Siguiente<img src="~/Content/bm3/images/icono/right-1.png" alt="">
+                    </a>
+                </li>
+            }
+
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+}

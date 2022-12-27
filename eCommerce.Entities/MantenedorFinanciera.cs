@@ -38,6 +38,7 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(2, "DIVORCIADO"));
             lis.Add(new MantenedorFinanciera(3, "CASADO"));
             lis.Add(new MantenedorFinanciera(4, "CONVIVIENTE"));
+            lis.Add(new MantenedorFinanciera(5, "VIUDO"));
 
             return lis;
         }
@@ -49,6 +50,8 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(1, "DNI"));
             lis.Add(new MantenedorFinanciera(2, "C. EXTRANJERÍA"));
             lis.Add(new MantenedorFinanciera(3, "PASAPORTE"));            
+            lis.Add(new MantenedorFinanciera(4, "CPP"));            
+            lis.Add(new MantenedorFinanciera(5, "OTROS"));            
 
             return lis;
         }
@@ -71,6 +74,17 @@ namespace eCommerce.Entities
             lis.Add(new MantenedorFinanciera(3, "VIVIENDA PROPIA"));
             return lis;
         }
+        
+        public List<MantenedorFinanciera> ListarSituacionLaboral()
+        {
+            List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
+            lis.Add(new MantenedorFinanciera(1, "FORMAL DEPENDIENTE (PLANILLA)"));
+            lis.Add(new MantenedorFinanciera(2, "FORMAL INDEPENDIENTE (RUC 10)"));
+            lis.Add(new MantenedorFinanciera(3, "INFORMAL DEPENDIENTE (CARTA DE TRABAJO)"));
+            lis.Add(new MantenedorFinanciera(4, "INFORMAL INDEPENDIENTE (NEGOCIO O COMERCIO SIN RUC)"));
+            lis.Add(new MantenedorFinanciera(5, "PERSONA JURÍDICA (RUC 20)"));
+            return lis;
+        }
 
         public List<MantenedorFinanciera> ListarRangoIngreso()
         {
@@ -85,9 +99,9 @@ namespace eCommerce.Entities
 
         public List<MantenedorFinanciera> ListarInteresCompra()
         {
-
             List<MantenedorFinanciera> lis = new List<MantenedorFinanciera>();
             lis.Add(new MantenedorFinanciera(1, "Lo más pronto posible"));
+            lis.Add(new MantenedorFinanciera(5, "Este mes"));
             lis.Add(new MantenedorFinanciera(2, "1 a 2 meses"));
             lis.Add(new MantenedorFinanciera(3, "3 a 6 meses"));
             lis.Add(new MantenedorFinanciera(4, "7 meses a más"));
@@ -145,6 +159,9 @@ namespace eCommerce.Entities
                     break;
                 case "AntiguedadLaboral":
                     model = ListarAntiguedadLaboral().FirstOrDefault(d => d.Codigo == codigo);
+                    break;
+                case "SituacionLaboral":
+                    model = ListarSituacionLaboral().FirstOrDefault(d => d.Codigo == codigo);
                     break;
                 default:
                     model.Valor = "";

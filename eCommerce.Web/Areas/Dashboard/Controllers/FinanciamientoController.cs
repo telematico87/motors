@@ -156,6 +156,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 var tipoVivienda = m.obtenerValor("TipoVivienda", item.TipoVivienda);
                 var financiera = m.obtenerValor("TipoFinanciera", item.TipoFinanciera);
                 var antiguedadLaboral = m.obtenerValor("AntiguedadLaboral", item.AntiguedadLaboral);
+                var situacionLaboral = m.obtenerValor("SituacionLaboral", item.IDSituacionLaboral);
                 var nombreCompleto = item.Nombre.Trim() + " " + item.Apellido.Trim();
 
                 Sheet.Cells[string.Format("A{0}", row)].Value = nombreCompleto.ToUpper();
@@ -172,7 +173,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 Sheet.Cells[string.Format("L{0}", row)].Value = "S/"+ item.MontoAFinanciar.ToString("N");
                 Sheet.Cells[string.Format("M{0}", row)].Value = interesCompra;
                 Sheet.Cells[string.Format("N{0}", row)].Value = tipoVivienda;
-                Sheet.Cells[string.Format("O{0}", row)].Value = item.SituacionLaboral.ToUpper();
+                Sheet.Cells[string.Format("O{0}", row)].Value = situacionLaboral.ToUpper();
                 Sheet.Cells[string.Format("P{0}", row)].Value = antiguedadLaboral.ToUpper();
                 Sheet.Cells[string.Format("Q{0}", row)].Value = "S/"+ item.IngresoNeto.ToString("N");
                 Sheet.Cells[string.Format("R{0}", row)].Value = financiera;

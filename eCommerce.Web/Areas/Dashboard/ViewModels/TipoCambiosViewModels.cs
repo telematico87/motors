@@ -22,6 +22,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string Venta { get; set; }
         public decimal Compra { get; set; }
         public DateTime Fecha { get; set; }
+        public string FechaStr { get; set; }
 
 
     }

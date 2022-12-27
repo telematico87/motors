@@ -145,6 +145,66 @@ namespace eCommerce.Web.Controllers
 
             return View(model);
         }
+        
+        [HttpGet]
+        public ActionResult DetalleParts(int? ID, string category)
+        {
+            ProductDetalleViewModel model = new ProductDetalleViewModel();
+
+            if (ID.HasValue)
+            {
+                var product = ProductsService.Instance.GetProductResponseByID(ID.Value, activeOnly: false);
+
+                if (product == null) return HttpNotFound();
+
+                var currentLanguageRecord = product.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                currentLanguageRecord = currentLanguageRecord ?? new ProductRecord();
+
+                model.ProductRecords = product.ProductRecords;
+                model.Category = product.Category;
+
+                model.ProductID = product.ID;
+                model.CategoryID = product.CategoryID;
+                model.Price = product.Price;
+                model.Discount = product.Discount;
+                model.Cost = product.Cost;
+                model.isFeatured = product.isFeatured;
+                model.StockQuantity = product.StockQuantity;
+                model.ProductPicturesList = product.ProductPictures;
+                model.ThumbnailPicture = product.ThumbnailPictureID;
+                model.SKU = product.SKU;
+                model.Barcode = product.Barcode;
+                model.Tags = product.Tags;
+                model.Supplier = product.Supplier;
+                model.InActive = product.IsActive;
+                model.MarcaID = product.MarcaID;
+                model.CatalogoID = product.CatalogoID;
+                model.TipoMoneda = product.TipoMoneda;                
+
+                model.ProductRecordID = currentLanguageRecord.ID;
+                model.Name = currentLanguageRecord.Name;
+                model.Summary = currentLanguageRecord.Summary;
+                model.Description = currentLanguageRecord.Description;
+
+                model.ProductSpecifications = currentLanguageRecord.ProductSpecifications;                
+                model.TipoProducto = product.TipoProducto;
+                model.EtiquetaOferta = product.EtiquetaOferta;
+                model.EtiquetaSoat = product.EtiquetaSoat;
+                model.IncluyeSoat = product.IncluyeSoat;
+                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
+                model.StockDisponibleEtiqueta = StockDisponible(model.ProductColors, model.StockQuantity);
+                model.FirsPicture = FirstPicture(model.ProductColors, model.ProductPicturesList);
+            }
+
+            model.Categories = CategoriesService.Instance.GetCategories();
+            model.Colors = ColorService.Instance.GetAllColors();
+            model.Catalogos = CatalogoService.Instance.GetCatalogos();
+            model.Marcas = MarcaService.Instance.ListarMarca();
+            model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
+
+            return View(model);
+        }
 
         public string StockDisponible(List<ProductColor> productColors, int stock) {
 

@@ -3,7 +3,7 @@
 @if (Model != null && Model.SlidersConfigurations != null && Model.SlidersConfigurations.Count > 0)
 {
     var j = 0;
-    string[] sliderMovil = { "adrenalina_movil.png", "apolonia_movil.png", "adrenalina_movil.png", "apolonia_movil.png", "adrenalina_movil.png", "apolonia_movil.png" };    
+    //string[] sliderMovil = { "01_ignitor movil.jpg", "02_raider_soat_bono_400_movil.jpg", "03_apache_180_casaca_movil.jpg", "adrenalina_movil.png", "05_Dazz_IGM_bike movil.jpg", "adrenalina_movil.png" };
 
     <style>
         .img-movil-slider {
@@ -21,43 +21,53 @@
                         {
                             @* TODO: Localizing Slider *@
 
-                            var img = configuration.Value.GetSubstringText("#IMG#", "#TH#");
-                            var imgMovil =  "site/sliders/" + sliderMovil[j].Trim();                            
-                            var topHeading = configuration.Value.GetSubstringText("#TH#", "#PG#");
-                            var paragraph = configuration.Value.GetSubstringText("#PG#", "#LK#");
-                            var link = configuration.Value.GetSubstringText("#LK#", "");
+                        var img = configuration.Value.GetSubstringText("#IMG#", "#IMGMOVIL#");
+                        var imgMovil = configuration.Value.GetSubstringText("#IMGMOVIL#", "#TH#");
 
-                            if (!string.IsNullOrEmpty(img))
-                            {
-                                img = img.Replace("IMG#", "");
-                                imgMovil = imgMovil.Replace("IMG#", "");
-                            }
-                            if (!string.IsNullOrEmpty(topHeading))
-                            {
-                                topHeading = topHeading.Replace("TH#", "");
-                            }
-                            if (!string.IsNullOrEmpty(paragraph))
-                            {
-                                paragraph = paragraph.Replace("PG#", "");
-                            }
-                            if (!string.IsNullOrEmpty(link))
-                            {
-                                link = link.Replace("LK#", "");
-                            }
-                        <div class="slider-item style8">
-                            <div class="item-image-slider-web @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
-                                @Html.Picture(img, classes: "img-fluid", alt: "Slider")
+                        //var imgMovil = "site/sliders/" + sliderMovil[j].Trim();
+                        var topHeading = configuration.Value.GetSubstringText("#TH#", "#PG#");
+                        var paragraph = configuration.Value.GetSubstringText("#PG#", "#LK#");
+                        var link = configuration.Value.GetSubstringText("#LK#", "");
+
+                        if (!string.IsNullOrEmpty(img))
+                        {
+                            img = img.Replace("IMG#", "");
+                        }
+                        if (!string.IsNullOrEmpty(imgMovil))
+                        {
+                            imgMovil = imgMovil.Replace("IMGMOVIL#", "");
+                        }
+                        if (!string.IsNullOrEmpty(topHeading))
+                        {
+                            topHeading = topHeading.Replace("TH#", "");
+                        }
+                        if (!string.IsNullOrEmpty(paragraph))
+                        {
+                            paragraph = paragraph.Replace("PG#", "");
+                        }
+                        if (!string.IsNullOrEmpty(link))
+                        {
+                            link = link.Replace("LK#", "");
+                        }
+                            <div class="slider-item style8">
+                                <div class="item-image-slider-web @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
+                                    <a href="@(link)">
+                                        @Html.Picture(img, classes: "img-fluid", alt: "Slider")
+                                    </a>
+                                </div>
+                                <div class="item-image-movil @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
+                                    <a href="@(link)">
+                                        @Html.Picture(imgMovil, classes: "img-movil-slider", alt: "Slider")
+                                    </a>
+                                </div>                                
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="item-image-movil @(j == 0 ? "active" : string.Empty)" data-target="#carouselIndicators">
-                                @Html.Picture(imgMovil, classes: "img-movil-slider", alt: "Slider")
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>                           
                             j++;
                         }
                     </div>
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
+
 }

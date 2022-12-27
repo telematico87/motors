@@ -78,9 +78,14 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 model.ProductID = product.ID;
                 model.CategoryID = product.CategoryID;
-                model.PriceStr = precioStr;
-                model.DiscountStr = dsctoStr;
-                model.CostStr = costStr;
+
+                model.Price = product.Price;
+                model.Discount = product.Discount;
+                model.Cost = product.Cost;
+                //model.PriceStr = precioStr;
+                //model.DiscountStr = dsctoStr;
+                //model.CostStr = costStr;
+
                 model.isFeatured = product.isFeatured;
                 model.StockQuantity = product.StockQuantity;
                 model.ProductPicturesList = product.ProductPictures;
@@ -108,11 +113,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
             }
 
-            model.Categories = CategoriesService.Instance.GetCategoryByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            model.Categories = CategoriesService.Instance.GetCategoryByCatalogoID(model.CatalogoID);
             //model.Categories = CategoriesService.Instance.GetCategories();
             model.Colors = ColorService.Instance.GetAllColors();
             model.Catalogos = CatalogoService.Instance.GetCatalogos();
-            model.Marcas = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
+            model.Marcas = MarcaService.Instance.GetMarcaByCatalogoID(model.CatalogoID);
             //model.Marcas = MarcaService.Instance.ListarMarca();
             model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
@@ -259,7 +264,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
                     else
                     {
-                        var productSpecsUpdated = ProductsService.Instance.UpdateProductSpecifications(product.ID, newProductSpecification);
+                        var productSpecsUpdated = ProductsService.Instance.UpdateProductSpecifications(currentLanguageRecord.ID, newProductSpecification);
 
                         /*No need to check if products specs were updated because their maybe cases when no specs are presnt and database doesn't update anything so it will return false*/
                         //if (!productSpecsUpdated)

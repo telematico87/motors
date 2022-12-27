@@ -22,6 +22,7 @@ namespace eCommerce.Web.ViewModels
         public string Provincia { get; set; }
         public string Distrito { get; set; }
         public int TipoVivienda { get; set; }        
+        public int IDSituacionLaboral { get; set; }
         public string SituacionLaboral { get; set; }
         public int AntiguedadLaboral { get; set; }
 

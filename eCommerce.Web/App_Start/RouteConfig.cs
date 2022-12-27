@@ -212,6 +212,13 @@ namespace eCommerce.Web
              namespaces: new[] { "eCommerce.Web.Controllers" }
          );
 
+            routes.MapRoute(
+            name: "Catalogo",
+            url: "catalogo/category/{categoryId}/marca/{MarcaId}",
+            defaults: new { area = "", controller = "Home", action = "CatalogoParts", categoryId = UrlParameter.Optional, marcaId = UrlParameter.Optional },
+            namespaces: new[] { "eCommerce.Web.Controllers" }
+        );
+
 
             routes.MapRoute(
                 name: "LanguageBased_SearchProducts",
@@ -233,6 +240,20 @@ namespace eCommerce.Web
                 defaults: new { area = "", controller = "Products", action = "DetalleBm3", sanitizedtitle = UrlParameter.Optional },
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
+
+            routes.MapRoute(
+                name: "Details",
+                url: "{category}/product-detail/{ID}/{sanitizedtitle}",
+                defaults: new { area = "", controller = "Products", action = "DetalleParts", sanitizedtitle = UrlParameter.Optional },
+                namespaces: new[] { "eCommerce.Web.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "LanguageBased_Details",
+               url: "{lang}/{category}/product-detail/{ID}/{sanitizedtitle}",
+               defaults: new { area = "", controller = "Products", action = "DetalleParts", sanitizedtitle = UrlParameter.Optional },
+               namespaces: new[] { "eCommerce.Web.Controllers" }
+           );
 
             routes.MapRoute(
                 name: "UserProfile",

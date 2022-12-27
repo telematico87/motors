@@ -91,6 +91,7 @@
 
 @{
     String iconoMoneda = "S/";
+    bool haveParentCategory = false;
     if (Model != null)
     {
         if (Model.ProductID > 0)
@@ -103,18 +104,25 @@
 
 @if (Model != null)
 {
+    
+
+    ProductRecord currentLanguageProductRecord = new ProductRecord();
+
+    CategoryRecord currentLanguageCategoryRecord = new CategoryRecord();
+
+
     if (Model != null && Model.ProductRecords != null && Model.Category != null)
     {
-        var currentLanguageProductRecord = Model.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+        currentLanguageProductRecord = Model.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
-        var currentLanguageCategoryRecord = Model.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+        currentLanguageCategoryRecord = Model.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
         Model.PageTitle = currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : ConfigurationsHelper.ApplicationName;
         Model.PageDescription = currentLanguageProductRecord != null ? currentLanguageProductRecord.Summary : string.Empty;
         //Model.PageURL = Url.SearchProducts(category: currentLanguageCategoryRecord.Category.SanitizedName,  q: Model. SearchTerm);
         //Model.PageURL = Url.SearchProducts(category: currentLanguageCategoryRecord.Category.SanitizedName,  q: "");
 
-        var haveParentCategory = Model.Category != null && Model.Category.ParentCategory != null;
+        haveParentCategory = Model.Category != null && Model.Category.ParentCategory != null;
 
     }
     else
@@ -132,7 +140,7 @@
     var productPriceDiscount = Model.TipoMoneda == 2 ? productPrice * tipoCambio : productPrice;
     var productPriceNormal = Model.TipoMoneda == 2 ? Model.Price * tipoCambio : Model.Price;
     var productPriceNormalSoles = Model.Price;
-    
+
     var NumeroWhatsApp = ConfigurationsHelper.WhatsAppNumber;
     var textoWhatsApp = "Quiero Información sobre esta moto: " + Model.Name;
     var showEtiquetaOferta = false;
@@ -150,20 +158,15 @@
     {
         showEtiquetaSoat = true;
     }
-
-
     <section class="flat-row flat-product-detail">
         <div class="container-full">
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-detail" style="background-image: url(/Content/bm3/images/producto/background_detail.png); background-size: cover;">
 
-
-
-
-
-
                         <div class="container">
+
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -395,9 +398,6 @@
             </div>
         </div>
     </section>
-
-
-
     <section class="flat-product-content">
         <div class="container">
             <div id="parentHorizontalTab">
@@ -439,13 +439,9 @@
                 </ul>
                 <div class="resp-tabs-container hor_1">
                     <div>
-
                         <div class="tecnical-specs" style="text-align:justify;">
-
                             @Html.Raw(@Model.Description)
-
                         </div>
-
                     </div>
                     <div>
                         <div class="tecnical-specs cssTamanio">
@@ -497,7 +493,6 @@
 
                     </div>
                     <div>
-
                         <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
@@ -520,10 +515,8 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div>
-
                         <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
@@ -541,7 +534,6 @@
                         </div>
                     </div>
                     <div>
-
                         <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
@@ -560,10 +552,8 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div>
-
                         <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
@@ -590,10 +580,8 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div>
-
                         <div class="tecnical-specs cssTamanio">
                             <table>
                                 <tbody>
@@ -612,7 +600,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -625,7 +612,6 @@
         </div>
         <div class="container-full">
             <div class="slider product-gallery">
-
                 @foreach (var picture in Model.ProductPicturesList)
                 {
                     <div>
@@ -639,14 +625,12 @@
             </div>
         </div>
     </section>
-
     <section class="flat-banner-box">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner-box" style="text-align: center !important; background-color: #2880fc !important">
                         <div class="inner-box">
-                            @*<a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento Efectiva">*@
                             <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title="Financiamiento Efectiva">
                                 <img src="~/Content/bm3/images/banner/efectiva-v2.jpg" alt="">
                             </a>
@@ -656,7 +640,6 @@
             </div>
         </div>
     </section>
-
     <section class="flat-brand-detail">
         <div class="container-full">
             <div class="row">
@@ -667,9 +650,7 @@
                             <div class="row">
                                 @if (Model.MarcaID > 0)
                                 {
-
                                     var marca = Model.Marcas.FirstOrDefault(x => x.ID == Model.MarcaID);
-
                                     if (marca != null)
                                     {
                                         <div class="col-md-3">
@@ -690,7 +671,6 @@
                                         -
                                     </span>
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -698,10 +678,7 @@
             </div>
         </div>
     </section>
-
     Html.RenderAction("RelatedProducts", "Products", new { categoryID = Model.CategoryID, ProductID = Model.ProductID, recordSize = RecordSizeEnums.Size6 });
-
-
 }
 <script>
 

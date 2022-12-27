@@ -72,14 +72,15 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     }
 
                     string ventaStr = model.Venta.Replace(".", ",");
-                    DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
+                    //DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd-MM-yyyy"));
+
                     Decimal Ventatmp2 = Convert.ToDecimal(ventaStr);
                     Decimal Ventatmp = Convert.ToDecimal(model.Venta);
                     
                     tcambio.ID = model.ID;
                     tcambio.Venta = Ventatmp;
                     tcambio.Compra = 0;
-                    tcambio.Fecha = FechaTipoCambio;
+                    tcambio.Fecha = model.Fecha;
 
                     if (!TipoCambioService.Instance.UpdateTipoCambio(tcambio))
                     {
@@ -90,7 +91,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 else
                 {       
                     //string ventaStr = model.Venta.Replace(".", ",");
-                    DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd/MM/yyyy"));                    
+                    //DateTime FechaTipoCambio = Convert.ToDateTime(model.Fecha.ToString("dd/MM/yyyy"));                    
                     Decimal venta = Convert.ToDecimal(model.Venta);
                     Decimal compra = model.Compra;
                     TipoCambio tcambios = new TipoCambio
@@ -98,7 +99,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         ID = model.ID,
                         Venta = venta,
                         Compra = compra,
-                        Fecha = FechaTipoCambio,
+                        Fecha = model.Fecha,
                         ModifiedOn = DateTime.Now
                     };
 

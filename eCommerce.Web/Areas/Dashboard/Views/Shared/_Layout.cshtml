@@ -9,7 +9,8 @@
 }
 
 <!DOCTYPE html>
-<html lang="@AppDataHelper.CurrentLanguage.ShortCode.ToLower()" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>
+@*<html lang="@AppDataHelper.CurrentLanguage.ShortCode.ToLower()" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>*@
+<html lang="es" @(AppDataHelper.IsRTL ? "dir=rtl" : string.Empty)>
 <head>
     @Html.Partial("_MetaTags", baseModel)
     @Html.Partial("_HeaderStylesScripts", baseModel)

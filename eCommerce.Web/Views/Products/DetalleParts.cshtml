@@ -1,0 +1,293 @@
+﻿@model eCommerce.Web.ViewModels.ProductDetalleViewModel
+
+
+<link href="~/Content/bm3/stylesheets/product-details.css" rel="stylesheet" />
+
+
+
+@if (Model != null)
+{
+
+    var currentLanguageProductRecord = Model.ProductRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+    var currentLanguageCategoryRecord = Model.Category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+    Model.PageTitle = currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty;
+    Model.PageDescription = currentLanguageProductRecord != null ? currentLanguageProductRecord.Summary : string.Empty;
+    Model.PageURL = Url.ProductPartsDetail(category: Model.Category.SanitizedName, ID: Model.ProductID);
+
+    var thumbnail = Model.ProductPicturesList != null ? Model.ProductPicturesList.Count == 1 ? Model.ProductPicturesList.FirstOrDefault() : Model.ProductPicturesList.Count > 0 ? Model.ProductPicturesList.Where(x => x.PictureID == Model.ThumbnailPicture).FirstOrDefault() : null : null;
+
+    if (thumbnail != null)
+    {
+        Model.PageImageURL = PictureHelper.PageImageURL(thumbnail.Picture.URL, isCompletePath: true);
+    }
+    else
+    {
+        Model.PageImageURL = PictureHelper.PageImageURL("products.jpg");
+    }
+
+    var productPrice = Model.Discount.HasValue && Model.Discount.Value > 0 ? Model.Discount.Value : Model.Price;
+
+    var haveParentCategory = Model.Category != null && Model.Category.ParentCategory != null;
+
+    var productStockTextColor = Model.StockQuantity > 0 ? "text-success bold" : "text-danger bold";
+
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="@Url.Home()">
+                            <i class="fa fa-home mr-1"></i>
+                            @("PP.Header.Menu.Home".Localized())
+                        </a>
+                        @if (haveParentCategory)
+                        {
+                            var currentLanguageParentCategoryRecord = Model.Category.ParentCategory.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
+
+                            <a href="@Url.CatalogoParts(categoryId: Model.Category.ParentCategory.ID, marcaId:0)">@(currentLanguageParentCategoryRecord != null ? currentLanguageParentCategoryRecord.Name : string.Empty)</a>
+                        }
+                        <a href="@Url.CatalogoParts(categoryId: Model.Category.ID, marcaId: 0)">@(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)</a>
+                        <span>@(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="product-shop spad page-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    @if (Model.ProductPicturesList != null && Model.ProductPicturesList.Count > 0)
+                    {
+                        var i = 0;
+                        var firstProductPicture = Model.ProductPicturesList.First();
+
+                        <div id="carouselIndicators" class="product-gallery-carousel carousel slide" data-ride="carousel">
+                            @if (Model.ProductPicturesList.Count > 1)
+                            {
+                                <ol class="carousel-indicators product-carousel-indicators">
+                                    @foreach (var picture in Model.ProductPicturesList)
+                                    {
+                                        var active = picture == firstProductPicture ? "active" : string.Empty;
+
+                                        <li class="@active" data-target="#carouselIndicators" data-slide-to="@i"></li>
+
+                                        i++;
+                                    }
+                                </ol>
+                            }
+                            <div class="carousel-inner product-carousel-inner" role="listbox">
+                                @{
+                                    var j = 0;
+                                }
+                                @foreach (var productPicture in Model.ProductPicturesList)
+                                {
+                                    j++;
+
+                                    var active = productPicture == firstProductPicture ? "active" : string.Empty;
+
+                                    <div class="carousel-item @active text-center">
+                                        @Html.PictureWithZoomAttribute(productPicture.Picture, "", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty, id: string.Format("imgZoom{0}", j))
+                                    </div>
+                                }
+                            </div>
+                            @if (Model.ProductPicturesList.Count > 1)
+                            {
+                                <a class="carousel-control-prev product-carousel-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next product-carousel-next" href="#carouselIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="carouselIndicators" class="product-gallery-carousel carousel slide" data-ride="carousel">
+                            <div class="carousel-inner product-carousel-inner" role="listbox">
+                                <div class="carousel-item active text-center">
+                                    @Html.Picture("", "", alt: currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-6" id="productSummaryContainer">
+                    <div class="product-details">
+                        <div class="pd-title">
+                            <a href="@Url.SearchProducts(category: Model.Category.SanitizedName)">
+                                <span>
+                                    @(currentLanguageCategoryRecord != null ? currentLanguageCategoryRecord.Name : string.Empty)
+                                </span>
+                            </a>
+                            <h2>
+                                @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Name : string.Empty)
+                            </h2>
+                        </div>
+                        @*<div class="pd-rating">
+                            @{
+                                //var totalComments = Model.Rating.TotalRatings;// Model.Comments != null && Model.Comments.Count > 0 ? Model.Comments.Select(x => x.Rating).ToList() : new List<int>();
+                                //var averageRating = Model.Rating.AverageRating;// RatingsHelpers.GetAverageRating(totalComments);
+                                var totalComments = 0;
+                                var averageRating = 4.5;
+
+                                <span title="@("PP.ProductDetails.AverageRatingCount".LocalizedString().Replace("{averageRating}", averageRating.ToString()).Replace("{totalComments}", totalComments.ToString()))">
+                                    @for (int i = 1; i <= averageRating; i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+
+                                    @for (int i = 1; i <= (ConfigurationsHelper.DefaultRating - averageRating); i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                </span>
+                            }
+                        </div>*@
+                        <div class="pd-desc">
+                            <p>
+                                @(currentLanguageProductRecord != null ? currentLanguageProductRecord.Summary : string.Empty)
+                            </p>
+                            <h4 title="Price" class="ltr-dir">
+                                @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+                                {
+                                    <span>
+                                        @Model.Price.WithCurrency()
+                                    </span>
+                                }
+
+                                @productPrice.WithCurrency()
+                            </h4>
+                        </div>
+                        @if (Model.InActive)
+                        {
+                            <div class="my-2">
+                                @if (Model.StockQuantity > 0)
+                                {
+                                    <strong class="p-code @productStockTextColor">
+                                        @("PP.ProductDetails.ProductStockQuantity".LocalizedString().Replace("{quantity}", Model.StockQuantity.ToString()))
+                                    </strong>
+                                }
+                                else
+                                {
+                                    <strong class="p-code @productStockTextColor">
+                                        @("PP.ProductDetails.OutOfStock".LocalizedString())
+                                    </strong>
+                                }
+                            </div>
+                            if (false)
+                            {
+                                <div class="pd-color">
+                                    <h6>Color</h6>
+                                    <div class="pd-color-choose">
+                                        <div class="cc-item">
+                                            <input type="radio" id="cc-black">
+                                            <label for="cc-black"></label>
+                                        </div>
+                                        <div class="cc-item">
+                                            <input type="radio" id="cc-yellow">
+                                            <label for="cc-yellow" class="cc-yellow"></label>
+                                        </div>
+                                        <div class="cc-item">
+                                            <input type="radio" id="cc-violet">
+                                            <label for="cc-violet" class="cc-violet"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pd-size-choose">
+                                    <h6>Sizes</h6>
+                                    <div class="sc-item">
+                                        <input type="radio" id="sm-size">
+                                        <label for="sm-size">s</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="md-size">
+                                        <label for="md-size">m</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="lg-size">
+                                        <label for="lg-size">l</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="xl-size">
+                                        <label for="xl-size">xs</label>
+                                    </div>
+                                </div>
+                            }
+                            <div class="quantity itemCartHolder">
+                                <div class="pro-qty">
+                                    <span class="qtybtn dec">-</span>
+                                    <input class="qtytxt" type="text" value="1">
+                                    <span class="qtybtn inc">+</span>
+                                </div>
+                                <a data-id="@Model.ProductID" data-price="@Model.Price" class="btnAddToCart pointerCursor primary-btn pd-cart text-white">@("PP.Shopping.AddToCart".Localized())</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="my-2">
+                                <strong class="p-code text-danger">
+                                    Producto Inactivo
+                                </strong>
+                            </div>
+                        }
+                        <div class="pd-share">
+                            <div class="pd-social">
+                                @{ Html.RenderPartial("_ShareOptions"); }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tab">
+                <div class="tab-item">
+                    <ul class="nav" role="tablist">
+                        @if (currentLanguageProductRecord != null && !string.IsNullOrEmpty(currentLanguageProductRecord.Description))
+                        {
+                            <li>
+                                <a data-toggle="tab" href="#description-tab" class="active" role="tab">@("PP.ProductDetails.Description".Localized())</a>
+                            </li>
+                        }
+                        @if (currentLanguageProductRecord != null && currentLanguageProductRecord.ProductSpecifications != null && currentLanguageProductRecord.ProductSpecifications.Count > 0)
+                        {
+                            <li>
+                                <a data-toggle="tab" href="#specification-tab" role="tab">@("PP.ProductDetails.ProductSpecifications".Localized())</a>
+                            </li>
+                        }
+                        @*<li>
+                            <a data-toggle="tab" href="#reviews-tab" role="tab" class="active">@("PP.ProductDetails.Reviews".Localized())</a>
+                        </li>*@
+                    </ul>
+                </div>
+                <div class="tab-item-content">
+                    <div class="tab-content">
+                        @if (currentLanguageProductRecord != null && !string.IsNullOrEmpty(currentLanguageProductRecord.Description))
+                        {
+                            <div class="tab-pane fade-in active show" id="description-tab" role="tabpanel">
+                                <div class="product-content">
+                                    @Html.Raw(currentLanguageProductRecord.Description)
+                                </div>
+                            </div>
+                        }
+                        @if (currentLanguageProductRecord != null && currentLanguageProductRecord.ProductSpecifications != null && currentLanguageProductRecord.ProductSpecifications.Count > 0)
+                        {
+                            <div class="tab-pane fade" id="specification-tab" role="tabpanel">
+                                @{ Html.RenderPartial("_ProductSpecifications", currentLanguageProductRecord.ProductSpecifications); }
+                            </div>
+                        }
+                        @*<div class="tab-pane fade active show" id="reviews-tab" role="tabpanel">
+                            @{ Html.RenderAction("ProductComments", "Comments", new { productID = Model.ProductID, recordSize = 10 }); }
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+}
+<script src="~/Content/lib/bootstrap-4.4.1/js/bootstrap.js"></script>

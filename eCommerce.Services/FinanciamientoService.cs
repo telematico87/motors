@@ -120,6 +120,7 @@ namespace eCommerce.Services
             var interesCompra = m.obtenerValor("InteresCompra", financiamiento.InteresCompra);
             var tipoVivienda = m.obtenerValor("TipoVivienda", financiamiento.TipoVivienda);            
             var antiguedadLaboral = m.obtenerValor("AntiguedadLaboral", financiamiento.TipoVivienda);            
+            var situacionLaboral = m.obtenerValor("SituacionLaboral", financiamiento.IDSituacionLaboral);            
             var nombreCompleto = financiamiento.Nombre.Trim() + " " + financiamiento.Apellido.Trim();            
             var nroDocumento = tipoDoc.Valor.Trim() + " " + financiamiento.NroDocumento.Trim();
             var financiera = m.obtenerValor("TipoFinanciera", financiamiento.TipoFinanciera);
@@ -142,7 +143,7 @@ namespace eCommerce.Services
             $"<p>Monto a Financiar: <strong>S/. {financiamiento.MontoAFinanciar}</strong></p>" +             
             $"<p>Interés de Compra: <strong>{interesCompra}</strong></p>" +             
             $"<p>Tipo Vivienda: <strong>{tipoVivienda}</strong></p>" +             
-            $"<p>Situación Laboral: <strong>{financiamiento.SituacionLaboral}</strong></p>" +
+            $"<p>Situación Laboral: <strong>{situacionLaboral}</strong></p>" +
             $"<p>Antiguedad Laboral: <strong>{antiguedadLaboral}</strong></p>" +
             $"<p>Estado Civil: <strong>{financiamiento.SituacionSentimental}</strong></p>" +                         
             $"<p>Ocupación: <strong>{financiamiento.Ocupacion}</strong></p>" +                         

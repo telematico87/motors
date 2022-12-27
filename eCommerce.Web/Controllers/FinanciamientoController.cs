@@ -74,6 +74,13 @@ namespace eCommerce.Web.Controllers
             var model = new MantenedorFinanciera().ListarTipoVivienda();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpGet]
+        public ActionResult listaSituacionLaboral()
+        {
+            var model = new MantenedorFinanciera().ListarSituacionLaboral();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public ActionResult listaRangoIngreso()
@@ -142,7 +149,7 @@ namespace eCommerce.Web.Controllers
                     Provincia = model.Provincia,
                     Distrito = model.Distrito,
                     TipoVivienda = model.TipoVivienda,
-                    SituacionLaboral = model.SituacionLaboral,
+                    IDSituacionLaboral = model.IDSituacionLaboral,
                     AntiguedadLaboral = model.AntiguedadLaboral,
 
                     IDMarca = model.IDMarca,

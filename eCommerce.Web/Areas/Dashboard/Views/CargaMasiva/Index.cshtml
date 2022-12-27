@@ -1,0 +1,45 @@
+﻿
+
+@model eCommerce.Web.Areas.Dashboard.ViewModels.CargaMasivaViewModel
+@{
+    if (Model != null)
+    {
+        Model.PageTitle = "Carga Masiva";
+        Model.PageDescription = "Carga Masiva de Productos desde Excel";
+        Model.PageURL = Url.ListAction("Configurations");
+        Model.PageImageURL = PictureHelper.PageImageURL("configurations.jpg");
+    }
+}
+
+<div class="page-info-container">
+    <h3 class="h3 mb-2 text-gray-800">
+        Carga Masiva
+    </h3>
+    <p>
+        Cargar Productos desde Excel
+    </p>
+    <hr />
+</div>
+
+<div class="page-data-holder card shadow mb-4">
+    <div class="card-header">
+        <form action="@Url.ListAction("Configurations")">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-dark">Descargar Plantilla</a>
+                </div>
+            </div>
+           
+
+            
+        
+        </form>
+</div>    
+</div>
+
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="contentArea">
+        </div>
+    </div>
+</div>

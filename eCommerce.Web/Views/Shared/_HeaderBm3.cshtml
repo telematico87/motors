@@ -215,8 +215,11 @@
                                     <a href="@Url.Action("Nosotros", "Home")" title="Nosotros"><i class="ti-info-alt"></i><span> Nosotros</span></a>                                    
                                 </li>
                                 <li class="has-mega-menu catalogo-moto">
-                                    <a href="@Url.CatalogoMoto(0,0)" title=""><i class="ti-star"></i><span> Catalogo</span></a>
+                                    <a href="@Url.CatalogoMoto(0,0)" title=""><i class="fa fa-motorcycle"></i><span> Motos</span></a>
                                     @{ Html.RenderAction("CategoriesPictureMenu", "Categories"); }
+                                </li>
+                                <li class="has-mega-menu catalogo-moto">
+                                    <a href="@Url.CatalogoParts(0,0)" title=""><i class="ti-star"></i><span> Accesorios</span></a>
                                 </li>
                                 <li class="has-mega-menu">
                                     <a href="@Url.Action("FinanciamientoEfectiva", "Financiamiento")" title=""><i class="ti-money"></i><span> Financiamiento</span></a>                                    

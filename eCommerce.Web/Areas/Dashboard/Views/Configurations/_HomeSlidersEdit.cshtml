@@ -12,7 +12,8 @@
     //sample str
     var str = string.Format("#IMG#slider.jpg#TH#Welcome to {0}#PG#Browse our latest products.#PG#This eCommerce website is developed with ASP .Net MVC framework and C# programming language for demo purpose.#LK#https://localhost:44384/en/cart", ConfigurationsHelper.ApplicationName);
 
-    var img = Model.Value.GetSubstringText("#IMG#", "#TH#");
+    var img = Model.Value.GetSubstringText("#IMG#", "#IMGMOVIL#");
+    var imgMovil = Model.Value.GetSubstringText("#IMGMOVIL#", "#TH#");
     var topHeading = Model.Value.GetSubstringText("#TH#", "#PG#");
     var paragraph = Model.Value.GetSubstringText("#PG#", "#LK#");
     var link = Model.Value.GetSubstringText("#LK#", "");
@@ -20,6 +21,10 @@
     if (!string.IsNullOrEmpty(img))
     {
         img = img.Replace("IMG#", "");
+    }
+    if (!string.IsNullOrEmpty(imgMovil))
+    {
+        imgMovil = imgMovil.Replace("IMGMOVIL#", "");
     }
     if (!string.IsNullOrEmpty(topHeading))
     {
@@ -41,13 +46,24 @@
 
             <div class="form-group">
                 <label>
-                    @("Dashboard.Configurations.Edit.SliderPicture".Localized())
+                    Imagen Versión Web
                 </label>
                 <input id="sliderPicture" class="form-control" name="Picture" type="file" />
                 <div id="pictureArea">
                     @Html.Picture(img, "image img-thumbnail", "width: 100%", "Home Slider", lazyLoad: false)
                 </div>
                 <input type="hidden" class="form-control" name="ImageURL" value="@img" />
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Imagen Versión Móvil
+                </label>
+                <input id="sliderPictureMovil" class="form-control" name="PictureMovil" type="file" />
+                <div id="pictureMovilArea">
+                    @Html.Picture(imgMovil, "image img-thumbnail", "width: 100%", "Home Slider", lazyLoad: false)
+                </div>
+                <input type="hidden" class="form-control" name="ImageMovilURL" value="@imgMovil" />
             </div>
 
             <div class="form-group">
@@ -100,7 +116,7 @@ else
 
     $("#sliderPicture").change(function () {
 		var pictures = this.files;
-        var picsData = new FormData();
+        var picsData = new FormData();        
 
 		for (var i = 0; i < pictures.length; i++) {
 			picsData.append("Picture", pictures[i]);
@@ -122,11 +138,42 @@ else
 		});
     });
 
+    $("#sliderPictureMovil").change(function () {
+		var pictures = this.files;
+        var picsData = new FormData();        
+
+		for (var i = 0; i < pictures.length; i++) {
+			picsData.append("PictureMovil", pictures[i]);
+        }
+    
+        $.ajax({
+            url: "@Url.UploadPicturesWithoutDatabase(isSiteFolder: true, subFolder: "sliders")",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+        .done(function (responses) {
+            if (responses != undefined) {
+                var picResponse = responses[0];
+                AttachNewImageMovil(picResponse.pictureURL, picResponse.pictureValue);
+            }
+		});
+    });
+
     function AttachNewImage(pictureURL, pictureValue) {
         var $newimgHTML = $("#sliderTemplate").clone();
         $newimgHTML.find(".image").attr("src", pictureURL);
         $("input[name=ImageURL]").val(pictureValue);
         $("#pictureArea").html($newimgHTML.html());
+    }
+
+    function AttachNewImageMovil(pictureURL, pictureValue) {
+        var $newimgHTML = $("#sliderTemplate").clone();
+        $newimgHTML.find(".image").attr("src", pictureURL);
+        $("input[name=ImageMovilURL]").val(pictureValue);
+        $("#pictureMovilArea").html($newimgHTML.html());
     }
 
 	@*$("#editForm").validate({
@@ -152,7 +199,7 @@ else
 	$("#saveButton").click(updateConfiguration);
 
     function updateConfiguration() {
-        $("[name=Value]").val("#IMG#" + $("[name=ImageURL]").val() + "#TH#" + $("[name=Heading]").val() + "#PG#" + $("[name=Paragraph]").val() + "#LK#" + $("[name=LinkURL]").val());
+        $("[name=Value]").val("#IMG#" + $("[name=ImageURL]").val() + "#IMGMOVIL#" + $("[name=ImageMovilURL]").val() + "#TH#" + $("[name=Heading]").val() + "#PG#" + $("[name=Paragraph]").val() + "#LK#" + $("[name=LinkURL]").val());
 
         if ($("#editForm").valid())
 	    {

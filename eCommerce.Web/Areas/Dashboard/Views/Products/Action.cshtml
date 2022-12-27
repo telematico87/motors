@@ -217,6 +217,7 @@
                         Catalogo
                     </label>
                     <select class="form-control" name="CatalogoID" id="cboCatalogo">
+                        <option value="0">SELECCIONE</option>
                         @foreach (var catalogo in Model.Catalogos)
                         {
                             var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
@@ -287,7 +288,7 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Price" value="@Model.PriceStr" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                             <div class="input-group-append">
                                 <span class="input-group-text icono-moneda">@iconoMoneda</span>
                             </div>
@@ -297,7 +298,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text icono-moneda">@iconoMoneda</span>
                             </div>
-                            <input type="text" class="form-control" name="Price" value="@Model.PriceStr" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
+                            <input type="text" class="form-control" name="Price" value="@Model.Price" placeholder="@("Dashboard.Products.Action.PricePlaceholder".Localized())">
                         }
                     </div>
                 </div>
@@ -310,7 +311,7 @@
                             <div class="input-group">
                                 @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                                 {
-                                    <input type="text" class="form-control" name="Discount" value="@Model.DiscountStr">
+                                    <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                                     <div class="input-group-append">
                                         <span class="input-group-text icono-moneda">@iconoMoneda</span>
                                     </div>
@@ -321,7 +322,7 @@
                                         <!--<span class="input-group-text">-->@*@ConfigurationsHelper.CurrencySymbol*@<!--</span>-->
                                         <span class="input-group-text icono-moneda">@iconoMoneda</span>
                                     </div>
-                                    <input type="text" class="form-control" name="Discount" value="@Model.DiscountStr">
+                                    <input type="text" class="form-control" name="Discount" value="@Model.Discount">
                                 }
                             </div>
                         </div>
@@ -345,7 +346,7 @@
                     <div class="input-group">
                         @if (ConfigurationsHelper.PriceCurrencyPosition.ToLower().StartsWith("{price}"))
                         {
-                            <input type="text" class="form-control" name="Cost" value="@Model.CostStr">
+                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                             <div class="input-group-append">
                                 <span class="input-group-text icono-moneda">@iconoMoneda</span>
                             </div>
@@ -355,7 +356,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text icono-moneda">@iconoMoneda</span>
                             </div>
-                            <input type="text" class="form-control" name="Cost" value="@Model.CostStr">
+                            <input type="text" class="form-control" name="Cost" value="@Model.Cost">
                         }
                     </div>
                 </div>
@@ -508,7 +509,7 @@
                         <input type="hidden" name="InActive" value="false">
 
                         <label class="form-check-label" for="InActive">
-                            Producto Activo
+                            Producto Inactivo
                         </label>
                     </div>
                 </div>

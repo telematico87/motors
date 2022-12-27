@@ -71,11 +71,11 @@
             {
                 <button class="btn btn-success" type="submit" id="actionButton">
                     <i class="fas fa-edit mr-1"></i>
-                    Editar Tipo Cambio
+                    Actualizar
                 </button>
                 <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ID">
                     <i class="fas fa-trash-alt mr-1"></i>
-                    Eliminar Tipo Cambio
+                    Eliminar
                 </button>
             }
             else
@@ -173,11 +173,13 @@
 
         let Venta = $("#txtVenta").val();
         let Fecha = $("#txtFecha").val();
-        let valor = 5.55;
+        let valor = $("#txtVenta").val();
+        let FechaFormat = transformarFecha(Fecha);
 
         var model = new Object();
         model.Venta = Venta;
-        model.Fecha = Fecha;
+        //model.Fecha = FechaFormat;
+        model.FechaStr = Fecha;
         model.valor = valor;
 
         console.log(model);
@@ -190,7 +192,7 @@
             //url: "/TipoCambio/Action",
             data: {
                 "Venta": Venta,
-                "Fecha": Fecha,
+                "Fecha": FechaFormat,
                 "Compra": valor,
             },
 
@@ -209,6 +211,13 @@
                  removeLoader("actionForm");
                  Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
 			});
+    }
+
+    function transformarFecha(fecha) {
+        var f = fecha.split("/");
+        if (f.length > 0)
+            return (f[2] + "-" + f[1] + "-" + f[0]);
+        return fecha;
     }
 
 </script>

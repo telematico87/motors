@@ -138,12 +138,77 @@ namespace eCommerce.Services
             return products.Skip(skipCount).Take(recordSize).Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
         }
 
-        public List<Product> SearchProductsMoto(List<int> categoryIDs, int marcaId, string searchTerm, decimal? from, decimal? to, string sortby, int? pageNo, int recordSize, bool activeOnly, out int count, int? stockCheckCount = null)
+        public List<Product> SearchProductsMoto(List<int> categoryIDs, int CatalogoId, int marcaId, string searchTerm, decimal? from, decimal? to, string sortby, int? pageNo, int recordSize, bool activeOnly, out int count, int? stockCheckCount = null)
         {
             var context = DataContextHelper.GetNewContext();
 
             var products = context.Products
+                                  .Where(x => x.CatalogoId == CatalogoId && !x.IsDeleted && (!activeOnly || x.IsActive) && !x.Category.IsDeleted)
+                                  .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                products = context.ProductRecords
+                                  .Where(x => !x.IsDeleted && x.Name.ToLower().Contains(searchTerm.ToLower()))
+                                  .Select(x => x.Product)
                                   .Where(x => !x.IsDeleted && (!activeOnly || x.IsActive) && !x.Category.IsDeleted)
+                                  .AsQueryable();
+            }
+
+            if (categoryIDs != null && categoryIDs.Count > 0)
+            {
+                products = products.Where(x => categoryIDs.Contains(x.CategoryID));
+            }
+
+            if (marcaId > 0)
+            {
+                products = products.Where(x => marcaId == x.MarcaId);
+            }
+
+            if (from.HasValue && from.Value > 0.0M)
+            {
+                products = products.Where(x => x.Discount >= from.Value);
+            }
+
+            if (to.HasValue && to.Value > 0.0M)
+            {
+                products = products.Where(x => x.Discount <= to.Value);
+            }
+
+            if (stockCheckCount.HasValue && stockCheckCount.Value > 0)
+            {
+                products = products.Where(x => x.StockQuantity <= stockCheckCount.Value);
+            }
+
+            if (!string.IsNullOrEmpty(sortby))
+            {
+                if (string.Equals(sortby, "price-high", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.OrderByDescending(x => x.Discount);
+                }
+                else
+                {
+                    products = products.OrderBy(x => x.Discount);
+                }
+            }
+            else //sortBy Product Date
+            {
+                products = products.OrderByDescending(x => x.ModifiedOn);
+            }
+
+            count = products.Count();
+
+            pageNo = pageNo ?? 1;
+            var skipCount = (pageNo.Value - 1) * recordSize;
+
+            return products.Skip(skipCount).Take(recordSize).Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
+        }
+        public List<Product> SearchProductsParts(List<int> categoryIDs, int catalogoId, int marcaId, string searchTerm, decimal? from, decimal? to, string sortby, int? pageNo, int recordSize, bool activeOnly, out int count, int? stockCheckCount = null)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var products = context.Products
+                                  .Where(x => x.CatalogoId == catalogoId && !x.IsDeleted && (!activeOnly || x.IsActive) && !x.Category.IsDeleted)
                                   .AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -529,6 +594,24 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             var oldProductSpecifications = context.ProductSpecifications.Where(p => p.ProductRecordID == productRecordID);
+            
+            context.ProductSpecifications.RemoveRange(oldProductSpecifications);
+
+
+            context.ProductSpecifications.AddRange(newProductSpecification);
+
+            return context.SaveChanges() > 0;
+        }
+        
+        public bool UpdateProductSpecificationsNew(int productRecordID, List<ProductSpecification> newProductSpecification)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            //context.ProductSpecifications.Remove
+
+            var oldProductSpecifications = context.ProductSpecifications.Where(p => p.ProductRecordID == productRecordID);
+
+
 
             context.ProductSpecifications.RemoveRange(oldProductSpecifications);
 

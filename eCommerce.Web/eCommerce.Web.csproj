@@ -248,6 +248,7 @@
     <Compile Include="Areas\API\Models\UserModels.cs" />
     <Compile Include="Areas\API\Providers\eCommerceOAuthProvider.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AroController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CargaMasivaController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CatalogoController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ColorController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardBaseController.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Areas\Dashboard\Controllers\TipoCambioController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\CargaMasivaViewModel.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\CatalogosViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\ColorsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\FinanciamientosViewModels.cs" />
@@ -412,6 +414,7 @@
     <Content Include="Content\bm3\javascript\jquery.min.js" />
     <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
+    <Content Include="Content\bm3\javascript\jsFinanciamiento.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
@@ -445,13 +448,14 @@
     <Content Include="Content\bm3\stylesheets\mCustomScrollbar.css" />
     <Content Include="Content\bm3\stylesheets\owl.carousel.css" />
     <Content Include="Content\bm3\stylesheets\owl.video.play.html" />
+    <Content Include="Content\bm3\stylesheets\product-details.css" />
     <Content Include="Content\bm3\stylesheets\responsiveTabs.css" />
-    <Content Include="Content\bm3\stylesheets\responsive_2.css" />
-    <Content Include="Content\bm3\stylesheets\shortcodes_2.css" />
+    <Content Include="Content\bm3\stylesheets\responsive.css" />
+    <Content Include="Content\bm3\stylesheets\shortcodes.css" />
     <Content Include="Content\bm3\stylesheets\slick-lightbox.css" />
     <Content Include="Content\bm3\stylesheets\slick-theme.css" />
     <Content Include="Content\bm3\stylesheets\slick.css" />
-    <Content Include="Content\bm3\stylesheets\style_2.css" />
+    <Content Include="Content\bm3\stylesheets\style.css" />
     <Content Include="Content\bm3\stylesheets\waves.min.css" />
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\financiamiento_mobile.css" />
@@ -1146,6 +1150,7 @@
     <Content Include="Content\images\site\sliders\e18f3dfd-d733-4d5d-908c-1e721e74eb56.jpg" />
     <Content Include="Content\images\site\sliders\fbe7a51c-b3f7-4bc7-9c9d-b6cb33b6405a.jpg" />
     <Content Include="Content\images\site\sliders\flyer.jpg" />
+    <Content Include="Content\images\site\sliders\ignitor movil reducido.jpg" />
     <Content Include="Content\images\site\sliders\pistera_slider.jpg" />
     <Content Include="Content\images\site\sliders\slider-movil-1.jpg" />
     <Content Include="Content\images\site\sliders\slider1.jpg" />
@@ -5292,7 +5297,6 @@
     <Folder Include="Areas\Dashboard\Views\Producto\" />
     <Folder Include="Content\images\thumbnails\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\Home\Catalogo\AccessoryFilters\" />
     <Folder Include="Views\Home\Catalogo\PartsFilters\" />
   </ItemGroup>
   <ItemGroup>
@@ -5341,6 +5345,7 @@
     <Content Include="Content\bm3\stylesheets\fonts\Staatliches-Regular.ttf" />
     <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling.ttf" />
     <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling_oblique.ttf" />
+    <Content Include="Areas\Dashboard\Views\CargaMasiva\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5360,14 +5365,19 @@
     <Content Include="Views\Home\Catalogo\MotoFilters\_ListingFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_SearchMoto.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_MotoFilters.cshtml" />
-    <Content Include="Views\Home\Catalogo\MotoFilters\_CategoriesFilter.cshtml" />
-    <Content Include="Views\Home\Catalogo\MotoFilters\_MarcasFilter.cshtml" />
     <Content Include="Views\Products\_Destacados.cshtml" />
     <Content Include="Views\Home\HomeMarcasMoto.cshtml" />
     <Content Include="Views\Shared\HeadTags.cshtml" />
     <Content Include="Views\Contacto\Contacto.cshtml" />
     <Content Include="Views\Home\Catalogo\MotoFilters\_MotoPriceRangeFilter.cshtml" />
     <Content Include="Views\Home\Nosotros.cshtml" />
+    <Content Include="Views\Home\CatalogoParts.cshtml" />
+    <Content Include="Views\Home\Catalogo\AccessoryFilters\_SearchParts.cshtml" />
+    <Content Include="Views\Home\Catalogo\AccessoryFilters\_ListingFilter.cshtml" />
+    <Content Include="Views\Home\Catalogo\Common\_MarcasFilter.cshtml" />
+    <Content Include="Views\Home\Catalogo\Common\_CategoriesFilter.cshtml" />
+    <Content Include="Views\Home\Catalogo\AccessoryFilters\PriceRangeFilter.cshtml" />
+    <Content Include="Views\Products\DetalleParts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">
