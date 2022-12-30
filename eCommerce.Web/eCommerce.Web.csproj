@@ -66,6 +66,9 @@
     <Reference Include="EPPlus.System.Drawing, Version=6.0.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.System.Drawing.6.0.0\lib\net452\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="LinqToExcel, Version=1.11.0.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -116,6 +119,15 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="SixLabors.ImageSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>..\packages\SixLabors.ImageSharp.1.0.4\lib\net472\SixLabors.ImageSharp.dll</HintPath>
     </Reference>
@@ -425,6 +437,7 @@
     <Content Include="Content\bm3\javascript\waves.min.js" />
     <Content Include="Content\bm3\javascript\waypoints.min.js" />
     <Content Include="Content\bm3\stylesheets\ajax-loader.gif" />
+    <Content Include="Content\bm3\stylesheets\bootstrap-select.css" />
     <Content Include="Content\bm3\stylesheets\bootstrap.min.css" />
     <Content Include="Content\bm3\stylesheets\cloud-zoom.css" />
     <Content Include="Content\bm3\stylesheets\colors\color2.css" />
@@ -5346,6 +5359,10 @@
     <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling.ttf" />
     <Content Include="Content\bm3\stylesheets\fonts\big_noodle_titling_oblique.ttf" />
     <Content Include="Areas\Dashboard\Views\CargaMasiva\Index.cshtml" />
+    <Content Include="Content\bm3\excel-format\Products.xlsx" />
+    <Content Include="Content\bm3\excel-format\ProductsCopia.xlsx" />
+    <Content Include="Content\bm3\excel-format\ProductTemplate.xlsx" />
+    <Content Include="Areas\Dashboard\Views\CargaMasiva\UploadExcel.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />

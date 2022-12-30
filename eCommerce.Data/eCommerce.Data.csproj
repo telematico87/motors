@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202212120200478_cambios-financiamiento.designer.cs">
       <DependentUpon>202212120200478_cambios-financiamiento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212300302452_CatalogoMarcaAccesorio.cs" />
+    <Compile Include="Migrations\202212300302452_CatalogoMarcaAccesorio.designer.cs">
+      <DependentUpon>202212300302452_CatalogoMarcaAccesorio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -296,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212120200478_cambios-financiamiento.resx">
       <DependentUpon>202212120200478_cambios-financiamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212300302452_CatalogoMarcaAccesorio.resx">
+      <DependentUpon>202212300302452_CatalogoMarcaAccesorio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

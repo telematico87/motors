@@ -71,6 +71,8 @@ namespace eCommerce.Data
         public DbSet<Financiamiento> Financiamientos { get; set; }
 
         public DbSet<Catalogo> Catalogos { get; set; }
+        public DbSet<CatalogoCategoria> CatalogoCategorias { get; set; }
+        public DbSet<CatalogoMarca> CatalogoMarcas { get; set; }
 
         public DbSet<Marca> Marcas { get; set; }
 

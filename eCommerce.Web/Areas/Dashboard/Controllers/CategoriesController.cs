@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eCommerce.Shared.Enums;
+using static eCommerce.Web.Areas.Dashboard.Controllers.ProductsController;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -72,11 +73,50 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             return View(model);
         }
         
-        [HttpGet]
-        public ActionResult listarCategoriasPorCatalogo(int? ID)
-        {            
-            var category = CategoriesService.Instance.GetCategoryByCatalogoID(ID.Value);
-            return Json(category, JsonRequestBehavior.AllowGet);
+        
+        [HttpPost]        
+        public JsonResult ListarCategoriasPorCatalogo(List<string> ids)
+        {
+            CatalogoCategoryResponse response = new CatalogoCategoryResponse();
+            //string[] ids = CatalogoIDs.Split(',');
+
+            List<CategoryResponse> listaResp = new List<CategoryResponse>();
+            
+            if (ids.Count > 0)
+            {
+                for (var i = 0; i < ids.Count; i++)
+                {
+                    int CatalogoID = Int32.Parse(ids[i]);
+                    var listaCategorias = CatalogoCategoriaService.Instance.SearchCategoriesByCatalogoID(CatalogoID);
+
+                    if (listaCategorias.Count() > 0)
+                    {
+                        
+                    }
+
+                    listaCategorias.ForEach(x => {
+                        var category = CategoriesService.Instance.GetCategoryByID(x.CategoriaId);
+
+                        if (category != null) {
+
+                            var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(r => r.LanguageID == AppDataHelper.CurrentLanguage.ID);
+                            CategoryResponse cat = new CategoryResponse();
+                            cat.CategoriaID = category.ID;
+                            cat.Nombre = currentLanguageCategoryRecord.Name;
+                            listaResp.Add(cat);                            
+                        }
+
+                    });                       
+                }
+            }
+            //categorias.Sort((x, y) => x.SanitizedName.CompareTo(y.SanitizedName));
+            //
+
+            response.Categorias = listaResp;
+
+            int temanio = response.Categorias.Count;
+
+            return Json(response);            
         }
 
         [HttpPost]
@@ -109,10 +149,10 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     category.PictureMovilID = model.PictureMovilID;
                     category.isFeatured = model.isFeatured;
                     category.SanitizedName = !string.IsNullOrEmpty(model.SanitizedName) ? model.SanitizedName : model.Name.SanitizeLowerString();
-                    category.CatalogoID = model.CatalogoID;
+                    category.CatalogoID = 0;
 
                     category.ModifiedOn = DateTime.Now;
-
+                                        
                     if(!CategoriesService.Instance.UpdateCategory(category))
                     {
                         throw new Exception("Dashboard.Categories.Action.Validation.UnableToUpdateCategory".LocalizedString());
@@ -150,6 +190,28 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     {
                         throw new Exception("Dashboard.Categories.Action.Validation.UnableToUpdateCategoryRecord".LocalizedString());
                     }
+
+                    //Guardar Catalogo(s)
+                    var ids = model.CatalogoIDs;
+                    if (ids.Count > 0)
+                    {
+
+                        for (var i = 0; i < ids.Count; i++)
+                        {
+
+                            CatalogoCategoria catalogos = new CatalogoCategoria();
+
+                            catalogos.CatalogoId = Int32.Parse(ids[i]);
+                            catalogos.CategoriaId = model.CategoryID;
+                            catalogos.ModifiedOn = DateTime.Now;
+                            catalogos.IsActive = true;
+
+                            if (!CatalogoCategoriaService.Instance.SaveCatalogoCategoria(catalogos))
+                            {
+                                throw new Exception("No se pudo actualizar los Catalogos para esta Categoria");
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -169,7 +231,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     category.PictureMovilID = model.PictureMovilID;
                     category.isFeatured = model.isFeatured;
                     category.SanitizedName = !string.IsNullOrEmpty(model.SanitizedName) ? model.SanitizedName : model.Name.SanitizeLowerString();
-                    category.CatalogoID = model.CatalogoID;
+                    category.CatalogoID = 0;
 
                     var currentLanguageCategoryRecord = new CategoryRecord
                     {
@@ -186,6 +248,30 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     if (!result)
                     {
                         throw new Exception("Dashboard.Categories.Action.Validation.UnableToCreateCategory".LocalizedString());
+                    }
+
+                    //Guardar Catalogo(s)
+                    //string[] ids = model.CatalogoIDs.Split(',');
+                    var ids = model.CatalogoIDs;
+                    if (ids.Count > 0)
+                    {
+                        int idCategoria = currentLanguageCategoryRecord.Category.ID;
+
+                        for (var i = 0; i < ids.Count; i++)
+                        {
+
+                            CatalogoCategoria catalogos = new CatalogoCategoria();
+
+                            catalogos.CatalogoId = Int32.Parse(ids[i]);
+                            catalogos.CategoriaId = idCategoria;
+                            catalogos.ModifiedOn = DateTime.Now;
+                            catalogos.IsActive = true;
+
+                            if (!CatalogoCategoriaService.Instance.SaveCatalogoCategoria(catalogos))
+                            {
+                                throw new Exception("No se pudo actualizar los Catalogos para esta Categoria");
+                            }
+                        }
                     }
                 }
 
@@ -216,6 +302,17 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             }
             
             return result;
+        }
+
+        public class CatalogoCategoryResponse
+        {
+            public List<CategoryResponse> Categorias { get; set; }            
+        }
+
+        public class CategoryResponse
+        {
+            public int CategoriaID { get; set; }
+            public string Nombre { get; set; }
         }
     }
 }

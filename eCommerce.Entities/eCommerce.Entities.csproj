@@ -71,6 +71,8 @@
     <Compile Include="APIEntities\PromoEntity.cs" />
     <Compile Include="Aro.cs" />
     <Compile Include="Catalogo.cs" />
+    <Compile Include="CatalogoCategoria.cs" />
+    <Compile Include="CatalogoMarca.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="CustomEntities\Cart.cs" />
@@ -108,6 +110,8 @@
     <Compile Include="Promo.cs" />
     <Compile Include="PromoTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\ProductRequest.cs" />
+    <Compile Include="Response\CategoryResponse.cs" />
     <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Response\ProductSimple.cs" />
     <Compile Include="TablaMaster.cs" />

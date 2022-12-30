@@ -80,10 +80,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>
-                       @("Dashboard.Categories.Action.Catalogo".Localized())
+                        Catálogos
                     </label>
-                    <select class="form-control" name="CatalogoID" id="CatalogoID">
-                        <option value="0">@("Dashboard.Categories.Action.CatalogoNone".Localized())</option>
+                    <select class="form-control selectpicker" name="CatalogoIDs" id="CatalogoIDs" multiple>
+                        <option value="0">Seleccione</option>
                         @foreach (var catalogo in Model.Catalogos)
                         {
                             var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
@@ -91,15 +91,16 @@
                                 @catalogo.Description
                             </option>
                         }
-                    </select>
+                    </select>                                      
                 </div>
                 <div class="form-group">
                     <label>
-                        @("Dashboard.Categories.Action.ParentCategory".Localized())
+                        Categroía Principal <i id="loadCategoriaPrincipal" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
                     </label>
-                    <select class="form-control" name="ParentCategoryID" id="ParentCategoryID">
+                    <select class="form-control" name="ParentCategoryID" id="ParentCategoryID" data-live-search="true">
                         <option value="0">@("Dashboard.Categories.Action.ParentCategoryNone".Localized())</option>
-                        @foreach (var category in Model.Categories.Where(x => x.ID != Model.CategoryID))
+                        @*@foreach (var category in Model.Categories.Where(x => x.ID != Model.CategoryID))
                         {
                             var selected = Model.ParentCategoryID == category.ID ? "selected" : string.Empty;
 
@@ -117,7 +118,7 @@
                                     @category.SanitizedName
                                 </option>
                             }
-                        }
+                        }*@
                     </select>
                 </div>
             </div>
@@ -133,7 +134,7 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                @Url.CatalogoMoto(categoryId:0, marcaId:0).ToSiteURL()/
+                                @Url.CatalogoMoto(categoryId: 0, marcaId: 0).ToSiteURL()/
                             </span>
                         </div>
                         <input type="text" class="form-control" id="SanitizedName" name="SanitizedName" value="@Model.SanitizedName">
@@ -209,8 +210,14 @@
 <div id="pictureMovilTemplate" style="display:none">
     @Html.UserAvatar(new eCommerce.Entities.Picture(), "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef")
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        $("#loadCategoriaPrincipal").css("display", "none");
+       
+    });
+
     $("#SanitizedName").keyup(function () {
         var titleValue = $(this).val();
         if (titleValue) {
@@ -219,6 +226,9 @@
         }
     });
 
+    $('.selectpicker').selectpicker();
+
+    $('#ParentCategoryID').select();
 
     $("#categoryPicture").change(function () {
 		var pictures = this.files;
@@ -282,50 +292,59 @@
 		});
     });
 
-    $("#CatalogoID").change(function () {
-        var ID = $(this).val();
-        console.log("Hola");
+  //  $("#CatalogoIDs").change(function () {
+  //      var IDs = $(this).val();
 
-		$.ajax({
-            url: "/Categories/listarCategoriasPorCatalogo",
-			type: "GET",
-            data: ID,
-			dateType: "json",
-			processData: false,
-			contentType: false
-		})
-            .done(function (responses) {
-                console.log(responses);
+		//$.ajax({
+  //          url: "/Categories/listarCategoriasPorCatalogo",
+		//	type: "GET",
+  //          data: IDs,
+		//	dateType: "json",
+		//	processData: false,
+		//	contentType: false
+		//})
+  //          .done(function (responses) {
+  //              console.log(responses);
 
-        })
+  //      })
+  //  });
+
+    $("#CatalogoIDs").change(function () {
+        $("#loadCategoriaPrincipal").show();
+        let IDs = $(this).val();
+        //let IDs = "5,2";
+        console.log(IDs);
+        let url = "@Url.Action("ListarCategoriasPorCatalogo", "Categories")";
+        //let data = { CatalogoIDs: IDs };
+        let data = { IDs: IDs };
+
+         $.post(url, data).done(function (data) {
+             llenarCombo(data.Categorias, "ParentCategoryID", "Nombre", "CategoriaID", "0");
+             console.log(data);
+             $("#loadCategoriaPrincipal").css("display", "none");
+
+         }).fail(manejarError).always(function () {
+             $("#loadCategoriaPrincipal").css("display", "none");
+         });
     });
 
-  //  function listarMarcas() {
-  //      $.ajax({
-  //          method: "GET",
-  //          url: "/Financiamiento/listarCategoriasPorCatalogo",
-  //          success: function (result) {
-  //              debugger;
-  //              console.log(result);
-  //              let Marca = result;
-  //              llenarCombo(Marca, "cboMarca", "Descripcion", "Descripcion", "0")
-  //          }
-  //      });
-  //  }
+    function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
 
-  //  function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
-  //      debugger;
-  //      var contenido = ""
-  //      var elemento;
-  //      contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
-  //      for (var j = 0; j < data.length; j++) {
-  //          elemento = data[j];
-  //          contenido +=
-  //              "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
-  //      }
-  //      contenido += "";
-  //      document.getElementById(id).innerHTML = contenido;
-  //  }
+        var contenido = ""
+        var elemento;
+        contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
+        for (var j = 0; j < data.length; j++) {
+            elemento = data[j];
+            contenido +=
+                "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
+        }
+        contenido += "";
+        document.getElementById(id).innerHTML = contenido;
+    }
+
+    function manejarError(err) {
+        console.log(err.responseText);
+    }
 
     function AttachNewImage(imageURL, imageID) {
         var $newimgHTML = $("#pictureTemplate").clone();

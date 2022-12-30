@@ -154,8 +154,7 @@ namespace eCommerce.Services
                                     .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
                                     .OrderBy(x => x.ID)
                                     .AsQueryable();
-            var ret = categories.ToList();
-            return ret;
+            return categories.ToList();            
         }
 
         public Category GetCategoryByID(int ID)

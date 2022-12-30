@@ -47,6 +47,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public List<Category> Categories { get; set; }
         public List<Catalogo> Catalogos { get; set; }
         public int CatalogoID { get; set; }
+        public List<string> CatalogoIDs { get; set; }
         
     }
 }
