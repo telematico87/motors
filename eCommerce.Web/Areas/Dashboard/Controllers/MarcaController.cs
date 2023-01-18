@@ -1,13 +1,10 @@
 ﻿using eCommerce.Entities;
 using eCommerce.Services;
 using eCommerce.Shared.Enums;
-using eCommerce.Shared.Helpers;
 using eCommerce.Web.Areas.Dashboard.ViewModels;
 using eCommerce.Web.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
@@ -34,13 +31,21 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         [HttpGet]
         public ActionResult Action(int? ID)
         {
-            MarcasActionViewModel model = new MarcasActionViewModel();
+            MarcasActionViewModel model = new MarcasActionViewModel();            
 
             if (ID.HasValue)
             {
                 var marca = MarcaService.Instance.GetMarcaByID(ID.Value);
 
                 if (marca == null) return HttpNotFound();
+
+                var catalogos = CatalogoMarcaService.Instance.SearchCatalogosByMarcaID(ID.Value);
+                List<string> catalogosId = new List<string>();
+
+                catalogos.ForEach(c => {
+                    //Añadir al array catalogosId
+                    catalogosId.Add(c.CatalogoId.ToString());                                        
+                });
 
                 model.ID = marca.ID;
                 model.Descripcion = marca.Descripcion;
@@ -49,10 +54,9 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.Picture = marca.Picture;
                 model.PictureID = marca.PictureID;
                 model.CatalogoID = marca.CatalogoID;
-            }
-             
+                model.CatalogoIDs = catalogosId;
+            }             
             model.Catalogos = CatalogoService.Instance.ListarCatalogo();
-
             return View(model);
         }
 
@@ -85,6 +89,27 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     {
                         throw new Exception("No se puede actualizar la marca");
                     }
+
+                    var ids = model.CatalogoIDs;
+                    List<CatalogoMarca> listCatalogos = new List<CatalogoMarca>();
+                    if (ids.Count > 0)
+                    {
+                        for (var i = 0; i < ids.Count; i++)
+                        {
+                            CatalogoMarca catalogo = new CatalogoMarca();
+
+                            catalogo.CatalogoId = Int32.Parse(ids[i]);
+                            catalogo.MarcaId = marca.ID;
+                            catalogo.ModifiedOn = DateTime.Now;
+                            catalogo.IsActive = true;
+                            listCatalogos.Add(catalogo);                            
+                        }
+                    }
+                    if (!CatalogoMarcaService.Instance.UpdateCatalogoMarca(marca.ID, listCatalogos))
+                    {
+                        throw new Exception("No se pudo actualizar los Catalogos para esta Marca");
+                    }
+
                     json.Data = new { Success = true };
 
                 }
@@ -105,7 +130,25 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                         throw new Exception("No se puede crear la marca");
                     }
 
+                    //Guardar Marca(s)
+                    var ids = model.CatalogoIDs;
+                    if (ids.Count > 0)
+                    {
+                        for (var i = 0; i < ids.Count; i++)
+                        {
+                            CatalogoMarca marcas = new CatalogoMarca();
 
+                            marcas.CatalogoId = Int32.Parse(ids[i]);
+                            marcas.MarcaId = marca.ID;
+                            marcas.ModifiedOn = DateTime.Now;
+                            marcas.IsActive = true;
+
+                            if (!CatalogoMarcaService.Instance.SaveCatalogoMarca(marcas))
+                            {
+                                throw new Exception("No se pudo actualizar los Catalogos para esta Marca");
+                            }
+                        }
+                    }
                     json.Data = new { Success = true };
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using eCommerce.Entities;
 using eCommerce.Entities.Response;
 using eCommerce.Services;
+using eCommerce.Shared.Commons;
 using eCommerce.Shared.Helpers;
 using eCommerce.Web.ViewModels;
 using System;
@@ -19,6 +20,12 @@ namespace eCommerce.Web.Controllers
         public ActionResult FinanciamientoEfectiva()
         { 
             return View(); 
+        }       
+
+        [HttpGet]
+        public ActionResult FormularioRegistro()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -43,7 +50,7 @@ namespace eCommerce.Web.Controllers
         public ActionResult listarMarca()
         { 
             //FinanciamientosViewModels model = new FinanciamientosViewModels();
-            var model = MarcaService.Instance.ListarMarca();
+            var model = MarcaService.Instance.GetMarcaByCatalogoID(eCommerceConstants.CATALOGO_MOTO_ID);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -100,6 +107,13 @@ namespace eCommerce.Web.Controllers
         public ActionResult listaMontoFinanciar()
         {
             var model = new MantenedorFinanciera().ListarMontoFinanciar();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult listaTipoDocumento()
+        {
+            var model = new MantenedorFinanciera().ListarTipoDocumento();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -189,6 +203,12 @@ namespace eCommerce.Web.Controllers
                 result.Data = new { Success = false, Message = ex.Message };
             }
             return result;
+        }
+
+        [HttpGet]
+        public ActionResult PaginaPrincipal()
+        {
+            return new RedirectResult(@Url.Home());
         }
 
 

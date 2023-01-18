@@ -3,6 +3,7 @@
     listarMarcas();
     listarEstadoCivil();
     listaTipoVivienda();
+    listarTipoDocumento();
     listaRangoIngreso();
     listaMontoFinanciar();
     listaInteresCompra();
@@ -239,7 +240,7 @@ function GuardarFinanciamiento() {
             success: function (result) {
 
                 Swal.fire("Gracias por tu Preferencia!", 'Enviado Correctamente', "success");
-                window.location.href = "@Url.Home()";
+                window.location.href = "/Financiamiento/PaginaPrincipal";
             }
 
         });
@@ -275,6 +276,17 @@ function listarEstadoCivil() {
         success: function (result) {
             let Marca = result;
             llenarCombo(Marca, "cboEstadoCivil", "Valor", "Valor", "0")
+        }
+    });
+}
+
+function listarTipoDocumento() {
+    $.ajax({
+        method: "GET",
+        url: "/Financiamiento/listaTipoDocumento",
+        success: function (result) {
+            let tipoDocumento = result;
+            llenarCombo(tipoDocumento, "cboTipoDocumento", "Valor", "Valor", "0")
         }
     });
 }

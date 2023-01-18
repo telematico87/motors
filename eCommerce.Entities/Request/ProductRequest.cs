@@ -26,5 +26,6 @@ namespace eCommerce.Entities.Request
         public int Stock { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
+        public string Especificaciones { get; set; }
     }
 }

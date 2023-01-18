@@ -1,5 +1,6 @@
 ﻿using eCommerce.Data;
 using eCommerce.Entities;
+using eCommerce.Shared.Commons;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -41,10 +42,10 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             var categories = context.Categories
-                                    .Where(x=>!x.IsDeleted)
+                                    .Where(x => !x.IsDeleted)
                                     .OrderBy(x => x.ID)
                                     .AsQueryable();
-            
+
             if (recordSize.HasValue && recordSize.Value > 0)
             {
                 pageNo = pageNo ?? 1;
@@ -61,10 +62,13 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-                var categories = context.Categories
-                                    .Where(x => !x.IsDeleted && x.isFeatured)
-                                    .OrderBy(x => x.ID)
-                                    .AsQueryable();
+            var catalogId = eCommerceConstants.CATALOGO_MOTO_ID;
+
+            var categories = from a in context.Categories
+                             join s in context.CatalogoCategorias on a.ID equals s.CategoriaId
+                             where s.CatalogoId == catalogId && !a.IsDeleted && a.isFeatured
+                             orderby a.ID
+                             select a;
 
             if (recordSize.HasValue && recordSize.Value > 0)
             {
@@ -75,7 +79,36 @@ namespace eCommerce.Services
                                        .Take(recordSize.Value);
             }
 
-            if(includeProducts)
+            if (includeProducts)
+            {
+                categories = categories.Include("Products.ProductRecords");
+            }
+
+            return categories.ToList();
+        }
+
+
+
+        public List<Category> GetFeaturedCategoriesCatalogo(int catalogId, int? pageNo = 1, int? recordSize = 0, bool includeProducts = false)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var categories = from a in context.Categories
+                             join s in context.CatalogoCategorias on a.ID equals s.CategoriaId
+                             where s.CatalogoId == catalogId && !a.IsDeleted && a.isFeatured
+                             orderby a.ID
+                             select a;           
+
+            if (recordSize.HasValue && recordSize.Value > 0)
+            {
+                pageNo = pageNo ?? 1;
+                var skip = (pageNo.Value - 1) * recordSize.Value;
+
+                categories = categories.Skip(skip)
+                                       .Take(recordSize.Value);
+            }
+
+            if (includeProducts)
             {
                 categories = categories.Include("Products.ProductRecords");
             }
@@ -88,7 +121,7 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             var categoryRecords = context.CategoryRecords
-                                         .Where(x=>x.CategoryID == categoryID && !x.IsDeleted)
+                                         .Where(x => x.CategoryID == categoryID && !x.IsDeleted)
                                          .OrderBy(x => x.ID)
                                          .AsQueryable();
 
@@ -150,11 +183,13 @@ namespace eCommerce.Services
         {
             var context = DataContextHelper.GetNewContext();
 
-            var categories = context.Categories
-                                    .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
-                                    .OrderBy(x => x.ID)
-                                    .AsQueryable();
-            return categories.ToList();            
+            var categories = from a in context.Categories
+                             join s in context.CatalogoCategorias on a.ID equals s.CategoriaId
+                             where s.CatalogoId == CatalogoId && !a.IsDeleted
+                             orderby a.ID
+                             select a;
+
+            return categories.ToList();
         }
 
         public Category GetCategoryByID(int ID)
@@ -164,7 +199,7 @@ namespace eCommerce.Services
             var category = context.Categories.Find(ID);
 
             return category != null && !category.IsDeleted ? category : null;
-        }       
+        }
 
         public CategoryRecord GetCategoryRecordByID(int ID)
         {
@@ -180,8 +215,27 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             var category = context.Categories.FirstOrDefault(x => x.SanitizedName.Equals(sanitizedCategoryName) && !x.IsDeleted);
-
+            
             return category != null ? category : null;
+        }
+
+        public Category GetCategoryByNameAndByCatalogo(string categoryName, int catalogId)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            categoryName = categoryName.ToUpper().Trim();
+
+            var categories = from c in context.Categories
+                             join s in context.CatalogoCategorias on c.ID equals s.CategoriaId
+                             join d in context.CategoryRecords on c.ID equals d.CategoryID
+                             where s.CatalogoId == catalogId && !c.IsDeleted
+                             orderby c.ID
+                             select d;
+
+
+            var category = categories.FirstOrDefault(x => x.Name.ToUpper().Trim().Equals(categoryName) && !x.IsDeleted);            
+
+            return category.Category != null ? category.Category : null;
         }
 
         public bool SaveCategory(Category category)
@@ -209,10 +263,10 @@ namespace eCommerce.Services
             var existingCategory = context.Categories.Find(category.ID);
 
             context.Entry(existingCategory).CurrentValues.SetValues(category);
-            
+
             return context.SaveChanges() > 0;
         }
-        
+
         public bool UpdateCategoryRecord(CategoryRecord categoryRecord)
         {
             var context = DataContextHelper.GetNewContext();
@@ -254,10 +308,10 @@ namespace eCommerce.Services
             if (parentCategoryID.HasValue && parentCategoryID.Value > 0)
             {
                 categories = categories.Where(x => x.ParentCategoryID == parentCategoryID.Value);
-            }                      
+            }
 
             count = categories.Count();
-            
+
             pageNo = pageNo ?? 1;
             var skipCount = (pageNo.Value - 1) * recordSize;
 

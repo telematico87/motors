@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="AroService.cs" />
     <Compile Include="CatalogoCategoriaService.cs" />
+    <Compile Include="CatalogoMarcaService.cs" />
     <Compile Include="CatalogoService.cs" />
     <Compile Include="CategoriesService.cs" />
     <Compile Include="ColorService.cs" />

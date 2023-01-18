@@ -726,33 +726,19 @@ namespace eCommerce.Web
                 namespaces: new[] { "eCommerce.Web.Controllers" }
             );
 
-            routes.MapRoute(
-               name: "Financiamiento",
-               url: "{controller}/Financiamiento-efectiva",
-               defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoEfectiva" },
-               namespaces: new[] { "eCommerce.Web.Controllers" }
-           );
+           // routes.MapRoute(
+           //    name: "Financiamiento",
+           //    url: "{controller}/Financiamiento-efectiva",
+           //    defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoEfectiva" },
+           //    namespaces: new[] { "eCommerce.Web.Controllers" }
+           //);
 
-            routes.MapRoute(
-                name: "LanguageBased_Financiamiento",
-                url: "Financiamiento/FinanciamientoEfectiva",
-                defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoEfectiva" },
-                namespaces: new[] { "eCommerce.Web.Controllers" }
-            );
-
-            routes.MapRoute(
-              name: "LanguageBased_FinanciamientoSantander",
-              url: "Financiamiento/FinanciamientoSantander",
-              defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoSantander" },
-              namespaces: new[] { "eCommerce.Web.Controllers" }
-          );
-
-            routes.MapRoute(
-            name: "FinanciamientoSantander",
-            url: "{controller}/Financiera-Santander",
-            defaults: new { area = "", controller = "Financiamiento", action = "FinancieraSantander" },
-            namespaces: new[] { "eCommerce.Web.Controllers" }
-        );
+           // routes.MapRoute(
+           //     name: "LanguageBased_Financiamiento",
+           //     url: "Financiamiento/FinanciamientoEfectiva",
+           //     defaults: new { area = "", controller = "Financiamiento", action = "FinanciamientoEfectiva" },
+           //     namespaces: new[] { "eCommerce.Web.Controllers" }
+           // );                       
 
             routes.MapRoute(
                 name: "LanguageBasedSaved_Financiamiento",

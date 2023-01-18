@@ -334,6 +334,7 @@
     <Content Include="404.html" />
     <Content Include="500.aspx" />
     <Content Include="500.html" />
+    <Content Include="Content\bm3\excel-format\ProductTemplate.txt" />
     <Content Include="Content\bm3\favicon\favicon.ico" />
     <Content Include="Content\bm3\favicon\favicon.png" />
     <Content Include="Content\bm3\fonts\font-awesome\icon.svg" />
@@ -426,7 +427,7 @@
     <Content Include="Content\bm3\javascript\jquery.min.js" />
     <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
-    <Content Include="Content\bm3\javascript\jsFinanciamiento.js" />
+    <Content Include="Content\bm3\javascript\jsFinanciamiento5.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />
@@ -5363,6 +5364,8 @@
     <Content Include="Content\bm3\excel-format\ProductsCopia.xlsx" />
     <Content Include="Content\bm3\excel-format\ProductTemplate.xlsx" />
     <Content Include="Areas\Dashboard\Views\CargaMasiva\UploadExcel.cshtml" />
+    <Content Include="Areas\Dashboard\Views\CargaMasiva\Result.cshtml" />
+    <Content Include="Content\bm3\excel-format\ProductTemplate1.xlsx" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_ExternalSocialScripts.cshtml" />
     <Content Include="Views\Categories\_SeccionNuevosIngresos.cshtml" />
@@ -5395,6 +5398,7 @@
     <Content Include="Views\Home\Catalogo\Common\_CategoriesFilter.cshtml" />
     <Content Include="Views\Home\Catalogo\AccessoryFilters\PriceRangeFilter.cshtml" />
     <Content Include="Views\Products\DetalleParts.cshtml" />
+    <Content Include="Views\Financiamiento\FormularioRegistro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\eCommerce.Data.csproj">

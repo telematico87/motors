@@ -33,15 +33,7 @@ namespace eCommerce.Services
         public MarcaService()
         {
         }
-        #endregion
-
-        //public List<Category> ListarCategoria()
-        //{
-        //    var context = DataContextHelper.GetNewContext();
-        //    var categori = context.Categories.ToList();
-        //    return categori.ToList();
-        //}
-         
+        #endregion                
 
         public List<Marca> SearchMarca(string searchTerm, int? pageNo, int recordSize, out int count)
         {
@@ -80,12 +72,14 @@ namespace eCommerce.Services
 
         public List<Marca> GetMarcaByCatalogoID(int CatalogoId, int? pageNo = 1, int? recordSize = 0)
         {
-            var context = DataContextHelper.GetNewContext();
+            var context = DataContextHelper.GetNewContext();            
 
-            var marcas = context.Marcas
-                                    .Where(x => x.CatalogoID == CatalogoId && !x.IsDeleted)
-                                    .OrderBy(x => x.ID)
-                                    .AsQueryable();
+            var marcas = from m in context.Marcas
+                             join c in context.CatalogoMarcas on m.ID equals c.MarcaId
+                             where c.CatalogoId == CatalogoId && !m.IsDeleted
+                             orderby m.ID
+                             select m;
+
             return marcas.ToList();
         }
 
@@ -102,9 +96,6 @@ namespace eCommerce.Services
         public bool UpdateMarca(Marca marca)
         {
             var context = DataContextHelper.GetNewContext();
-
-            //marca.ModifiedOn = DateTime.Now;
-            //context.Entry(marca).State = System.Data.Entity.EntityState.Modified; 
             var existingCategory = context.Marcas.Find(marca.ID); 
             context.Entry(existingCategory).CurrentValues.SetValues(marca);
 
@@ -122,6 +113,14 @@ namespace eCommerce.Services
             context.Entry(marcas).State = System.Data.Entity.EntityState.Modified;
 
             return context.SaveChanges() > 0;
+        }
+
+        public Marca GetMarcaByName(string marcaName)
+        {
+            var context = DataContextHelper.GetNewContext();
+            marcaName = marcaName.ToUpper().Trim();
+            var marca = context.Marcas.FirstOrDefault(x => x.Descripcion.ToUpper().Trim().Equals(marcaName) && !x.IsDeleted);
+            return marca != null ? marca : null;
         }
     }
 }

@@ -31,27 +31,27 @@
 
 <div class="page-data-holder mb-4">
     <form id="actionForm" method="post">
-        <input type="hidden" name="hdCatalogoID" value="@Model.CatalogoID" />   
+        <input type="hidden" name="hdCatalogoID" value="@Model.CatalogoID" />
         <div class="card mt-3">
-            
+
             <div class="card-body">
                 <div class="form-group">
                     <label>
-                       Descripción
+                        Descripción
                     </label>
                     <input class="form-control" name="Descripcion" value="@Model.Descripcion" placeholder="Descripción" />
                 </div>
 
                 <div class="form-group">
                     <label>
-                       Resumen
+                        Resumen
                     </label>
                     <textarea class="form-control" name="Resumen" placeholder="Resumen" rows="2">@Model.Resumen</textarea>
                 </div>
 
                 <div class="form-group">
                     <label>
-                       URL
+                        URL
                     </label>
                     <input class="form-control" name="URL" placeholder="URL" value="@Model.URL" />
                 </div>
@@ -61,35 +61,36 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>
-                       Catálogo
+                        Catálogos
                     </label>
-                    <select class="form-control" name="CatalogoID">
-                        <option value="0">--Seleccione--</option> 
-                        @foreach (var catalogo in Model.Catalogos)
-                        {
-                            var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
+                    <select class="form-control selectpicker" name="CatalogoIDs" id="CatalogoIDs" multiple>
+                        <option value="0">Seleccione</option>
 
-                            <option value="@catalogo.ID" @selected>
-                                @catalogo.Description
-                            </option> 
-                        } 
+                        @if (Model.Catalogos.Count > 0)
+                        {
+                            foreach (var catalogo in Model.Catalogos)
+                            {
+                                string match = null;
+                                var catalogoIdStr = catalogo.ID.ToString();
+                                //var matchingvalues = Model.CatalogoIDs.Where(c => c.Contains(catalogoIdStr));
+                                if (Model.CatalogoIDs != null)
+                                {
+                                    match = Model.CatalogoIDs.FirstOrDefault(stringToCheck => stringToCheck.Contains(catalogoIdStr));
+                                }
+
+                                //var selected = Model.CatalogoID == catalogo.ID ? "selected" : string.Empty;
+                                var selected = string.Empty;
+                                if (match != null)
+                                {
+                                    selected = "selected";
+                                }
+                                <option value="@catalogo.ID" @selected>
+                                    @catalogo.Description
+                                </option>
+                            }
+                        }
                     </select>
                 </div>
-
-                @*<div class="form-group">
-                    <label>
-                        @("Dashboard.Categories.Action.URL".Localized())
-                    </label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                @Url.SearchProducts(category: "").ToSiteURL()/
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" id="SanitizedName" name="SanitizedName" value="@Model.SanitizedName">
-                    </div>
-                </div>*@
-
                 <div class="form-group" id="pics-container">
                     <label>
                         @("Dashboard.Categories.Action.SelectPicture".Localized())
@@ -100,30 +101,30 @@
                         @Html.Picture(Model.Picture, "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef", lazyLoad: false)
                     </div>
                 </div>
-                 
+
                 <hr />
                 <div class="form-group mb-0">
                     @if (Model.ID > 0)
                     {
                         <button class="btn btn-success" type="submit" id="actionButton">
                             <i class="fas fa-edit mr-1"></i>
-                           Actualizar
+                            Actualizar
                         </button>
                         <button class="deleteButton btn btn-danger" type="button" data-id="@Model.ID">
                             <i class="fas fa-trash-alt mr-1"></i>
-                          Eliminar
+                            Eliminar
                         </button>
                     }
                     else
                     {
                         <button class="btn btn-success" type="submit" id="actionButton">
                             <i class="fas fa-plus mr-1"></i>
-                          Guardar
+                            Guardar
                         </button>
                     }
                     <a class="btn btn-secondary" href="@Url.ListAction("Marca")">
                         <i class="fas fa-angle-double-left mr-1"></i>
-                       Cancelar
+                        Cancelar
                     </a>
                 </div>
             </div>
@@ -134,7 +135,7 @@
 <div id="pictureTemplate" style="display:none">
     @Html.UserAvatar(new eCommerce.Entities.Picture(), "image img-thumbnail", "height: 433px; width: 380px; border: 1px solid #efefef")
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
     $("#SanitizedName").keyup(function () {
         var titleValue = $(this).val();
@@ -144,6 +145,7 @@
         }
     });
 
+    $('.selectpicker').selectpicker();
 
     $("#categoryPicture").change(function () {
 		var pictures = this.files;

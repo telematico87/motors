@@ -1,6 +1,4 @@
-﻿
-
-@model eCommerce.Web.Areas.Dashboard.ViewModels.CargaMasivaViewModel
+﻿@model eCommerce.Web.Areas.Dashboard.ViewModels.CargaMasivaViewModel
 @{
     if (Model != null)
     {
@@ -16,7 +14,7 @@
         Carga Masiva
     </h3>
     <p>
-        Cargar Productos desde Excel
+        Insertar y Actualiza Productos desde Excel
     </p>
     <hr />
 </div>
@@ -25,76 +23,121 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm("UploadExcel", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
-{
- 
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="control-label col-md-2">Descargar Plantilla:</div>
-            <div class="col-md-10">
-                <a href="/CargaMasiva/DownloadExcel/">Productos Template.xlsx</a>
+<div class="row">
+    <div class="col-md-6">
+
+        <h5 class="h5 mb-2 text-gray-800">
+            Subir Productos
+        </h5>
+        <form id="UploadExcel" method="post" enctype="multipart/form-data">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label>
+                        Descargar Plantilla: @Html.ActionLink("Productos Template.xlsx", "DownloadExcel", "CargaMasiva", new { fileName = "Products.xlsx" }, new { @target = "_blank" })
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="">
+                        <input type="file" id="FileUpload" name="FileUpload" class="" />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Cargar Productos" id="btnSubmit" class="btn btn-primary" />
+                </div>
             </div>
-        </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h5 class="h5 mb-2 text-gray-800">
+            Descargar Productos
+        </h5>
+        <p><a class="btn btn-info" href="@Url.Action("DownloadAccesorio","CargaMasiva")">Descargar Accesorios</a></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        <h4 class="h3 mb-2 text-gray-800">
+            Resultado de Carga
+        </h4>
         <div class="form-group">
-            <div class="control-label col-md-2">Excel:</div>
-            <div class="col-md-10">
-                <input type="file" id="FileUpload" name="FileUpload" class="" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+            <i id="loadPrincipal" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+            <div id="result">
+
             </div>
         </div>
     </div>
-}
-
-
+</div>
 
 <script>
-
     $(document).ready(function () {
 
+        $("#loadPrincipal").css("display", "none");
+
         $("#UploadExcel").submit(function (e) {
-            debugger;
-            submitForm();
-
             e.preventDefault();
-        });
 
+            $("#loadPrincipal").css("display", "block");
+            var form = $('#UploadExcel')[0];
+            // Create an FormData object
+            var data = new FormData(form);
+            submitForm(data);
+        });
     });
 
+    function submitForm(data) {
 
-    function submitForm() {
-        debugger;
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/CargaMasiva/UploadExcel",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+
+                $("#loadPrincipal").css("display", "none");
+
+                if (data.Success === true) {
+                    $("#result").text("Se subio correctamente");
+                } else {
+                    $("#result").text(data);
+                }
+                console.log("SUCCESS : ", data);
+            },
+            error: function (e) {
+                $("#result").text(e.responseText);
+                console.log("ERROR : ", e);                
+            }
+        });
 
 
 
-            $.ajax({
+            @*$.ajax({
                 url: "/CargaMasiva/UploadExcel",
                 type: "post",
-                data: $("#loginForm").serialize(),
+                enctype: 'multipart/form-data',
+                data: data
             })
                 .done(function (response) {
                     debugger;
                     console.log(response);
                     if (response != null && response.Success) {
                         alertify.success('Cargado con exiti¿o ' + response.Usuario);
-                        //window.location.href = "@(!string.IsNullOrEmpty(Model.ReturnUrl) ? Model.ReturnUrl : Url.Home())";
-
-                }
+                    }
                     else {
                         console.log("entro al else");
                     //removeLoader("login-container");
-
-                }
+                    }
             })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     console.log("entro al fail");
                  //removeLoader("login-container");
                  Swal.fire("@("PP.Message.Error".Localized())", "@("PP.Message.GenericErrorMessage".Localized())", "error");
 
-            });
-
+                });*@
     }
 </script>

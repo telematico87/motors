@@ -112,17 +112,16 @@ namespace eCommerce.Services
 
         public void sendEmailToAdmin(Financiamiento financiamiento)
         {
-            MantenedorFinanciera m = new MantenedorFinanciera();
-            
-            var tipoDoc = m.ListarTipoDocumento().FirstOrDefault(d => d.Codigo == financiamiento.TipoDocumento);
+            MantenedorFinanciera m = new MantenedorFinanciera();                        
             
             var rangoIngreso = m.obtenerValor("RangoIngreso", financiamiento.RangoIngreso);
             var interesCompra = m.obtenerValor("InteresCompra", financiamiento.InteresCompra);
             var tipoVivienda = m.obtenerValor("TipoVivienda", financiamiento.TipoVivienda);            
             var antiguedadLaboral = m.obtenerValor("AntiguedadLaboral", financiamiento.TipoVivienda);            
             var situacionLaboral = m.obtenerValor("SituacionLaboral", financiamiento.IDSituacionLaboral);            
+            var tipoDocumento = m.obtenerValor("TipoDocumento", financiamiento.IDSituacionLaboral);            
             var nombreCompleto = financiamiento.Nombre.Trim() + " " + financiamiento.Apellido.Trim();            
-            var nroDocumento = tipoDoc.Valor.Trim() + " " + financiamiento.NroDocumento.Trim();
+            var nroDocumento = tipoDocumento + " " + financiamiento.NroDocumento.Trim();
             var financiera = m.obtenerValor("TipoFinanciera", financiamiento.TipoFinanciera);
 
             //Envio al Administrador

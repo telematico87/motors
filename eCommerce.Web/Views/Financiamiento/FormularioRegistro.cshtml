@@ -1,0 +1,262 @@
+﻿@model FinanciamientosViewModels
+<link href="~/Content/css/financiamiento_mobile.css" rel="stylesheet" />
+<style>
+    input[type="checkbox"] {
+        opacity: 1;
+    }
+</style>
+
+<section class="flat-row">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="text-align: center !important; background-color: #2880fc !important">
+                    <div>
+                        <div class="item-image">
+                            <img src="~/Content/bm3/images/banner/efectiva-v2.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-full" style="background-color:whitesmoke;">
+        <div class="container" id="mod_financiera">
+            <div class="row" style="padding:10px;">
+                <div class="form-group">
+                    <h3>Para solicitar financiamiento, complete el siguiente formulario.</h3>
+                </div>
+            </div>
+            <div class="formulario_financiera">
+                <form method="post" id="frmEfectiva">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Nombre">Nombre<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Nombre" aria-label="default input example" placeholder="Ingrese Nombres" id="txtNombre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Nombres'" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Apellido">Apellidos<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtApellido" name="Apellido" placeholder="Ingrese Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Apellidos'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="FechaNascimiento">Fecha Nacimiento<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="txtFechaNacimiento" name="Nacimiento" placeholder="20/12/1990" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Fecha Nacimiento'" maxlength="9">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Celular">Celular<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtCelular" name="Celular" placeholder="Ingrese Celular" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Celular'" maxlength="9">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Correo">Email<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="txtCorreo" name="Correo" type="email" placeholder="Ingrese Correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Correo'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="TipoDocumento">Tipo Documento<span class="text-danger">*</span></label>                                    
+                                    <select id="cboTipoDocumento" class="form-control custom-select" name="TipoDocumento">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="NroDocumento">Nro Documento<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtNroDocumento" name="NroDocumento" placeholder="Ingrese NroDocumento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NroDocumento'">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="EstadoCivil">Estado Civil<span class="text-danger">*</span></label>
+                                    <select id="cboEstadoCivil" class="form-control custom-select" name="EstadoCivil">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Departamento">Departamento<span class="text-danger">*</span></label>
+                                    <select id="cboDepartamento" class="form-control custom-select" name="Departamento">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Provincia">Provincia<span class="text-danger">*</span></label>
+                                    <select id="cboProvincia" class="form-control custom-select" name="Provincia">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="TipoVivienda">Tipo de Vivienda<span class="text-danger">*</span></label>
+                                    <select id="cboTipoVivienda" class="form-control custom-select">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="InteresCompra">Interés de Compra<span class="text-danger">*</span></label>
+                                    <select id="cboInteresCompra" class="form-control custom-select" name="InteresCompra">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="SituacionLaboral">Situación Laboral<span class="text-danger">*</span></label>
+                                    <select id="cboSituacionLaboral" class="form-control custom-select" name="SituacionLaboral">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="MontoFinanciar">Ocupación<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtOcupacion" name="txtOcupacion" placeholder="Ingrese Ocupación" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingrese Ocupación'" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="RangoIngresos">Ingreso Neto<span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">S/</span>
+                                        </div>
+                                        <input type="number" required value="0" id="txtIngresoNeto" name="txtIngresoNeto" class="form-control" aria-label="Ingreso Neto">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="AntiguedadLaboral">Antiguedad Laboral<span class="text-danger">*</span></label>
+                                    <select id="cboAntiguedadLaboral" class="form-control custom-select" name="AntiguedadLaboral">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="TipoFinanciera">Financiera de Preferencia<span class="text-danger">*</span></label>
+                                    <select id="cboTipoFinanciera" class="form-control custom-select" name="TipoFinanciera">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Marca">Marca<span class="text-danger">*</span></label>
+                                    <select id="cboMarca" class="form-control custom-select" name="Marca">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="Modelo">Modelo<span class="text-danger">*</span></label>
+                                    <select id="cboModelo" class="form-control custom-select" name="Modelo">
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Precio">Precio<span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="txtPrecio" disabled name="Precio" placeholder="Ingrese Precio" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Precio'" value="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="MontoInicial">Monto Inicial</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">S/</span>
+                                        </div>
+                                        <input type="number" required value="0" id="txtMontoInicial" name="txtMontoInicial" class="form-control" aria-label="Monto Inicial">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="MontoFinanciar">Monto a Financiar<span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">S/</span>
+                                        </div>
+                                        <input type="number" disabled required id="txtMontoFinanciar" name="txtMontoFinanciar" value="0" class="form-control" aria-label="Monto a Financiar">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-check">
+                                <input type="checkbox" name="PoliticaPrivacidad" id="PoliticaPrivacidad">
+                                <label class="form-check-label" for="PoliticaPrivacidad">
+                                    He leído y acepto la política de privacidad
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-check">
+                                <input type="checkbox" name="AceptoComunicaciones" id="AceptoComunicaciones">
+                                <label class="form-check-label" for="AceptoComunicaciones">
+                                    Acepto recibir comunicaciones comerciales de LA EMPRESA
+                                </label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-tprimary" type="submit" id="actionButton"><i class="fa fa-paper-plane" aria-hidden="true"></i> Solicitar Financiamiento</button>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="~/Content/lib/jquery-3.4.1/jquery.min.js"></script>
+<script src="~/Content/bm3/javascript/jsFinanciamiento5.js"></script>

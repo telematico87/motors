@@ -82,6 +82,7 @@ namespace eCommerce.Data
 
         public DbSet<Contacto> Contactos { get; set; }
         public DbSet<LogSystem> LogSystems { get; set; }
+        public DbSet<ProductStock> ProductStocks { get; set; }
 
         public static eCommerceContext Create()
         {

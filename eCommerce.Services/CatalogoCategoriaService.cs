@@ -39,35 +39,19 @@ namespace eCommerce.Services
             return context.SaveChanges() > 0;
         }
 
-        //public List<CategoryResponse> SearchCategoriesByCatalogoID(int CatalogId, int? pageNo, int recordSize, out int count)
-        //{
-        //    //Consultar Categorias de un Catalogo
-        //    List<CategoryResponse> result = new List<CategoryResponse>();
+        public bool UpdateCatalogoCategoria(int categoryId, List<CatalogoCategoria> newCatalogos)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var oldCatalogos = context.CatalogoCategorias.Where(p => p.CategoriaId == categoryId);
+
+            context.CatalogoCategorias.RemoveRange(oldCatalogos);
 
 
-        //    var context = DataContextHelper.GetNewContext();
+            context.CatalogoCategorias.AddRange(newCatalogos);
 
-        //    var catalogosCategorias = context.CatalogoCategorias
-        //                        .Where(x => !x.IsDeleted && x.CatalogoId == CatalogId)
-        //                        .AsQueryable();
-
-        //    if (catalogosCategorias.Count() > 0) {
-
-        //        //Traer valores de Categorias
-        //        foreach(var c in catalogosCategorias) {
-
-        //            var category = context.Categories.FirstOrDefault(x => !x.IsDeleted && x.ID == c.CategoriaId);
-
-        //            if (category!= null) {
-        //                var currentLanguageCategoryRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
-
-        //                CategoryResponse cat = new CategoryResponse();
-        //                cat.CategoryID = category.ID;
-        //                cat.Name = currentLanguageCategoryRecord.Name;
-        //                result.Add(cat);
-        //            }
-        //        }               
-        //    }
+            return context.SaveChanges() > 0;
+        }
 
         public List<CatalogoCategoria> SearchCategoriesByCatalogoID(int CatalogId)
         {
@@ -79,5 +63,16 @@ namespace eCommerce.Services
 
             return catalogosCategorias.OrderByDescending(x => x.ID).ToList();
         }
+
+        public List<CatalogoCategoria> SearchCatalogosByCategoryID(int CategoryId)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var catalogosCategorias = context.CatalogoCategorias
+                                .Where(x => !x.IsDeleted && x.CategoriaId == CategoryId)
+                                .AsQueryable();
+
+            return catalogosCategorias.OrderByDescending(x => x.ID).ToList();
+        }        
     }
 }

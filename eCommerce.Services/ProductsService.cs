@@ -269,6 +269,17 @@ namespace eCommerce.Services
             return products.Skip(skipCount).Take(recordSize).Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
         }
 
+        public List<Product> ProductsByCatalogID(int catalogoId)
+        {
+            var context = DataContextHelper.GetNewContext();
+            var products = context.Products
+                                  .Where(x => x.CatalogoId == catalogoId && !x.IsDeleted && x.IsActive && !x.Category.IsDeleted)
+                                  .AsQueryable();
+
+            products = products.OrderBy(x => x.CategoryID);
+            return products.Include("Category.CategoryRecords").Include("ProductPictures.Picture").ToList();
+        }
+
 
         public List<Product> GetProductWithLessStockQuantity(List<int> categoryIDs, string searchTerm, decimal? from, decimal? to, string sortby, bool activeOnly, int stockCount, out int count)
         {
@@ -479,7 +490,7 @@ namespace eCommerce.Services
             var context = DataContextHelper.GetNewContext();
 
             return IDs.Select(id => context.Products.Find(id)).Where(x=>!x.IsDeleted && x.IsActive && !x.Category.IsDeleted).OrderBy(x=>x.ID).ToList();
-        }
+        }                
         
         public List<ProductSimple> GetProductsByMarcaID(Int32 id)
         {

@@ -25,5 +25,6 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public virtual Picture Picture { get; set; }
         public List<Catalogo> Catalogos { get; set; } 
         public int CatalogoID { get; set; }
+        public List<string> CatalogoIDs { get; set; }
     }
 }

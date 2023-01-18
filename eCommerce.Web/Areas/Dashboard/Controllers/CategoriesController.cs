@@ -7,10 +7,8 @@ using eCommerce.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using eCommerce.Shared.Enums;
-using static eCommerce.Web.Areas.Dashboard.Controllers.ProductsController;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -39,12 +37,33 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         public ActionResult Action(int? ID)
         {
             CategoryActionViewModel model = new CategoryActionViewModel();
+
+            List<Category> listCategories = new List<Category>();
             
             if (ID.HasValue)
             {
-                var category = CategoriesService.Instance.GetCategoryByID(ID.Value);
+                var category = CategoriesService.Instance.GetCategoryByID(ID.Value);              
 
                 if (category == null) return HttpNotFound();
+
+                var catalogos = CatalogoCategoriaService.Instance.SearchCatalogosByCategoryID(ID.Value);
+                List<string> catalogosId = new List<string>();
+               
+                catalogos.ForEach(c => {
+                    //Añadir al array catalogosId
+                    catalogosId.Add(c.CatalogoId.ToString());
+
+                    var listaCatalogoCategorias = CatalogoCategoriaService.Instance.SearchCategoriesByCatalogoID(c.CatalogoId);
+
+                    listaCatalogoCategorias.ForEach(x => {
+                        var categoryObj = CategoriesService.Instance.GetCategoryByID(x.CategoriaId);
+
+                        if (categoryObj != null)
+                        {
+                            listCategories.Add(categoryObj);
+                        }
+                    });
+                });
 
                 var currentLanguageRecord = category.CategoryRecords.FirstOrDefault(x => x.LanguageID == AppDataHelper.CurrentLanguage.ID);
 
@@ -64,12 +83,11 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.Description = currentLanguageRecord.Description;
                 model.Summary = currentLanguageRecord.Summary;
                 model.CatalogoID = category.CatalogoID;
-            }
-
-            model.Categories = CategoriesService.Instance.GetCategories();
+                model.CatalogoIDs = catalogosId;
+                model.Categories = listCategories;
+            }            
             model.Catalogos = CatalogoService.Instance.GetCatalogos();
             
-
             return View(model);
         }
         
@@ -193,6 +211,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     //Guardar Catalogo(s)
                     var ids = model.CatalogoIDs;
+                    List<CatalogoCategoria> listCatalogos = new List<CatalogoCategoria>();
                     if (ids.Count > 0)
                     {
 
@@ -205,13 +224,16 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                             catalogos.CategoriaId = model.CategoryID;
                             catalogos.ModifiedOn = DateTime.Now;
                             catalogos.IsActive = true;
-
-                            if (!CatalogoCategoriaService.Instance.SaveCatalogoCategoria(catalogos))
-                            {
-                                throw new Exception("No se pudo actualizar los Catalogos para esta Categoria");
-                            }
+                            listCatalogos.Add(catalogos);                            
                         }
                     }
+
+                    if (!CatalogoCategoriaService.Instance.UpdateCatalogoCategoria(category.ID, listCatalogos))
+                    {
+                        throw new Exception("No se pudo actualizar los Catalogos para esta Marca");
+                    }
+
+                    
                 }
                 else
                 {
