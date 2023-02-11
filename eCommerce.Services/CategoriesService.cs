@@ -235,7 +235,7 @@ namespace eCommerce.Services
 
             var category = categories.FirstOrDefault(x => x.Name.ToUpper().Trim().Equals(categoryName) && !x.IsDeleted);            
 
-            return category.Category != null ? category.Category : null;
+            return category != null ? category.Category : null;
         }
 
         public bool SaveCategory(Category category)

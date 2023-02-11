@@ -15,6 +15,7 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
     public class TallasActionViewModels : PageViewModel
     {
         public int ID { get; set; }
+        public int Orden { get; set; }
         public string Description { get; set; }
 
     }

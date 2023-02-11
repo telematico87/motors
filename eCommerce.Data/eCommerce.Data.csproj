@@ -191,6 +191,18 @@
     <Compile Include="Migrations\202212300302452_CatalogoMarcaAccesorio.designer.cs">
       <DependentUpon>202212300302452_CatalogoMarcaAccesorio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301180214030_productStock.cs" />
+    <Compile Include="Migrations\202301180214030_productStock.designer.cs">
+      <DependentUpon>202301180214030_productStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202301222203481_addSKUinStock.cs" />
+    <Compile Include="Migrations\202301222203481_addSKUinStock.designer.cs">
+      <DependentUpon>202301222203481_addSKUinStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302080255154_barcode.cs" />
+    <Compile Include="Migrations\202302080255154_barcode.designer.cs">
+      <DependentUpon>202302080255154_barcode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -303,6 +315,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212300302452_CatalogoMarcaAccesorio.resx">
       <DependentUpon>202212300302452_CatalogoMarcaAccesorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301180214030_productStock.resx">
+      <DependentUpon>202301180214030_productStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301222203481_addSKUinStock.resx">
+      <DependentUpon>202301222203481_addSKUinStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302080255154_barcode.resx">
+      <DependentUpon>202302080255154_barcode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

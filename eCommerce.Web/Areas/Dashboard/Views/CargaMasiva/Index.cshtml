@@ -16,6 +16,7 @@
     <p>
         Insertar y Actualiza Productos desde Excel
     </p>
+    <p><a class="btn btn-info" href="@Url.Action("DownloadPlantilla","CargaMasiva")">Descargar Plantilla</a></p>
     <hr />
 </div>
 
@@ -32,9 +33,10 @@
         <form id="UploadExcel" method="post" enctype="multipart/form-data">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label>
+                    @*<label>
                         Descargar Plantilla: @Html.ActionLink("Productos Template.xlsx", "DownloadExcel", "CargaMasiva", new { fileName = "Products.xlsx" }, new { @target = "_blank" })
-                    </label>
+                    </label>*@
+                    
                 </div>
                 <div class="form-group">
                     <label class="">
@@ -42,7 +44,7 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Cargar Productos" id="btnSubmit" class="btn btn-primary" />
+                    <input type="submit" value="Cargar Productos" id="btnSubmit" class="btn btn-success" />
                 </div>
             </div>
         </form>
@@ -59,7 +61,7 @@
     <div class="col-md-12">
         <hr />
         <h4 class="h3 mb-2 text-gray-800">
-            Resultado de Carga
+            Resultado de la Carga
         </h4>
         <div class="form-group">
             <i id="loadPrincipal" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
@@ -104,40 +106,31 @@
                 if (data.Success === true) {
                     $("#result").text("Se subio correctamente");
                 } else {
-                    $("#result").text(data);
+
+                    var result = '<ul>';
+
+                    $.each(data.Data, function (index, value) {
+                        console.log("Imprimo each");
+                        console.log(value);
+
+                        $.each(value.data, function (i, v) {
+                            console.log("Imprimo each 0: " + v);
+                            result += "<li>"+v+"</li>";
+                        });
+                    });
+
+                    result += "</ul>";
+
+
+                    $("#result").html(result);
                 }
                 console.log("SUCCESS : ", data);
             },
             error: function (e) {
+                $("#loadPrincipal").css("display", "none");
                 $("#result").text(e.responseText);
-                console.log("ERROR : ", e);                
+                console.log("ERROR : ", e);
             }
         });
-
-
-
-            @*$.ajax({
-                url: "/CargaMasiva/UploadExcel",
-                type: "post",
-                enctype: 'multipart/form-data',
-                data: data
-            })
-                .done(function (response) {
-                    debugger;
-                    console.log(response);
-                    if (response != null && response.Success) {
-                        alertify.success('Cargado con exiti¿o ' + response.Usuario);
-                    }
-                    else {
-                        console.log("entro al else");
-                    //removeLoader("login-container");
-                    }
-            })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("entro al fail");
-                 //removeLoader("login-container");
-                 Swal.fire("@("PP.Message.Error".Localized())", "@("PP.Message.GenericErrorMessage".Localized())", "error");
-
-                });*@
     }
 </script>

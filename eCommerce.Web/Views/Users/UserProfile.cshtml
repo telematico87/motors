@@ -99,10 +99,11 @@
 <script>
     $(".user-link").click(function () {
         var url = $(this).attr("data-href");
+        console.log("Iniciamos");
 
         if (url != undefined && url != "") {            
             $("#response-holder").html("");
-            addLoader("response-holder");
+            //addLoader("response-holder");
 
             $(".user-link").removeClass("active");
             $(this).addClass("active");

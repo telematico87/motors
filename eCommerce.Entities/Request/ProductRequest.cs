@@ -26,6 +26,27 @@ namespace eCommerce.Entities.Request
         public int Stock { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
+        public int Stock_TallaS { get; set; }
+        public int Stock_TallaM { get; set; }
+        public int Stock_TallaL { get; set; }
+        public int Stock_TallaXL { get; set; }
+        public int Stock_TallaXXL { get; set; }
+        public string Esp_Titulo1 { get; set; }
+        public string Esp_Valor1 { get; set; }
+        public string Esp_Titulo2 { get; set; }
+        public string Esp_Valor2 { get; set; }
+        public string Esp_Titulo3 { get; set; }
+        public string Esp_Valor3 { get; set; }
+        public string Esp_Titulo4 { get; set; }
+        public string Esp_Valor4 { get; set; }
+        public string Esp_Titulo5 { get; set; }
+        public string Esp_Valor5 { get; set; }        
         public string Especificaciones { get; set; }
+        public string SKU_S { get; set; }
+        public string SKU_M { get; set; }
+        public string SKU_L { get; set; }
+        public string SKU_XL { get; set; }
+        public string SKU_XXL { get; set; }
+        
     }
 }

@@ -9,6 +9,8 @@ namespace eCommerce.Entities
     public class Talla : BaseEntity
     {
         public string Description { get; set; }
+        public string Barcode { get; set; }
+        public int Orden { get; set; }
        
     }
 

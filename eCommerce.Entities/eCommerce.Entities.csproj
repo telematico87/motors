@@ -107,6 +107,7 @@
     <Compile Include="EntityEnums.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="ProductSpecification.cs" />
+    <Compile Include="ProductStock.cs" />
     <Compile Include="Promo.cs" />
     <Compile Include="PromoTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

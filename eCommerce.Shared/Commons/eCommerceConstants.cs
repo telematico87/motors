@@ -18,5 +18,10 @@ namespace eCommerce.Shared.Commons
         public const int CATALOGO_ACCESORIO_ID = 2;
         public const int CATALOGO_LLANTA_ID = 2;
         public const int CATALOGO_LUBRICANTE_ID = 3;
+        public const int TALLA_S = 1;
+        public const int TALLA_M = 2;
+        public const int TALLA_L = 3;
+        public const int TALLA_XL = 4;
+        public const int TALLA_XXL = 5;
     }
 }

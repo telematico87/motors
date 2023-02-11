@@ -50,7 +50,18 @@ namespace eCommerce.Services
             pageNo = pageNo ?? 1;
             var skipCount = (pageNo.Value - 1) * recordSize;
 
-            return talla.OrderByDescending(x => x.Description).Skip(skipCount).Take(recordSize).ToList();
+            return talla.OrderBy(x => x.Orden).Skip(skipCount).Take(recordSize).ToList();
+        }
+
+        public List<Talla> AllTalla()
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var tallas = context.Tallas
+                                .Where(x => !x.IsDeleted)
+                                .AsQueryable();
+
+            return tallas.OrderBy(x => x.Orden).ToList();
         }
 
         public Talla GetTallaByID(int ID)

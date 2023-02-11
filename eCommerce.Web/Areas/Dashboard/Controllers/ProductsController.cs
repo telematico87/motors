@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using eCommerce.Shared.Commons;
 using System.Configuration;
+using System.Drawing.Printing;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -641,6 +642,40 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             return Json(response);
         }
 
+        [HttpPost]
+        public JsonResult LoadTallas()
+        {           
+            var tallas = TallaService.Instance.AllTalla();           
+
+            List<TallaResponse> response = new List<TallaResponse>();
+            tallas.ForEach(x => {
+
+                TallaResponse obj = new TallaResponse();
+                obj.TallaID = x.ID;
+                obj.Description = x.Description;
+                obj.Orden = x.Orden;
+                response.Add(obj);
+            });            
+            return Json(response);
+        }
+
+        [HttpPost]
+        public JsonResult LoadColores()
+        {
+            var colores = ColorService.Instance.GetAllColors();
+
+            List<ColorResponse> response = new List<ColorResponse>();
+            colores.ForEach(x => {
+
+                ColorResponse obj = new ColorResponse();
+                obj.ColorID = x.ID;
+                obj.Description = x.Description;
+                obj.Valor = x.Valor;
+                response.Add(obj);
+            });
+            return Json(response);
+        }
+
         public class CatalogoChangeResponse {
             public List<CategoryResponse> Categorias { get; set; }
             public List<MarcaResponse> Marcas { get; set; }
@@ -656,7 +691,22 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
         {
             public int ID { get; set; }
             public string NombreMarca { get; set; }
-        }     
+        }
+
+        public class TallaResponse {
+            public int TallaID { get; set; }
+            public string Description { get; set; }
+            public int Orden { get; set; }
+
+        }
+        
+        public class ColorResponse {
+
+            public int ColorID { get; set; }
+            public string Description { get; set; }
+            public string Valor { get; set; }
+
+        }
 
     }
 }

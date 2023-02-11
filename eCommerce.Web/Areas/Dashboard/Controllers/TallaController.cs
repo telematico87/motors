@@ -45,8 +45,8 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                 model.ID = talla.ID;
                 model.Description = talla.Description;
+                model.Orden = talla.Orden;
             }
-
             return View(model);
         }
 
@@ -68,13 +68,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                     talla.ID = model.ID;
                     talla.Description = model.Description;
-
+                    talla.Orden = model.Orden;
 
                     if (!TallaService.Instance.UpdateTalla(talla))
                     {
                         throw new Exception("Dashboard.Talla.Action.Validation.UnableToUpdateTalla".LocalizedString());
                     }
-
                     json.Data = new { Success = true };
                 }
                 else
@@ -83,7 +82,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                     {
                         ID = model.ID,
                         Description = model.Description,
-
+                        Orden = model.Orden,
                     };
 
                     if (!TallaService.Instance.SaveTalla(talla))

@@ -6,20 +6,18 @@
     <table class="table table-hover table-responsive-sm m-0">
         <thead class="thead-light">
             <tr>
-                <th>
-                    @("Dashboard.Tallas.List.Name".Localized())
-                </th>
-
+                <th>Descripción</th>
+                <th>Orden</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var talla in Model.Tallas)
             {
                 <tr>
-                    <td>
-                        @talla.Description
-                    </td>
-                    <td>
+                    <td width="50%">@talla.Description</td>
+                    <td width="20%">@talla.Orden</td>
+                    <td width="30%">
                         <div class="btn-group" role="group">
                             <a class="btn btn-primary" href="@Url.EditAction("Talla", talla.ID)">
                                 <i class="fas fa-edit mr-1"></i>

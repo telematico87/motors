@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace eCommerce.Entities
 {
     public class Ubigeo : BaseEntity
-    {
-         
+    {         
         public string CodUbigeo { get; set; }
         public string NombreUbigeo { get; set; }
         public string CodPais { get; set; }

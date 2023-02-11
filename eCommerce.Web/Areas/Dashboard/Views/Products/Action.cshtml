@@ -87,7 +87,42 @@
             </div>
         </div>
 
-        <div class="card mt-3" style="display: none;">
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>
+                        Variantes
+                    </label>
+                    <div class="input-group">
+                        <button type="button" onclick="loadVariantes()" class="btn btn-primary" data-toggle="modal" data-target="#varianteModal">
+                            Agregar Variante
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group mb-0">
+                    <table class="table table-striped mb-0" id="varianteTable">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="10%">Foto</th>
+                                <th scope="col" width="45%">Variante</th>
+                                <th scope="col" width="10%">Stock</th>
+                                <th scope="col" width="10%">SKU</th>
+                                <th scope="col" width="10%">Precio</th>
+                                <th scope="col" width="10%">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>                          
+                            <tr id="noVarianteRow" style="@(Model.ProductSpecifications == null || Model.ProductSpecifications.Count == 0 ? string.Empty : "display:none")">
+                                <td scope="row" colspan="6">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mt-3">
             <div class="card-body">
                 <div class="form-group">
                     <label>
@@ -434,7 +469,8 @@
                                 {
                                     pc = Model.ProductColors.FirstOrDefault(x => x.PictureID == picture.PictureID);
 
-                                    if (pc != null){
+                                    if (pc != null)
+                                    {
                                         existeColorStock = true;
                                         stockColor = pc.Stock;
                                         idColorStock = pc.ColorID;
@@ -444,7 +480,7 @@
                                     }
                                 }
 
-                                var divColor = existeColorStock? "block" : "none";
+                                var divColor = existeColorStock ? "block" : "none";
 
                                 <div class="thisImage col-md-3">
                                     <div class="card mt-4">
@@ -457,7 +493,7 @@
                                                 <input type="radio" name="ThumbnailPicture" class="mr-1" value="@picture.PictureID" id="@string.Format("r{0}", picture.PictureID)" @(picture.PictureID == Model.ThumbnailPicture ? "checked" : string.Empty)>
                                                 <label for="@string.Format("r{0}", picture.PictureID)">@("Dashboard.Products.Action.SetThumbnailImage".Localized())</label>
 
-                                                <button class="@classBoton" type="button" id="@string.Format("btn-add-color-id-{0}", picture.PictureID)" onclick="showhideColorStock(@picture.PictureID)">@textoBoton</button>                                                
+                                                <button class="@classBoton" type="button" id="@string.Format("btn-add-color-id-{0}", picture.PictureID)" onclick="showhideColorStock(@picture.PictureID)">@textoBoton</button>
                                                 <div class="div-product-color" style="display: @divColor" data-id="div-product-color-@picture.PictureID">
                                                     <label>Color</label>
                                                     <select class="form-control sel-color" id="@string.Format("sel-color-id-{0}", picture.PictureID)">
@@ -847,9 +883,9 @@
                 <div class="form-group mb-0">
 
                     @*<button class="btn btn-success" type="button" onclick="testData()">
-                        <i class="fas fa-edit mr-1"></i>
-                        Test Data
-                    </button>*@
+                            <i class="fas fa-edit mr-1"></i>
+                            Test Data
+                        </button>*@
 
                     @if (Model.ProductID > 0)
                     {
@@ -913,10 +949,70 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="varianteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Variantes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="talla-tab" data-toggle="tab" href="#talla" role="tab" aria-controls="talla" aria-selected="true">Talla</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="color-tab" data-toggle="tab" href="#color" role="tab" aria-controls="color" aria-selected="false">Color</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="talla" role="tabpanel" aria-labelledby="talla-tab">                        
+                        <div class="row">
+                            <div class="col-md-12" id="varianteTallaBody">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="color-tab">
+                        <div class="row">
+                            <div class="col-md-12" id="varianteColorBody">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="guardarVariante()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/x-custom-template" id="specificationRow">
     <tr class="specificationRow new" style="display:none">
         <td class="title" scope="row"></td>
         <td class="value"></td>
+        <td>
+            <input type="hidden" name="specification" value="" />
+            <button class="btn btn-danger deleteSpecificationButton btn-sm" type="button" onclick="removeRow(this)">
+                @("Dashboard.Products.Action.SpecificationDelete".Localized())
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script type="text/x-custom-template" id="varianteRow">
+    <tr class="varianteRow new" style="display:none">
+        <td class="varPhoto" scope="row"></td>
+        <td class="varDescription"></td>
+        <td class="varStock"><input class='form-control'  name='txtVarianteStock' type='text' value='0' /> </td>
+        <td class="varSku"><input class='form-control'  name='txtVarianteSku' type='text' value='' /> </td>
+        <td class="varPrice"><input class='form-control' name='txtVariantePrice' type='text' value='0' /> </td>
         <td>
             <input type="hidden" name="specification" value="" />
             <button class="btn btn-danger deleteSpecificationButton btn-sm" type="button" onclick="removeRow(this)">
@@ -942,6 +1038,160 @@
 
 <script>
 
+
+
+    let variante = {
+        tallasIDs : [],
+        tallasNames : [],
+        colorsIDs : [],
+        colorsNames : []
+    };
+
+     $(document).ready(function () {
+        $("#TipoProducto").trigger("change");
+        var availableSpecificationTitles = [ @Html.Raw(string.Join(",", (Enum.GetValues(typeof(ProductSpecifications)).Cast<ProductSpecifications>()).Select(x=> string.Format("\"{0}\"", x)))) ];
+
+        $("#SpecificationTitle").autocomplete({
+            source: availableSpecificationTitles
+        });
+
+
+         //Modal Variante
+         $('#myModal').on('shown.bs.modal', function () {
+             $('#myInput').trigger('focus')
+         })
+
+         CKEDITOR.replace('Description', { height: 700, contentsLangDirection: '@(AppDataHelper.IsRTL ? "rtl" : "ltr")', defaultLanguage: 'en', language: '@AppDataHelper.CurrentLanguage.ShortCode' });
+
+     });    
+
+    function loadVariantes() {
+        loadTallas();
+        loadColors();
+    }
+
+    function loadTallas() {
+        let data = {};
+        let url = "@Url.Action("LoadTallas", "Products")";
+
+            $.post(url, data).done(function (data) {
+                fillSizes(data, "varianteTallaBody");
+            }).fail(manejarError).always(function () {
+            });
+    }
+
+    function loadColors() {
+        let data = {};
+        let url = "@Url.Action("LoadColores", "Products")";
+
+            $.post(url, data).done(function (data) {
+                fillColors(data, "varianteColorBody");
+            }).fail(manejarError).always(function () {
+            });
+
+    }
+
+    function guardarVariante() {
+        let tallasIDs = [];
+        let tallasNames = [];
+        let colorIDs = [];
+        let colorNames = [];
+
+        $("#varianteTable tbody").empty();
+
+        $("#ulTallas input").each(function () {
+
+            let chk = $(this).is(':checked');
+
+            if (chk) {
+                let tallaId = $(this).attr("data-id");
+                let tallaName = $(this).attr("data-name");
+                tallasIDs.push(tallaId);
+                tallasNames.push(tallaName);
+            }
+        });
+
+        variante.tallasIDs = tallasIDs;
+        variante.tallasNames = tallasNames;
+
+        $("#ulColors input").each(function () {
+
+            let chk = $(this).is(':checked');
+
+            if (chk) {
+                let colorId = $(this).attr("data-id");
+                let colorName = $(this).attr("data-name");
+                colorIDs.push(colorId);
+                colorNames.push(colorName);
+            }
+        });
+
+        variante.colorsIDs = colorIDs;
+        variante.colorsNames = colorNames;
+
+        createTemplateVariante(variante);
+        $('#varianteModal').modal('hide')
+    }
+
+    function createTemplateVariante(objVariante) {
+        
+        var tallaNames = objVariante.tallasNames;
+        var colorNames = objVariante.colorsNames;
+        let existTallaNames = tallaNames.length > 0 ? true: false;
+        let existColorNames = colorNames.length > 0 ? true : false;        
+
+        let contador = 0;
+
+        if (existTallaNames) {
+
+            tallaNames.forEach(tallaName => {
+
+                if (existColorNames) {
+
+                    colorNames.forEach(colorName => {
+                        printTampleVarianteRow(tallaName, colorName, contador);
+                        contador++;
+                    });
+
+                } else {
+                    printTampleVarianteRow(tallaName, '', contador);
+                    contador++;
+                }
+            });
+
+        } else {
+
+            colorNames.forEach(colorName => {
+                printTampleVarianteRow('', colorName, contador);
+                contador++;
+            });
+
+        }        
+        showHideNoVariantesRow();
+    }
+
+    function printTampleVarianteRow(size, color, fila) {
+
+        $("#varianteTable tbody").append($("#varianteRow").clone().html());
+
+        var $newRow = $(".new", "#varianteTable tbody");
+
+        var name = size+" "+color;
+        name = name.trim();
+        //for display to user
+        $(".varPhoto", $newRow).html('Photo');
+        $(".varDescription", $newRow).html(name);
+        //for submitting value
+        $("[name=txtVarianteStock]", $newRow).attr("name", "txtVarianteStock" + fila);
+        $("[name=txtVarianteSku]", $newRow).attr("name", "txtVarianteSku" + fila);
+        $("[name=txtVariantePrice]", $newRow).attr("name", "txtVariantePrice" + fila);
+
+        $newRow.attr("id", "variante" + fila);
+        $newRow.removeClass("new");
+        //show this new specification
+        $newRow.show();
+    }
+
     function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
 
         var contenido = ""
@@ -956,7 +1206,44 @@
         document.getElementById(id).innerHTML = contenido;
     }
 
-    function testData(id) {                
+    function fillSizes(data, id) {
+
+        var tallaIds = variante.tallasIDs;
+
+        var contenido = "<label>Elija Tallas:</label>"        
+        contenido += "<ul class='list-group' id='ulTallas'>"
+        
+        data.forEach(elemento => {
+            let checked = '';
+            tallaIds.forEach(id => {
+                if (id == elemento["TallaID"]) {
+                    checked = 'checked';
+                }                
+            });            
+            contenido += "<li class='list-group-item'><input "+checked+"  data-id='" + elemento["TallaID"] + "' data-name='" + elemento["Description"] + "' type='checkbox'> " + elemento["Description"] + "</li>"
+        });
+        contenido += "</ul>";
+        document.getElementById(id).innerHTML = contenido;
+    }
+
+    function fillColors(data, id) {
+        var colorIds = variante.colorsIDs;
+        var contenido = "<label>Elija Colores:</label>";
+        contenido += "<ul class='list-group' id='ulColors'>";
+        data.forEach(elemento => {        
+            let checked = '';
+            colorIds.forEach(id => {
+                if (id == elemento["ColorID"]) {
+                    checked = 'checked';
+                }
+            });
+            contenido += "<li class='list-group-item'><input type='checkbox' "+ checked +" data-id='" + elemento["ColorID"] + "' data-name='" + elemento["Description"] + "'> " + elemento["Description"] + "</li>";
+        });
+        contenido += "</ul>";
+        document.getElementById(id).innerHTML = contenido;
+    }
+
+    function testData(id) {
         $("#btn-add-color-id-" + id).html("New Text");
     }
 
@@ -980,17 +1267,6 @@
     var productSpecificationCount = @(productSpecificationCount + 1);
     var productColorCount = @(productColorCount + 1);
 
-    $(document).ready(function () {
-        $("#TipoProducto").trigger("change");
-        var availableSpecificationTitles = [ @Html.Raw(string.Join(",", (Enum.GetValues(typeof(ProductSpecifications)).Cast<ProductSpecifications>()).Select(x=> string.Format("\"{0}\"", x)))) ];
-
-        $("#SpecificationTitle").autocomplete({
-            source: availableSpecificationTitles
-        });
-
-        CKEDITOR.replace('Description', { height: 700, contentsLangDirection: '@(AppDataHelper.IsRTL ? "rtl" : "ltr")', defaultLanguage: 'en', language : '@AppDataHelper.CurrentLanguage.ShortCode' });
-    });
-
     function removeRow(column) {
         $(column).parents("tr").remove();
 
@@ -1003,6 +1279,15 @@
         }
         else {
             $("#noSpecificationRow").show();
+        }
+    }
+
+    function showHideNoVariantesRow() {
+        if ($(".varianteRow").length > 0) {
+            $("#noVarianteRow").hide();
+        }
+        else {
+            $("#noVarianteRow").show();
         }
     }
 
@@ -1234,7 +1519,7 @@
             $("#btn-add-color-id-" + id).removeAttr("class");
             $("#btn-add-color-id-" + id).attr("class", "btn btn-danger btn-block");
             $("#sel-color-id-" + id).val("0");
-            $("#stock-color-id-" + id).val("0.0");            
+            $("#stock-color-id-" + id).val("0.0");
         }
     }
 
@@ -1262,7 +1547,7 @@
                     colorStockIds.push(imageID);
                     colorIds.push(colorId);
                     stockByColors.push(stock);
-                }                
+                }
             }
         });
 
