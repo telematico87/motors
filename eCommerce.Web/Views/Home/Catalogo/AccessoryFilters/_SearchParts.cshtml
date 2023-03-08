@@ -41,7 +41,7 @@
                         showEtiquetaOferta = true;
                     }
 
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-6">
                         <div class="product-box">
                             <div class="imagebox style2">
                                 <div class="box-image">
@@ -122,7 +122,7 @@
             else
             {
                 <li class="prev">
-                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                    <a href="@Url.CatalogoParts(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage - 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
                         <img src="~/Content/bm3/images/icono/left-1.png" alt="">Anterior
                     </a>
                 </li>
@@ -151,7 +151,7 @@
             {
 
                 <li class="next">
-                    <a href="@Url.CatalogoMoto(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage + 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
+                    <a href="@Url.CatalogoParts(categoryId: pCategoryID, marcaId: pMarcaID, q: Model.SearchTerm, pageNo: Model.Pager.CurrentPage + 1, from: Model.PriceFrom, to: Model.PriceTo, recordSize: Model.PageSize, sortby: Model.SortBy)" title="">
                         Siguiente<img src="~/Content/bm3/images/icono/right-1.png" alt="">
                     </a>
                 </li>

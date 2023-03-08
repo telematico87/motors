@@ -428,6 +428,7 @@
     <Content Include="Content\bm3\javascript\jquery.responsiveTabs.min.js" />
     <Content Include="Content\bm3\javascript\jquery.zoom.min.js" />
     <Content Include="Content\bm3\javascript\jsFinanciamiento5.js" />
+    <Content Include="Content\bm3\javascript\jsProduct.js" />
     <Content Include="Content\bm3\javascript\main.js" />
     <Content Include="Content\bm3\javascript\main_.js" />
     <Content Include="Content\bm3\javascript\owl.carousel.js" />

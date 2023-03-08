@@ -1,4 +1,5 @@
 ﻿using eCommerce.Entities;
+using eCommerce.Entities.Response;
 using eCommerce.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,12 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public string ProductColorsPicture { get; set; }
         public string ProductColorsId { get; set; }
         public string ProductColorsStock { get; set; }
+        public string ProductStockSize { get; set; }
+        public string ProductStockColor { get; set; }
+        public string ProductStockSKU { get; set; }
+        public string ProductStockQuantity { get; set; }
+        public string ProductStockPrice { get; set; }
+
         public int ThumbnailPicture { get; set; }
         public string EtiquetaOferta { get; set; }
         public string EtiquetaSoat { get; set; }
@@ -76,6 +83,8 @@ namespace eCommerce.Web.Areas.Dashboard.ViewModels
         public List<Category> Categories { get; set; }
         public List<Color> Colors { get; set; }
         public List<ProductColor> ProductColors { get; set; }
+        public List<ProductStockResponse> ProductStocks { get; set; }
+        public bool ExisteProductStocks { get; set; }
 
        public ProductoCaracteristica ProductoCaracteristica { get; set; }
 

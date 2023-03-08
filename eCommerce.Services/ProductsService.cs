@@ -589,6 +589,19 @@ namespace eCommerce.Services
             return context.SaveChanges() > 0;
         }
 
+        public bool UpdateProductStock(int productID, List<ProductStock> newProductStocks)
+        {
+            var context = DataContextHelper.GetNewContext();
+
+            var oldProductStocks = context.ProductStocks.Where(p => p.ProductID == productID);
+
+            context.ProductStocks.RemoveRange(oldProductStocks);
+
+            context.ProductStocks.AddRange(newProductStocks);
+
+            return context.SaveChanges() > 0;
+        }
+
         public bool UpdateProductRecord(ProductRecord productRecord)
         {
             var context = DataContextHelper.GetNewContext();

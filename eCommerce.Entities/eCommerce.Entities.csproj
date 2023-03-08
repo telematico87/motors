@@ -115,6 +115,7 @@
     <Compile Include="Response\CategoryResponse.cs" />
     <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Response\ProductSimple.cs" />
+    <Compile Include="Response\ProductStockResponse.cs" />
     <Compile Include="TablaMaster.cs" />
     <Compile Include="Talla.cs" />
     <Compile Include="TipoCambio.cs" />

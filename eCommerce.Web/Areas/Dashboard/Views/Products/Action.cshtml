@@ -24,6 +24,7 @@
 
     var productSpecificationCount = 0;
     var productColorCount = 0;
+    var existeProductStocks = Model.ExisteProductStocks ? 1 : 0;
 
 }
 
@@ -97,6 +98,9 @@
                         <button type="button" onclick="loadVariantes()" class="btn btn-primary" data-toggle="modal" data-target="#varianteModal">
                             Agregar Variante
                         </button>
+                        <button type="button" onclick="fillTableVariante()">
+                            Fill Variante
+                        </button>
                     </div>
                 </div>
                 <div class="form-group mb-0">
@@ -111,10 +115,51 @@
                                 <th scope="col" width="10%">Acción</th>
                             </tr>
                         </thead>
-                        <tbody>                          
-                            <tr id="noVarianteRow" style="@(Model.ProductSpecifications == null || Model.ProductSpecifications.Count == 0 ? string.Empty : "display:none")">
-                                <td scope="row" colspan="6">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
-                            </tr>
+                        <tbody>
+
+
+                            @if (Model.ProductStocks != null && Model.ProductStocks.Count > 0)
+                            {
+                                var contadorStock = 0;
+                                foreach (var productStock in Model.ProductStocks)
+                                {
+
+                                    var varVarianteStock = string.Format("txtVarianteStock{0}", contadorStock);
+                                    var varVarianteSku = string.Format("txtVarianteSku{0}", contadorStock);
+                                    var varVariantePrice = string.Format("txtVariantePrice{0}", contadorStock);
+                                    var varVariantePhoto = string.Format("txtVariantePhoto{0}", contadorStock);
+
+                                    var colorName = productStock.ColorName;
+                                    var sizeName = productStock.TallaName;
+                                    var nameStock = sizeName + " " + colorName;
+
+                                    <tr class="varianteRow">
+                                        <td class="varPhoto" scope="row">
+                                            <input name="@varVariantePhoto" type='hidden' value='0' />
+
+                                        </td>
+                                        <td class="varDescription">@nameStock</td>
+                                        <td class="varStock"><input class='form-control' name='@varVarianteStock' type='text' value='@productStock.Stock' data-color-id="@productStock.ColorID" data-size-id="@productStock.TallaID" /> </td>
+                                        <td class="varSku"><input class='form-control' name='@varVarianteSku' type='text' value='@productStock.SKU' /> </td>
+                                        <td class="varPrice"><input class='form-control' name='@varVariantePrice' type='text' value='@productStock.Precio' /> </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" type="button" onclick="removeRow(this)">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    contadorStock++;
+                                }
+                            }
+                            else
+                            {
+
+                                <tr id="noVarianteRow" style="@(Model.ProductStocks == null || Model.ProductStocks.Count == 0 ? string.Empty : "display:none")">
+                                    <td scope="row" colspan="6">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
+                                </tr>
+                            }
+
+
                         </tbody>
                     </table>
                 </div>
@@ -122,7 +167,7 @@
             </div>
         </div>
 
-        <div class="card mt-3">
+        <div class="card mt-3" style="display: none">
             <div class="card-body">
                 <div class="form-group">
                     <label>
@@ -233,7 +278,6 @@
                                     </tr>
                                 }
                             }
-
                             <tr id="noSpecificationRow" style="@(Model.ProductSpecifications == null || Model.ProductSpecifications.Count == 0 ? string.Empty : "display:none")">
                                 <td scope="row" colspan="3">@("Dashboard.Products.Action.NoSpecifications".Localized())</td>
                             </tr>
@@ -526,6 +570,12 @@
                     <input type="hidden" name="ProductColorsId" id="colorIDs" />
                     <input type="hidden" name="ProductColorsStock" id="stockByColors" />
 
+                    <input type="hidden" name="ProductStockSize" id="productStockBySizes" />
+                    <input type="hidden" name="ProductStockColor" id="productStockByColors" />
+                    <input type="hidden" name="ProductStockSKU" id="productStockBySKUs" />
+                    <input type="hidden" name="ProductStockQuantity" id="productStockByQuantities" />
+                    <input type="hidden" name="ProductStockPrice" id="productStockByPrices" />
+                    <input type="hidden" name="ExisteProductStock" id="ExisteProductStock" value="@existeProductStocks" />
                 </div>
 
                 <div class="form-group">
@@ -969,7 +1019,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="talla" role="tabpanel" aria-labelledby="talla-tab">                        
+                    <div class="tab-pane fade show active" id="talla" role="tabpanel" aria-labelledby="talla-tab">
                         <div class="row">
                             <div class="col-md-12" id="varianteTallaBody">
 
@@ -983,7 +1033,7 @@
                             </div>
                         </div>
                     </div>
-                </div>               
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -1008,7 +1058,11 @@
 
 <script type="text/x-custom-template" id="varianteRow">
     <tr class="varianteRow new" style="display:none">
-        <td class="varPhoto" scope="row"></td>
+        <td class="varPhoto" scope="row">
+            <input name='txtVarianteTallaID' data-id='' type='hidden' value='0' />
+            <input name='txtVarianteColorID' data-id='' type='hidden' value='0' />
+            <input name='txtVariantePhoto' type='hidden' value='0' />
+        </td>
         <td class="varDescription"></td>
         <td class="varStock"><input class='form-control'  name='txtVarianteStock' type='text' value='0' /> </td>
         <td class="varSku"><input class='form-control'  name='txtVarianteSku' type='text' value='' /> </td>
@@ -1036,25 +1090,73 @@
 </script>
 
 
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        function setVariantesDB() {
+
+            var existe = $("#ExisteProductStock").val();
+            console.log(existe);
+
+            if (existe == 1) {
+
+                
+
+                @*variante = {
+                    tallasIDs: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.TallaID)))))],
+                    tallasIDs: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.TallaID)))))],
+                    tallasNames: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.TallaName)))))],
+                    colorsIDs: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.ColorID)))))],
+                    colorsNames: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.ColorName)))))],
+                    stocks: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.Stock)))))],
+                    precio: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.Precio)))))],
+                    sku: [@Html.Raw(string.Join(",", (Model.ProductStocks.Select(x => string.Format("\"{0}\"", x.SKU)))))]
+                };*@
+
+        }
+            else {
+
+                variante = {
+                    tallasIDs: [],
+                    tallasNames: [],
+                    colorsIDs: [],
+                    colorsNames: [],
+                    stocks: [],
+                    precio: [],
+                    sku: []
+                };
+            }
+        }
+
+    </script>
+
+}
+
 <script>
-
-
 
     let variante = {
         tallasIDs : [],
         tallasNames : [],
         colorsIDs : [],
-        colorsNames : []
+        colorsNames: [],
+        stocks: [],
+        precio: [],
+        sku: []
     };
 
      $(document).ready(function () {
         $("#TipoProducto").trigger("change");
-        var availableSpecificationTitles = [ @Html.Raw(string.Join(",", (Enum.GetValues(typeof(ProductSpecifications)).Cast<ProductSpecifications>()).Select(x=> string.Format("\"{0}\"", x)))) ];
+         
+
+
 
         $("#SpecificationTitle").autocomplete({
             source: availableSpecificationTitles
         });
 
+         setVariantesDB();
 
          //Modal Variante
          $('#myModal').on('shown.bs.modal', function () {
@@ -1063,7 +1165,9 @@
 
          CKEDITOR.replace('Description', { height: 700, contentsLangDirection: '@(AppDataHelper.IsRTL ? "rtl" : "ltr")', defaultLanguage: 'en', language: '@AppDataHelper.CurrentLanguage.ShortCode' });
 
-     });    
+     });
+
+    
 
     function loadVariantes() {
         loadTallas();
@@ -1071,241 +1175,435 @@
     }
 
     function loadTallas() {
-        let data = {};
-        let url = "@Url.Action("LoadTallas", "Products")";
+            let data = {};
+            let url = "@Url.Action("LoadTallas", "Products")";
 
             $.post(url, data).done(function (data) {
-                fillSizes(data, "varianteTallaBody");
+            fillSizes(data, "varianteTallaBody");
             }).fail(manejarError).always(function () {
             });
     }
 
     function loadColors() {
-        let data = {};
-        let url = "@Url.Action("LoadColores", "Products")";
+            let data = {};
+            let url = "@Url.Action("LoadColores", "Products")";
 
             $.post(url, data).done(function (data) {
-                fillColors(data, "varianteColorBody");
+            fillColors(data, "varianteColorBody");
             }).fail(manejarError).always(function () {
             });
-
     }
 
-    function guardarVariante() {
-        let tallasIDs = [];
-        let tallasNames = [];
-        let colorIDs = [];
-        let colorNames = [];
+            function guardarVariante() {
+            let tallasIDs = [];
+            let tallasNames = [];
+            let colorIDs = [];
+            let colorNames = [];
+            let varianteObjTemp = {
+            tallasIDs: [],
+            tallasNames: [],
+            colorsIDs: [],
+            colorsNames: [],
+            };
 
-        $("#varianteTable tbody").empty();
+            $("#varianteTable tbody").empty();
 
-        $("#ulTallas input").each(function () {
+            $("#ulTallas input").each(function () {
 
             let chk = $(this).is(':checked');
 
             if (chk) {
-                let tallaId = $(this).attr("data-id");
-                let tallaName = $(this).attr("data-name");
-                tallasIDs.push(tallaId);
-                tallasNames.push(tallaName);
+            let tallaId = $(this).attr("data-id");
+            let tallaName = $(this).attr("data-name");
+            tallasIDs.push(tallaId);
+            tallasNames.push(tallaName);
             }
-        });
+            });
 
-        variante.tallasIDs = tallasIDs;
-        variante.tallasNames = tallasNames;
+            varianteObjTemp.tallasIDs = tallasIDs;
+            varianteObjTemp.tallasNames = tallasNames;
 
-        $("#ulColors input").each(function () {
+            $("#ulColors input").each(function () {
 
             let chk = $(this).is(':checked');
 
             if (chk) {
-                let colorId = $(this).attr("data-id");
-                let colorName = $(this).attr("data-name");
-                colorIDs.push(colorId);
-                colorNames.push(colorName);
+            let colorId = $(this).attr("data-id");
+            let colorName = $(this).attr("data-name");
+            colorIDs.push(colorId);
+            colorNames.push(colorName);
             }
-        });
+            });
 
-        variante.colorsIDs = colorIDs;
-        variante.colorsNames = colorNames;
+            varianteObjTemp.colorsIDs = colorIDs;
+            varianteObjTemp.colorsNames = colorNames;
 
-        createTemplateVariante(variante);
-        $('#varianteModal').modal('hide')
-    }
+            createTemplateVariante(varianteObjTemp);
+            fillTableVariante();
 
-    function createTemplateVariante(objVariante) {
-        
-        var tallaNames = objVariante.tallasNames;
-        var colorNames = objVariante.colorsNames;
-        let existTallaNames = tallaNames.length > 0 ? true: false;
-        let existColorNames = colorNames.length > 0 ? true : false;        
 
-        let contador = 0;
+            $('#varianteModal').modal('hide')
+            }
 
-        if (existTallaNames) {
+            function fillTableVariante() {
+
+            var fila = 0;
+
+            $("#varianteTable .varDescription").each(function () {
+
+            let tallaId = $('input[name="txtVarianteStock' + fila + '"]').attr("data-size-id");
+            let colorId = $('input[name="txtVarianteStock' + fila + '"]').attr("data-color-id");
+            let posTallas = [];
+            let posFinal = -1;
+
+            if (tallaId != 0) {
+            if (colorId != 0) {
+
+            //Existe Talla in Array
+            var posicionTallaSearch = $.inArray(tallaId, variante.tallasIDs);
+            //Existe Color in Array
+            var posicionColorSearch = $.inArray(colorId, variante.colorsIDs);
+
+            console.log("posicionTallaSearch: " + posicionTallaSearch);
+            console.log("posicionColorSearch: " + posicionColorSearch);
+
+            //Si existe Talla y Existe Color (Existen ambos, obtener precios)
+            //Si existe Talla y No Existe Color (Solo existe talla)
+            //No existe Talla y Existe Color (Solo existe color)
+            //No existe Talla y No Existe Color (Ambos nuevos)
+
+            if (posicionTallaSearch >= 0) {
+            if (posicionColorSearch >= 0) {
+
+            //Logica si existen ambos
+
+            //Obtener posiciones de talla
+            var position = 0;
+            variante.tallasIDs.forEach(x => {
+            if (x == tallaId) {
+            posTallas.push(position);
+            }
+            position++;
+            });
+
+            //Recorrer Posiciones de Tallas
+            posTallas.forEach(x => {
+            let colorpos = variante.colorsIDs[x];
+            if (colorpos == colorId) {
+            posFinal = x;
+            }
+            });
+
+            if (posFinal >= 0) {
+
+            let tempTalla = variante.tallasNames[posFinal];
+            let tempColor = variante.colorsNames[posFinal];
+            let tempPrecio = variante.precio[posFinal];
+            let tempSku = variante.sku[posFinal];
+            let tempStock = variante.stocks[posFinal];
+
+            $('input[name="txtVarianteStock' + fila + '"]').val(tempStock);
+            $('input[name="txtVarianteSku' + fila + '"]').val(tempSku);
+            $('input[name="txtVariantePrice' + fila + '"]').val(tempPrecio);
+            $('input[name="txtVariantePhoto' + fila + '"]').val("");
+            }
+
+            } else {
+
+            //Obtener posiciones de talla
+            var position = 0;
+            variante.tallasIDs.forEach(x => {
+            if (x == tallaId) {
+            posFinal = position;
+            }
+            position++;
+            });
+
+            if (posFinal >= 0) {
+
+            let tempTalla = variante.tallasNames[posFinal];
+            let tempColor = variante.colorsNames[posFinal];
+            let tempPrecio = variante.precio[posFinal];
+            let tempSku = variante.sku[posFinal];
+            let tempStock = variante.stocks[posFinal];
+
+            $('input[name="txtVarianteStock' + fila + '"]').val(tempStock);
+            $('input[name="txtVarianteSku' + fila + '"]').val(tempSku);
+            $('input[name="txtVariantePrice' + fila + '"]').val(tempPrecio);
+            $('input[name="txtVariantePhoto' + fila + '"]').val("");
+            }
+            }
+
+
+            }
+            } else {
+            // Lógica cuando no existe color
+
+
+
+            }
+
+            }  else if(colorId != '0') {
+            console.log("Color es diferente de cero");
+
+            }
+
+            //{
+            //}
+
+
+            //if (sku == '') sku = '0';
+
+            //varianteTallaIds.push(tallaId);
+            //varianteColorIds.push(colorId);
+            //varianteStocks.push(stock);
+            //varianteSKUs.push(sku);
+            //variantePrices.push(price);
+            //variantePhotos.push("");
+            posFinal = -1;
+            fila++;
+            });
+
+
+            //for (i = 0; i < variante.tallasIDs.length; i++) {
+
+            //    tallaId = variante.tallasIDs[i];
+            //    stock = variante.stocks[i];
+            //    sku = variante.sku[i];
+            //    price = variante.precio[i];
+
+            //    $('input[name="txtVarianteStock' + i + '"]').val(stock);
+            //    $('input[name="txtVarianteSku' + i + '"]').val(sku);
+            //    $('input[name="txtVariantePrice' + i + '"]').val(price);
+            //    $('input[name="txtVariantePhoto' + i + '"]').val("");
+
+            //}
+            }
+
+            function fillVarianteObject(tallaID, tallaName, colorID, colorName) {
+            //sizeId, size, colorId, color, fila
+
+            let tallaIds = variante.tallasIDs;
+            let tallaNames = variante.tallasNames;
+            let colorIds = variante.colorsIDs;
+            let colorNames = variante.colorsNames;
+            let stocks = variante.stocks;
+            let prices = variante.precio;
+            let skus = variante.sku;
+
+
+            var posicionSearch = $.inArray(tallaID, variante.tallasIDs);
+            if (posicionSearch < 0) {
+            tallaIds.push(tallaID);
+            tallaNames.push(tallaName);
+            colorIds.push(colorID);
+            colorNames.push(colorName);
+            stocks.push('0');
+            prices.push('0');
+            skus.push('');
+            }
+
+            variante = {
+            tallasIDs: tallaIds,
+            tallasNames: tallaNames,
+            colorsIDs: colorIds,
+            colorsNames: colorNames,
+            stocks: stocks,
+            precio: prices,
+            sku: skus
+            };
+
+            return variante;
+
+            }
+
+            function createTemplateVariante(objVariante) {
+
+            var tallaNames = objVariante.tallasNames;
+            var colorNames = objVariante.colorsNames;
+            let existTallaNames = tallaNames.length > 0 ? true: false;
+            let existColorNames = colorNames.length > 0 ? true : false;
+
+            let fila = 0;
+            let contadorTalla = 0;
+
+            if (existTallaNames) {
 
             tallaNames.forEach(tallaName => {
 
-                if (existColorNames) {
+            if (existColorNames) {
+            let contadorColor = 0;
+            colorNames.forEach(colorName => {
 
-                    colorNames.forEach(colorName => {
-                        printTampleVarianteRow(tallaName, colorName, contador);
-                        contador++;
-                    });
-
-                } else {
-                    printTampleVarianteRow(tallaName, '', contador);
-                    contador++;
-                }
+            var colorId = objVariante.colorsIDs[contadorColor];
+            var tallaId = objVariante.tallasIDs[contadorTalla];
+            printTampleVarianteRow(tallaId, tallaName, colorId, colorName, fila);
+            fila++;
+            contadorColor++;
             });
 
-        } else {
+            } else {
+            var tallaId = objVariante.tallasIDs[fila];
+            printTampleVarianteRow(tallaId, tallaName, 0, '', fila);
+            fila++;
+            }
+            contadorTalla++;
+            });
+            } else {
 
             colorNames.forEach(colorName => {
-                printTampleVarianteRow('', colorName, contador);
-                contador++;
+            var colorId = objVariante.colorsIDs[contador];
+            printTampleVarianteRow(0, '', colorId, colorName, contador);
+            contador++;
             });
+            }
+            showHideNoVariantesRow();
+            }
 
-        }        
-        showHideNoVariantesRow();
-    }
+            function printTampleVarianteRow(sizeId, size, colorId, color, fila) {
 
-    function printTampleVarianteRow(size, color, fila) {
+            fillVarianteObject(sizeId, size, colorId, color);
 
-        $("#varianteTable tbody").append($("#varianteRow").clone().html());
+            $("#varianteTable tbody").append($("#varianteRow").clone().html());
 
-        var $newRow = $(".new", "#varianteTable tbody");
+            var $newRow = $(".new", "#varianteTable tbody");
 
-        var name = size+" "+color;
-        name = name.trim();
-        //for display to user
-        $(".varPhoto", $newRow).html('Photo');
-        $(".varDescription", $newRow).html(name);
-        //for submitting value
-        $("[name=txtVarianteStock]", $newRow).attr("name", "txtVarianteStock" + fila);
-        $("[name=txtVarianteSku]", $newRow).attr("name", "txtVarianteSku" + fila);
-        $("[name=txtVariantePrice]", $newRow).attr("name", "txtVariantePrice" + fila);
+            var name = size+" "+color;
+            name = name.trim();
+            //for display to user
+            $(".varPhoto", $newRow).html('Photo');
+            $(".varDescription", $newRow).html(name);
+            //for submitting value
+            $("[name=txtVarianteStock]", $newRow).attr("data-color-id", colorId);
+            $("[name=txtVarianteStock]", $newRow).attr("data-size-id", sizeId);
+            $("[name=txtVarianteStock]", $newRow).attr("name", "txtVarianteStock" + fila);
+            $("[name=txtVarianteSku]", $newRow).attr("name", "txtVarianteSku" + fila);
+            $("[name=txtVariantePrice]", $newRow).attr("name", "txtVariantePrice" + fila);
+            $("[name=txtVarianteTallaID]", $newRow).attr("name", "txtVarianteTallaID" + fila);
+            $("[name=txtVarianteColorID]", $newRow).attr("name", "txtVarianteColorID" + fila);
+            $("[name=txtVariantePhoto]", $newRow).attr("name", "txtVariantePhoto" + fila);
 
-        $newRow.attr("id", "variante" + fila);
-        $newRow.removeClass("new");
-        //show this new specification
-        $newRow.show();
-    }
 
-    function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+            /*Add Ids*/
+            $newRow.attr("id", "variante" + fila);
+            $newRow.removeClass("new");
+            //show this new specification
+            $newRow.show();
+            }
 
-        var contenido = ""
-        var elemento;
-        contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>"
-        for (var j = 0; j < data.length; j++) {
+            function llenarCombo(data, id, propiedadMostrar, propiedadId, valueDefecto = "") {
+
+                var contenido = "";
+            var elemento;
+                contenido += "<option value='" + valueDefecto + "'>--Seleccionar--</option>";
+            for (var j = 0; j < data.length; j++) {
             elemento = data[j];
-            contenido +=
-                "<option value='" + elemento[propiedadId] + "' >" + elemento[propiedadMostrar] + "</option>"
-        }
-        contenido += "";
-        document.getElementById(id).innerHTML = contenido;
-    }
+            contenido += "<option value='" + elemento[propiedadId] + "'>" + elemento[propiedadMostrar] + "</option>"
+            }
+            contenido += "";
+            document.getElementById(id).innerHTML = contenido;
+            }
 
-    function fillSizes(data, id) {
+            function fillSizes(data, id) {
 
-        var tallaIds = variante.tallasIDs;
+            var tallaIds = variante.tallasIDs;
 
-        var contenido = "<label>Elija Tallas:</label>"        
-        contenido += "<ul class='list-group' id='ulTallas'>"
-        
-        data.forEach(elemento => {
-            let checked = '';
-            tallaIds.forEach(id => {
+                var contenido = "<label>Elija Tallas:</label>";
+                contenido += "<ul class='list-group' id='ulTallas'>";
+
+                data.forEach(elemento => {
+                let checked = '';
+                tallaIds.forEach(id => {
                 if (id == elemento["TallaID"]) {
-                    checked = 'checked';
-                }                
-            });            
-            contenido += "<li class='list-group-item'><input "+checked+"  data-id='" + elemento["TallaID"] + "' data-name='" + elemento["Description"] + "' type='checkbox'> " + elemento["Description"] + "</li>"
-        });
-        contenido += "</ul>";
-        document.getElementById(id).innerHTML = contenido;
-    }
-
-    function fillColors(data, id) {
-        var colorIds = variante.colorsIDs;
-        var contenido = "<label>Elija Colores:</label>";
-        contenido += "<ul class='list-group' id='ulColors'>";
-        data.forEach(elemento => {        
-            let checked = '';
-            colorIds.forEach(id => {
-                if (id == elemento["ColorID"]) {
-                    checked = 'checked';
+                checked = 'checked';
                 }
+                });
+                    contenido += "<li class='list-group-item'><input " + checked + " data-id='" + elemento["TallaID"] + "' data-name='" + elemento["Description"] + "' type='checkbox'> " + elemento["Description"] + "</li>";
+                });
+                contenido += "</ul>";
+            document.getElementById(id).innerHTML = contenido;
+            }
+
+            function fillColors(data, id) {
+            var colorIds = variante.colorsIDs;
+            var contenido = "<label>Elija Colores:</label>";
+            contenido += "<ul class='list-group' id='ulColors'>";
+                data.forEach(elemento => {
+                let checked = '';
+                colorIds.forEach(id => {
+                if (id == elemento["ColorID"]) {
+                checked = 'checked';
+                }
+                });
+                contenido += "<li class='list-group-item'><input type='checkbox' "+ checked +" data-id='" + elemento["ColorID"] + "' data-name='" + elemento["Description"] + "'> " + elemento["Description"] + "</li>";
+                });
+                contenido += "</ul>";
+            document.getElementById(id).innerHTML = contenido;
+            }
+
+            function testData(id) {
+            $("#btn-add-color-id-" + id).html("New Text");
+            }
+
+            $("#cboCatalogo").change(function () {
+
+            let varCatalogoID = $("#cboCatalogo").val();
+            let url = "@Url.Action("LoadCategoriesAndMarcasByCatalogoID", "Products")";
+            let data = { CatalogoID: varCatalogoID };
+
+            $.post(url, data).done(function (data) {
+            llenarCombo(data.Categorias, "cboCategoria", "NombreCategoria", "ID", "0");
+            llenarCombo(data.Marcas, "cboMarca", "NombreMarca", "ID", "0");
+            }).fail(manejarError).always(function () {
             });
-            contenido += "<li class='list-group-item'><input type='checkbox' "+ checked +" data-id='" + elemento["ColorID"] + "' data-name='" + elemento["Description"] + "'> " + elemento["Description"] + "</li>";
-        });
-        contenido += "</ul>";
-        document.getElementById(id).innerHTML = contenido;
-    }
+            });
 
-    function testData(id) {
-        $("#btn-add-color-id-" + id).html("New Text");
-    }
+            function manejarError(err) {
+            console.log(err.responseText);
+            }
 
-     $("#cboCatalogo").change(function () {
+            var productSpecificationCount = @(productSpecificationCount + 1);
+            var productColorCount = @(productColorCount + 1);
 
-         let varCatalogoID = $("#cboCatalogo").val();
-         let url = "@Url.Action("LoadCategoriesAndMarcasByCatalogoID", "Products")";
-         let data = { CatalogoID: varCatalogoID };
+            function removeRow(column) {
+            $(column).parents("tr").remove();
 
-         $.post(url, data).done(function (data) {
-             llenarCombo(data.Categorias, "cboCategoria", "NombreCategoria", "ID", "0");
-             llenarCombo(data.Marcas, "cboMarca", "NombreMarca", "ID", "0");
-         }).fail(manejarError).always(function () {
-         });
-     });
+            showHideNoSpecificationsRow();
+            }
 
-    function manejarError(err) {
-        console.log(err.responseText);
-    }
-
-    var productSpecificationCount = @(productSpecificationCount + 1);
-    var productColorCount = @(productColorCount + 1);
-
-    function removeRow(column) {
-        $(column).parents("tr").remove();
-
-        showHideNoSpecificationsRow();
-    }
-
-    function showHideNoSpecificationsRow() {
-        if ($(".specificationRow").length > 0) {
+            function showHideNoSpecificationsRow() {
+            if ($(".specificationRow").length > 0) {
             $("#noSpecificationRow").hide();
-        }
-        else {
+            }
+            else {
             $("#noSpecificationRow").show();
-        }
-    }
+            }
+            }
 
-    function showHideNoVariantesRow() {
-        if ($(".varianteRow").length > 0) {
+            function showHideNoVariantesRow() {
+            if ($(".varianteRow").length > 0) {
             $("#noVarianteRow").hide();
-        }
-        else {
+            }
+            else {
             $("#noVarianteRow").show();
-        }
-    }
+            }
+            }
 
-    function showHideNoColorsRow() {
-        if ($(".colorRow").length > 0) {
+            function showHideNoColorsRow() {
+            if ($(".colorRow").length > 0) {
             $("#noColorRow").hide();
-        }
-        else {
+            }
+            else {
             $("#noColorRow").show();
-        }
-    }
+            }
+            }
 
-    $("#addSpecification").click(function () {
-        var specificationTitle = $("#SpecificationTitle").val();
-        var specificationValue = $("#SpecificationValue").val();
+            $("#addSpecification").click(function () {
+            var specificationTitle = $("#SpecificationTitle").val();
+            var specificationValue = $("#SpecificationValue").val();
 
-        if (specificationTitle && specificationValue)
-        {
+            if (specificationTitle && specificationValue)
+            {
             $("#specificationsTable tbody").append($("#specificationRow").clone().html());
 
             var $newRow = $(".new", "#specificationsTable tbody");
@@ -1331,23 +1629,23 @@
             $("#SpecificationValue").val("");
 
             showHideNoSpecificationsRow();
-        }
-    });
+            }
+            });
 
-    $("#addColor").click(function () {
-        var colorSelect = $("#ColorID").val();
-        var colorSplit = colorSelect.split(",");
-        var colorId = colorSplit[0];
-        var colorValue = "";
-        if (colorSplit.length > 1) {
+            $("#addColor").click(function () {
+            var colorSelect = $("#ColorID").val();
+            var colorSplit = colorSelect.split(",");
+            var colorId = colorSplit[0];
+            var colorValue = "";
+            if (colorSplit.length > 1) {
             colorValue = colorSplit[1];
-        }
-        var productId = @Model.ProductID;
-        var colorDescription = $("#ColorID").find('option:selected').text();
+            }
+            var productId = @Model.ProductID;
+            var colorDescription = $("#ColorID").find('option:selected').text();
 
-        var colorValor = '<span style="background-color: '+ colorValue +'; height:10px; width:10px"></span>';
+            var colorValor = '<span style="background-color: '+ colorValue +'; height:10px; width:10px"></span>';
 
-        if (colorId && colorDescription) {
+            if (colorId && colorDescription) {
             $("#colorsTable tbody").append($("#colorRow").clone().html());
 
             var $newRow = $(".new", "#colorsTable tbody");
@@ -1370,141 +1668,141 @@
 
             //reset inputs
             showHideNoColorsRow();
-        }
-    });
-
-    $("#actionForm").validate({
-        errorClass: "alert alert-danger",
-        errorElement: "div",
-        rules: {
-            Name: {
-                required: true,
-                minlength: 3,
-                maxlength: 150
-            },
-            CategoryID: {
-                required: true
-            },
-            Summary: {
-                required: true,
-                minlength: 20,
-                maxlength: 200
-            },
-            Description: {
-                required: updateEditFields(),
-                minlength: 20
-            },
-            Price: {
-                required: true,
-                range: [1, 10000000]
-            },
-            ProductPictures: {
-                required: true,
-            },
-            StockQuantity: {
-                required: true,
-                range: [0, 10000000]
-            },
-        },
-        messages: {
-            Name: {
-                required: "@("Dashboard.Products.Action.Validation.NameRequired".Localized())",
-				minlength: "@("Dashboard.Products.Action.Validation.NameMinimumLength".LocalizedString().Replace("{min}", "15"))",
-				maxlength: "@("Dashboard.Products.Action.Validation.NameMaximumLength".LocalizedString().Replace("{max}", "150"))"
-            },
-            CategoryID: {
-                required: "@("Dashboard.Products.Action.Validation.CategoryRequired".Localized())",
-            },
-            Summary: {
-                required: "@("Dashboard.Products.Action.Validation.SummaryRequired".Localized())",
-				minlength: "@("Dashboard.Products.Action.Validation.SummaryMinimumLength".LocalizedString().Replace("{min}", "20"))",
-				maxlength: "@("Dashboard.Products.Action.Validation.SummaryMaximumLength".LocalizedString().Replace("{max}", "200"))"
-            },
-            Description: {
-                required: "@("Dashboard.Products.Action.Validation.DescriptionRequired".Localized())",
-				minlength: "@("Dashboard.Products.Action.Validation.DescriptionMinimumLength".LocalizedString().Replace("{min}", "20"))"
-            },
-            Price: {
-                required: "@("Dashboard.Products.Action.Validation.PriceRequired".Localized())",
-				range: "@("Dashboard.Products.Action.Validation.PriceRange".LocalizedString().Replace("{min}", "1").Replace("{max}", "10000000"))"
-            },
-            ProductPictures: {
-                required: "@("Dashboard.Products.Action.Validation.ProductPicturesRequired".Localized())"
-            },
-            StockQuantity: {
-                required: "@("Dashboard.Products.Action.Validation.StockQuantityRequired".Localized())",
-				range: "@("Dashboard.Products.Action.Validation.StockQuantityRange".LocalizedString().Replace("{min}", "1").Replace("{max}", "10000000"))"
-            },
-        },
-        highlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        },
-        errorPlacement: function ( error, element ) {
-            if(element.parent().hasClass('input-group')){
-                error.insertAfter( element.parent() );
-            }else{
-          	    error.insertAfter( element );
             }
-        }
-    });
+            });
 
-    $("#productPictures").change(function () {
+            $("#actionForm").validate({
+            errorClass: "alert alert-danger",
+            errorElement: "div",
+            rules: {
+            Name: {
+            required: true,
+            minlength: 3,
+            maxlength: 150
+            },
+            CategoryID: {
+            required: true
+            },
+            Summary: {
+            required: true,
+            minlength: 20,
+            maxlength: 200
+            },
+            Description: {
+            required: updateEditFields(),
+            minlength: 20
+            },
+            Price: {
+            required: true,
+            range: [1, 10000000]
+            },
+            ProductPictures: {
+            required: true,
+            },
+            StockQuantity: {
+            required: true,
+            range: [0, 10000000]
+            },
+            },
+            messages: {
+            Name: {
+            required: "@("Dashboard.Products.Action.Validation.NameRequired".Localized())",
+            minlength: "@("Dashboard.Products.Action.Validation.NameMinimumLength".LocalizedString().Replace("{min}", "15"))",
+            maxlength: "@("Dashboard.Products.Action.Validation.NameMaximumLength".LocalizedString().Replace("{max}", "150"))"
+            },
+            CategoryID: {
+            required: "@("Dashboard.Products.Action.Validation.CategoryRequired".Localized())",
+            },
+            Summary: {
+            required: "@("Dashboard.Products.Action.Validation.SummaryRequired".Localized())",
+            minlength: "@("Dashboard.Products.Action.Validation.SummaryMinimumLength".LocalizedString().Replace("{min}", "20"))",
+            maxlength: "@("Dashboard.Products.Action.Validation.SummaryMaximumLength".LocalizedString().Replace("{max}", "200"))"
+            },
+            Description: {
+            required: "@("Dashboard.Products.Action.Validation.DescriptionRequired".Localized())",
+            minlength: "@("Dashboard.Products.Action.Validation.DescriptionMinimumLength".LocalizedString().Replace("{min}", "20"))"
+            },
+            Price: {
+            required: "@("Dashboard.Products.Action.Validation.PriceRequired".Localized())",
+            range: "@("Dashboard.Products.Action.Validation.PriceRange".LocalizedString().Replace("{min}", "1").Replace("{max}", "10000000"))"
+            },
+            ProductPictures: {
+            required: "@("Dashboard.Products.Action.Validation.ProductPicturesRequired".Localized())"
+            },
+            StockQuantity: {
+            required: "@("Dashboard.Products.Action.Validation.StockQuantityRequired".Localized())",
+            range: "@("Dashboard.Products.Action.Validation.StockQuantityRange".LocalizedString().Replace("{min}", "1").Replace("{max}", "10000000"))"
+            },
+            },
+            highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+            },
+            errorPlacement: function ( error, element ) {
+            if(element.parent().hasClass('input-group')){
+            error.insertAfter( element.parent() );
+            }else{
+            error.insertAfter( element );
+            }
+            }
+            });
 
-		var pictures = this.files;
+            $("#productPictures").change(function () {
 
-		var picsData = new FormData();
+            var pictures = this.files;
 
-		for (var i = 0; i < pictures.length; i++) {
-			picsData.append("Picture", pictures[i]);
-		}
+            var picsData = new FormData();
 
-        addLoader("pics-container");
-		$.ajax({
-			url: "@Url.UploadPictures()",
-			type: "post",
-			data: picsData,
-			dateType: "json",
-			processData: false,
-			contentType: false
-		})
-		.done(function (responses) {
-			for (var i = 0; i < responses.length; i++) {
-				var picResponse = responses[i];
+            for (var i = 0; i < pictures.length; i++) {
+            picsData.append("Picture", pictures[i]);
+            }
 
-				AttachNewImage(picResponse.pictureURL, picResponse.ID);
-			}
+            addLoader("pics-container");
+            $.ajax({
+            url: "@Url.UploadPictures()",
+            type: "post",
+            data: picsData,
+            dateType: "json",
+            processData: false,
+            contentType: false
+            })
+            .done(function (responses) {
+            for (var i = 0; i < responses.length; i++) {
+            var picResponse = responses[i];
+
+            AttachNewImage(picResponse.pictureURL, picResponse.ID);
+            }
             removeLoader("pics-container");
-		})
-        .fail(function () {
-             removeLoader("pics-container");
-             Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-		});
-    });
+            })
+            .fail(function () {
+            removeLoader("pics-container");
+            Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+            });
+            });
 
-    function AttachNewImage(imageURL, imageID) {
-        var $newimgHTML = $("#imageTemplate").clone();
+            function AttachNewImage(imageURL, imageID) {
+            var $newimgHTML = $("#imageTemplate").clone();
 
-        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
-        $newimgHTML.find(".image").attr("data-id", imageID);
-        $newimgHTML.find(".sel-color").attr("id", "sel-color-id-"+imageID);
-        $newimgHTML.find(".stock-color").attr("id", "stock-color-id-"+imageID);
-        $newimgHTML.find(".div-product-color").attr("data-id", "div-product-color-"+imageID);
-        $newimgHTML.find("input[name=productImageId]").val(imageID);
-        $newimgHTML.find("input[name=productImageId]").attr("id", "product-image-id"+imageID);
-        $newimgHTML.find("button:contains('Agregar Color/Stock')").attr('onClick', 'showhideColorStock('+ imageID+')');
-        $newimgHTML.find("button:contains('Agregar Color/Stock')").attr("id", "btn-add-color-id-" + imageID);
-        $newimgHTML.find("input[name=ThumbnailPicture]").val(imageID);
-        $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
-        $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
+            $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+            $newimgHTML.find(".image").attr("data-id", imageID);
+            $newimgHTML.find(".sel-color").attr("id", "sel-color-id-"+imageID);
+            $newimgHTML.find(".stock-color").attr("id", "stock-color-id-"+imageID);
+            $newimgHTML.find(".div-product-color").attr("data-id", "div-product-color-"+imageID);
+            $newimgHTML.find("input[name=productImageId]").val(imageID);
+            $newimgHTML.find("input[name=productImageId]").attr("id", "product-image-id"+imageID);
+            $newimgHTML.find("button:contains('Agregar Color/Stock')").attr('onClick', 'showhideColorStock('+ imageID+')');
+            $newimgHTML.find("button:contains('Agregar Color/Stock')").attr("id", "btn-add-color-id-" + imageID);
+            $newimgHTML.find("input[name=ThumbnailPicture]").val(imageID);
+            $newimgHTML.find("input[name=ThumbnailPicture]").attr("id", "r"+ imageID);
+            $newimgHTML.find(".imageInputLabel").attr("for", "r"+ imageID);
 
-        $("#picturesArea").append($newimgHTML.html());
-    }
+            $("#picturesArea").append($newimgHTML.html());
+            }
 
-    function showhideColorStock(id) {
+            function showhideColorStock(id) {
 
-        $('[data-id="div-product-color-'+id+'"]').css('visibility', 'visible');
+            $('[data-id="div-product-color-'+id+'"]').css('visibility', 'visible');
 
-        if ($('[data-id="div-product-color-' + id + '"]').is(":visible")) {
+            if ($('[data-id="div-product-color-' + id + '"]').is(":visible")) {
             $('[data-id="div-product-color-' + id + '"]').css('display', 'none');
             $("#product-image-id-" + id).val("0");
             $("#btn-add-color-id-" + id).html("Agregar Color/Stock");
@@ -1512,7 +1810,7 @@
             $("#btn-add-color-id-" + id).attr("class", "btn btn-info btn-block");
 
 
-        } else {
+            } else {
             $('[data-id="div-product-color-' + id + '"]').css('display', 'block');
             $("#product-image-id-" + id).val(id);
             $("#btn-add-color-id-" + id).html("Eliminar Color/Stock");
@@ -1520,77 +1818,130 @@
             $("#btn-add-color-id-" + id).attr("class", "btn btn-danger btn-block");
             $("#sel-color-id-" + id).val("0");
             $("#stock-color-id-" + id).val("0.0");
-        }
-    }
+            }
+            }
 
-    $("#actionForm").submit(function (e) {
-        updateEditFields();
+            function buildVarianteFinal() {
 
-        var imageIDs = [];
-        var colorStockIds = [];
-        var colorIds = [];
-        var stockByColors = [];
+            let varianteTallaIds =[];
+            let varianteColorIds=[];
+            let varianteStocks=[];
+            let varianteSKUs=[];
+            let variantePrices=[];
+            let variantePhotos = [];
+            let id = 0;
 
-        $("#picturesArea .image").each(function () {
+            $("#varianteTable .varDescription").each(function () {
+
+            //let tallaId = $('input[name="txtVarianteTallaID' + id + '"]').val();
+            //let colorId = $('input[name="txtVarianteColorID' + id + '"]').val();
+            let stock = $('input[name="txtVarianteStock' + id + '"]').val();
+            let sku =   $('input[name="txtVarianteSku' + id + '"]').val();
+            let price = $('input[name="txtVariantePrice' + id + '"]').val();
+            let photo = $('input[name="txtVariantePhoto' + id + '"]').val();
+
+            let tallaId = $('input[name="txtVarianteStock' + id + '"]').attr("data-size-id");
+            let colorId = $('input[name="txtVarianteStock' + id + '"]').attr("data-color-id");
+
+            if (sku == '') sku = '0';
+
+            varianteTallaIds.push(tallaId);
+            varianteColorIds.push(colorId);
+            varianteStocks.push(stock);
+            varianteSKUs.push(sku);
+            variantePrices.push(price);
+            variantePhotos.push("");
+            id++;
+            });
+
+            let objVariante = {
+            varianteTallaIds: varianteTallaIds,
+            varianteColorIds: varianteColorIds,
+            varianteStocks: varianteStocks,
+            varianteSKUs: varianteSKUs,
+            variantePrices: variantePrices,
+            variantePhotos: variantePhotos
+            };
+            return objVariante;
+            }
+
+
+            $("#actionForm").submit(function (e) {
+            updateEditFields();
+
+            var imageIDs = [];
+            var colorStockIds = [];
+            var colorIds = [];
+            var stockByColors = [];
+
+            var buildVariante = buildVarianteFinal();
+            console.log("buildVariante");
+            console.log(buildVariante);
+
+            let varianteTallaIds = buildVariante.varianteTallaIds;
+
+            console.log("varianteTallaIds");
+            console.log(varianteTallaIds);
+
+            $("#picturesArea .image").each(function () {
             var imageID = $(this).attr("data-id");
             imageIDs.push(imageID);
-        });
+            });
 
-        $("#picturesArea .stock-color-image-id").each(function () {
+            $("#picturesArea .stock-color-image-id").each(function () {
             var imageID = $(this).val();
             if (imageID > 0) {
 
-                var colorId = $("#sel-color-id-" + imageID).val();
-                var stock = $("#stock-color-id-" + imageID).val();
+            var colorId = $("#sel-color-id-" + imageID).val();
+            var stock = $("#stock-color-id-" + imageID).val();
 
-                if (colorId > 0) {
-                    colorStockIds.push(imageID);
-                    colorIds.push(colorId);
-                    stockByColors.push(stock);
-                }
+            if (colorId > 0) {
+            colorStockIds.push(imageID);
+            colorIds.push(colorId);
+            stockByColors.push(stock);
             }
-        });
+            }
+            });
 
-        //console.log("colorStockIds:");
-        //console.log(colorStockIds);
-        //console.log("colorIds:");
-        //console.log(colorIds);
-        //console.log("stockByColors:");
-        //console.log(stockByColors);
+            $("#pictureIDs").val(imageIDs.join());
+            $("#colorStockIDs").val(colorStockIds.join());
+            $("#colorIDs").val(colorIds.join());
+            $("#stockByColors").val(stockByColors.join());
+            //Variante ProductStock
+            $("#productStockBySizes").val(buildVariante.varianteTallaIds.join());
+            $("#productStockByColors").val(buildVariante.varianteColorIds.join());
+            $("#productStockBySKUs").val(buildVariante.varianteSKUs.join());
+            $("#productStockByQuantities").val(buildVariante.varianteStocks.join());
+            $("#productStockByPrices").val(buildVariante.variantePrices.join());
 
-        $("#pictureIDs").val(imageIDs.join());
-        $("#colorStockIDs").val(colorStockIds.join());
-        $("#colorIDs").val(colorIds.join());
-        $("#stockByColors").val(stockByColors.join());
-
-        if ($("#actionForm").valid()) {
+            if ($("#actionForm").valid()) {
             addLoader("actionForm");
             $.ajax({
-                type: "post",
-                data: $("#actionForm").serialize()
-			})
+            type: "post",
+            data: $("#actionForm").serialize()
+            })
             .done(function (response) {
-                if (response.Success) {
-                    window.location.href = "@Url.ListAction("Products")";
-			    }
-			    else {
-                    removeLoader("actionForm");
-                    Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-			    }
-			})
+            if (response.Success) {
+            window.location.href = "@Url.ListAction("Products")";
+            }
+            else {
+            removeLoader("actionForm");
+            Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+            }
+            })
             .fail(function () {
-                 removeLoader("actionForm");
-                 Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			});
-        }
+            removeLoader("actionForm");
+            Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+            });
+            }
 
-        e.preventDefault();
-    });
+            e.preventDefault();
+            });
 
-    $(".deleteButton").click(function () {
-        var recordID = $(this).attr("data-id");
+            $(".deleteButton").click(function () {
+            var recordID = $(this).attr("data-id");
 
-        Swal.fire({
+            Swal.fire({
             title: '@("Dashboard.Message.Warning".Localized())',
             text: "@("Dashboard.Message.ConfirmDeleteWarning".Localized())",
             icon: 'warning',
@@ -1599,52 +1950,50 @@
             cancelButtonColor: '#d33',
             confirmButtonText: '@("Dashboard.Message.ConfirmDelete".Localized())',
             cancelButtonText: '@("Dashboard.Message.CancelDelete".Localized())'
-        }).then((result) => {
+            }).then((result) => {
             if (result.value) {
-                addLoader("actionForm");
-				$.ajax({
-					url: "@Url.DeleteAction("Products")",
-                    type: "post",
-                    data: { id: recordID }
-				})
-                .done(function (response) {
-                    if (response != null && response.Success != undefined && response.Success) {
-                        window.location.href = "@Url.ListAction("Products")";
-				    }
-                    else {
-                        removeLoader("actionForm");
-                        Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
-				    }
-				})
-                .fail(function () {
-                     removeLoader("actionForm");
-                     Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
-			    });
+            addLoader("actionForm");
+            $.ajax({
+            url: "@Url.DeleteAction("Products")",
+            type: "post",
+            data: { id: recordID }
+            })
+            .done(function (response) {
+            if (response != null && response.Success != undefined && response.Success) {
+            window.location.href = "@Url.ListAction("Products")";
             }
-        });
-    });
+            else {
+            removeLoader("actionForm");
+            Swal.fire("@("Dashboard.Message.Error".Localized())", response.Message, "error");
+            }
+            })
+            .fail(function () {
+            removeLoader("actionForm");
+            Swal.fire("@("Dashboard.Message.Error".Localized())", "@("Dashboard.Message.GenericErrorMessage".Localized())", "error");
+            });
+            }
+            });
+            });
 
-    $("#TipoProducto").change(function () {
-        if ($('#TipoProducto').is(':checked')) {
+            $("#TipoProducto").change(function () {
+            if ($('#TipoProducto').is(':checked')) {
 
             $("#TagMotos").css("display", "block");
-        }
-        else {
-                $("#TagMotos").css("display", "none");
+            }
+            else {
+            $("#TagMotos").css("display", "none");
             }
 
-    });
+            });
 
-    $("#TipoMoneda").change(function () {
+            $("#TipoMoneda").change(function () {
 
-        var tipoMoneda = $(this).val();
+            var tipoMoneda = $(this).val();
 
-        if (tipoMoneda == "1") {
+            if (tipoMoneda == "1") {
             $(".icono-moneda").html("S/");
-        } else {
+            } else {
             $(".icono-moneda").html("$");
-        }
-    });
-
-
+            }
+            });
 </script>

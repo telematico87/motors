@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 using eCommerce.Shared.Commons;
 using System.Configuration;
 using System.Drawing.Printing;
+using eCommerce.Entities.Response;
 
 namespace eCommerce.Web.Areas.Dashboard.Controllers
 {
@@ -111,7 +112,17 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 model.EtiquetaOferta = product.EtiquetaOferta;
                 model.EtiquetaSoat = product.EtiquetaSoat;
                 model.IncluyeSoat = product.IncluyeSoat;
-                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);
+                model.ProductColors = ProductColorService.Instance.SearchProductColorByProductId(product.ID);                
+                model.ProductStocks = obtenerProductStocks(product.ID);
+            }
+
+            model.ExisteProductStocks = false;
+            if (model.ProductStocks != null && model.ProductStocks.Count > 0)
+            {
+                model.ExisteProductStocks = true;
+            }
+            else {
+                model.ProductStocks = new List<ProductStockResponse>();
             }
 
             model.Categories = CategoriesService.Instance.GetCategoryByCatalogoID(model.CatalogoID);
@@ -123,6 +134,47 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
             model.TipoMonedas = TablaMasterService.Instance.GetTablaMasterByTipoTabla("TIPO_MONEDA");
 
             return View(model);
+        }
+
+        public List<ProductStockResponse> obtenerProductStocks(int productId) {
+
+            List<ProductStockResponse> productResponses = new List<ProductStockResponse>();
+            
+
+            var lista = ProductStockService.Instance.GetProductStockByProductID(productId);
+
+            lista.ForEach(x=>{
+
+                var productStock = new ProductStockResponse();
+
+                productStock.ID = x.ID;
+                productStock.ProductID = x.ProductID;
+                productStock.ColorID = x.ColorID;
+                productStock.TallaID = x.TallaID;
+                productStock.SKU = x.SKU;
+                productStock.Precio = x.Precio;
+                productStock.Stock = x.Stock;
+
+                var color = new Color();
+                var size = new Talla();
+
+                if (x.ColorID != 0) {
+                    color = ColorService.Instance.GetColorByID(x.ColorID);
+                    productStock.ColorName = color.Description;
+                }
+
+                if (x.TallaID != 0)
+                {
+                    size = TallaService.Instance.GetTallaByID(x.TallaID);
+                    productStock.TallaName = size.Description;
+                }
+
+                productResponses.Add(productStock);
+                
+            });
+
+            return productResponses;
+
         }
 
         [HttpPost, ValidateInput(false)]
@@ -222,6 +274,53 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                         }                                                  
                     }
+
+                    // Add Variantes
+
+                    if (!string.IsNullOrEmpty(model.ProductStockSize)) {
+
+                        var psSizeIds  = model.ProductStockSize
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psColorIds = model.ProductStockColor
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psSKUs = model.ProductStockSKU
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => ID).ToList();
+                        var psQuantities = model.ProductStockQuantity
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psPrices = model.ProductStockPrice
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => double.Parse(ID)).ToList();
+
+                        if (psSizeIds.Count > 0)
+                        {
+                            var newProductStocks = new List<ProductStock>();
+
+                            for (int i = 0; i < psSizeIds.Count; i++)
+                            {
+
+                                ProductStock ps = new ProductStock();
+                                ps.ProductID = product.ID;
+                                ps.TallaID = psSizeIds[i];
+                                ps.ColorID = psColorIds[i];
+                                ps.Stock = psQuantities[i];
+                                ps.SKU = psSKUs[i].ToString() == "0" ? "" : psSKUs[i].ToString();
+                                ps.Precio = psPrices[i];
+                                newProductStocks.Add(ps);
+                            }
+
+                            if (!ProductsService.Instance.UpdateProductStock(product.ID, newProductStocks))
+                            {
+                                throw new Exception("Error al Insertar Product Stocks");
+                            }
+                        }
+
+                    }
+
+
 
                     product.IsActive = !model.InActive;
                     product.TipoProducto = model.TipoProducto;
@@ -331,9 +430,7 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                             product.ThumbnailPictureID = model.ThumbnailPicture != 0 ? model.ThumbnailPicture : pictureIDs.First();
                         }
-                    }
-
-
+                    }                    
 
                     product.IsActive = !model.InActive;
 
@@ -381,7 +478,53 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
 
                         }
 
-                    }                    
+                    }
+
+                    // Add Variantes
+
+                    if (!string.IsNullOrEmpty(model.ProductStockSize))
+                    {
+
+                        var psSizeIds = model.ProductStockSize
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psColorIds = model.ProductStockColor
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psSKUs = model.ProductStockSKU
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => ID).ToList();
+                        var psQuantities = model.ProductStockQuantity
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => int.Parse(ID)).ToList();
+                        var psPrices = model.ProductStockPrice
+                                                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(ID => double.Parse(ID)).ToList();
+
+                        if (psSizeIds.Count > 0)
+                        {
+                            var newProductStocks = new List<ProductStock>();
+
+                            for (int i = 0; i < psSizeIds.Count; i++)
+                            {
+
+                                ProductStock ps = new ProductStock();
+                                ps.ProductID = product.ID;
+                                ps.TallaID = psSizeIds[i];
+                                ps.ColorID = psColorIds[i];
+                                ps.Stock = psQuantities[i];
+                                ps.SKU = psSKUs[i].ToString() =="0" ? "" : psSKUs[i].ToString();
+                                ps.Precio = psPrices[i];
+                                newProductStocks.Add(ps);
+                            }
+
+                            if (!ProductsService.Instance.UpdateProductStock(product.ID, newProductStocks))
+                            {
+                                throw new Exception("Error al Insertar Product Stocks");
+                            }
+                        }
+
+                    }
 
                     var currentLanguageRecord = new ProductRecord
                     {
@@ -555,8 +698,12 @@ namespace eCommerce.Web.Areas.Dashboard.Controllers
                 ProductoCaracteristica = productoCaracteristicas,
                 MarcaID = int.Parse(formCollection ["MarcaID"]),
                 CatalogoID = int.Parse(formCollection ["CatalogoID"]),
-                TipoMoneda = int.Parse(formCollection["TipoMoneda"])
-                
+                TipoMoneda = int.Parse(formCollection["TipoMoneda"]),
+                ProductStockSize = formCollection["ProductStockSize"],
+                ProductStockColor = formCollection["ProductStockColor"],
+                ProductStockSKU = formCollection["ProductStockSKU"],
+                ProductStockQuantity = formCollection["ProductStockQuantity"],
+                ProductStockPrice = formCollection["ProductStockPrice"]
             };
 
             foreach (string key in formCollection)
